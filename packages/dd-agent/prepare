@@ -21,4 +21,4 @@ export GOBIN=$GOPATH
 cd ../src/gohai
 curl https://glide.sh/get | sh
 glide install
-go build -o gohai
+# go build -o gohai
