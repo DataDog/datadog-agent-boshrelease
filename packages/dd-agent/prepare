@@ -16,4 +16,7 @@ git submodule init
 git submodule update
 
 echo "  Running 'go get' to get all the dependencies"
-cd ../src/gohai && GOPATH=$(pwd) GOBIN=$GOPATH go get github.com/Masterminds/glide && GOPATH=$(pwd) GOBIN=$GOPATH glide install && GOPATH=$(pwd) GOBIN=$GOPATH go get -d
+export GOPATH=$(pwd)
+export GOBIN=$GOPATH
+curl https://glide.sh/get | sh
+glide install
