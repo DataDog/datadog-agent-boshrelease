@@ -1,41 +1,5 @@
 ---
-zlib/zlib-1.2.11.tar.gz:
-  object_id: 23a6c3ac-d17c-4207-9e72-534f61f8da8a
-  sha: e6d119755acdf9104d7ba236b1242696940ed6dd
-  size: 607698
-libffi/libffi-3.2.1.tar.gz:
-  object_id: f054006c-2121-4afe-846c-7520e4c77543
-  sha: 280c265b789e041c02e5c97815793dfc283fb1e6
-  size: 940837
-pip/pip-9.0.1.tar.gz:
-  object_id: ae3bec1b-7f31-443b-b824-5366203777c3
-  sha: 57ff41e99cb01b6a1c2b0999161589b726f0ec8b
-  size: 1197370
 setuptools/setuptools-33.1.1.tar.gz:
-  object_id: 312f8e8a-46b1-4b5b-a0ab-9ec1b718e1be
+  object_id: 26e13d7c-bf08-4027-aa6b-63e24bb9b344
   sha: ec1548d92dd3a9bec62d3ce3bce8902feabe61bf
   size: 652126
-dd-agent/dd-agent-5.10.1.tar.gz:
-  object_id: a45bf1d7-3fb7-4133-8118-28d3216d5ba7
-  sha: 801e615309a729790bb4b644b7687bd30a0ec438
-  size: 7189402
-openssl/openssl-1.0.2j.tar.gz:
-  object_id: 86b9a735-67d3-4b6a-8502-d594748c5854
-  sha: bdfbdb416942f666865fa48fe13c2d0e588df54f
-  size: 5307912
-bzip2/bzip2-1.0.6.tar.gz:
-  object_id: af419069-1312-448d-b76f-7bba5adf306c
-  sha: 3f89f861209ce81a6bab1fd1998c0ef311712002
-  size: 782025
-python/Python-2.7.13.tar.xz:
-  object_id: 32aa1fd4-535c-40fa-975e-b157a4f7350e
-  sha: 18a8f30a0356c751b8d0ea6f76e764cab13ee046
-  size: 12495628
-golang/go1.7.4.linux-amd64.tar.gz:
-  object_id: 977c5d7b-da5e-430c-aee9-68dcdd637bbe
-  sha: 2e5baf03d1590e048c84d1d5b4b6f2540efaaea1
-  size: 84021919
-libyaml/yaml-0.1.7.tar.gz:
-  object_id: 14e58050-6f15-4a38-bf71-e5c49959f97e
-  sha: 3590cbf092ef4c71bc0a9b404c00a626b1e04dee
-  size: 527518

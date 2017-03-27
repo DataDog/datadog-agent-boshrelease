@@ -2,51 +2,47 @@
 set -e -x
 
 # Grab the latest versions that are in the directory
-DD_AGENT_VERSION=$(ls -r dd-agent/dd-agent-*.tar.gz | sed 's/.*\/dd-agent-\(.*\)\.tar\.gz$/\1/' | head -1)
-BOSH_PACKAGES_DIR=${BOSH_PACKAGES_DIR:-/var/vcap/packages}
+DD_AGENT_VERSION=5.12.3
 JOB_NAME="dd-agent"
-LIBFFI_VERSION="3.2.1"
+BOSH_PACKAGES_DIR=${BOSH_PACKAGES_DIR:-/var/vcap/packages}
 
-# Integrate contents of all packages to this folder, so only this package needs
-# to be included in the job
-for pkg in $(ls --ignore=golang --ignore=dd-agent ${BOSH_PACKAGES_DIR}); do
-    echo "Integrating ${BOSH_PACKAGES_DIR}/${pkg}/* in ${BOSH_INSTALL_TARGET}"
-    cp -av ${BOSH_PACKAGES_DIR}/${pkg}/* ${BOSH_INSTALL_TARGET}
-done
-
+if [ -f /etc/debian_version -o "$DISTRIBUTION" == "Debian" -o "$DISTRIBUTION" == "Ubuntu" ]; then
+    OS="Debian"
+elif [ -f /etc/redhat-release -o "$DISTRIBUTION" == "RedHat" -o "$DISTRIBUTION" == "CentOS" -o "$DISTRIBUTION" == "Amazon" ]; then
+    OS="RedHat"
+else
+    echo "this distribution is not supported by datadog"
+    exit 1
+fi
 
 # Install shell helpers
 echo "Adding shell helpers ..."
 mkdir -p ${BOSH_INSTALL_TARGET}
 cp -av helpers ${BOSH_INSTALL_TARGET}/
 
+AGENT_INSTALL_TARGET=${BOSH_INSTALL_TARGET}/agent
+mkdir -p ${AGENT_INSTALL_TARGET}/checks.d
+
+mkdir ./extracted-agent
+
+echo "extracting package"
+if [ $OS == "Debian" ]; then
+  dpkg -x dd-agent/datadog-agent_${DD_AGENT_VERSION}-1_amd64.deb ./extracted-agent
+
+  cp -R ./extracted-agent/opt/datadog-agent/* ${BOSH_INSTALL_TARGET}
+fi
+
+if [ $OS == "RedHat" ]; then
+  pushd ./extracted-agent
+    rpm2cpio ../dd-agent/datadog-agent-${DD_AGENT_VERSION}-1.x86_64.rpm | cpio -idmv --no-absolute-filenames
+  popd
+  cp -R ./extracted-agent/opt/datadog-agent/* ${BOSH_INSTALL_TARGET}
+fi
+
 # Install custom checks
 echo "Adding custom checks ..."
-mkdir -p ${BOSH_INSTALL_TARGET}
-cp -av checks.d ${BOSH_INSTALL_TARGET}/
-
-# Build gohai
-echo "Building and installing gohai ..."
-export GOPATH=${BOSH_COMPILE_TARGET}/gohai
-export GOBIN=$GOPATH
-export GOROOT=$(readlink -nf "${BOSH_PACKAGES_DIR}/golang")
-export PATH=${GOROOT}/bin:${PATH}
-pushd gohai
-  go build -o gohai
-  mkdir -p ${BOSH_INSTALL_TARGET}/bin
-  install -m 0755 gohai ${BOSH_INSTALL_TARGET}/bin
-popd
-
-echo "Extracting Datadog Agent ${DD_AGENT_VERSION} ..."
-tar xvf dd-agent/dd-agent-${DD_AGENT_VERSION}.tar.gz
-
-# Re-Define INSTALL folder with embedded to avoid collateral issues with other packages
-AGENT_INSTALL_TARGET=${BOSH_INSTALL_TARGET}/agent
 mkdir -p ${AGENT_INSTALL_TARGET}
-echo "Installing Datadog Agent ..."
-pushd dd-agent-${DD_AGENT_VERSION}
-  cp -av * ${AGENT_INSTALL_TARGET}/
-popd
+cp -av checks.d ${AGENT_INSTALL_TARGET}/
 
 echo "Setting up configuration ..."
 pushd ${AGENT_INSTALL_TARGET}
@@ -55,62 +51,3 @@ pushd ${AGENT_INSTALL_TARGET}
   ln -s /var/vcap/jobs/$JOB_NAME/config/conf.d conf.d
   ln -s /var/vcap/jobs/$JOB_NAME/config/datadog.conf datadog.conf
 popd
-
-# Re-Define INSTALL folder with embedded to avoid collateral issues with other packages
-REQUIREMENTS_INSTALL_TARGET=${BOSH_INSTALL_TARGET}/embedded
-mkdir -p ${REQUIREMENTS_INSTALL_TARGET}
-
-echo "Creating python site packages folder ..."
-mkdir -p ${REQUIREMENTS_INSTALL_TARGET}/lib/python2.7/site-packages
-
-
-# In all these paths the priority is set to the current folder, why?
-# * to make it usable when contents from other packages are copied (integrated) on this package
-# * to reuse this package in other releases (as standalone package)
-# Python setuptools/pip install the contents and create the shebang based
-# on the python binary location, so sometimes the shebang does not point
-# a proper path in case the contents were copied from other package.
-
-echo "Setting the PYTHONPATH with setuptools and Datadog agent site packages ..."
-PYTHONPATH="${REQUIREMENTS_INSTALL_TARGET}/lib/python2.7/site-packages:${PYTHONPATH}"
-for package_python_dir in $(ls -d ${BOSH_PACKAGES_DIR}/*/lib/python*/site-packages 2>/dev/null); do
-    PYTHONPATH="${package_python_dir}:${PYTHONPATH}"
-done
-for package_python_dir in $(ls -d ${BOSH_INSTALL_TARGET}/lib/python*/site-packages 2>/dev/null); do
-    PYTHONPATH="${package_python_dir}:${PYTHONPATH}"
-done
-export PYTHONPATH
-
-echo "Setting setuptools build sources ..."
-CPATH="${BOSH_PACKAGES_DIR}/libffi/lib/libffi-${LIBFFI_VERSION}/include"
-for package_cpath_dir in $(ls -d ${BOSH_PACKAGES_DIR}/*/include 2>/dev/null); do
-    CPATH="${package_cpath_dir}:${CPATH}"
-done
-export CPATH="${BOSH_INSTALL_TARGET}/include:${CPATH}"
-
-echo "Setting libs path ..."
-for package_lib_dir in $(ls -d ${BOSH_PACKAGES_DIR}/*/lib 2>/dev/null); do
-    LIBRARY_PATH="${package_lib_dir}:${LIBRARY_PATH}"
-done
-export LIBRARY_PATH="${BOSH_INSTALL_TARGET}/lib:${LIBRARY_PATH}"
-export LD_LIBRARY_PATH="${LIBRARY_PATH}"
-
-echo "Setting path ..."
-for package_bin_dir in $(ls -d ${BOSH_PACKAGES_DIR}/*/bin 2>/dev/null); do
-    PATH="${package_bin_dir}:${PATH}"
-done
-export PATH="${BOSH_INSTALL_TARGET}/bin:${PATH}"
-
-pushd "dd-agent-${DD_AGENT_VERSION}"
-  echo "Installing main requirements.txt ..."
-  pip install --prefix=${REQUIREMENTS_INSTALL_TARGET} --compile -r requirements.txt
-
-  echo "Installing Datadog Agent ..."
-  python setup.py install --prefix=${REQUIREMENTS_INSTALL_TARGET}
-
-  echo "Installing additional requirements-opt.txt ..."
-  # These deps are not really needed, so we ignore failures
-  PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" ./utils/pip-allow-failures.sh requirements-opt.txt
-  # pip install --prefix=${REQUIREMENTS_INSTALL_TARGET} --compile -r requirements-opt.txt
-popd
-

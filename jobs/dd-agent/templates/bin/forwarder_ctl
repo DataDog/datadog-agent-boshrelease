@@ -19,10 +19,10 @@ case ${1:-help} in
     echon_log "Starting Datadog Agent $COMPONENT: "
     pid_guard $PIDFILE "dd-agent-$COMPONENT"
     # Load python library path for dynamic libs
-    ldconf "$LD_LIBRARY_PATH"
+    # ldconf "$LD_LIBRARY_PATH"
     (
         {
-            exec chpst -v -u vcap:vcap python "$DD_FORWARDER" --use_simple_http_client=1
+            exec chpst -v -u vcap:vcap $DD_AGENT_PYTHON "$DD_FORWARDER" --use_simple_http_client=1
         } >>$LOG_DIR/$COMPONENT.stdout.log \
         2>>$LOG_DIR/$COMPONENT.stderr.log
     ) &
@@ -39,4 +39,3 @@ case ${1:-help} in
     ;;
 esac
 exit 0
-

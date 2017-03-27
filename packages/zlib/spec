@@ -1,7 +1,0 @@
----
-name: zlib
-
-dependencies: []
-
-files:
-- zlib/zlib-1.2.11.tar.gz    # http://zlib.net/zlib-1.2.11.tar.gz
