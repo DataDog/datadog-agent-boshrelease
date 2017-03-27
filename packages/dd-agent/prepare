@@ -20,3 +20,4 @@ export GOPATH=$(pwd)
 export GOBIN=$GOPATH
 curl https://glide.sh/get | sh
 glide install
+go build -o gohai
