@@ -38,8 +38,6 @@ pushd gohai
   echo $GOROOT
   ls $GOROOT
   ls $GOROOT/src
-  curl https://glide.sh/get | sh
-  glide install
   go build -o gohai
   mkdir -p ${BOSH_INSTALL_TARGET}/bin
   install -m 0755 gohai ${BOSH_INSTALL_TARGET}/bin
