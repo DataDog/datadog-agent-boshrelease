@@ -32,7 +32,7 @@ export GOBIN=$GOPATH
 export GOROOT=$(readlink -nf "${BOSH_PACKAGES_DIR}/golang")
 export PATH=${GOROOT}/bin:${PATH}
 pushd gohai
-  go build -o gohai
+  # go build -o gohai
   mkdir -p ${BOSH_INSTALL_TARGET}/bin
   install -m 0755 gohai ${BOSH_INSTALL_TARGET}/bin
 popd
