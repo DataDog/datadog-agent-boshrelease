@@ -1,7 +1,7 @@
 #!/usr/bin/env bash -e
 
 PACKAGE="dd-agent"
-VERSION="5.10.1"
+VERSION="5.12.1"
 FILE="dd-agent-${VERSION}.tar.gz"
 URL="https://github.com/DataDog/dd-agent/archive/${VERSION}.tar.gz"
 
@@ -11,6 +11,11 @@ if [ ! -s "${PACKAGE}/${FILE}" ]; then
   curl -L -s "${URL}" -o "${PACKAGE}/${FILE}"
 fi
 
+PACKAGE="integrations-core"
+FILE="integrations-core-${VERSION}.tar.gz"
+URL="https://github.com/DataDog/dd-agent/archive/${VERSION}.tar.gz"
+INTEGRATIONS_URL="https://github.com/DataDog/integrations-core/archive/${VERSION}.tar.gz"
+
 echo "  Populating the gohai submodule ..."
 git submodule init
 git submodule update
@@ -19,6 +24,8 @@ echo "  Running 'go get' to get all the dependencies"
 export GOPATH=$(pwd)
 export GOBIN=$GOPATH
 cd ../src/gohai
-curl https://glide.sh/get | sh
+go get github.com/Masterminds/glide
+# curl https://glide.sh/get | sh
+# go get -d
 glide install
 # go build -o gohai

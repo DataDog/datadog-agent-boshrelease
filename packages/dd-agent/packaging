@@ -51,6 +51,38 @@ pushd dd-agent-${DD_AGENT_VERSION}
   cp -av * ${AGENT_INSTALL_TARGET}/
 popd
 
+echo "Extracting Agent Integrations ${DD_AGENT_VERSION} ..."
+tar xvf integrations-core/integrations-core-${DD_AGENT_VERSION}.tar.gz
+
+# Re-Define INSTALL folder with embedded to avoid collateral issues with other packages
+AGENT_INSTALL_TARGET=${BOSH_INSTALL_TARGET}/agent
+mkdir -p ${AGENT_INSTALL_TARGET}/checks.d
+mkdir -p ${AGENT_INSTALL_TARGET}/conf.d
+INTEGRATION_REQUIREMENTS_FILE=${BOSH_INSTALL_TARGET}/integration_requirements.txt
+touch ${INTEGRATION_REQUIREMENTS_FILE}
+echo "Installing Agent Integrations ..."
+pushd integrations-core-${DD_AGENT_VERSION}
+  INTEGRATIONS=$(ls)
+  for INT in $INTEGRATIONS; do
+    INT_DIR="$INT"
+    if [ -f "$INT_DIR/requirements.txt" ]; then
+      cat "$INT_DIR/requirements.txt" > $INTEGRATION_REQUIREMENTS_FILE
+    fi
+    if [ -f "$INT_DIR/check.py" ]; then
+      cp "$INT_DIR/check.py" "$DD_HOME/agent/checks.d/$INT.py"
+    fi
+    if [ -f "$INT_DIR/conf.yaml.example" ]; then
+      cp "$INT_DIR/conf.yaml.example" "$DD_HOME/agent/conf.d/$INT.yaml.example"
+    fi
+    if [ -f "$INT_DIR/auto_conf.yaml" ]; then
+      cp "$INT_DIR/auto_conf.yaml" "$DD_HOME/agent/conf.d/auto_conf/$INT.yaml"
+    fi
+    if [ -f "$INT_DIR/conf.yaml.default" ]; then
+      cp "$INT_DIR/conf.yaml.default" "$DD_HOME/agent/conf.d/$INT.yaml.default"
+    fi
+  done
+popd
+
 echo "Setting up configuration ..."
 pushd ${AGENT_INSTALL_TARGET}
   rm -rf conf.d datadog.conf
@@ -115,4 +147,7 @@ pushd "dd-agent-${DD_AGENT_VERSION}"
   # These deps are not really needed, so we ignore failures
   PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" ./utils/pip-allow-failures.sh requirements-opt.txt
   # pip install --prefix=${REQUIREMENTS_INSTALL_TARGET} --compile -r requirements-opt.txt
+  echo "Installing Agent Integrations Requirements"
+  INTEGRATION_REQUIREMENTS_FILE=${BOSH_INSTALL_TARGET}/integration_requirements.txt
+  PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" ./utils/pip-allow-failures.sh $INTEGRATION_REQUIREMENTS_FILE
 popd
