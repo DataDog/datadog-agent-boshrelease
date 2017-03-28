@@ -13,8 +13,13 @@ fi
 
 PACKAGE="integrations-core"
 FILE="integrations-core-${VERSION}.tar.gz"
-URL="https://github.com/DataDog/dd-agent/archive/${VERSION}.tar.gz"
-INTEGRATIONS_URL="https://github.com/DataDog/integrations-core/archive/${VERSION}.tar.gz"
+URL="https://github.com/DataDog/integrations-core/archive/${VERSION}.tar.gz"
+
+if [ ! -s "${PACKAGE}/${FILE}" ]; then
+  echo "  Downloading ${URL} ..."
+  mkdir -p ${PACKAGE}
+  curl -L -s "${URL}" -o "${PACKAGE}/${FILE}"
+fi
 
 echo "  Populating the gohai submodule ..."
 git submodule init
