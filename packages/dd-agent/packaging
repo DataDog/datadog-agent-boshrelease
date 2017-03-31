@@ -145,9 +145,19 @@ pushd "dd-agent-${DD_AGENT_VERSION}"
 
   echo "Installing additional requirements-opt.txt ..."
   # These deps are not really needed, so we ignore failures
-  PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" ./utils/pip-allow-failures.sh requirements-opt.txt
+  # PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" ./utils/pip-allow-failures.sh requirements-opt.txt
   # pip install --prefix=${REQUIREMENTS_INSTALL_TARGET} --compile -r requirements-opt.txt
   echo "Installing Agent Integrations Requirements"
-  INTEGRATION_REQUIREMENTS_FILE=${BOSH_INSTALL_TARGET}/integration_requirements.txt
-  PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" ./utils/pip-allow-failures.sh $INTEGRATION_REQUIREMENTS_FILE
+  # INTEGRATION_REQUIREMENTS_FILE=${BOSH_INSTALL_TARGET}/integration_requirements.txt
+  # PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" ./utils/pip-allow-failures.sh $INTEGRATION_REQUIREMENTS_FILE
+popd
+
+pushd "python-deps"
+  # pip_script="../dd-agent-${DD_AGENT_VERSION}/utils/pip-allow-failures.sh"
+  echo "Installing Python Deps"
+  DEPS=$(ls)
+  for DEP in $DEPS; do
+    echo "Installing ${DEP}"
+    PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" pip install ./$DEP
+  done
 popd

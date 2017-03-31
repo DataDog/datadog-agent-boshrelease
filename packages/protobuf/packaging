@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+# abort script on any command that exits with a non zero value
+set -e -x
+
+PROTOBUF_VERSION=$(ls -r protobuf/protobuf-*.tar.gz | sed 's/.*\/protobuf-cpp-\(.*\)\.tar\.gz$/\1/' | head -1)
+
+BOSH_PACKAGES_DIR=${BOSH_PACKAGES_DIR:-/var/vcap/packages}
+PATH=${BOSH_INSTALL_TARGET}/bin:/var/vcap/packages/autoconf/bin:/var/vcap/packages/automake/bin:$PATH
+
+echo "Extracting protobuf ${PROTOBUF_VERSION} ... "
+tar xvf protobuf/protobuf-cpp-${PROTOBUF_VERSION}.tar.gz
+
+echo "Defining libraries path ..."
+CFLAGS="-fPIC ${CFLAGS}"
+for package_include_dir in $(ls -d ${BOSH_PACKAGES_DIR}/*/include 2>/dev/null); do
+    export CPPFLAGS="-I${package_include_dir} ${CPPFLAGS}"
+    export CFLAGS="${CFLAGS} -I${package_include_dir}"
+done
+for package_lib_dir in $(ls -d ${BOSH_PACKAGES_DIR}/*/lib 2>/dev/null); do
+    export LDFLAGS="-L${package_lib_dir} ${LDFLAGS}"
+    export LIBRARY_PATH="${package_lib_dir}:${LIBRARY_PATH}"
+done
+for pkg_config_lib_dir in $(ls -d ${BOSH_PACKAGES_DIR}/*/pkgconfig 2>/dev/null); do
+    export PKG_CONFIG_PATH="${pkg_config_lib_dir}:${PKG_CONFIG_PATH}"
+done
+for bin_dir in $(ls -d ${BOSH_PACKAGES_DIR}/*/bin 2>/dev/null); do
+    export PATH=$bin_dir:$PATH
+done
+for package_dir in $(ls -d ${BOSH_PACKAGES_DIR}/* 2>/dev/null); do
+    export AL_OPTS="${AL_OPTS} -I${package_dir}"
+done
+export CPPFLAGS
+export LDFLAGS
+export LIBRARY_PATH
+export LD_LIBRARY_PATH="${LIBRARY_PATH}"
+export CFLAGS
+export PATH
+export AL_OPTS="-I${BOSH_PACKAGES_DIR}/pkg-config/share/aclocal -I${BOSH_PACKAGES_DIR}/libtool/share/aclocal/ ${AL_OPTS}"
+export PKG_CONFIG_PATH=".:${PKG_CONFIG_PATH}"
+export CXXFLAGS="$(pkg-config --cflags protobuf)"
+export LIBS="$(pkg-config --libs protobuf)"
+
+echo "Building and installing protobuf C++ ... "
+pushd protobuf-${PROTOBUF_VERSION}
+  # ./autogen.sh
+  ./configure --prefix=${BOSH_INSTALL_TARGET} CXXFLAGS="$(pkg-config --cflags protobuf)" LIBS="$(pkg-config --libs protobuf)"
+  make
+  make check
+  make install
+popd
+
+rm -rf protobuf-${PROTOBUF_VERSION}
+tar xvf protobuf-python/protobuf-python-${PROTOBUF_VERSION}.tar.gz
+
+REQUIREMENTS_INSTALL_TARGET=${BOSH_INSTALL_TARGET}/embedded
+mkdir -p ${REQUIREMENTS_INSTALL_TARGET}
+mkdir -p ${REQUIREMENTS_INSTALL_TARGET}/lib/python2.7/site-packages
+
+echo "Building and installing protobuf python ... "
+pushd protobuf-${PROTOBUF_VERSION}
+  python setup.py install --cpp_implementation --prefix=${REQUIREMENTS_INSTALL_TARGET}
+popd

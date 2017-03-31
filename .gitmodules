@@ -2,3 +2,9 @@
 	path = src/gohai
 	url = https://github.com/DataDog/gohai.git
         ignore = dirty
+[submodule "src/dd-agent"]
+	path = src/dd-agent
+	url = https://github.com/DataDog/dd-agent.git
+[submodule "src/integrations-core"]
+	path = src/integrations-core
+	url = https://github.com/DataDog/integrations-core.git

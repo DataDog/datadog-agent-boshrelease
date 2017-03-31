@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# abort script on any command that exits with a non zero value
+set -e -x
+
+export PATH=${BOSH_INSTALL_TARGET}/bin:/var/vcap/packages/autoconf/bin:$PATH
+
+# libtool
+tar xzf libtool/libtool-2.4.6.tar.gz
+
+pushd libtool-2.4.6
+  ./configure --prefix=$BOSH_INSTALL_TARGET
+  make
+  make install prefix=$BOSH_INSTALL_TARGET
+popd

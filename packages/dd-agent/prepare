@@ -25,12 +25,18 @@ echo "  Populating the gohai submodule ..."
 git submodule init
 git submodule update
 
+python ../packages/dd-agent/get-pip-reqs.py
+
 echo "  Running 'go get' to get all the dependencies"
 export GOPATH=$(pwd)
 export GOBIN=$GOPATH
-cd ../src/gohai
-go get github.com/Masterminds/glide
-# curl https://glide.sh/get | sh
-# go get -d
-glide install
-# go build -o gohai
+pushd ../src/gohai
+  go get github.com/Masterminds/glide
+  # curl https://glide.sh/get | sh
+  # go get -d
+  glide install
+  # go build -o gohai
+popd
+rm glide
+rm -rf src/github.com/Masterminds/glide
+rm -rf pkg/darwin_amd64/Masterminds/glide
