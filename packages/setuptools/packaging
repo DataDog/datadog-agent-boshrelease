@@ -40,4 +40,3 @@ for pyf in ${BOSH_INSTALL_TARGET}/bin/*; do
     sed -i -e '1s:^#!/var/vcap/packages/python[0-9a-zA-Z_\.-]*/bin/python[0-9a-zA-Z_\.-]*:#!/usr/bin/env python:' $pyf
   fi
 done
-
