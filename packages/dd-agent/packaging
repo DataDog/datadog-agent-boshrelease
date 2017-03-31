@@ -158,6 +158,9 @@ pushd "python-deps"
   DEPS=$(ls)
   for DEP in $DEPS; do
     echo "Installing ${DEP}"
-    PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" pip install ./$DEP
+    if [ $DEP != "requierments.txt" &&  $DEP != "binary_requierments.txt" && $DEP != "source_requierments.txt" ]; then
+      PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" pip install ./$DEP
+    fi
+
   done
 popd

@@ -8,10 +8,8 @@ PROTOBUF_VERSION=$(ls -r protobuf/protobuf-cpp-*.tar.gz | sed 's/.*\/protobuf-cp
 BOSH_PACKAGES_DIR=${BOSH_PACKAGES_DIR:-/var/vcap/packages}
 PATH=${BOSH_INSTALL_TARGET}/bin:/var/vcap/packages/autoconf/bin:/var/vcap/packages/automake/bin:$PATH
 
-cd protobuf
-
 echo "Extracting protobuf ${PROTOBUF_VERSION} ... "
-tar xvf protobuf-cpp-${PROTOBUF_VERSION}.tar.gz
+tar xvf protobuf/protobuf-cpp-${PROTOBUF_VERSION}.tar.gz
 
 echo "Defining libraries path ..."
 CFLAGS="-fPIC ${CFLAGS}"
@@ -40,12 +38,10 @@ export CFLAGS
 export PATH
 export AL_OPTS="-I${BOSH_PACKAGES_DIR}/pkg-config/share/aclocal -I${BOSH_PACKAGES_DIR}/libtool/share/aclocal/ ${AL_OPTS}"
 export PKG_CONFIG_PATH=".:${PKG_CONFIG_PATH}"
-export CXXFLAGS="$(pkg-config --cflags protobuf)"
-export LIBS="$(pkg-config --libs protobuf)"
 
 echo "Building and installing protobuf C++ ... "
 pushd protobuf-${PROTOBUF_VERSION}
-  ./configure --prefix=${BOSH_INSTALL_TARGET} CXXFLAGS="$(pkg-config --cflags protobuf)" LIBS="$(pkg-config --libs protobuf)"
+  ./configure --prefix=${BOSH_INSTALL_TARGET}
   make
   make install
 popd

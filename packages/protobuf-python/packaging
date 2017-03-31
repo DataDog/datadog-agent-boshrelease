@@ -3,15 +3,14 @@
 # abort script on any command that exits with a non zero value
 set -e -x
 
-PROTOBUF_VERSION=$(ls -r protobuf/protobuf-cpp-*.tar.gz | sed 's/.*\/protobuf-cpp-\(.*\)\.tar\.gz$/\1/' | head -1)
+PROTOBUF_VERSION=$(ls -r protobuf-python/protobuf-python-*.tar.gz | sed 's/.*\/protobuf-python-\(.*\)\.tar\.gz$/\1/' | head -1)
 
 BOSH_PACKAGES_DIR=${BOSH_PACKAGES_DIR:-/var/vcap/packages}
 PATH=${BOSH_INSTALL_TARGET}/bin:/var/vcap/packages/autoconf/bin:/var/vcap/packages/automake/bin:$PATH
 
-cd protobuf
-
 echo "Extracting protobuf python ${PROTOBUF_VERSION} ... "
 tar xvf protobuf-python/protobuf-python-${PROTOBUF_VERSION}.tar.gz
+tar xvf protobuf-python/six-1.10.0.tar.gz
 
 echo "Defining libraries path ..."
 CFLAGS="-fPIC ${CFLAGS}"
@@ -47,10 +46,15 @@ REQUIREMENTS_INSTALL_TARGET=${BOSH_INSTALL_TARGET}/embedded
 mkdir -p ${REQUIREMENTS_INSTALL_TARGET}
 mkdir -p ${REQUIREMENTS_INSTALL_TARGET}/lib/python2.7/site-packages
 
-PYTHONPATH="${BOSH_INSTALL_TARGET}/lib/python2.7/site-packages:${PYTHONPATH}"
+export PYTHONPATH="${BOSH_INSTALL_TARGET}/embedded/lib/python2.7/site-packages:${PYTHONPATH}"
 for package_python_dir in $(ls -d ${BOSH_PACKAGES_DIR}/*/lib/python*/site-packages 2>/dev/null); do
-    PYTHONPATH="${package_python_dir}:${PYTHONPATH}"
+    export PYTHONPATH="${package_python_dir}:${PYTHONPATH}"
 done
+for package_python_dir in $(ls -d ${BOSH_INSTALL_TARGET}/lib/python*/site-packages 2>/dev/null); do
+    export PYTHONPATH="${package_python_dir}:${PYTHONPATH}"
+done
+
+pip install --prefix=${REQUIREMENTS_INSTALL_TARGET} --compile protobuf-python/six-1.10.0.tar.gz
 
 echo "Building and installing protobuf python ... "
 pushd protobuf-${PROTOBUF_VERSION}/python
