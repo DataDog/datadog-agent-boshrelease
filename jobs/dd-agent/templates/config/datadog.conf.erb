@@ -143,7 +143,7 @@ use_dogstatsd: no
 # DogStatsd is a small server that aggregates your custom app metrics. For
 # usage information, check out http://docs.datadoghq.com/guides/dogstatsd/
 
-#  Make sure your client is sending to the same port.
+# Make sure your client is sending to the same port.
 # 8125 is frequently used for cloud foundry's own statsd stuff. We need to use a different port.
 dogstatsd_port: <%= p("dd.dogstatsd_port", "18125") %>
 
