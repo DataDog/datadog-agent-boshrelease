@@ -39,4 +39,4 @@ pushd ../src/gohai
 popd
 rm glide
 rm -rf src/github.com/Masterminds/glide
-rm -rf pkg/darwin_amd64/Masterminds/glide
+rm -rf pkg/darwin_amd64/github.com/Masterminds/glide
