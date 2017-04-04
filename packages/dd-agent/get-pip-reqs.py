@@ -7,7 +7,7 @@ import os
 
 
 def check_if_binary(line):
-    binaries = ['protobuf', 'psycopg2']
+    binaries = ['protobuf', 'psycopg2', 'boto']
     for binary in binaries:
         if binary in line:
             return True

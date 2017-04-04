@@ -31,6 +31,8 @@ python ../packages/dd-agent/get-pip-reqs.py
 # otherwise, it'll download a version that needs to be compiled, resulting in a failure
 curl -L -s "https://pypi.python.org/packages/d4/a5/a6948a4a294818780333561096cd7196f48ce0760ef1464c251bf873892d/psycopg2-2.7.1-cp27-cp27m-manylinux1_x86_64.whl#md5=c26092b85c2710b6cd66f3cc3ef03994" -o "python-deps/psycopg2-2.7.1-cp27-cp27m-manylinux1_x86_64.whl"
 
+curl -L -s "https://pypi.python.org/packages/48/ec/a90c9a21c15ea162015e58c8e4cd3cfff02602414eea57272441c6a74db4/boto-2.39.0-py2.py3-none-any.whl#md5=7a3905b33f003950e16e19b1f8ee8725" -o "python-deps/boto-2.39.0-py2.py3-none-any.whl"
+
 echo "  Running 'go get' to get all the dependencies"
 export GOPATH=$(pwd)
 export GOBIN=$GOPATH

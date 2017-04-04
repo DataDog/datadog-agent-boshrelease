@@ -75,10 +75,6 @@ python-deps/beautifulsoup4-4.5.1.tar.gz:
   object_id: a4799492-ef39-4879-9a42-b2231175b310
   sha: 60f790e04bef71ca8143126839aba55b2e00b560
   size: 158039
-python-deps/boto-2.39.0.tar.gz:
-  object_id: 7494e2d9-43ec-4836-be5a-b2c433381fe3
-  sha: e6cd7a9c48852bcc982f1dd35a5475ac6965dc47
-  size: 1434775
 python-deps/dnspython-1.12.0.zip:
   object_id: 012fc7b4-b771-4417-999d-e1284014b289
   sha: e1d81af983d37c5478fe04694b78014b46210c5e

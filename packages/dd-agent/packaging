@@ -163,5 +163,3 @@ pushd "dd-agent-${DD_AGENT_VERSION}"
   # INTEGRATION_REQUIREMENTS_FILE=${BOSH_INSTALL_TARGET}/integration_requirements.txt
   # PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" ./utils/pip-allow-failures.sh $INTEGRATION_REQUIREMENTS_FILE
 popd
-
-sleep 500
