@@ -20,4 +20,3 @@ tar xzf "golang/go${GOLAN_VERSION}.linux-amd64.tar.gz"
 
 echo "Installing go ..."
 cp -R go/* ${BOSH_INSTALL_TARGET}
-

@@ -1,0 +1,141 @@
+---
+packages:
+- name: autoconf
+  version: fb0d4aad60b87f09edaf7bc9c22b62a6ac5e1afa
+  fingerprint: fb0d4aad60b87f09edaf7bc9c22b62a6ac5e1afa
+  sha1: 52fbd5b4fdcd296e27d008c8ebcdca7e7053007a
+  dependencies: []
+- name: automake
+  version: 50cc06a8d8f96bdaa73ef25b0a6a59b4c7db7f0f
+  fingerprint: 50cc06a8d8f96bdaa73ef25b0a6a59b4c7db7f0f
+  sha1: efd013820db015ebc4f52f1ad3bb2616269c5af1
+  dependencies:
+  - autoconf
+- name: bzip2
+  version: 2b44ddce9f82cb956c89e13b724a62f0301b9b9a
+  fingerprint: 2b44ddce9f82cb956c89e13b724a62f0301b9b9a
+  sha1: 8aa05ca70e078409958e206827bd7644bface773
+  dependencies: []
+- name: dd-agent
+  version: b8575c7375812949f0a921039e46ba0e46d3a278
+  fingerprint: b8575c7375812949f0a921039e46ba0e46d3a278
+  sha1: 4582322eda4f7cea1656c83e597ef93ee7110455
+  dependencies:
+  - bzip2
+  - golang
+  - libffi
+  - libyaml
+  - openssl
+  - pip
+  - protobuf
+  - protobuf-python
+  - python27
+  - setuptools
+  - zlib
+- name: golang
+  version: d9be4724be655abae59564d5e495962b2604b725
+  fingerprint: d9be4724be655abae59564d5e495962b2604b725
+  sha1: 8a1aeed03c0d556f7061d10b6bc481f691b20730
+  dependencies: []
+- name: libffi
+  version: 1d435bfd680129ed6ccfd6eb2032e77a4ab4e0e9
+  fingerprint: 1d435bfd680129ed6ccfd6eb2032e77a4ab4e0e9
+  sha1: 939c25ec15d8ab711bd3365dc9629b67cdf16461
+  dependencies: []
+- name: libtool
+  version: d61b1023bfcf93ba02af8413e18470f1593e9524
+  fingerprint: d61b1023bfcf93ba02af8413e18470f1593e9524
+  sha1: 692f97f52a72f5b5ee3f58f5061f988c0d78511a
+  dependencies:
+  - autoconf
+  - automake
+- name: libyaml
+  version: 46e7275caf8567fedf7cb0c1879f19afae800b82
+  fingerprint: 46e7275caf8567fedf7cb0c1879f19afae800b82
+  sha1: 4c30310715c231b5a3aaf4abf1b5ec2860788a2c
+  dependencies: []
+- name: openssl
+  version: b3008bc25cec057cd41ad82150ef51a03b64e477
+  fingerprint: b3008bc25cec057cd41ad82150ef51a03b64e477
+  sha1: eb264f1819a404b5535384784e236eb406d47470
+  dependencies:
+  - zlib
+- name: pip
+  version: 645ccd18e07cd3cfdf3203277445467322a090c0
+  fingerprint: 645ccd18e07cd3cfdf3203277445467322a090c0
+  sha1: 895a606e69d1fb71a3be0d486cb1176f62c4ad66
+  dependencies:
+  - bzip2
+  - libyaml
+  - openssl
+  - python27
+  - setuptools
+  - zlib
+- name: pkg-config
+  version: 18b618e5f0e591b4fb94a501867b25203abfb253
+  fingerprint: 18b618e5f0e591b4fb94a501867b25203abfb253
+  sha1: d518fa4bc27e2cb9adeb3d0676a11c9782c82979
+  dependencies:
+  - autoconf
+  - automake
+- name: protobuf
+  version: 9de1f5b2ceb4b2ec9f8b8e6e6c0fe709ffe47503
+  fingerprint: 9de1f5b2ceb4b2ec9f8b8e6e6c0fe709ffe47503
+  sha1: 99c4cc731a1e45540af0e06113d436b4785e7759
+  dependencies:
+  - autoconf
+  - automake
+  - bzip2
+  - libffi
+  - libtool
+  - libyaml
+  - openssl
+  - pip
+  - pkg-config
+  - python27
+  - setuptools
+  - zlib
+- name: protobuf-python
+  version: 770a82b5cbf37ab3a71e4207e6be5bde646181b2
+  fingerprint: 770a82b5cbf37ab3a71e4207e6be5bde646181b2
+  sha1: '091bc456f7870bc9c8a55af83e4eaaf315fcfae0'
+  dependencies:
+  - pip
+  - protobuf
+  - python27
+  - setuptools
+- name: python27
+  version: be3226d4bcb67aa93eb83864b63cc56a2c566be1
+  fingerprint: be3226d4bcb67aa93eb83864b63cc56a2c566be1
+  sha1: e51687dcedad18d7a76f2c8df0ffcf2f45250c0e
+  dependencies:
+  - bzip2
+  - openssl
+  - zlib
+- name: setuptools
+  version: 1a62a33b691795713bf6f0acc78adff906f78d48
+  fingerprint: 1a62a33b691795713bf6f0acc78adff906f78d48
+  sha1: 6d3a552afbcbfd85ba56b909879b192f4e6f6c74
+  dependencies:
+  - bzip2
+  - openssl
+  - python27
+  - zlib
+- name: zlib
+  version: 81fcee5b4a1a3aa9f59208420faee4449fecb40d
+  fingerprint: 81fcee5b4a1a3aa9f59208420faee4449fecb40d
+  sha1: d139bd8c6b0d7b5872983a6556892f2d3f0a3a56
+  dependencies: []
+jobs:
+- name: dd-agent
+  version: 9de71e4304709f17585c6144163c8f58cfa9acb6
+  fingerprint: 9de71e4304709f17585c6144163c8f58cfa9acb6
+  sha1: 8468245164cfb59542564e5e05fd75630756bd3d
+license:
+  version: dd2876e08d0816dd876506d44442c2e814724a1d
+  fingerprint: dd2876e08d0816dd876506d44442c2e814724a1d
+  sha1: fd36842ab8f30221e2a4b0dc1a6d458662780814
+commit_hash: bca0feed
+uncommitted_changes: true
+name: datadog-agent
+version: '6'

@@ -1,0 +1,9 @@
+---
+name: libtool
+
+dependencies:
+  - autoconf
+  - automake
+
+files:
+  - libtool/libtool-2.4.6.tar.gz # http://mirror.keystealth.org/gnu/libtool/libtool-2.4.6.tar.gz

@@ -1,0 +1,9 @@
+---
+name: pkg-config
+
+dependencies:
+  - autoconf
+  - automake
+
+files:
+  - pkg-config/pkg-config-0.29.tar.gz # https://pkgconfig.freedesktop.org/releases/pkg-config-0.29.tar.gz

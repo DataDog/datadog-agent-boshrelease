@@ -32,6 +32,9 @@ export GOBIN=$GOPATH
 export GOROOT=$(readlink -nf "${BOSH_PACKAGES_DIR}/golang")
 export PATH=${GOROOT}/bin:${PATH}
 pushd gohai
+  mkdir -p $GOROOT/src/github.com/DataDog/gohai/
+  cp -R * $GOROOT/src/github.com/DataDog/gohai/
+  cp -R ./vendor/* $GOROOT/src/
   go build -o gohai
   mkdir -p ${BOSH_INSTALL_TARGET}/bin
   install -m 0755 gohai ${BOSH_INSTALL_TARGET}/bin
@@ -46,6 +49,38 @@ mkdir -p ${AGENT_INSTALL_TARGET}
 echo "Installing Datadog Agent ..."
 pushd dd-agent-${DD_AGENT_VERSION}
   cp -av * ${AGENT_INSTALL_TARGET}/
+popd
+
+echo "Extracting Agent Integrations ${DD_AGENT_VERSION} ..."
+tar xvf integrations-core/integrations-core-${DD_AGENT_VERSION}.tar.gz
+
+# Re-Define INSTALL folder with embedded to avoid collateral issues with other packages
+AGENT_INSTALL_TARGET=${BOSH_INSTALL_TARGET}/agent
+mkdir -p ${AGENT_INSTALL_TARGET}/checks.d
+mkdir -p ${AGENT_INSTALL_TARGET}/conf.d/auto_conf
+INTEGRATION_REQUIREMENTS_FILE=${BOSH_INSTALL_TARGET}/integration_requirements.txt
+touch ${INTEGRATION_REQUIREMENTS_FILE}
+echo "Installing Agent Integrations ..."
+pushd integrations-core-${DD_AGENT_VERSION}
+  INTEGRATIONS=$(ls)
+  for INT in $INTEGRATIONS; do
+    INT_DIR="$INT"
+    if [ -f "$INT_DIR/requirements.txt" ]; then
+      cat "$INT_DIR/requirements.txt" > $INTEGRATION_REQUIREMENTS_FILE
+    fi
+    if [ -f "$INT_DIR/check.py" ]; then
+      cp "$INT_DIR/check.py" "$AGENT_INSTALL_TARGET/checks.d/$INT.py"
+    fi
+    if [ -f "$INT_DIR/conf.yaml.example" ]; then
+      cp "$INT_DIR/conf.yaml.example" "$AGENT_INSTALL_TARGET/conf.d/$INT.yaml.example"
+    fi
+    if [ -f "$INT_DIR/auto_conf.yaml" ]; then
+      cp "$INT_DIR/auto_conf.yaml" "$AGENT_INSTALL_TARGET/conf.d/auto_conf/$INT.yaml"
+    fi
+    if [ -f "$INT_DIR/conf.yaml.default" ]; then
+      cp "$INT_DIR/conf.yaml.default" "$AGENT_INSTALL_TARGET/conf.d/$INT.yaml.default"
+    fi
+  done
 popd
 
 echo "Setting up configuration ..."
@@ -101,6 +136,18 @@ for package_bin_dir in $(ls -d ${BOSH_PACKAGES_DIR}/*/bin 2>/dev/null); do
 done
 export PATH="${BOSH_INSTALL_TARGET}/bin:${PATH}"
 
+pushd "python-deps"
+  # pip_script="../dd-agent-${DD_AGENT_VERSION}/utils/pip-allow-failures.sh"
+  echo "Installing Python Deps"
+  DEPS=$(ls)
+  for DEP in $DEPS; do
+    echo "Installing ${DEP}"
+    if [[ "$DEP" != "requierments.txt" &&  "$DEP" != "binary_requierments.txt" && "$DEP" != "source_requierments.txt" ]]; then
+      PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" pip install ./$DEP
+    fi
+  done
+popd
+
 pushd "dd-agent-${DD_AGENT_VERSION}"
   echo "Installing main requirements.txt ..."
   pip install --prefix=${REQUIREMENTS_INSTALL_TARGET} --compile -r requirements.txt
@@ -110,7 +157,9 @@ pushd "dd-agent-${DD_AGENT_VERSION}"
 
   echo "Installing additional requirements-opt.txt ..."
   # These deps are not really needed, so we ignore failures
-  PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" ./utils/pip-allow-failures.sh requirements-opt.txt
+  # PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" ./utils/pip-allow-failures.sh requirements-opt.txt
   # pip install --prefix=${REQUIREMENTS_INSTALL_TARGET} --compile -r requirements-opt.txt
+  echo "Installing Agent Integrations Requirements"
+  # INTEGRATION_REQUIREMENTS_FILE=${BOSH_INSTALL_TARGET}/integration_requirements.txt
+  # PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" ./utils/pip-allow-failures.sh $INTEGRATION_REQUIREMENTS_FILE
 popd
-

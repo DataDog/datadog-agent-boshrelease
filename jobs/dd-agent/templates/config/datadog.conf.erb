@@ -143,8 +143,9 @@ use_dogstatsd: no
 # DogStatsd is a small server that aggregates your custom app metrics. For
 # usage information, check out http://docs.datadoghq.com/guides/dogstatsd/
 
-#  Make sure your client is sending to the same port.
-dogstatsd_port: <%= p("dd.dogstatsd_port", "8125") %>
+# Make sure your client is sending to the same port.
+# 8125 is frequently used for cloud foundry's own statsd stuff. We need to use a different port.
+dogstatsd_port: <%= p("dd.dogstatsd_port", "18125") %>
 
 # By default dogstatsd will post aggregate metrics to the Agent (which handles
 # errors/timeouts/retries/etc). To send directly to the datadog api, set this
@@ -264,4 +265,3 @@ jmxfetch_log_file: /var/vcap/sys/log/dd-agent/jmxfetch.log
 log_to_syslog: no
 # syslog_host:
 # syslog_port:
-

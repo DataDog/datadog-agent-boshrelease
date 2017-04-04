@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# abort script on any command that exits with a non zero value
+set -e -x
+
+export PATH=${BOSH_INSTALL_TARGET}/bin:$PATH
+
+# autoconf
+tar xzf autoconf/autoconf-2.69.tar.gz
+
+pushd autoconf-2.69
+  autoconf_dir=$BOSH_INSTALL_TARGET/share/autoconf ./configure --prefix=$BOSH_INSTALL_TARGET
+  make
+  make install prefix=$BOSH_INSTALL_TARGET
+popd

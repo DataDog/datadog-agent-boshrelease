@@ -1,0 +1,8 @@
+---
+name: automake
+
+dependencies:
+  - autoconf
+
+files:
+  - automake/automake-1.15.tar.gz # http://ftp.gnu.org/gnu/automake/automake-1.15.tar.gz

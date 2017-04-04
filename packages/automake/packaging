@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# abort script on any command that exits with a non zero value
+set -e -x
+
+export PATH=${BOSH_INSTALL_TARGET}/bin:/var/vcap/packages/autoconf/bin:$PATH
+# automake
+tar xzf automake/automake-1.15.tar.gz
+
+pushd automake-1.15
+  ./configure --prefix=$BOSH_INSTALL_TARGET
+  make
+  make install prefix=$BOSH_INSTALL_TARGET
+popd

@@ -1,41 +1,201 @@
 ---
-zlib/zlib-1.2.11.tar.gz:
-  object_id: 23a6c3ac-d17c-4207-9e72-534f61f8da8a
-  sha: e6d119755acdf9104d7ba236b1242696940ed6dd
-  size: 607698
-libffi/libffi-3.2.1.tar.gz:
-  object_id: f054006c-2121-4afe-846c-7520e4c77543
-  sha: 280c265b789e041c02e5c97815793dfc283fb1e6
-  size: 940837
-pip/pip-9.0.1.tar.gz:
-  object_id: ae3bec1b-7f31-443b-b824-5366203777c3
-  sha: 57ff41e99cb01b6a1c2b0999161589b726f0ec8b
-  size: 1197370
-setuptools/setuptools-33.1.1.tar.gz:
-  object_id: 312f8e8a-46b1-4b5b-a0ab-9ec1b718e1be
-  sha: ec1548d92dd3a9bec62d3ce3bce8902feabe61bf
-  size: 652126
-dd-agent/dd-agent-5.10.1.tar.gz:
-  object_id: a45bf1d7-3fb7-4133-8118-28d3216d5ba7
-  sha: 801e615309a729790bb4b644b7687bd30a0ec438
-  size: 7189402
-openssl/openssl-1.0.2j.tar.gz:
-  object_id: 86b9a735-67d3-4b6a-8502-d594748c5854
-  sha: bdfbdb416942f666865fa48fe13c2d0e588df54f
-  size: 5307912
+python-deps/snakebite-1.3.11.tar.gz:
+  object_id: a3a03bbb-ab99-4dfe-bd55-682a2f1c6fc7
+  sha: 2714aa8963c916aae5e5bcb846f12e99a1ae5271
+  size: 62542
+autoconf/autoconf-2.69.tar.gz:
+  object_id: aee68bcb-ac87-4db8-b794-abdf7a02418e
+  sha: 562471cbcb0dd0fa42a76665acf0dbb68479b78a
+  size: 1927468
+automake/automake-1.15.tar.gz:
+  object_id: e7ae123d-bb4e-4eee-8f10-da9be754a797
+  sha: b5a840c7ec4321e78fdc9472e476263fa6614ca1
+  size: 2244206
 bzip2/bzip2-1.0.6.tar.gz:
-  object_id: af419069-1312-448d-b76f-7bba5adf306c
+  object_id: 3e79b052-095e-47cd-9e40-43cddae0ac3e
   sha: 3f89f861209ce81a6bab1fd1998c0ef311712002
   size: 782025
-python/Python-2.7.13.tar.xz:
-  object_id: 32aa1fd4-535c-40fa-975e-b157a4f7350e
-  sha: 18a8f30a0356c751b8d0ea6f76e764cab13ee046
-  size: 12495628
-golang/go1.7.4.linux-amd64.tar.gz:
-  object_id: 977c5d7b-da5e-430c-aee9-68dcdd637bbe
-  sha: 2e5baf03d1590e048c84d1d5b4b6f2540efaaea1
-  size: 84021919
+dd-agent/dd-agent-5.12.1.tar.gz:
+  object_id: 20d5fe2e-0f37-4a33-9864-27a5a7cb2dab
+  sha: 442c72a376531710844bdabdb1b1455a8511f8dd
+  size: 6466835
+golang/go1.8.linux-amd64.tar.gz:
+  object_id: 41dae6b2-5187-4de1-85f3-9740d0350580
+  sha: a93fe8fc245e3554f956bc823f30ef4eb23c2068
+  size: 89803580
+integrations-core/integrations-core-5.12.1.tar.gz:
+  object_id: 74bd7d1f-3543-49b6-b418-c53438cfb25d
+  sha: 54fca87ed868ab325403e2c060b58ef2bac16d64
+  size: 713069
+libffi/libffi-3.2.1.tar.gz:
+  object_id: 0bc048fd-d4d9-4cd4-a5e1-7d265816dd1f
+  sha: 280c265b789e041c02e5c97815793dfc283fb1e6
+  size: 940837
+libtool/libtool-2.4.6.tar.gz:
+  object_id: 35db2eff-1921-42d5-a672-2f05545b42d8
+  sha: 25b6931265230a06f0fc2146df64c04e5ae6ec33
+  size: 1806697
 libyaml/yaml-0.1.7.tar.gz:
-  object_id: 14e58050-6f15-4a38-bf71-e5c49959f97e
+  object_id: f81967f5-875e-45cd-9beb-41a0c62452c6
   sha: 3590cbf092ef4c71bc0a9b404c00a626b1e04dee
   size: 527518
+openssl/openssl-1.0.2j.tar.gz:
+  object_id: bc112be1-432d-45dc-99e4-228d7a656c15
+  sha: bdfbdb416942f666865fa48fe13c2d0e588df54f
+  size: 5307912
+pip/pip-9.0.1.tar.gz:
+  object_id: 8e957eba-c96b-49c9-bb0a-5438ef40ef6c
+  sha: 57ff41e99cb01b6a1c2b0999161589b726f0ec8b
+  size: 1197370
+pkg-config/pkg-config-0.29.tar.gz:
+  object_id: 28b7366b-64a6-42f9-962b-a8d76a58b7bd
+  sha: f4b19d203b3896a4293af4b62c7f908063c88a5a
+  size: 1973875
+protobuf/protobuf-cpp-3.1.0.tar.gz:
+  object_id: d4ffc0a3-767b-44af-bd84-41d6d42ac1fa
+  sha: b7b7275405ac18784965b02bea7d62f836873564
+  size: 4109863
+protobuf-python/protobuf-python-3.1.0.tar.gz:
+  object_id: 56e64f42-4255-4d2f-9e5e-83975f45c024
+  sha: 0a92e2135c9a7f62139d2ffcace95074a5546113
+  size: 4377622
+protobuf-python/six-1.10.0.tar.gz:
+  object_id: 9ba18e03-75a1-4631-bb7c-071c423c8837
+  sha: 30d480d2e352e8e4c2aae042cf1bf33368ff0920
+  size: 29630
+python/Python-2.7.13.tar.xz:
+  object_id: 147b20a0-7f69-408b-97b7-c4a017f78032
+  sha: 18a8f30a0356c751b8d0ea6f76e764cab13ee046
+  size: 12495628
+python-deps/adodbapi-2.6.0.7.zip:
+  object_id: a8ab2a59-6216-4349-a272-1f97112139df
+  sha: 3db954f1193db07cc1aabd8d352e7d890a55df13
+  size: 335598
+python-deps/beautifulsoup4-4.5.1.tar.gz:
+  object_id: a4799492-ef39-4879-9a42-b2231175b310
+  sha: 60f790e04bef71ca8143126839aba55b2e00b560
+  size: 158039
+python-deps/dnspython-1.12.0.zip:
+  object_id: 012fc7b4-b771-4417-999d-e1284014b289
+  sha: e1d81af983d37c5478fe04694b78014b46210c5e
+  size: 230499
+python-deps/docker-py-1.10.6.tar.gz:
+  object_id: de4e9156-c142-4da3-b90b-612346e0491d
+  sha: ea84db41769902356256b2530c1ee5733577f631
+  size: 84129
+python-deps/gearman-2.0.2.tar.gz:
+  object_id: 8c1b4aab-7835-4695-a616-b25f6acc3ef6
+  sha: 071d4999babfd738a2c538d7fa67245ddaf45b3a
+  size: 28355
+python-deps/httplib2-0.9.zip:
+  object_id: bf2c6e85-16d6-4ce1-b19d-421a83cfd732
+  sha: ae640c62743734f8da5c3730683d2f746aab763c
+  size: 209971
+python-deps/kafka-python-1.3.1.tar.gz:
+  object_id: 8cd3e7e0-db81-4131-9700-66b3f1685780
+  sha: '048cfacc4996ae094af09f2f734cc00fe539982c'
+  size: 206400
+python-deps/kazoo-2.2.1.tar.gz:
+  object_id: '086cf4de-6799-4152-9ace-db666448f844'
+  sha: c7c2c9753d6e50e410784615883a6fa4af2d5847
+  size: 108037
+python-deps/ntplib-0.3.3.tar.gz:
+  object_id: f6bfb3c9-a460-464f-8f71-ddd6ec86c353
+  sha: 403ac0cc01398bacdf608d4aa35e74e36f5ad64d
+  size: 6808
+python-deps/paramiko-1.15.2.tar.gz:
+  object_id: 28da5a6d-29fb-4276-9d48-04c162e436e9
+  sha: 754ffa47fd6f78b93fc56437cf14a79bef094f0f
+  size: 1220578
+python-deps/pg8000-1.10.1.tar.gz:
+  object_id: 61a5c9e7-1553-46da-932a-0bc882fe1e33
+  sha: ff142058446ff50dc4a48abb62d3528039739c6e
+  size: 39072
+python-deps/psutil-4.4.1.tar.gz:
+  object_id: 66fc966a-3810-4b4e-873a-82b5a3b7281f
+  sha: 2050bc663019ffe5fb7a685e6400d46bdc38bc65
+  size: 1831794
+python-deps/pyasn1-0.1.9.tar.gz:
+  object_id: b283f63a-2283-4a8f-b957-c6873351e727
+  sha: d19599c5d9d039ead21ffcd1a2392c29a838ae03
+  size: 75947
+python-deps/pycurl-7.19.5.1.tar.gz:
+  object_id: c8dd59bf-5edb-4f25-8897-5bfe93b8dc2a
+  sha: e448cc05ef05f8645bb9a7873d7a7e0b0035db14
+  size: 142140
+python-deps/pymongo-3.2.tar.gz:
+  object_id: fccf987a-774a-4644-a772-22b2009b4c3b
+  sha: 1e9bf461dad709148fed4faf2d93aaf5fc30ab79
+  size: 473631
+python-deps/PyMySQL-0.6.6.tar.gz:
+  object_id: 0cdf7e49-a769-406b-a897-3f59257a46a8
+  sha: 63098543f056951f6ba54cb4e560ce4efa755fc3
+  size: 56862
+python-deps/Pyro4-4.36.tar.gz:
+  object_id: 0bde824d-ced9-46a1-82aa-049657811cfa
+  sha: c35f442435451bcfc1e482ef286db5964f97fb55
+  size: 329397
+python-deps/pysnmp-4.2.5.tar.gz:
+  object_id: efe4b06a-05ec-4a26-8dc5-edc034b267ce
+  sha: 4a74ec969c57c146b53b8d496df182d69674871c
+  size: 225014
+python-deps/pysnmp-mibs-0.1.4.tar.gz:
+  object_id: ec07358c-f018-4d7d-89c7-7a9e96f954cd
+  sha: a1c0c83815422f0b1f1afe5e454e6618cb2f9bc2
+  size: 1982745
+python-deps/python-consul-0.4.7.tar.gz:
+  object_id: 4750cbba-32fd-4fb1-ac5b-ac610ce87218
+  sha: 2c92273da976a7e1b12d19f4d1b75401db58b8d0
+  size: 18333
+python-deps/python-etcd-0.4.2.tar.gz:
+  object_id: 333d7b73-c65c-4d61-98bc-2339940cd64f
+  sha: 680b368853d95a6e229ad9cd6bfa2e5297d76393
+  size: 29564
+python-deps/python-memcached-1.53.tar.gz:
+  object_id: 74727a16-6639-404b-a4c3-d0a8ac9a7448
+  sha: 82a0c3721b75ee6543e8ac7fa001d24efe4ad2bf
+  size: 20631
+python-deps/pyvmomi-6.0.0.tar.gz:
+  object_id: e5a6812f-6c46-4361-aa9e-f4881a4ffde7
+  sha: 46c824a165f9469c82bc280b0f42a3d72ccc2cd8
+  size: 216134
+python-deps/PyYAML-3.11.zip:
+  object_id: cc70239b-e8d6-4aee-a0d6-1de6d7746dbf
+  sha: 54fc968acc5abe80c628a6fa3ed74f7c3029beca
+  size: 371754
+python-deps/redis-2.10.5.tar.gz:
+  object_id: f089ef41-665a-4ef5-8e5d-990cad02344d
+  sha: 6235ad91f06e6aef82cfe137e6c89673e79eedcd
+  size: 88610
+python-deps/requests-2.11.1.tar.gz:
+  object_id: 177b8664-389d-4e77-966f-1f1b4ce4a757
+  sha: 7083e52275a9bcc02757e8b53c0be07cb73149a1
+  size: 485936
+python-deps/scandir-1.5.tar.gz:
+  object_id: f4bd32c6-d6c9-4e5d-98c0-7c7ea42ef251
+  sha: d1f7c7ed770ab7bfd9464e0d9e082ce0274c3eb6
+  size: 29351
+python-deps/simplejson-3.6.5.tar.gz:
+  object_id: dee58867-913a-44f8-9515-8cbbb94b6edf
+  sha: 4e3f2557fc8003115cf5d9c388845c03aec83121
+  size: 73961
+python-deps/supervisor-3.3.0.tar.gz:
+  object_id: f93aa532-cdb4-4a1e-8e72-543f035d96a9
+  sha: 7f6338b54e5a3bd489be7d62305eda9c465b0e5f
+  size: 416329
+python-deps/tornado-3.2.2.tar.gz:
+  object_id: a79a0576-93d6-4d0c-a1a3-449547769e7d
+  sha: ede9603adcceaf1b6085fd5a973cec50c7391888
+  size: 405596
+python-deps/uptime-3.0.1.tar.gz:
+  object_id: 98b5e36a-933c-45e2-b4d8-7ea95a20dfae
+  sha: d52dcfd7b13bf058b2918ad12e532be6662c252a
+  size: 6630
+setuptools/setuptools-33.1.1.tar.gz:
+  object_id: 26e13d7c-bf08-4027-aa6b-63e24bb9b344
+  sha: ec1548d92dd3a9bec62d3ce3bce8902feabe61bf
+  size: 652126
+zlib/zlib-1.2.11.tar.gz:
+  object_id: 03fc68b7-701a-48bc-bf59-b0429099b2c1
+  sha: e6d119755acdf9104d7ba236b1242696940ed6dd
+  size: 607698
