@@ -119,10 +119,6 @@ python-deps/psutil-4.4.1.tar.gz:
   object_id: 66fc966a-3810-4b4e-873a-82b5a3b7281f
   sha: 2050bc663019ffe5fb7a685e6400d46bdc38bc65
   size: 1831794
-python-deps/psycopg2-2.7.1.tar.gz:
-  object_id: 97180ed4-29c4-4e5c-80e2-648a44c0fa13
-  sha: 284ae137dc4ddf1855d47f7e92434fcd06a27ec6
-  size: 421034
 python-deps/pyasn1-0.1.9.tar.gz:
   object_id: b283f63a-2283-4a8f-b957-c6873351e727
   sha: d19599c5d9d039ead21ffcd1a2392c29a838ae03

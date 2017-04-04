@@ -136,6 +136,18 @@ for package_bin_dir in $(ls -d ${BOSH_PACKAGES_DIR}/*/bin 2>/dev/null); do
 done
 export PATH="${BOSH_INSTALL_TARGET}/bin:${PATH}"
 
+pushd "python-deps"
+  # pip_script="../dd-agent-${DD_AGENT_VERSION}/utils/pip-allow-failures.sh"
+  echo "Installing Python Deps"
+  DEPS=$(ls)
+  for DEP in $DEPS; do
+    echo "Installing ${DEP}"
+    if [[ "$DEP" != "requierments.txt" &&  "$DEP" != "binary_requierments.txt" && "$DEP" != "source_requierments.txt" ]]; then
+      PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" pip install ./$DEP
+    fi
+  done
+popd
+
 pushd "dd-agent-${DD_AGENT_VERSION}"
   echo "Installing main requirements.txt ..."
   pip install --prefix=${REQUIREMENTS_INSTALL_TARGET} --compile -r requirements.txt
@@ -152,15 +164,4 @@ pushd "dd-agent-${DD_AGENT_VERSION}"
   # PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" ./utils/pip-allow-failures.sh $INTEGRATION_REQUIREMENTS_FILE
 popd
 
-pushd "python-deps"
-  # pip_script="../dd-agent-${DD_AGENT_VERSION}/utils/pip-allow-failures.sh"
-  echo "Installing Python Deps"
-  DEPS=$(ls)
-  for DEP in $DEPS; do
-    echo "Installing ${DEP}"
-    if [ $DEP != "requierments.txt" &&  $DEP != "binary_requierments.txt" && $DEP != "source_requierments.txt" ]; then
-      PIP_COMMAND="pip" PIP_OPTIONS="--prefix=${REQUIREMENTS_INSTALL_TARGET} --compile" pip install ./$DEP
-    fi
-
-  done
-popd
+sleep 500

@@ -27,7 +27,6 @@ pycurl==7.19.5.1
 psutil==4.4.1
 scandir==1.5
 pymongo==3.2
-psycopg2==2.7.1
 pysnmp-mibs==0.1.4
 pyasn1==0.1.9
 pysnmp==4.2.5

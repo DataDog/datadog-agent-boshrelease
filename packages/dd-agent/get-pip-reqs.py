@@ -7,7 +7,7 @@ import os
 
 
 def check_if_binary(line):
-    binaries = ['protobuf']
+    binaries = ['protobuf', 'psycopg2']
     for binary in binaries:
         if binary in line:
             return True
@@ -17,7 +17,8 @@ source_requirements = []
 binary_requirements = []
 
 here = os.path.dirname(os.path.realpath(__file__))
-python_deps_folder = os.path.join(here, '..', '..', 'src', 'python-deps')
+python_deps_folder = os.path.join(here, '..', '..', 'src',
+                                  'python-requirements')
 
 
 dd_agent_dir = os.path.join(python_deps_folder, '..', 'dd-agent')

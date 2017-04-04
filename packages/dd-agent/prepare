@@ -27,6 +27,10 @@ git submodule update
 
 python ../packages/dd-agent/get-pip-reqs.py
 
+# This should not be hardcoded like this, but for now we'll do this as there's not a lot of other choices.
+# otherwise, it'll download a version that needs to be compiled, resulting in a failure
+curl -L -s "https://pypi.python.org/packages/d4/a5/a6948a4a294818780333561096cd7196f48ce0760ef1464c251bf873892d/psycopg2-2.7.1-cp27-cp27m-manylinux1_x86_64.whl#md5=c26092b85c2710b6cd66f3cc3ef03994" -o "python-deps/psycopg2-2.7.1-cp27-cp27m-manylinux1_x86_64.whl"
+
 echo "  Running 'go get' to get all the dependencies"
 export GOPATH=$(pwd)
 export GOBIN=$GOPATH
