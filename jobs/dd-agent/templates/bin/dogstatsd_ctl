@@ -18,8 +18,6 @@ case ${1:-help} in
   start)
     echon_log "Starting Datadog Agent $COMPONENT: "
     pid_guard $PIDFILE "dd-agent-$COMPONENT"
-    # Load python library path for dynamic libs
-    # ldconf "$LD_LIBRARY_PATH"
     (
         {
             exec chpst -v -u vcap:vcap $DD_AGENT_PYTHON "$DD_DOGSTATSD" --use-local-forwarder

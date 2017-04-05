@@ -167,6 +167,8 @@ instances:
   - use_mount: yes
     tag_by_filesystem: <%= p("dd.generate_disk_config_tag_by_filesystem", "yes") %>
     all_partitions: <%= p("dd.generate_disk_config_all_partitions", "yes") %>
+    excluded_filesystems:
+      - tracefs
 
 EOF
 <% end %>
@@ -179,4 +181,3 @@ cat <<'YAML' > "${CONFD_DIR}/<%= integration %>.yaml"
 YAML
 
 <% end %>
-
