@@ -1,5 +1,9 @@
 ---
-setuptools/setuptools-33.1.1.tar.gz:
-  object_id: 26e13d7c-bf08-4027-aa6b-63e24bb9b344
-  sha: ec1548d92dd3a9bec62d3ce3bce8902feabe61bf
-  size: 652126
+dd-agent/datadog-agent-5.12.3-1.x86_64.rpm:
+  object_id: 4d8e7900-2fef-415b-8d22-9bce383877d4
+  sha: cf8fe8a026e2b581c4147c9178117244ce53985b
+  size: 57171593
+dd-agent/datadog-agent_5.12.3-1_amd64.deb:
+  object_id: e3f54eea-653a-4a89-9634-22ec26c8d91f
+  sha: 9e1399ed215e0d240f218f91c5b0fa743cfe2088
+  size: 68341698

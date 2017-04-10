@@ -5,16 +5,6 @@
 set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
 
-# Python dlopen does not pay attention to LD_LIBRARY_PATH, so
-# ctypes.util.find_library is not able to find dyn libs, the only
-# way to do is by defining the folders in ldconfig
-function ldconf {
-  local path=$1
-  echo "$path" | tr ':' '\n' > $TMP_DIR/ld.so.conf
-  ldconfig -f $TMP_DIR/ld.so.conf
-  rm -f $TMP_DIR/ld.so.conf
-}
-
 # Log some info to the Monit Log file
 function log {
   local message=${1}
@@ -132,7 +122,7 @@ function kill_and_wait {
   # Append 'with timeout {n} seconds' to monit start/stop program configs
   local timeout=${2:-25}
   local force=${3:-1}
-  
+
   if [ -f "${pidfile}" ]; then
     wait_pidfile $pidfile 1 $timeout $force
   else
@@ -158,4 +148,3 @@ function check_nfs_mount {
     fi
   fi
 }
-

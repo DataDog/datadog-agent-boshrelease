@@ -10,4 +10,3 @@ source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent"
 
 # setup configuration
 source /var/vcap/jobs/dd-agent/config/confd.sh
-
