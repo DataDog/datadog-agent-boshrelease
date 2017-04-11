@@ -14,7 +14,7 @@ license:
   version: dd2876e08d0816dd876506d44442c2e814724a1d
   fingerprint: dd2876e08d0816dd876506d44442c2e814724a1d
   sha1: 6dbdf8ac4903fba626a233b86867cbf768c1cac8
-commit_hash: 4ab74d41
+commit_hash: 6d19d237
 uncommitted_changes: true
 name: datadog-agent
-version: '7'
+version: 5.12.3.1
