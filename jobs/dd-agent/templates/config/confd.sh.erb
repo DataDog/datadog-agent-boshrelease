@@ -177,7 +177,7 @@ EOF
 # Integrations
 <% p("dd.integrations", {}).each do |integration, config| %>
 cat <<'YAML' > "${CONFD_DIR}/<%= integration %>.yaml"
-<%= JSON.dump(config) %>
+<%= YAML.dump(config) %>
 YAML
 
 <% end %>
