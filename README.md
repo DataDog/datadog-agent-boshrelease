@@ -21,6 +21,16 @@ We also saw some disparities on some machines. It can creates issues if it stomp
 
 So, our solution for this was to use our embedded python that we already have in our packages and unpack those packages (rather than installing them).
 
+
+# Versioning
+
+We version the bosh release with the following scheme:
+
+`major.minor.bugfix.cfbuild`
+
+The first three are directly from the agent itself, they reflect the current agent version. The final one is the CF version, as there may be cause to release more than one during an agent bugfix.
+
+
 # Configuration
 
 Upload the release to Bosh director
@@ -63,12 +73,9 @@ There is a script `bosh_prepare,` which grabs all the relevant blobs gets everyt
 ./bosh_prepare
 ```
 
-It will get all sources specified in the packages/*/spec files (commented out) for
-local development, then you can create the release (final) with:
-```
-./bosh_final_release
-```
-which will upload the tarball to github and make the new blobs public available in the S3 bucket
+It will get all sources specified in the packages/\*/spec files for local development.
+
+The default blobstore is our s3 bucket, however you can change this to any blobstore you like. We have a yaml file set up to use a local blobstore as well, if for some reason you cannot use a remote one.
 
 
 # Author
