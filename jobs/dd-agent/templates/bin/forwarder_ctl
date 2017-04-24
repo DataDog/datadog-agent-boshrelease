@@ -20,7 +20,7 @@ case ${1:-help} in
     pid_guard $PIDFILE "dd-agent-$COMPONENT"
     (
         {
-            exec chpst -v -u vcap:vcap $DD_AGENT_PYTHON "$DD_FORWARDER" --use_simple_http_client=1
+            exec chpst -v -u vcap:vcap $DD_AGENT_PYTHON "$DD_FORWARDER"
         } >>$LOG_DIR/$COMPONENT.stdout.log \
         2>>$LOG_DIR/$COMPONENT.stderr.log
     ) &
