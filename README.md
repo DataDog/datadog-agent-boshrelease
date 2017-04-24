@@ -26,7 +26,7 @@ So, our solution for this was to use our embedded python that we already have in
 
 We version the bosh release with the following scheme:
 
-`major.minor.bugfix.cfbuild`
+`cf_major.cf_minor.agent_version`
 
 The first three are directly from the agent itself, they reflect the current agent version. The final one is the CF version, as there may be cause to release more than one during an agent bugfix.
 
