@@ -36,29 +36,15 @@ exec_download() {
     )
 }
 
-exec_prepare() {
-    local prepare="$1"
-    (
-        cd ${SRC}
-        ${SHELL} "${prepare}"
-    )
-}
-
 main() {
     for script in $(pwd)/packages/*/spec ; do
         local base=$(dirname "${script}")
-        local prepare="${base}/prepare"
-        if [ -s "${prepare}" ]; then
-            echo "* Procesing ${prepare} ..."
-            exec_prepare "$prepare"
-        else
-            echo "* Procesing ${script} ..."
-            for spec in $(read_spec "${script}"); do
-                local downloadfile=$(echo $spec | cut -d'@' -f 1)
-                local downloadurl=$(echo $spec | cut -d'@' -f 2)
-                exec_download "${downloadfile}" "${downloadurl}"
-            done
-        fi
+          echo "* Procesing ${script} ..."
+          for spec in $(read_spec "${script}"); do
+              local downloadfile=$(echo $spec | cut -d'@' -f 1)
+              local downloadurl=$(echo $spec | cut -d'@' -f 2)
+              exec_download "${downloadfile}" "${downloadurl}"
+          done
     done
 }
 
