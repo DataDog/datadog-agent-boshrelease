@@ -50,11 +50,11 @@ addons:
     dd:
       use_dogstatsd: yes
       api_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-      tags: ["pe", "bosh", "bosh:bosh-exp"]
+      tags: ["datadog", "bosh", "bosh:bosh-exp"]
 
 tags:
-  owner: pe
-  email: platform-engineering@springernature.com
+  owner: datadog
+  email: support@datadoghq.com
 ```
 
 Upload runtime-config to Bosh Director: `bosh update runtime-config  runtime-config.yaml`
