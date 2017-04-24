@@ -12,31 +12,13 @@ export COMPONENT=${2:-$NAME}
 # Setup the PATH and LD_LIBRARY_PATH
 LD_LIBRARY_PATH=${LD_LIBRARY_PATH:-''}
 package_dir="/var/vcap/packages/dd-agent"
-has_busybox=0
 temp_path=${PATH}
 # Add all packages' /bin & /sbin into $PATH
 for package_bin_dir in $(ls -d ${package_dir}/*bin 2>/dev/null); do
   # Do not add any packages that use busybox, as impacts builtin commands and
   # is often used for different architecture (via containers)
-  if [ -f ${package_bin_dir}/busybox ]; then
-    has_busybox=1
-  else
-    temp_path=${package_bin_dir}:${temp_path}
-  fi
+  temp_path=${package_bin_dir}:${temp_path}
 done
-if [ "$has_busybox" == "0" ]; then
-  PATH=${temp_path}
-  if [ -d ${package_dir}/lib ]; then
-    LD_LIBRARY_PATH="${package_dir}/lib:$LD_LIBRARY_PATH"
-  fi
-  # Python libs
-  for package_lib_dir in $(ls -d ${package_dir}/lib/python*/lib-dynload 2>/dev/null); do
-    LD_LIBRARY_PATH="${package_lib_dir}:${LD_LIBRARY_PATH}"
-  done
-  for package_lib_dir in $(ls -d ${package_dir}/lib/python*/site-packages 2>/dev/null); do
-    LD_LIBRARY_PATH="${package_lib_dir}:${LD_LIBRARY_PATH}"
-  done
-fi
 export PATH="$PACKAGES/$NAME/checks.d:$PACKAGES/$NAME/agent:$PACKAGES/$NAME/embedded/bin:$PATH"
 for package_lib_dir in $(ls -d $PACKAGES/dd-agent/embedded/lib 2>/dev/null); do
     LD_LIBRARY_PATH="${package_lib_dir}:${LD_LIBRARY_PATH}"
@@ -51,9 +33,6 @@ export LD_LIBRARY_PATH
 
 # Python modules
 PYTHONPATH=${PYTHONPATH:-''}
-for python_mod_dir in $(ls -d $PACKAGES/*/lib/python*/site-packages 2>/dev/null); do
-    PYTHONPATH="${python_mod_dir}:${PYTHONPATH}"
-done
 for python_mod_dir in $(ls -d $PACKAGES/dd-agent/embedded/lib/python*/site-packages 2>/dev/null); do
     PYTHONPATH="${python_mod_dir}:${PYTHONPATH}"
 done
