@@ -173,11 +173,62 @@ instances:
 EOF
 <% end %>
 
+<%
+  def use_check(config)
+    if (!config['include'] && !config['exclude']) || (config['include'].empty? && config['exclude'].empty?)
+      return true
+    end
+
+    types = {
+      'include': true,
+      'exclude': false
+    }
+    options = ['name', 'deployment', 'az']
+
+    types.each do |type, return_type|
+      unless config[type].nil? || !config['exclude']
+        options.each do |option|
+          if config[type][option]
+            if config[type][option].is_a? Array
+              config[type][option].each do |name|
+                if name == spec.send(option)
+                  return return_type
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+
+    # if it is not excluded from anything, and there are no inclusion rules
+    # then include it
+    if !config['include']
+      return true
+    end
+
+    # otherwise, exclude
+    false
+  end
+
+  def dump_check(config)
+    config_clone = config.clone
+
+    config_clone.delete('include')
+    config_clone.delete('exclude')
+
+    YAML.dump(config_clone)
+  end
+%>
+
 
 # Integrations
-<% p("dd.integrations", {}).each do |integration, config| %>
-cat <<'YAML' > "${CONFD_DIR}/<%= integration %>.yaml"
-<%= YAML.dump(config) %>
-YAML
+<% p("dd.checks", {}).each do |check, config| %>
+
+  <% if use_check(config) %>
+    cat <<'YAML' > "${CONFD_DIR}/<%= check %>.yaml"
+    <%= dump_check %>
+    YAML
+  <% end %>
 
 <% end %>

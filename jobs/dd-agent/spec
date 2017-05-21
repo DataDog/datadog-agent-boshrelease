@@ -157,8 +157,6 @@ properties:
   dd.generate_disk_config_all_partitions:
     default: yes
     description: Include all partitions in the system
-  dd.integrations:
+  dd.checks:
     default: {}
     description: Agent integration configuration. Each key will have ".yaml" appended to it and the value dumped a file
-
-
