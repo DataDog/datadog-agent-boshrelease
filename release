@@ -16,7 +16,7 @@ cp config/final.yml config/final.yml.bk
 cp config/final.yml.local config/final.yml
 
 # Creating the release
-bosh create release --force --final --with-tarball --name $RELEASE
+bosh create release --force --final --with-tarball --name $RELEASE || bosh create-release --force --final --tarball=release.tgz --name $RELEASE
 
 cp config/final.yml.bk config/final.yml
 rm config/final.yml.bk
