@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -e
+
+RELEASE="datadog-agent"
+
+./prepare
+
+if [ ! -f './config/private.yml' ]; then
+  # Setting it up could eventually be templated
+  echo "you need to set up your private.yml"
+  exit 1
+fi
+
+# setting up the local blobstore
+cp config/final.yml config/final.yml.bk
+cp config/final.yml.local config/final.yml
+
+# Creating the release
+bosh create release --force --final --with-tarball --name $RELEASE
+
+cp config/final.yml.bk config/final.yml
+rm config/final.yml.bk
