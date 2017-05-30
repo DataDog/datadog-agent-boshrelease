@@ -82,6 +82,9 @@ properties:
   dd.use_jmxfetch:
     default: no
     description: Should the jmxfetch agent be started
+  dd.apm_enabled:
+    default: no
+    description: Should the trace Agent be started
   dd.use_dogstatsd:
     default: no
     description: Should the dogstatsd agent be started for statsd metrics collection

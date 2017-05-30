@@ -138,6 +138,14 @@ histogram_percentiles: <%= p("dd.histogram_percentiles", ["0.95"]).join(', ') %>
 # and modify its value.
 # sd_template_dir: /datadog/check_configs
 
+# ============================================ #
+# APM					       #
+# ============================================ #
+<% if p('dd.apm_enabled') == true || p('dd.apm_enabled') =~ (/(true|t|yes|y|1)$/i) %>
+apm_enabled: true
+<% else %>
+apm_enabled: false
+<% end %>
 
 # ========================================================================== #
 # DogStatsd configuration                                                    #
