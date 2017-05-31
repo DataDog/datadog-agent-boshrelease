@@ -11,12 +11,18 @@ if [ ! -f './config/private.yml' ]; then
   exit 1
 fi
 
+VERSION_STRING=""
+
+if [[ ! -z $VERSION ]]; then
+  VERSION_STRING="--version=$VERSION"
+fi
+
 # setting up the local blobstore
 cp config/final.yml config/final.yml.bk
 cp config/final.yml.local config/final.yml
 
 # Creating the release
-bosh create release --force --final --with-tarball --name $RELEASE || bosh create-release --force --final --tarball=release.tgz --name $RELEASE
+bosh create release --force --final --with-tarball --name $RELEASE || bosh create-release --force --final --tarball=datadog-agent-release.tgz --name $RELEASE $VERSION_STRING
 
 cp config/final.yml.bk config/final.yml
 rm config/final.yml.bk
