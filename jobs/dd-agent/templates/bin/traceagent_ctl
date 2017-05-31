@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Load job properties
+source /var/vcap/jobs/dd-agent/data/properties.sh
+
+# Setup env vars and folders for the ctl script
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "traceagent"
+
+# Load function lib (alway before setup, there are some global variables needed)
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
+
+TRACE_AGENT="$JOB_DIR/packages/dd-agent/bin/trace-agent"
+
+case ${1:-help} in
+  start)
+    echon_log "Starting Datadog Agent $COMPONENT: "
+    pid_guard $PIDFILE "dd-agent-$COMPONENT"
+    (
+        {
+            exec chpst -v -u vcap:vcap $TRACE_AGENT -ddconfig /var/vcap/jobs/dd-agent/config/datadog.conf
+        } >>$LOG_DIR/$COMPONENT.stdout.log \
+        2>>$LOG_DIR/$COMPONENT.stderr.log
+    ) &
+    echo $! > $PIDFILE
+    echo "$(<${PIDFILE}). Done"
+    ;;
+  stop)
+    echo_log "Stopping Datadog $COMPONENT: $(<${PIDFILE}). "
+    kill_and_wait $PIDFILE
+    echo_log "Done"
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+    ;;
+esac
+exit 0

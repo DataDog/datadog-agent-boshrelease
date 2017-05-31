@@ -18,6 +18,14 @@ check process dd-agent-dogstatsd
   group vcap
 <% end %>
 
+<% if p('dd.apm_enabled') == true || p('dd.apm_enabled') =~ (/(true|t|yes|y|1)$/i) %>
+check process dd-agent-traceagent
+  with pidfile /var/vcap/sys/run/dd-agent/traceagent.pid
+  start program "/var/vcap/jobs/dd-agent/bin/traceagent_ctl start"
+  stop program "/var/vcap/jobs/dd-agent/bin/traceagent_ctl stop"
+  group vcap
+<% end %>
+
 <% if p('dd.use_jmxfetch') == true || p('dd.use_jmxfetch') =~ (/(true|t|yes|y|1)$/i) %>
 check process dd-agent-jmxfetch
   with pidfile /var/vcap/sys/run/dd-agent/jmxfetch.pid
