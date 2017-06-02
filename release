@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+./prepare
+
+cp config/final.yml config/final.yml.bk
+cp config/final.yml.local config/final.yml
+
+bosh create release --final --force --with-tarball || bosh create-release --force --final --tarball=datadog-agent-release.tgz
+cp config/final.yml.bk config/final.yml
+rm config/final.yml.bk
+
+echo "Please upload these to the proper s3 bucket"

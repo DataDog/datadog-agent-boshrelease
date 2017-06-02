@@ -1,0 +1,6 @@
+---
+final_name: datadog-firehose-nozzle
+blobstore:
+  provider: local
+  options:
+    blobstore_path: blobstore

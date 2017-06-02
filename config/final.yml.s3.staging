@@ -3,4 +3,4 @@ final_name: datadog-firehose-nozzle
 blobstore:
   provider: s3
   options:
-    bucket_name: public-datadog-firehose-nozzle-blobs
+    bucket_name: public-datadog-firehose-nozzle-release-staging

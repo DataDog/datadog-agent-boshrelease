@@ -3,6 +3,7 @@
 *.swp
 *~
 .blobs
+blobstore
 .bundle
 .cache
 .dev_builds
@@ -14,6 +15,7 @@
 blobs
 config/dev.yml
 config/private.yml
+config/final.yml.bk
 dev_releases
 output
 releases/*.tgz
