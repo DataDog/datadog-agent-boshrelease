@@ -5,7 +5,7 @@
 cp config/final.yml config/final.yml.bk
 cp config/final.yml.local config/final.yml
 
-bosh create release --final --force --with-tarball || bosh create-release --force --final --tarball=datadog-agent-release.tgz
+bosh create release --final --force --with-tarball || bosh create-release --force --final --tarball=datadog-firehoes-nozzle-release.tgz
 cp config/final.yml.bk config/final.yml
 rm config/final.yml.bk
 
