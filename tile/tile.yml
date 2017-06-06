@@ -1,0 +1,108 @@
+name: datadog
+icon_file: resources/icon.png
+label: Datadog Nozzle for PCF
+description: Send metrics from Cloud Foundry metrics to Datadog!
+
+apply_open_security_group: false       # Apply open security group, default: false
+allow_paid_service_plans: false        # Allow paid service plans, default: false
+
+stemcell_criteria:
+  os: ubuntu-trusty
+  requires_cpi: false
+  version: '3263'
+
+properties:
+- name: author
+  type: string
+  label: Author
+  value: Greg Meyer
+
+forms:
+- name: datadog-config
+  label: Datadog Config
+  description: Configure your datadog nozzle!
+  properties:
+  - name: api_key
+    type: secret
+    label: Datadog API Key
+    description: Your Datadog API Key
+  - name: api_url
+    type: string
+    label: Datadog API URL
+    description: The Datadog API endpoint to send your metrics to
+    default: https://app.datadoghq.com/api/v1/series
+  - name: metric_prefix
+    type: string
+    label: Metric Prefix
+    description: The metric prefix. Setting this to anything other than the default will have billing implications.
+    optional: true
+
+- name: cf-config
+  label: Cloud Foundry Settings
+  description: Cloud Foundry connection details
+  markdown: |
+    On deployments with runtimes 1.8.9/1.7.29 and above,
+    the built in user `datadog-firehose-nozzle` will be used when no user is specified.
+
+    API user is **required** for earlier versions of the Elastic Runtimes.
+    Failing to specify the API user on versions without `datadog-firehose` will result in:
+
+    ```
+    unknown property "datadog_firehose_credentials"...
+    ```
+
+    See the docs for detailed instructions on creating a user.
+  properties:
+  - name: insecure_ssl_skip_verify
+    type: boolean
+    label: Skip SSL validation
+    default: false
+    description: Skip SSL validation (to allow things like self-signed certs). Do not set to true in production.
+  - name: disable_access_control
+    type: boolean
+    label: Disable Access Control
+    default: false
+    description: Disable Access Control
+  - name: api_user
+    type: string
+    label: API user
+    description: Nozzle user (a user having both "cloud_controller.admin_read_only" and "doppler.firehose")
+    optional: true
+  - name: api_password
+    type: secret
+    label: API password
+    description: Password for API user
+    optional: true
+  - name: firehose_subscription_id
+    type: string
+    label: Firehose subscription id
+    default: datadog-firehose-subscription-id
+    description: Subscription id unique to nozzle; firehose balances across socket connections having same id.
+
+packages:
+- name: datadog-firehose-nozzle-release
+  type: bosh-release
+  path: resources/datadog-firehose-nozzle-release-62.tgz
+  jobs:
+    - name: datadog-firehose-nozzle
+      templates:
+      - name: datadog-firehose-nozzle
+        release: datadog-firehose-nozzle
+      dynamic_ip: 1
+      instances: 1
+      properties:
+        datadog:
+          api_key: (( .properties.api_key.value ))
+          api_url: (( .properties.api_url.value ))
+          metric_prefix: (( .properties.metric_prefix.value ))
+        loggregator:
+          traffic_controller_url: wss://doppler.(( ..cf.cloud_controller.system_domain.value )):443
+        nozzle:
+          insecure_ssl_skip_verify: (( .properties.insecure_ssl_skip_verify.value ))
+          disable_access_control: (( .properties.disable_access_control.value ))
+          subscription_id: (( .properties.firehose_subscription_id.value ))
+          deployment: (( name ))
+        uaa:
+          client: (( .properties.api_user.value || ..cf.uaa.datadog_firehose_credentials.identity ))
+          client_secret: (( .properties.api_password.value || ..cf.uaa.datadog_firehose_credentials.password ))
+          url: https://uaa.(( ..cf.cloud_controller.system_domain.value ))
