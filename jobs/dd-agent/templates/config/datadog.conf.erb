@@ -28,6 +28,8 @@ hostname: <%= hostname %>
 hostname: <%= spec.name.tr('_', '-') %>-<%= spec.index %>
 <% end %>
 
+host_aliases: <%= spec.id if spec.id and not spec.id.empty? %>
+
 # Set the host's tags
 <%
 generated_tags = {}
