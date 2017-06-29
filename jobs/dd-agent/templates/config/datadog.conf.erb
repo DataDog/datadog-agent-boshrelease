@@ -33,9 +33,6 @@ hostname: <%= spec.name.tr('_', '-') %>-<%= spec.index %>
   if spec.id and not spec.id.empty?
     host_aliases << spec.id
   end
-  if spec.ip and not spec.ip.empty?
-    host_aliases << spec.ip
-  end
 %>
 
 host_aliases: <%= host_aliases.join(',') %>
