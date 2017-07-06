@@ -29,6 +29,9 @@ hostname: <%= spec.name.tr('_', '-') %>-<%= spec.index %>
 <% end %>
 
 cloud_foundry: true
+<% if spec.id and not spec.id.empty? %>
+bosh_id: <%= spec.id %>
+<% end %>
 
 # Set the host's tags
 <%
