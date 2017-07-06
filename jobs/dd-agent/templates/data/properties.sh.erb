@@ -3,6 +3,9 @@
 # job name & index of this VM within cluster
 export DEPLOYMENT_NAME="<%= spec.deployment %>"
 
+export DD_BOSH_ID="<%= spec.id %>"
+export CLOUD_FOUNDRY="true"
+
 # e.g. JOB_NAME=redis, JOB_INDEX=0
 export JOB_NAME='<%= name %>'
 export JOB_INDEX="<%= spec.index %>"

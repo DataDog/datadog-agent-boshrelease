@@ -28,14 +28,7 @@ hostname: <%= hostname %>
 hostname: <%= spec.name.tr('_', '-') %>-<%= spec.index %>
 <% end %>
 
-<%
-  host_aliases = []
-  if spec.id and not spec.id.empty?
-    host_aliases << spec.id
-  end
-%>
-
-host_aliases: <%= host_aliases.join(',') %>
+cloud_foundry: true
 
 # Set the host's tags
 <%
