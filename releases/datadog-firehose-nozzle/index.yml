@@ -1,126 +1,129 @@
+---
 builds:
   022773d3-123b-4503-ae7f-3ebc4fc597ec:
-    version: "51"
-  08cfc711-10f3-4794-95ad-8dc5746eb72f:
-    version: "42"
+    version: '51'
+  '08cfc711-10f3-4794-95ad-8dc5746eb72f':
+    version: '42'
   0ab886b3-2899-4c5f-89f7-49351b1edac9:
-    version: "34"
+    version: '34'
   0bea9d09-d4ef-48ad-8c49-7f1bae74729c:
-    version: "19"
+    version: '19'
   0f6c1f9e-8460-4b3b-bc3e-9b6f0c1d32ed:
-    version: "57"
+    version: '57'
   1875dd3f-5d27-4448-a3e7-5fb75483b5db:
-    version: "45"
+    version: '45'
   1a08ac2f-39ae-4af4-8ebd-cac648abba83:
-    version: "2"
+    version: '2'
   266ff929-a753-4ee9-99ac-bb451d94bfd4:
-    version: "9"
+    version: '9'
   28cd75d9-0a34-4e68-a247-9045a0df6a64:
-    version: "56"
+    version: '56'
   298c2fd9-47ed-438b-99f8-3ce177a7d283:
-    version: "37"
+    version: '37'
   29fb9ed7-4627-4eec-b2af-0b38c09e96e4:
-    version: "52"
+    version: '52'
   2a657d02-b66a-493c-8d17-a1b25c49f6ed:
-    version: "1"
+    version: '1'
   2da723ad-95b1-4354-b6a3-e9e19e6a5765:
-    version: "23"
+    version: '23'
   31679fb2-15d5-4983-85b9-308e9917c65e:
-    version: "43"
+    version: '43'
   32e0b1ca-dfc9-4a13-b757-0f868055c3b4:
-    version: "31"
+    version: '31'
   3399015a-2c8b-4962-89ac-9b894ea15481:
-    version: "13"
+    version: '13'
   35caafc5-809e-4122-a76b-1c490e5dd0d6:
-    version: "12"
+    version: '12'
   3b2c73b3-3456-4f18-b9a6-7877b42b8bb6:
-    version: "14"
+    version: '14'
   3d3a86c8-def7-4004-9136-6b06583bacca:
-    version: "41"
+    version: '41'
   3dd4af6a-ca79-4a5d-ae50-11a3e32cfb8b:
-    version: "30"
+    version: '30'
   4a1dd7de-96a8-447f-957b-be735d9d6f8c:
-    version: "11"
+    version: '11'
   4a51e6eb-eec8-487d-b6a3-ca72ee834ce6:
-    version: "8"
+    version: '8'
   4f183208-3324-4917-9ca9-09e530d88530:
-    version: "5"
+    version: '5'
   539b4d1e-edb4-45de-b08b-99f9757eb158:
-    version: "3"
+    version: '3'
   58fd9d13-cec2-497e-862e-6a540771a0c5:
-    version: "6"
+    version: '6'
   66249870-2ae7-4f65-81b9-5fd2e08726b1:
-    version: "22"
+    version: '22'
   6ad6725b-d388-4938-baab-0ec991f235f4:
-    version: "54"
+    version: '54'
   6b650fcd-294e-48ac-a844-90138ea60b41:
-    version: "46"
+    version: '46'
   80054998-18ab-4cbc-91df-50910ad1930f:
-    version: "39"
+    version: '39'
   821f5f26-7b4a-4b90-8923-6ac3ca467247:
-    version: "35"
+    version: '35'
   83cd9dbc-6553-4e15-8974-cc4a4a19e30d:
-    version: "38"
+    version: '38'
   84393d93-334a-40d2-88b6-f65e633360f9:
-    version: "36"
+    version: '36'
   85837274-66f4-4803-7d70-0f4bf818747f:
-    version: "61"
+    version: '61'
   8b3e8b86-d17a-41d0-886f-cf10e9dbede7:
-    version: "29"
+    version: '29'
   8cac812b-472a-4b5a-96f3-1d2cb1077d43:
-    version: "25"
+    version: '25'
   8ce32783-4165-4363-91c4-b33d9f78a952:
-    version: "16"
+    version: '16'
   8d43a030-5f25-463f-a9b0-072d80c69385:
-    version: "48"
+    version: '48'
   9424505e-c951-4276-8be8-63bcb2360abd:
-    version: "24"
+    version: '24'
   962640d1-c1f0-4036-9e4a-3d2dbe157c4a:
-    version: "4"
+    version: '4'
   9a835686-e2c8-45c2-ba62-eb4054536807:
-    version: "55"
+    version: '55'
   9c20de4b-2970-4e3b-b55e-5c5db64cc1d3:
-    version: "10"
+    version: '10'
   9cc9f801-f8f6-4902-b6d2-1cfe313d5cec:
-    version: "47"
+    version: '47'
   a002737a-3eda-46e5-970b-4c3095a6c159:
-    version: "49"
+    version: '49'
   a3acb786-7aee-4298-a77c-1ee668dfd3a4:
-    version: "44"
+    version: '44'
   a5245406-44fb-4810-b2df-fdbcf2b7a8b9:
-    version: "27"
+    version: '27'
   abdc9146-16b2-4e93-b639-a1bc56f5a469:
-    version: "26"
+    version: '26'
   bbb9021c-dfab-4c5e-bd6f-08113eee6ad5:
-    version: "53"
+    version: '53'
   c072e6f4-c79f-4794-ad65-cd8337924c9f:
-    version: "59"
+    version: '59'
   c9c415de-8387-4607-954c-f7deb71ee4d5:
-    version: "7"
+    version: '7'
   ca6cb44f-ec2a-4881-a4b3-d2b841cf8a41:
-    version: "58"
+    version: '58'
   caa60475-0100-488d-82b1-b2c21fed589a:
-    version: "17"
+    version: '17'
   cb9e47dd-4810-4b42-a602-f98694632fd6:
-    version: "18"
+    version: '18'
   cc3c3a0f-954c-47c9-526b-277ae0be0a49:
-    version: "62"
+    version: '62'
   d259b9a9-0dd0-4d96-9a42-41e5fe84aa08:
-    version: "32"
+    version: '32'
   d7a4b1f1-827a-4913-9d46-8c72f4b6995f:
-    version: "20"
+    version: '20'
   ddc3b1ed-b228-4c1d-9d68-11e9be1d4627:
-    version: "21"
+    version: '21'
   e6163aff-f779-49a1-9598-adee2dc43717:
-    version: "28"
+    version: '28'
   efaee368-beef-49fa-9bfb-ca65765fa128:
-    version: "15"
+    version: '15'
   f158b763-a8f8-4235-a60c-e9f0761b057d:
-    version: "40"
+    version: '40'
   f2a8fece-1632-4a9e-88a9-de6458dc85ba:
-    version: "60"
+    version: '60'
   f55d75da-b7a0-49ba-aad4-561589e8ae24:
-    version: "50"
+    version: '50'
   f95ccfcf-ddf6-4332-b800-84b205033f7f:
-    version: "33"
-format-version: "2"
+    version: '33'
+  b8adc5e7-768a-4c52-88d7-20e8436244b6:
+    version: '63'
+format-version: '2'
