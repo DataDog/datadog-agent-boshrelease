@@ -4,4 +4,6 @@ builds:
     version: 1.0.5130
   369c43ef-8445-407e-b0b5-1039fa401910:
     version: 1.0.5140
+  c8186680-7018-4482-9af7-002c93107213:
+    version: 1.0.5150
 format-version: '2'
