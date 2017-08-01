@@ -25,7 +25,11 @@ api_key: <%= p('dd.api_key') %>
 <% if_p("dd.hostname") do |hostname| %>
 hostname: <%= hostname %>
 <% end.else do %>
+<% if_p("dd.use_uuid_hostname") do |hostname| %>
+hostname: <%= hostname %>
+<% end.else do %>
 hostname: <%= spec.name.tr('_', '-') %>-<%= spec.index %>
+<% end %>
 <% end %>
 
 cloud_foundry: true
@@ -84,6 +88,8 @@ gce_updated_hostname: <%= p("dd.gce_updated_hostname", "yes") %>
 
 # Change port the Agent is listening to
 listen_port: <%= p("dd.listen_port", "17123") %>
+
+process_agent_enabled: <%= p("dd.process_agent_enabled", "no") %>
 
 <% if p('dd.use_graphite') == true || p('dd.use_graphite') =~ (/(true|t|yes|y|1)$/i) %>
 # Start a graphite listener on this port
