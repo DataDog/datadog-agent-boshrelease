@@ -20,7 +20,7 @@ case ${1:-help} in
     pid_guard $PIDFILE "dd-agent-$COMPONENT"
     (
         {
-            exec chpst -v -u vcap:vcap "$DD_PROCESS_AGENT"
+            # exec chpst -v -u vcap:vcap "$DD_PROCESS_AGENT"
         } >>$LOG_DIR/$COMPONENT.stdout.log \
         2>>$LOG_DIR/$COMPONENT.stderr.log
     ) &

@@ -89,8 +89,8 @@ gce_updated_hostname: <%= p("dd.gce_updated_hostname", "yes") %>
 # Change port the Agent is listening to
 listen_port: <%= p("dd.listen_port", "17123") %>
 
-<% if p('dd.process_agent_enabled') == true || p('dd.process_agent_enabled') =~ (/(true|t|yes|y|1)$/i) || p('dd.use_process_agent') == true || p('dd.use_process_agent') =~ (/(true|t|yes|y|1)$/i) %>
-process_agent_enabled: true
+<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) || p('dd.use_process_agent', false) == true || p('dd.use_process_agent', false) =~ (/(true|t|yes|y|1)$/i) %>
+process_agent_enabled: false
 <% end %>
 
 <% if p('dd.use_graphite') == true || p('dd.use_graphite') =~ (/(true|t|yes|y|1)$/i) %>
