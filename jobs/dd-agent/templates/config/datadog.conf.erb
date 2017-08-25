@@ -272,6 +272,9 @@ dogstreams: <%= dogstreams.join(', ') %>
 custom_emitters: <%= custom_emitters.join(', ') %>
 <% end %>
 
+<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) || p('dd.use_process_agent', false) == true || p('dd.use_process_agent', false) =~ (/(true|t|yes|y|1)$/i) %>
+  process_agent_enabled: true
+<% end %>
 
 # ========================================================================== #
 # Logging
@@ -288,3 +291,6 @@ jmxfetch_log_file: /var/vcap/sys/log/dd-agent/jmxfetch.log
 log_to_syslog: no
 # syslog_host:
 # syslog_port:
+
+[process.config]
+log_file: /var/vcap/sys/log/dd-agent/process_agent.log
