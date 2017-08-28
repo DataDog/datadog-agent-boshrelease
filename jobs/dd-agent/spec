@@ -86,7 +86,7 @@ properties:
     default: no
     description: Should the jmxfetch agent be started
   dd.use_dogstatsd:
-    default: yes
+    default: no
     description: Should the dogstatsd agent be started for statsd metrics collection
   dd.dogstatsd_port:
     default: 18125
@@ -149,9 +149,6 @@ properties:
     default: yes
     description: Report metrics including the state of the nics
   dd.process_agent_enabled:
-    default: no
-    description: Enable the (beta) process agent.
-  dd.use_process_agent:
     default: no
     description: Enable the (beta) process agent.
   dd.generate_network_config_excluded_interfaces:

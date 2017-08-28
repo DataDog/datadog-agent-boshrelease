@@ -30,7 +30,6 @@ hostname: <%= hostname %>
 <% end.else do %>
 hostname: <%= spec.name.tr('_', '-') %>-<%= spec.index %>
 <% end %>
-<% end %>
 
 cloud_foundry: true
 <% if spec.id and not spec.id.empty? %>
@@ -88,10 +87,6 @@ gce_updated_hostname: <%= p("dd.gce_updated_hostname", "yes") %>
 
 # Change port the Agent is listening to
 listen_port: <%= p("dd.listen_port", "17123") %>
-
-<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) || p('dd.use_process_agent', false) == true || p('dd.use_process_agent', false) =~ (/(true|t|yes|y|1)$/i) %>
-process_agent_enabled: false
-<% end %>
 
 <% if p('dd.use_graphite') == true || p('dd.use_graphite') =~ (/(true|t|yes|y|1)$/i) %>
 # Start a graphite listener on this port
@@ -272,8 +267,8 @@ dogstreams: <%= dogstreams.join(', ') %>
 custom_emitters: <%= custom_emitters.join(', ') %>
 <% end %>
 
-<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) || p('dd.use_process_agent', false) == true || p('dd.use_process_agent', false) =~ (/(true|t|yes|y|1)$/i) %>
-  process_agent_enabled: true
+<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
+process_agent_enabled: true
 <% end %>
 
 # ========================================================================== #

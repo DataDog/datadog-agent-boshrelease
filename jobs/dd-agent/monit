@@ -26,7 +26,7 @@ check process dd-agent-jmxfetch
   group vcap
 <% end %>
 
-<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) || p('dd.use_process_agent', false) == true || p('dd.use_process_agent', false) =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
 check process dd-agent-process-agent
   with pidfile /var/vcap/sys/run/dd-agent/process_agent.pid
   start program "/var/vcap/jobs/dd-agent/bin/process_agent_ctl start"
