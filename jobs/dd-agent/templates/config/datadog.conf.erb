@@ -30,6 +30,8 @@ hostname: <%= hostname %>
 <% end.else do %>
 hostname: <%= spec.name.tr('_', '-') %>-<%= spec.index %>
 <% end %>
+<% end %>
+
 
 cloud_foundry: true
 <% if spec.id and not spec.id.empty? %>
