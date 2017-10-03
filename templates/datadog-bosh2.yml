@@ -3,7 +3,7 @@ name: datadog
 
 releases:
   - name: datadog-firehose-nozzle
-    url: https://bosh.io/d/github.com/cloudfoundry-incubator/datadog-firehose-nozzle-release
+    url: https://bosh.io/d/github.com/datadog/datadog-firehose-nozzle-release
     version: latest
 
 update:
@@ -23,11 +23,11 @@ instance_groups:
   azs:
   - z1
   instances: 1
-  persistent_disk_type: 5GB
+  persistent_disk_type: default
   vm_type: default
   stemcell: default
   networks:
-  - name: private
+  - name: default
   jobs:
   - name: datadog-firehose-nozzle
     release: datadog-firehose-nozzle
