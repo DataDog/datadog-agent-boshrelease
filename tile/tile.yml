@@ -82,7 +82,7 @@ forms:
 packages:
 - name: datadog-firehose-nozzle-release
   type: bosh-release
-  path: resources/datadog-firehose-nozzle-release-62.tgz
+  path: resources/datadog-firehose-nozzle-release-63.tgz
   jobs:
     - name: datadog-firehose-nozzle
       templates:
