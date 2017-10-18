@@ -3,7 +3,7 @@ name: datadog
 
 releases:
   - name: datadog-firehose-nozzle
-    url: https://bosh.io/d/github.com/datadog/datadog-firehose-nozzle-release
+    url: https://bosh.io/d/github.com/DataDog/datadog-firehose-nozzle-release
     version: latest
 
 update:
