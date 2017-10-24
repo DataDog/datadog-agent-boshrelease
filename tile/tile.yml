@@ -41,10 +41,7 @@ forms:
   label: Cloud Foundry Settings
   description: Cloud Foundry connection details
   markdown: |
-    On deployments with runtimes 1.8.9/1.7.29 and above,
-    the built in user `datadog-firehose-nozzle` will be used when no user is specified.
-
-    API user is **required** for earlier versions of the Elastic Runtimes.
+    A UAA Client and Secret is requierd to use the datadog firehose nozzle
     Failing to specify the API user on versions without `datadog-firehose` will result in:
 
     ```
@@ -63,16 +60,16 @@ forms:
     label: Disable Access Control
     default: false
     description: Disable Access Control
-  - name: api_user
+  - name: uaa_client
     type: string
-    label: API user
-    description: Nozzle user (a user having both "cloud_controller.admin_read_only" and "doppler.firehose")
-    optional: true
-  - name: api_password
+    label: UAA Client
+    description: UAA client (a user having both "cloud_controller.admin_read_only" and "doppler.firehose")
+    optional: false
+  - name: uaa_secret
     type: secret
-    label: API password
-    description: Password for API user
-    optional: true
+    label: UAA Secret
+    description: Secret for the UAA Client
+    optional: false
   - name: firehose_subscription_id
     type: string
     label: Firehose subscription id
@@ -103,6 +100,6 @@ packages:
           subscription_id: (( .properties.firehose_subscription_id.value ))
           deployment: (( name ))
         uaa:
-          client: (( .properties.api_user.value || ..cf.uaa.datadog_firehose_credentials.identity ))
-          client_secret: (( .properties.api_password.value || ..cf.uaa.datadog_firehose_credentials.password ))
+          client: (( .properties.uaa_client.value ))
+          client_secret: (( .properties.uaa_secret.value ))
           url: https://uaa.(( ..cf.cloud_controller.system_domain.value ))
