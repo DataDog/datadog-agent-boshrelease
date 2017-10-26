@@ -34,7 +34,9 @@ uaa:
 ```
 
 Once a Datadog client is registered in UAA, you are ready to deploy the
-nozzle. The instructions here assume you are using the Ruby based Bosh CLI.
+nozzle. The instructions here assume you are using the Ruby based Bosh CLI and have this deployed on Bosh Lite.
+
+### If you are using Bosh Lite
 
 First, update `bosh-lite/stub.yml` with your Datadog API key.  Note that the
 `client_secret` under the `uaa` section in `properties` will need to match
@@ -46,6 +48,12 @@ with:
 ```
 ./scripts/make_manifest_spiff bosh-lite/stub.yml
 ```
+
+### If you are not using Bosh Lite
+
+If you are not usin Bosh Lite, your deployment will require more customization. If you look at the current templates, you'll get a good sense of what you'll need to do in order to deploy the firehose.
+
+For an example manifest, check out `./manifests/examples/example_manifest.yml`
 
 You are now ready to deploy:
 

@@ -1,0 +1,52 @@
+---
+name: datadog-firehose-nozzle
+director_uuid: 6956bea0-3068-4a57-af74-bf9f68d90ab0
+jobs:
+- instances: 1
+  name: datadog-firehose-nozzle
+  vm_type: medium
+  persistent_disk_type: '1024'
+  stemcell: bosh-ubuntu-trusty-go_agent
+  azs:
+  - us-east1-a
+  networks:
+  - name: ert
+    default:
+    - dns
+    - gateway
+  jobs:
+    - name: datadog-firehose-nozzle
+
+properties:
+  datadog:
+    api_key: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    api_url: https://app.datadoghq.com/api/v1/series
+    flush_duration_seconds: 15
+    metric_prefix: cf.nozzle.
+  loggregator:
+    traffic_controller_url: wss://doppler.sys.mycloudfoundry.com:443
+  nozzle:
+    deployment: datadog-firehose-nozzle
+    disable_access_control: null
+    insecure_ssl_skip_verify: true
+    subscription_id: datadog-firehose-nozzle
+  uaa:
+    client: datadog-firehose-nozzle
+    client_secret: datadog_secret-password
+    url: https://uaa.sys.mycloudfoundry.com
+
+releases:
+- name: datadog-firehose-nozzle
+  version: latest
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-100000
+  max_errors: 1
+  max_in_flight: 1
+  update_watch_time: 30000-100000
+
+stemcells:
+- alias: bosh-ubuntu-trusty-go_agent
+  os: ubuntu-trusty
+  version: '3263.14'
