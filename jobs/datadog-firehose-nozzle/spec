@@ -60,3 +60,15 @@ properties:
   nozzle.disable_access_control:
     description: "Datadog Nozzle bypasses authentication with the UAA"
     default: false
+  cc.endpoint:
+    description: "Cloud Controller Endpoint for getting appmetrics"
+    default: ""
+  nozzle.app_metrics:
+    description: "Turn on grabbing of app metrics (may substantially increase load)"
+    default: true
+  nozzle.workers:
+    description: "The number of worker threads to use"
+    default: 4
+  nozzle.grab_interval:
+    description: "The Interval (in minutes) to update the app metadata"
+    default: 10

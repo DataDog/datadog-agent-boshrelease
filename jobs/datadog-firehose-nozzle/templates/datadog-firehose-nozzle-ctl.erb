@@ -19,7 +19,7 @@ exec >>$LOG_DIR/datadog-firehose-nozzle.stdout.log \
     2>>$LOG_DIR/datadog-firehose-nozzle.stderr.log
 
 chpst -u vcap:vcap /var/vcap/packages/datadog-firehose-nozzle/datadog-firehose-nozzle \
---config /var/vcap/jobs/datadog-firehose-nozzle/config/datadog-firehose-nozzle.json &
+--config /var/vcap/jobs/datadog-firehose-nozzle/config/datadog-firehose-nozzle.json --debug &
 
 echo $! > $PIDFILE
 
