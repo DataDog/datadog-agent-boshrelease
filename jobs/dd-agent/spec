@@ -162,3 +162,6 @@ properties:
   dd.integrations:
     default: {}
     description: Agent integration configuration. Each key will have ".yaml" appended to it and the value dumped a file
+  dd.enable_gohai:
+    default: yes
+    description: Enable gohai metadata collection (default: yes)

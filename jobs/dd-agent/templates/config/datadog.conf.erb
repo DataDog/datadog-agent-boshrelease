@@ -38,6 +38,8 @@ cloud_foundry: true
 bosh_id: <%= spec.id %>
 <% end %>
 
+enable_gohai: <%= p('dd.enable_gohai', 'yes') %>
+
 # Set the host's tags
 <%
 generated_tags = {}
