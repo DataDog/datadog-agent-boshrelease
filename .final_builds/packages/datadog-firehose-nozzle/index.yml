@@ -1,4 +1,3 @@
----
 builds:
   004f1f8ab61f7f4deebd01598507e1998e8ff536:
     version: 004f1f8ab61f7f4deebd01598507e1998e8ff536
@@ -7,7 +6,7 @@ builds:
   02712a7e9fefb0bb6d30b57eaf0fdbd9659e33ea:
     version: 02712a7e9fefb0bb6d30b57eaf0fdbd9659e33ea
     blobstore_id: 982226a0-389f-441d-957e-deb8be77835a
-    sha1: '038705c25f4717926b6e243459dee762965af346'
+    sha1: 038705c25f4717926b6e243459dee762965af346
   066efa66a6a729a06bef0c18a07b2adfc3a52937:
     version: 066efa66a6a729a06bef0c18a07b2adfc3a52937
     blobstore_id: c04b165a-f1ec-448f-9601-bf0887d8a77b
@@ -84,6 +83,10 @@ builds:
     version: 4616a0941e209287538ef87477a062f501120439
     blobstore_id: e06f236a-aa58-432f-a5e7-28e954163434
     sha1: 27367f41872e55bdf456fd76f233e1afe413abb6
+  4a06fe9c7334bd89ca7b89363b4d8633b4c3c63b:
+    version: 4a06fe9c7334bd89ca7b89363b4d8633b4c3c63b
+    blobstore_id: efdd9fff-43e7-414c-8cac-46d35ff54b9f
+    sha1: 59cc56c5aa019dfb2c6608b217437ce54a74f20c
   4d1075cfaf41e8906757b9288ae9e0bfdfb3fb17:
     version: 4d1075cfaf41e8906757b9288ae9e0bfdfb3fb17
     blobstore_id: 84f41473-5028-41a9-b6c1-7c2146f1f511
@@ -136,6 +139,10 @@ builds:
     version: 9cff4c99957d8706b9a1ababf0112fd22cffa9c3
     blobstore_id: 40b15c11-81ee-464f-888f-e73deec5216c
     sha1: 8e50cc9e69611acf1e9c137740cd9896ab622298
+  a1cfae6e3cf01bb5f1cc8b015d5c3574f4963c52:
+    version: a1cfae6e3cf01bb5f1cc8b015d5c3574f4963c52
+    blobstore_id: d0beb112-a14c-4e79-4a20-99342027d475
+    sha1: a56be4f0da452f0a2637064cf351249f4ca95752
   a58f24bf3b95021d55ae36803e1c6ba612fd5efe:
     version: a58f24bf3b95021d55ae36803e1c6ba612fd5efe
     blobstore_id: 0febf7a8-d6d0-4878-9774-1ccfff56db7b
@@ -212,8 +219,4 @@ builds:
     version: f732bf8fb52db53d618ccfe6e3643dc2772c7491
     blobstore_id: 5f0de599-e23a-4a86-a3ac-ed221e028fe7
     sha1: a4102da7236f950f615b76308553d7c8aa5ac38b
-  4a06fe9c7334bd89ca7b89363b4d8633b4c3c63b:
-    version: 4a06fe9c7334bd89ca7b89363b4d8633b4c3c63b
-    sha1: 59cc56c5aa019dfb2c6608b217437ce54a74f20c
-    blobstore_id: efdd9fff-43e7-414c-8cac-46d35ff54b9f
-format-version: '2'
+format-version: "2"
