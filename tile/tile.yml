@@ -20,7 +20,7 @@ properties:
 forms:
 - name: datadog-config
   label: Datadog Config
-  description: Configure your datadog nozzle!
+  description: Configure your Datadog Firehose Nozzle!
   properties:
   - name: api_key
     type: secret
@@ -41,7 +41,7 @@ forms:
   label: Cloud Foundry Settings
   description: Cloud Foundry connection details
   markdown: |
-    A UAA Client and Secret is requierd to use the datadog firehose nozzle
+    A [UAA Client and Secret](https://docs.pivotal.io/pivotalcf/uaa/uaa-user-management.html) is required to use the datadog firehose nozzle
     Failing to specify the API user on versions without `datadog-firehose` will result in:
 
     ```
