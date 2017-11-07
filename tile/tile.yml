@@ -36,6 +36,11 @@ forms:
     label: Metric Prefix
     description: The metric prefix. Setting this to anything other than the default will have billing implications.
     optional: true
+  - name: app_metrics
+    type: boolean
+    label: App Metrics
+    default: true
+    description: Grab app container metrics (e.g. cpu and memory usage).
 
 - name: cf-config
   label: Cloud Foundry Settings
@@ -75,11 +80,21 @@ forms:
     label: Firehose subscription id
     default: datadog-firehose-subscription-id
     description: Subscription id unique to nozzle; firehose balances across socket connections having same id.
+  - name: num_workers
+    type: integer
+    label: Number of Worker Threads
+    description: The number of worker threads to use in the nozzle
+    default: 4
+  - name: grab_interval
+    type: integer
+    label: App Metrics Interval
+    description: The interval at which to grab the app metrics
+    default: 10
 
 packages:
 - name: datadog-firehose-nozzle-release
   type: bosh-release
-  path: resources/datadog-firehose-nozzle-release-63.tgz
+  path: resources/datadog-firehose-nozzle-release-64.tgz
   jobs:
     - name: datadog-firehose-nozzle
       templates:
@@ -99,7 +114,12 @@ packages:
           disable_access_control: (( .properties.disable_access_control.value ))
           subscription_id: (( .properties.firehose_subscription_id.value ))
           deployment: (( name ))
+          app_metrics: (( .properties.app_metrics.value ))
+          num_workers: (( .properties.num_workers.value ))
+          grab_interval: (( .properties.grab_interval.value ))
         uaa:
           client: (( .properties.uaa_client.value ))
           client_secret: (( .properties.uaa_secret.value ))
           url: https://uaa.(( ..cf.cloud_controller.system_domain.value ))
+        cc:
+          endpoint: https://api.(( ..cf.cloud_controller.system_domain.value ))
