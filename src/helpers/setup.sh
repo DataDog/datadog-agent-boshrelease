@@ -19,7 +19,7 @@ for package_bin_dir in $(ls -d ${package_dir}/*bin 2>/dev/null); do
   # is often used for different architecture (via containers)
   temp_path=${package_bin_dir}:${temp_path}
 done
-export PATH="$PACKAGES/$NAME/checks.d:$PACKAGES/$NAME/agent:$PACKAGES/$NAME/embedded/bin:$PATH"
+export PATH="$PACKAGES/$NAME/checks.d:$PACKAGES/$NAME/agent:$PACKAGES/$NAME/bin:$PACKAGES/$NAME/embedded/bin:$PATH"
 for package_lib_dir in $(ls -d $PACKAGES/dd-agent/embedded/lib 2>/dev/null); do
     LD_LIBRARY_PATH="${package_lib_dir}:${LD_LIBRARY_PATH}"
 done
