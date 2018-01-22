@@ -7,7 +7,7 @@
   end
 
   no_proxy = p("nozzle.no_proxy", "")
-  if no_proxy.class == Sting
+  if no_proxy.class == String
     no_proxy = no_proxy.split(",")
   end
 %>

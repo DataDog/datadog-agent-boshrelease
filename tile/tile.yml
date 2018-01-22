@@ -127,6 +127,7 @@ packages:
           api_key: (( .properties.api_key.value ))
           api_url: (( .properties.api_url.value ))
           metric_prefix: (( .properties.metric_prefix.value ))
+          custom_tags: (( .properties.tags.value ))
         loggregator:
           traffic_controller_url: wss://doppler.(( ..cf.cloud_controller.system_domain.value )):443
         nozzle:
@@ -137,6 +138,9 @@ packages:
           app_metrics: (( .properties.app_metrics.value ))
           num_workers: (( .properties.num_workers.value ))
           grab_interval: (( .properties.grab_interval.value ))
+          http_proxy_url: (( .properties.http_proxy_url.value ))
+          https_proxy_url: (( .properties.https_proxy_url.value ))
+          no_proxy: (( .properties.no_proxy.value ))
         uaa:
           client: (( .properties.uaa_client.value ))
           client_secret: (( .properties.uaa_secret.value ))
