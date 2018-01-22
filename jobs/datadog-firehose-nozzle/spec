@@ -38,6 +38,9 @@ properties:
   datadog.timeout_seconds:
     description: "The number of seconds to set the timeout for writes to Datadog"
     default: 5
+  datadog.custom_tags:
+    description: "Send up custom tags with every request (e.g. to label your foundries)"
+    default: []
 
   uaa.url:
     description: "URL for the UAA server"
@@ -72,3 +75,12 @@ properties:
   nozzle.grab_interval:
     description: "The Interval (in minutes) to update the app metadata"
     default: 10
+  nozzle.http_proxy_url:
+    description: "Use an http proxy"
+    default: ""
+  nozzle.https_proxy_url:
+    description: "Use an https proxy"
+    default: ""
+  nozzle.no_proxy:
+    description: "Hosts that should skip the proxy"
+    default: ""

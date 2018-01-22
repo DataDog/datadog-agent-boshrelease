@@ -1,3 +1,17 @@
+<%
+  # Since YAML allows making arrays as arrays, it should be an option here, too
+  # However, the tile has no good option to make an array, so there it is a string
+  tags = p("datadog.custom_tags", "")
+  if tags.class == String
+    tags = tags.split(",")
+  end
+
+  no_proxy = p("nozzle.no_proxy", "")
+  if no_proxy.class == Sting
+    no_proxy = no_proxy.split(",")
+  end
+%>
+
 <%=
 
 JSON.pretty_generate(
@@ -11,6 +25,9 @@ JSON.pretty_generate(
     "DataDogTimeoutSeconds" => p("datadog.timeout_seconds"),
     "FlushDurationSeconds" => p("datadog.flush_duration_seconds"),
     "FlushMaxBytes" => p("datadog.flush_max_bytes"),
+    "HTTPProxyURL": p("nozzle.http_proxy_url", ""),
+    "HTTPSProxyURL": p("nozzle.https_proxy_url", ""),
+    "NoProxy": no_proxy,
     "InsecureSSLSkipVerify" => p("nozzle.insecure_ssl_skip_verify"),
     "MetricPrefix" => p("datadog.metric_prefix"),
     "Deployment" => p("nozzle.deployment"),
@@ -21,6 +38,7 @@ JSON.pretty_generate(
     "AppMetrics" => p("nozzle.app_metrics", true),
     "NumWorkers" => p("nozzle.num_workers", 4),
     "GrabInterval" => p("nozzle.grab_interval", 10),
+    "CustomTags" => tags
 )
 
 %>

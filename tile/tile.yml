@@ -36,6 +36,11 @@ forms:
     label: Metric Prefix
     description: The metric prefix. Setting this to anything other than the default will have billing implications.
     optional: true
+  - name: tags
+    type: string
+    label: Tags
+    description: Set custom tags, separated by a comma (e.g. foundry:thisone,env:production)
+    optional: true
   - name: app_metrics
     type: boolean
     label: App Metrics
@@ -90,11 +95,26 @@ forms:
     label: App Metrics Interval
     description: The interval at which to grab the app metrics
     default: 10
+  - name: http_proxy_url
+    type: string
+    optional: true
+    label: HTTP Proxy URL
+    description: Set a URL for an http proxy
+  - name: https_proxy_url
+    type: string
+    optional: true
+    label: HTTPS Proxy URL
+    description: Set a URL for an https proxy
+  - name: no_proxy
+    type: string
+    optional: true
+    label: No Proxy
+    description: Set urls that should skip the proxy, separated by a comma (e.g. datadoghq.com,google.com,example.engineering)
 
 packages:
 - name: datadog-firehose-nozzle-release
   type: bosh-release
-  path: resources/datadog-firehose-nozzle-release-64.tgz
+  path: resources/datadog-firehose-nozzle-release.tgz
   jobs:
     - name: datadog-firehose-nozzle
       templates:
