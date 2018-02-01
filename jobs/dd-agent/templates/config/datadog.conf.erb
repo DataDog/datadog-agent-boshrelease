@@ -57,7 +57,16 @@ end
 # The others are optional, however this one is not, as it figures into our dashboard
 generated_tags["bosh_deployment"] = spec.deployment if spec.deployment and not spec.deployment.empty?
 generated_tags["deployment"] = spec.deployment if spec.deployment and not spec.deployment.empty?
-tags = p('dd.tags', []) + generated_tags.map { |k, v| "#{k}:#{v}" }
+
+custom_tags = []
+if p('dd.tags', []).class == String
+  custom_tags = p('dd.tags', "").split(",")
+else
+  custom_tags = p('dd.tags', [])
+end
+
+tags = custom_tags
+tags += generated_tags.map { |k, v| "#{k}:#{v}" }
 # The firehose nozzle uses this tag, which is frustrating, but we want the data to be able to conform
 tags += ["index:#{spec.id}"] if spec.id and not spec.id.empty?
 tags += ["ip:#{spec.ip}"] if spec.ip and not spec.ip.empty?
