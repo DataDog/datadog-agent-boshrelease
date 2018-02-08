@@ -54,3 +54,25 @@ pushd ${AGENT_INSTALL_TARGET}
   ln -s /var/vcap/jobs/$JOB_NAME/config/conf.d conf.d
   ln -s /var/vcap/jobs/$JOB_NAME/config/datadog.conf datadog.conf
 popd
+
+echo "Fixing broken symbolic links"
+broken_links="/embedded/bin/bzfgrep
+/embedded/bin/bzcmp
+/embedded/bin/bzless
+/embedded/bin/bzegrep
+/embedded/ssl/cert.pem"
+
+for link in $broken_links; do
+  rm -f ${BOSH_INSTALL_TARGET}/${link}
+done
+
+pushd ${BOSH_INSTALL_TARGET}/embedded/bin
+  ln -s bzgrep bzfgrep
+  ln -s bzdiff bzcmp
+  ln -s bzmore bzless
+  ln -s bzgrep bzegrep
+popd
+
+pushd ${BOSH_INSTALL_TARGET}/embedded/ssl
+  ln -s ./certs/cacert.pem cert.pem
+popd
