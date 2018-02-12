@@ -11,6 +11,7 @@ export COMPONENT=${2:-$NAME}
 
 # Setup the PATH and LD_LIBRARY_PATH
 LD_LIBRARY_PATH=${LD_LIBRARY_PATH:-''}
+LD_LIBRARY_PATH="$PACKAGES/dd-agent/embedded/lib:${LD_LIBRARY_PATH}"
 package_dir="/var/vcap/packages/dd-agent"
 temp_path=${PATH}
 # Add all packages' /bin & /sbin into $PATH
@@ -33,6 +34,7 @@ export LD_LIBRARY_PATH
 
 # Python modules
 PYTHONPATH=${PYTHONPATH:-''}
+PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7:${PYTHONPATH}"
 for python_mod_dir in $(ls -d $PACKAGES/dd-agent/embedded/lib/python*/site-packages 2>/dev/null); do
     PYTHONPATH="${python_mod_dir}:${PYTHONPATH}"
 done

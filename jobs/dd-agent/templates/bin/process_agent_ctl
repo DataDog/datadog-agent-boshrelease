@@ -12,7 +12,7 @@ source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "pr
 # Load function lib (alway before setup, there are some global variables needed)
 source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
 
-DD_PROCESS_AGENT="$JOB_DIR/packages/dd-agent/bin/process-agent"
+DD_PROCESS_AGENT="$JOB_DIR/packages/dd-agent/embedded/bin/process-agent"
 export DD_AGENT_PY_ENV="PYTHONPATH=$PYTHONPATH,LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 export DD_AGENT_PY="$DD_AGENT_PYTHON"
 
@@ -31,9 +31,9 @@ case ${1:-help} in
     echo "$(<${PIDFILE}). Done"
     ;;
   stop)
-    echo_log "Stopping Datadog $COMPONENT: $(<${PIDFILE}). "
+    printf_log "Stopping Datadog $COMPONENT: $(<${PIDFILE}). "
     kill_and_wait $PIDFILE
-    echo_log "Done"
+    printf_log "Done"
     ;;
   *)
     echo "Usage: $0 {start|stop}"

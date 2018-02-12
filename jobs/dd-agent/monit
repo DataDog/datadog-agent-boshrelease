@@ -1,30 +1,8 @@
-check process dd-agent-collector
-  with pidfile /var/vcap/sys/run/dd-agent/collector.pid
-  start program "/var/vcap/jobs/dd-agent/bin/collector_ctl start"
-  stop program "/var/vcap/jobs/dd-agent/bin/collector_ctl stop"
+check process datadog-agent
+  with pidfile /var/vcap/sys/run/dd-agent/agent.pid
+  start program "/var/vcap/jobs/dd-agent/bin/agent_ctl start"
+  stop program "/var/vcap/jobs/dd-agent/bin/agent_ctl stop"
   group vcap
-
-check process dd-agent-forwarder
-  with pidfile /var/vcap/sys/run/dd-agent/forwarder.pid
-  start program "/var/vcap/jobs/dd-agent/bin/forwarder_ctl start"
-  stop program "/var/vcap/jobs/dd-agent/bin/forwarder_ctl stop"
-  group vcap
-
-<% if p('dd.use_dogstatsd') == true || p('dd.use_dogstatsd') =~ (/(true|t|yes|y|1)$/i) %>
-check process dd-agent-dogstatsd
-  with pidfile /var/vcap/sys/run/dd-agent/dogstatsd.pid
-  start program "/var/vcap/jobs/dd-agent/bin/dogstatsd_ctl start"
-  stop program "/var/vcap/jobs/dd-agent/bin/dogstatsd_ctl stop"
-  group vcap
-<% end %>
-
-<% if p('dd.use_jmxfetch') == true || p('dd.use_jmxfetch') =~ (/(true|t|yes|y|1)$/i) %>
-check process dd-agent-jmxfetch
-  with pidfile /var/vcap/sys/run/dd-agent/jmxfetch.pid
-  start program "/var/vcap/jobs/dd-agent/bin/jmxfetch_ctl start"
-  stop program "/var/vcap/jobs/dd-agent/bin/jmxfetch_ctl stop"
-  group vcap
-<% end %>
 
 <% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
 check process dd-agent-process-agent

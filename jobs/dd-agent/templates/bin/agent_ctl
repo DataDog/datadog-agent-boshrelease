@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+#
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Load job properties
+source /var/vcap/jobs/dd-agent/data/properties.sh
+
+# Setup env vars and folders for the ctl script
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "agent"
+
+# Load function lib (alway before setup, there are some global variables needed)
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
+
+# Load function lib (alway before setup, there are some global variables needed)
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/agent-setup.sh
+
+ensure_agent_ownership
+
+# Hardcoded pidfile
+DD_AGENT_PIDFILE="$TMP_DIR/dd-agent.pid"
+DD_AGENT="$JOB_DIR/packages/dd-agent/bin/agent/agent"
+
+AGENT_COMMAND="$DD_AGENT start -c $JOB_DIR/config/"
+
+case ${1:-help} in
+  start)
+    echon_log "Starting Datadog Agent $COMPONENT: "
+
+    # There is a rare bug that can cause monit to lose track of the agent.
+    # Monit thinks the agent is not running, but it is.
+    # An orphaned agent must be killed before attempting to start it again,
+    # So, run a check and kill it before attempting to start it.
+    check_if_running_and_kill $AGENT_COMMAND "false"
+
+    pid_guard $PIDFILE "dd-agent-$COMPONENT"
+    (
+        {
+            exec chpst -v -u vcap:vcap $AGENT_COMMAND -p "$PIDFILE"
+        } >>$LOG_DIR/$COMPONENT.stdout.log \
+        2>>$LOG_DIR/$COMPONENT.stderr.log
+    ) &
+    # echo $! > $PIDFILE
+    echo "$(<${PIDFILE}). Done"
+    ;;
+  stop)
+    printf_log "Stopping Datadog $COMPONENT: $(<${PIDFILE}). "
+    stop_agent $AGENT_COMMAND
+    kill_and_wait $PIDFILE
+    rm -f $PIDFILE
+    printf_log "Done"
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+    ;;
+esac
+exit 0

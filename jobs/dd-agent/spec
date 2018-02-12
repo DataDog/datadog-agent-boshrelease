@@ -6,13 +6,12 @@ packages:
 templates:
   data/properties.sh.erb: data/properties.sh
   config/datadog.conf.erb: config/datadog.conf
+  config/datadog.yaml.erb: config/datadog.yaml
   config/confd.sh.erb: config/confd.sh
-  bin/collector_ctl: bin/collector_ctl
-  bin/dogstatsd_ctl: bin/dogstatsd_ctl
-  bin/forwarder_ctl: bin/forwarder_ctl
-  bin/jmxfetch_ctl: bin/jmxfetch_ctl
   bin/process_agent_ctl: bin/process_agent_ctl
   bin/pre-start: bin/pre-start
+  bin/agent_ctl: bin/agent_ctl
+
 properties:
   dd.url:
     default: "https://app.datadoghq.com"
@@ -24,6 +23,12 @@ properties:
       port: 8080
       user: user
       password: pass
+  dd.proxy.http:
+    description: The proxy for http endpoints
+  dd.proxy.https:
+    description: The proxy for https endpoints
+  dd.proxy.no_proxy:
+    description: Domains that the agent proxy should skip
   dd.skip_ssl_validation:
     default: no
     description: Skip SSL validation for the Datadog url
@@ -146,7 +151,7 @@ properties:
     description: Report metrics including the state of the nics
   dd.process_agent_enabled:
     default: no
-    description: Enable the (beta) process agent.
+    description: Enable the process agent.
   dd.generate_network_config_excluded_interfaces:
     default: ["lo", "lo0"]
     description: List of the network interfaces to exclude from reporting metrics
@@ -165,3 +170,24 @@ properties:
   dd.integrations:
     default: {}
     description: Agent integration configuration. Each key will have ".yaml" appended to it and the value dumped a file
+  dd.expvar_port:
+    default: 15000
+    description: The port that the agent reports expvar metrics over. (Set to a different port if there's a collision)
+  dd.cmd_port:
+    default: 15001
+    description: The port on which the IPC api listens. (Set to a different port if there's a collision)
+  dd.check_runners:
+    default: 1
+    description: "The Agent runs workers in parallel to execute checks. By default the number of workers is set to 1. If set to 0 the agent will automatically determine the best number of runners needed based on the number of checks running. This would optimize the check collection time but may produce CPU spikes."
+  dd.enable_metadata_collection:
+    default: yes
+    description: "Metadata collection should always be enabled, except if you are running several agents/dsd instances per host. In that case, only one agent should have it on. WARNING: disabling it on every agent will lead to display and billing issues"
+  dd.log_format_json:
+    default: no
+    description: Set this option to "yes" to output logs in JSON format
+  dd.forwarder_num_workers:
+    default: 1
+    description: "The number of workers used by the forwarder. Please note each worker will open an outbound HTTP connection towards Datadog's metrics intake at every flush."
+  dd.agent_config:
+    default: {}
+    description: "Add any additional agent config options here. (Warning: any options you add here will override the options set previously.)"

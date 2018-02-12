@@ -9,26 +9,26 @@ set -u # report the usage of uninitialized variables
 function log {
   local message=${1}
   local timestamp=`date +%y:%m:%d-%H:%M:%S`
-  echo "${timestamp} :: ${message}" >> "/var/vcap/sys/log/${NAME}/${COMPONENT:-$NAME}_script.log"
+  printf "${timestamp} :: ${message}\n" >> "/var/vcap/sys/log/${NAME}/${COMPONENT:-$NAME}_script.log"
 }
 
 # Print a message
-function echo_log {
+function printf_log {
   local message=${1}
   local timestamp=`date +%y:%m:%d-%H:%M:%S`
-  echo "${timestamp} :: ${message}" | tee -a "/var/vcap/sys/log/${NAME}/${COMPONENT:-$NAME}_script.log"
+  printf "${timestamp} :: ${message}\n" | tee -a "/var/vcap/sys/log/${NAME}/${COMPONENT:-$NAME}_script.log"
 }
 
 # Print a message without \n at the end
 function echon_log {
   local message=${1}
   local timestamp=`date +%y:%m:%d-%H:%M:%S`
-  echo -n "${timestamp} :: ${message}" | tee -a "/var/vcap/sys/log/${NAME}/${COMPONENT:-$NAME}_script.log"
+  printf "${timestamp} :: ${message} \n" | tee -a "/var/vcap/sys/log/${NAME}/${COMPONENT:-$NAME}_script.log"
 }
 
 # Print a message and exit with error
 function die {
-  echo_log "$@"
+  printf_log "$@"
   exit 1
 }
 
@@ -50,7 +50,7 @@ function pid_guard {
     if [ -n "$pid" ] && [ -e /proc/$pid ]; then
       die "$name is already running, please stop it first"
     fi
-    echo_log "Removing stale pidfile ..."
+    printf_log "Removing stale pidfile ..."
     rm $pidfile
   fi
 }
@@ -75,7 +75,7 @@ function wait_pid {
         if [ $countdown -eq 0 ]; then
           if [ "$force" = "1" ]; then
             echo
-            echo_log "Kill timed out, using kill -9 on $pid ..."
+            printf_log "Kill timed out, using kill -9 on $pid ..."
             kill -9 $pid
             sleep 0.5
           fi
@@ -86,12 +86,12 @@ function wait_pid {
       fi
     done
     if [ -e /proc/$pid ]; then
-      echo_log "Timed Out"
+      printf_log "Timed Out"
     else
-      echo_log "Stopped"
+      printf_log "Stopped"
     fi
   else
-    echo_log "Process $pid is not running"
+    printf_log "Process $pid is not running"
   fi
 }
 
@@ -111,7 +111,7 @@ function wait_pidfile {
     wait_pid $pid $try_kill $timeout $force
     rm -f $pidfile
   else
-    echo_log "Pidfile $pidfile doesn't exist"
+    printf_log "Pidfile $pidfile doesn't exist"
   fi
 }
 
@@ -132,6 +132,22 @@ function kill_and_wait {
   fi
 }
 
+function find_pid_kill_and_wait {
+  local find_command=$1
+  local pid=$(find_pid)
+  local timeout=${2:-25}
+  local force=${3:-1}
+
+  wait_pid $pid 1 $timeout $force
+}
+
+function find_pid {
+  local find_command=$1
+  local pid=$(pgrep -f $find_command)
+
+  echo $pid
+}
+
 
 function check_nfs_mount {
   local opts=$1
@@ -139,9 +155,9 @@ function check_nfs_mount {
   local mount_point=$3
 
   if grep -qs $mount_point /proc/mounts; then
-    echo_log "Found NFS mount $mount_point"
+    printf_log "Found NFS mount $mount_point"
   else
-    echo_log "Mounting NFS ..."
+    printf_log "Mounting NFS ..."
     mount $opts $exports $mount_point
     if [ $? != 0 ]; then
       die "Cannot mount NFS from $exports to $mount_point, exiting ..."
