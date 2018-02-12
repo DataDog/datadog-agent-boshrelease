@@ -36,6 +36,11 @@ exec_download() {
   )
 }
 
+add_blob() {
+  local blob="$1"
+  bosh add-blob ${SRC}/${1} ${1} || true
+}
+
 main() {
   for script in $(pwd)/packages/*/spec ; do
     local base=$(dirname "${script}")
@@ -44,6 +49,7 @@ main() {
         local downloadfile=$(echo $spec | cut -d'@' -f 1)
         local downloadurl=$(echo $spec | cut -d'@' -f 2)
         exec_download "${downloadfile}" "${downloadurl}"
+        add_blob "${downloadfile}"
       done
   done
 }
