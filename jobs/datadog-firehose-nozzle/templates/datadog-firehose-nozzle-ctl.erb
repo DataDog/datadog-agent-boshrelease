@@ -2,6 +2,7 @@
 
 RUN_DIR=/var/vcap/sys/run/datadog-firehose-nozzle
 LOG_DIR=/var/vcap/sys/log/datadog-firehose-nozzle
+TMP_DIR=/var/vcap/sys/tmp/datadog-firehose-nozzle
 PIDFILE=$RUN_DIR/datadog-firehose-nozzle.pid
 
 case $1 in
@@ -10,8 +11,10 @@ start)
 
 mkdir -p $RUN_DIR
 mkdir -p $LOG_DIR
+mkdir -p $TMP_DIR
 
 chown -R vcap:vcap $LOG_DIR
+chown -R vcap:vcap $TMP_DIR
 
 (crontab -l | sed /datadog.*logrotate/d; cat /var/vcap/jobs/datadog-firehose-nozzle/config/datadog_logrotate.cron) | sed /^$/d | crontab
 

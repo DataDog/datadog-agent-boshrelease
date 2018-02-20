@@ -1,14 +1,27 @@
 <%
   # Since YAML allows making arrays as arrays, it should be an option here, too
   # However, the tile has no good option to make an array, so there it is a string
+  tags = []
   tags = p("datadog.custom_tags", "")
   if tags.class == String
     tags = tags.split(",")
   end
 
+  more_tags = p("datadog.tags", "")
+  if tags.class == String
+    more_tags = more_tags.split(",")
+  end
+
+  tags += more_tags
+
   no_proxy = p("nozzle.no_proxy", "")
   if no_proxy.class == String
     no_proxy = no_proxy.split(",")
+  end
+
+  traffic_controller_url = ""
+  if p("loggregator", nil) && p("loggregator.traffic_controller_url", nil)
+    traffic_controller_url = p("loggregator.traffic_controller_url", "")
   end
 %>
 
@@ -18,7 +31,7 @@ JSON.pretty_generate(
     "UAAURL" => p("uaa.url"),
     "Client" => p("uaa.client"),
     "ClientSecret" => p("uaa.client_secret"),
-    "TrafficControllerURL" => p("loggregator.traffic_controller_url"),
+    "TrafficControllerURL" => traffic_controller_url,
     "FirehoseSubscriptionID" => p("nozzle.subscription_id"),
     "DataDogURL" => p("datadog.api_url"),
     "DataDogAPIKey" => p("datadog.api_key"),
@@ -38,7 +51,8 @@ JSON.pretty_generate(
     "AppMetrics" => p("nozzle.app_metrics", true),
     "NumWorkers" => p("nozzle.num_workers", 4),
     "GrabInterval" => p("nozzle.grab_interval", 10),
-    "CustomTags" => tags
+    "CustomTags" => tags,
+    "DBPath": "/var/vcap/sys/tmp/datadog-firehose-nozzle/firehose_nozzle.db"
 )
 
 %>

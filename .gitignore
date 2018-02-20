@@ -9,6 +9,7 @@ blobstore
 .dev_builds
 .final_builds/jobs/**/*.tgz
 .final_builds/packages/**/*.tgz
+tile/releases/*.tgz
 .gitreview
 .idea
 /Gemfile.lock
@@ -30,3 +31,4 @@ tmp
 
 tile/product/
 tile/release/
+*.tgz

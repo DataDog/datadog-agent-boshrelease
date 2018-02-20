@@ -11,7 +11,8 @@ packages:
 
 properties:
   loggregator.traffic_controller_url:
-    description: "Traffic controller URL"
+    description: "Traffic controller URL (not necessary if you have cc.endpoint)"
+    default: ""
   datadog.api_url:
     description: "The REST API Endpoint for datadog"
     default: "https://app.datadoghq.com/api/v1/series"
@@ -41,7 +42,9 @@ properties:
   datadog.custom_tags:
     description: "Send up custom tags with every request (e.g. to label your foundries)"
     default: []
-
+  datadog.tags:
+    description: "Send up custom tags with every request (e.g. to label your foundries)"
+    default: []
   uaa.url:
     description: "URL for the UAA server"
   uaa.client:
