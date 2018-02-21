@@ -26,10 +26,10 @@ uaa:
   clients:
     datadog-firehose-nozzle:
       access-token-validity: 1209600
-      authorities: doppler.firehose
-      authorized-grant-types: client_credentials
+      authorities: doppler.firehose,cloud_controller.admin_read_only,openid,oauth.approvals
+      authorized-grant-types: client_credentials,refresh_token
       override: true
-      scope: doppler.firehose
+      scope: doppler.firehose,cloud_controller.admin_read_only,oauth.login
       secret: datadog-password
 ```
 
