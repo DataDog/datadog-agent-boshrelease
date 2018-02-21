@@ -41,13 +41,64 @@ add_blob() {
   bosh add-blob ${SRC}/${1} ${1} || true
 }
 
-main() {
+get_agent_version() {
+  local file="$1"
+  local version=""
+  if [ -f $file ]; then
+    version=$(grep -o -h -e "DD_AGENT_VERSION=[0-9]\.[0-9]\.[0-9][~]*[r]*[c]*\.*[0-9]*" $file)
+    version=$(echo $version | cut -d'=' -f 2)
+  fi
+  echo $version
+}
+
+check_versions() {
+  local agent_script=$(pwd)/packages/dd-agent/packaging
+  local agent_version=$(get_agent_version $agent_script)
   for script in $(pwd)/packages/*/spec ; do
     local base=$(dirname "${script}")
-      echo "* Procesing ${script} ..."
+      local priorversion=""
       for spec in $(read_spec "${script}"); do
         local downloadfile=$(echo $spec | cut -d'@' -f 1)
         local downloadurl=$(echo $spec | cut -d'@' -f 2)
+        local file_version=$(echo $downloadfile | grep -o -h -e "[0-9]\.[0-9]\.[0-9][~]*[r]*[c]*\.*[0-9]*")
+        local url_version=$(echo $downloadfile | grep -o -h -e "[0-9]\.[0-9]\.[0-9][~]*[r]*[c]*\.*[0-9]*")
+
+        if [ "$file_version" != "$url_version" ]; then
+          echo "The Agent versions in the File and URL do not match"
+          exit 1
+        fi
+
+        local version="$file_version"
+
+        if [ -n "$version" ]; then
+          if [ "$version" = "$agent_version" ]; then
+            if [ -n "$priorversion" ]; then
+              if [ "$version" != "$priorversion" ]; then
+                echo "The Agent blob versions do not match"
+                exit 1
+              fi
+            fi
+          else
+            echo "The Agent versions do not match the version in the script"
+            exit 1
+          fi
+        fi
+        priorversion="$version"
+      done
+  done
+}
+
+main() {
+  check_versions
+
+  for script in $(pwd)/packages/*/spec ; do
+    local base=$(dirname "${script}")
+      echo "* Procesing ${script} ..."
+      local priorversion=""
+      for spec in $(read_spec "${script}"); do
+        local downloadfile=$(echo $spec | cut -d'@' -f 1)
+        local downloadurl=$(echo $spec | cut -d'@' -f 2)
+
         exec_download "${downloadfile}" "${downloadurl}"
         add_blob "${downloadfile}"
       done
