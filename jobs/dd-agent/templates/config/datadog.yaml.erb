@@ -274,6 +274,9 @@ dogstatsd_non_local_traffic: <%= p("dd.non_local_traffic", "no") %>
 log_level: <%= p("dd.log_level", "INFO") %>
 log_file: /var/vcap/sys/log/dd-agent/agent.log
 
+# Set the auth token
+auth_token_file_path: /var/vcap/sys/run/dd-agent/auth_token
+
 # Autodiscovery
 #
 # Change the root directory to look at to get cgroup statistics. Useful when running inside a
