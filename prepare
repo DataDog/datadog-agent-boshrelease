@@ -89,8 +89,6 @@ check_versions() {
 }
 
 main() {
-  check_versions
-
   for script in $(pwd)/packages/*/spec ; do
     local base=$(dirname "${script}")
       echo "* Procesing ${script} ..."
@@ -103,6 +101,8 @@ main() {
         add_blob "${downloadfile}"
       done
   done
+
+  check_versions
 }
 
 # Run!
