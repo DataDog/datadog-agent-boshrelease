@@ -1,6 +1,6 @@
 name: datadog
 icon_file: resources/icon.png
-label: Datadog Nozzle for PCF
+label: Datadog Cluster Monitoring for PCF
 description: Send metrics from Cloud Foundry metrics to Datadog!
 
 apply_open_security_group: false       # Apply open security group, default: false
@@ -20,7 +20,8 @@ properties:
 forms:
 - name: datadog-config
   label: Datadog Config
-  description: Configure your Datadog Firehose Nozzle!
+  description: Datadog Configuration
+  markdown: This is common configuration to both the Datadog Firehose Nozzle and the Datadog Agent
   properties:
   - name: api_key
     type: secret
@@ -29,23 +30,128 @@ forms:
   - name: api_url
     type: string
     label: Datadog API URL
-    description: The Datadog API endpoint to send your metrics to
-    default: https://app.datadoghq.com/api/v1/series
+    description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
+    default: https://app.datadoghq.com
+  - name: tags
+    type: string
+    label: Tags
+    description: Set custom tags, separated by a comma (e.g. foundry:myfoundry,env:production)
+    optional: true
+  - name: http_proxy_url
+    type: string
+    optional: true
+    label: HTTP Proxy URL
+    description: Set a URL for an http proxy
+  - name: https_proxy_url
+    type: string
+    optional: true
+    label: HTTPS Proxy URL
+    description: Set a URL for an https proxy
+  - name: no_proxy
+    type: string
+    optional: true
+    label: No Proxy
+    description: Set urls that should skip the proxy, separated by a comma (e.g. datadoghq.com,google.com,example.engineering)
+
+- name: datadog-nozzle-config
+  label: Datadog Firehose Nozzle Config
+  description: Configure your Datadog Firehose Nozzle
+  properties:
   - name: metric_prefix
     type: string
     label: Metric Prefix
     description: The metric prefix. Setting this to anything other than the default will have billing implications.
-    optional: true
-  - name: tags
-    type: string
-    label: Tags
-    description: Set custom tags, separated by a comma (e.g. foundry:thisone,env:production)
     optional: true
   - name: app_metrics
     type: boolean
     label: App Metrics
     default: true
     description: Grab app container metrics (e.g. cpu and memory usage).
+  - name: num_workers
+    type: integer
+    label: Number of Worker Threads
+    description: The number of worker threads to use in the nozzle
+    default: 4
+  - name: grab_interval
+    type: integer
+    label: App Metrics Interval
+    description: The interval at which to grab the app metrics
+    default: 10
+
+- name: datadog-agent-config
+  label: Datadog Agent Config
+  description: Configure your Datadog Agent!
+  properties:
+  - name: use_uuid_hostname
+    type: boolean
+    label: Use UUID Hostname
+    default: false
+    description: By default we use a friendly hostname, this might cause problems with some setups. Set this to use the UUID instead. (In an environment where there are multiple hosts of the same type on different deployments or in different foundries, this will be necessary.) If dd.hostname is set, it will take precedence over the uuid hostname.
+  - name: process_agent_enabled
+    label: Enable Process Agent
+    type: boolean
+    default: true
+    description: Enable the process agent.
+  - name: agent_listen_port
+    type: string
+    label: Agent Listen Port
+    default: '17123'
+    description: Change port the Agent is listening to
+  - name: generate_processes
+    default: true
+    type: boolean
+    label: Configure Process Integration
+    description: Automatically generate process monitoring integration, process.yaml
+  - name: generate_monit_processes
+    default: true
+    type: boolean
+    label: Monitor Monit Processes
+    description: Add monit processes to process check
+  - name: generate_system_processes
+    default: true
+    type: boolean
+    label: Monitor System Processes
+    description: Add basic system processes to process check
+  - name: generate_ntp_config
+    default: true
+    type: boolean
+    label: Automatically Generate NTP Check
+    description: Generate NTP monitoring ntp.yaml
+  - name: generate_ntp_config_host
+    label: NTP Check Host
+    type: string
+    default: "0.ubuntu.pool.ntp.org"
+    description: NTP host
+  - name: generate_disk_config
+    label: Generate Disk Check Config
+    default: true
+    type: boolean
+    description: Generate disk configuration, disk.yaml
+  - name: generate_disk_config_tag_by_filesystem
+    label: Tag By Filesystem
+    default: true
+    type: boolean
+    description: Add tags to mountpoints by filesystem type
+  - name: generate_disk_config_all_partitions
+    label: Monitor All Partitions
+    default: true
+    type: boolean
+    description: Include all partitions in the system
+  - name: enable_gohai
+    label: Enable Gohai
+    default: true
+    type: boolean
+    description: Enable gohai metadata collection (default is yes)
+  - name: check_runners
+    type: string
+    default: '1'
+    label: Check Runners
+    description: "The Agent runs workers in parallel to execute checks. By default the number of workers is set to 1. If set to 0 the agent will automatically determine the best number of runners needed based on the number of checks running. This would optimize the check collection time but may produce CPU spikes."
+  - name: forwarder_num_workers
+    type: string
+    default: '1'
+    label: Forwarder Workers
+    description: "The number of workers used by the forwarder. Please note each worker will open an outbound HTTP connection towards Datadog's metrics intake at every flush."
 
 - name: cf-config
   label: Cloud Foundry Settings
@@ -85,31 +191,6 @@ forms:
     label: Firehose subscription id
     default: datadog-firehose-subscription-id
     description: Subscription id unique to nozzle; firehose balances across socket connections having same id.
-  - name: num_workers
-    type: integer
-    label: Number of Worker Threads
-    description: The number of worker threads to use in the nozzle
-    default: 4
-  - name: grab_interval
-    type: integer
-    label: App Metrics Interval
-    description: The interval at which to grab the app metrics
-    default: 10
-  - name: http_proxy_url
-    type: string
-    optional: true
-    label: HTTP Proxy URL
-    description: Set a URL for an http proxy
-  - name: https_proxy_url
-    type: string
-    optional: true
-    label: HTTPS Proxy URL
-    description: Set a URL for an https proxy
-  - name: no_proxy
-    type: string
-    optional: true
-    label: No Proxy
-    description: Set urls that should skip the proxy, separated by a comma (e.g. datadoghq.com,google.com,example.engineering)
 
 packages:
 - name: datadog-firehose-nozzle-release
@@ -125,11 +206,9 @@ packages:
       properties:
         datadog:
           api_key: (( .properties.api_key.value ))
-          api_url: (( .properties.api_url.value ))
+          api_url: (( .properties.api_url.value ))/api/v1/series
           metric_prefix: (( .properties.metric_prefix.value ))
           custom_tags: (( .properties.tags.value ))
-        loggregator:
-          traffic_controller_url: wss://doppler.(( ..cf.cloud_controller.system_domain.value )):443
         nozzle:
           insecure_ssl_skip_verify: (( .properties.insecure_ssl_skip_verify.value ))
           disable_access_control: (( .properties.disable_access_control.value ))
@@ -147,3 +226,46 @@ packages:
           url: https://uaa.(( ..cf.cloud_controller.system_domain.value ))
         cc:
           endpoint: https://api.(( ..cf.cloud_controller.system_domain.value ))
+
+- name: datadog-agent-boshrelease
+  type: bosh-release
+  path: resources/datadog-agent-release.tgz
+
+
+runtime_configs:
+  - name: datdog-agent
+    runtime_config:
+      releases:
+        - name: datadog-agent
+          version: 2.0.600 # Update this if update the agent
+      addons:
+      - name: datadog
+        jobs:
+        - name: dd-agent
+          release: datadog-agent
+        properties:
+          dd:
+            use_dogstatsd: yes
+            dogstatsd_port: 18125 # Many Cloud Foundry deployments have their own StatsD listening on port 8125
+            process_agent_enabled: yes
+            api_key: (( .properties.api_key.value ))
+            tags: (( .properties.tags.value ))
+            proxy:
+              http: (( .properties.http_proxy_url.value ))
+              https: (( .properties.https_proxy_url.value ))
+              no_proxy: (( .properties.no_proxy.value ))
+            url: (( .properties.api_url.value ))
+            use_uuid_hostname: (( .properties.use_uuid_hostname.value ))
+            process_agent_enabled: (( .properties.process_agent_enabled.value ))
+            agent_listen_port: (( .properties.agent_listen_port.value ))
+            generate_processes: (( .properties.generate_processes.value ))
+            generate_monit_processes: (( .properties.generate_monit_processes.value ))
+            generate_system_processes: (( .properties.generate_system_processes.value ))
+            generate_ntp_config: (( .properties.generate_ntp_config.value ))
+            generate_ntp_config_host: (( .properties.generate_ntp_config_host.value ))
+            generate_disk_config: (( .properties.generate_disk_config.value ))
+            generate_disk_config_tag_by_filesystem: (( .properties.generate_disk_config_tag_by_filesystem.value ))
+            generate_disk_config_all_partitions: (( .properties.generate_disk_config_all_partitions.value ))
+            enable_gohai: (( .properties.enable_gohai.value ))
+            check_runners: (( .properties.check_runners.value ))
+            forwarder_num_workers: (( .properties.forwarder_num_workers.value ))
