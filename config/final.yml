@@ -2,5 +2,5 @@
 blobstore:
   provider: s3
   options:
-    bucket_name: public-datadog-agent-boshrelease-staging
+    bucket_name: public-datadog-agent-boshrelease
 final_name: datadog-agent
