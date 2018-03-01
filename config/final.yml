@@ -3,4 +3,5 @@ blobstore:
   provider: s3
   options:
     bucket_name: public-datadog-agent-boshrelease
+    credentials_source: env_or_profile
 final_name: datadog-agent
