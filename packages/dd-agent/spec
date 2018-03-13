@@ -2,7 +2,7 @@
 name: dd-agent
 
 files:
-- dd-agent/datadog-agent_6.0.0-1_amd64.deb       # https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_6.0.0-1_amd64.deb
-- dd-agent/datadog-agent-6.0.0-1.x86_64.rpm    #  https://s3.amazonaws.com/yum.datadoghq.com/stable/6/x86_64/datadog-agent-6.0.0-1.x86_64.rpm
+- dd-agent/datadog-agent_6.0.3-1_amd64.deb       # https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_6.0.3-1_amd64.deb
+- dd-agent/datadog-agent-6.0.3-1.x86_64.rpm    #  https://s3.amazonaws.com/yum.datadoghq.com/stable/6/x86_64/datadog-agent-6.0.3-1.x86_64.rpm
 - helpers/**/*
 - checks.d/**/*

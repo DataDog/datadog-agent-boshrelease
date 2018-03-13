@@ -88,6 +88,22 @@ check_versions() {
   done
 }
 
+remove_stale() {
+  local stale_files=""
+  local spec_files=""
+  for spec in $(read_spec "${script}"); do
+    local downloadfile=$(echo $spec | cut -d'@' -f 1)
+    local filename=$(echo $downloadfile | cut -d'/' -f 2)
+    spec_files="$filename $spec_files"
+  done
+  for saved_file in $(ls blobs/dd-agent); do
+    res=$(echo "$spec_files" | grep -o -h "$saved_file")
+    if [[ ! "$res" ]]; then
+      bosh remove-blob "dd-agent/$saved_file"
+    fi
+  done
+}
+
 main() {
   for script in $(pwd)/packages/*/spec ; do
     local base=$(dirname "${script}")
@@ -95,6 +111,7 @@ main() {
       local priorversion=""
       for spec in $(read_spec "${script}"); do
         local downloadfile=$(echo $spec | cut -d'@' -f 1)
+        local file_version=$(echo $downloadfile | grep -o -h -e "[0-9]\.[0-9]\.[0-9][~]*[r]*[c]*\.*[0-9]*")
         local downloadurl=$(echo $spec | cut -d'@' -f 2)
 
         exec_download "${downloadfile}" "${downloadurl}"
@@ -103,6 +120,7 @@ main() {
   done
 
   check_versions
+  remove_stale
 }
 
 # Run!
