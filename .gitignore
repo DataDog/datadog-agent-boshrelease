@@ -19,3 +19,5 @@ my*.yml
 .DS_Store
 blobstore
 releases/datadog-agent/*.tgz
+datadog-agent-release.tgz
+datadog-agent-boshrelease.tgz
