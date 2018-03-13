@@ -1,0 +1,79 @@
+#!/bin/bash -e
+
+DATADOG_URL=<%= p("datadog.api_url") %>
+HOSTNAME=$(cat /etc/hostname)
+SYS_DIR=/var/vcap/sys
+RUN_DIR=$SYS_DIR/run/datadog-firehose-nozzle
+LOG_DIR=$SYS_DIR/log/datadog-firehose-nozzle
+TMP_DIR=$SYS_DIR/tmp/datadog-firehose-nozzle
+FLARE_DIR=$TMP_DIR/$HOSTNAME
+ZIPFILE=$TMP_DIR/nozzle-flare-$(date +"%m-%d-%Y-%H-%M").zip
+PIDFILE=$RUN_DIR/datadog-firehose-nozzle.pid
+CONFIG_FILE=/var/vcap/jobs/datadog-firehose-nozzle/config/datadog-firehose-nozzle.json
+
+if [ -z ${1+x} ]; then
+  echo "Please set the caseid as the first field and your email as the second"
+  exit 1
+fi
+
+if [ -z ${2+x} ]; then
+  echo "Please set the caseid as the first field and your email as the second"
+  exit 1
+fi
+
+CASE_ID=$1
+EMAIL=$2
+
+if [ -f $ZIPFILE ]; then
+  rm $ZIPFILE
+fi
+
+rm -rf $FLARE_DIR
+mkdir -p $FLARE_DIR
+
+pushd $LOG_DIR
+  for file in $(ls); do
+    cp $file $FLARE_DIR
+  done
+popd
+
+# clean up the config file
+CLEAN_CONFIG_FILE=$FLARE_DIR/datadog-firehose-nozzle.json
+python /var/vcap/jobs/datadog-firehose-nozzle/bin/clean_config.py $CONFIG_FILE $CLEAN_CONFIG_FILE
+
+# go into the directory so that the zip file is cleanly created
+# in other words: so the zip file won't unzip to var/vcap/sys/tmp/...
+pushd $TMP_DIR
+  zip -r $ZIPFILE $HOSTNAME
+popd
+
+# remove the /api path from the URL
+DATADOG_FLARE_URL=$(echo $DATADOG_URL | sed "s~/api/v1/series~/support/flare~")
+DATADOG_FLARE_URL=$(echo $DATADOG_FLARE_URL | sed "s~/api/v1/series/~/support/flare~")
+
+DATADOG_FLARE_URL="$DATADOG_FLARE_URL?api_key="<%= p("datadog.api_key") %>
+
+curl -SL -X POST \
+  -H "Content-Type: multipart/form-data" \
+  -F "case_id=$CASE_ID" \
+  -F "email=$EMAIL" \
+  -F "hostname=$HOSTNAME" \
+  -F "flare_file=@$ZIPFILE" \
+  $DATADOG_FLARE_URL
+
+CURL_RESULT=$?
+
+# remove the temp files
+rm $ZIPFILE
+rm -rf $FLARE_DIR
+
+# in case curl does not print a newline, print one here
+echo ""
+
+if [ "$CURL_RESULT" != "0" ]; then
+  echo "Failed to upload flare!"
+  exit 1
+else
+  echo "Finished uploading flare!"
+  exit 0
+fi

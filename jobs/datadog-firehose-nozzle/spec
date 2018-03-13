@@ -5,6 +5,8 @@ templates:
   datadog-firehose-nozzle.json.erb: config/datadog-firehose-nozzle.json
   datadog_logrotate.cron.erb: config/datadog_logrotate.cron
   logrotate.conf.erb: config/logrotate.conf
+  flare.erb: bin/flare
+  clean_config.py: bin/clean_config.py
 
 packages:
 - datadog-firehose-nozzle
