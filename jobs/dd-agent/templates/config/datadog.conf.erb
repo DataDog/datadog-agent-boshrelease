@@ -51,8 +51,13 @@ if p('dd.bosh_tags') == true || p('dd.bosh_tags') =~ (/(true|t|yes|y|1)$/i)
     generated_tags["#{bosh_tags_prefix}az"] = spec.az if spec.az and not spec.az.empty?
     generated_tags["#{bosh_tags_prefix}deployment"] = spec.deployment if spec.deployment and not spec.deployment.empty?
     generated_tags["#{bosh_tags_prefix}name"] = spec.name if spec.name and not spec.name.empty?
-    generated_tags["#{bosh_tags_prefix}address"] = spec.address if spec.address and not spec.address.empty?
-    generated_tags["#{bosh_tags_prefix}ip"] = spec.ip if spec.ip and not spec.ip.empty?
+
+    if p('dd.address_tag')
+      generated_tags["#{bosh_tags_prefix}address"] = spec.address if spec.address and not spec.address.empty?
+    end
+    if p('dd.ip_tag')
+      generated_tags["#{bosh_tags_prefix}ip"] = spec.ip if spec.ip and not spec.ip.empty?
+    end
 end
 # The others are optional, however this one is not, as it figures into our dashboard
 generated_tags["bosh_deployment"] = spec.deployment if spec.deployment and not spec.deployment.empty?
@@ -69,7 +74,9 @@ tags = custom_tags
 tags += generated_tags.map { |k, v| "#{k}:#{v}" }
 # The firehose nozzle uses this tag, which is frustrating, but we want the data to be able to conform
 tags += ["index:#{spec.id}"] if spec.id and not spec.id.empty?
-tags += ["ip:#{spec.ip}"] if spec.ip and not spec.ip.empty?
+if p('dd.ip_tag')
+  tags += ["ip:#{spec.ip}"] if spec.ip and not spec.ip.empty?
+end
 tags += ["cloudfoundry"]
 %>
 tags: <%= tags.join(', ') %>

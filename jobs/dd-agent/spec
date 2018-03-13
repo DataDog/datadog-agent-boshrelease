@@ -191,3 +191,9 @@ properties:
   dd.agent_config:
     default: {}
     description: "Add any additional agent config options here. (Warning: any options you add here will override the options set previously.)"
+  dd.ip_tag:
+    default: true
+    description: "Include the ip tag"
+  dd.address_tag:
+    default: true
+    description: "Include the address tag"
