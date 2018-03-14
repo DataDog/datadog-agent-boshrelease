@@ -43,8 +43,8 @@ skip_ssl_validation: <%= p("dd.skip_ssl_validation", "no") %>
 <% if_p("dd.hostname") do |hostname| %>
 hostname: <%= hostname %>
 <% end.else do %>
-<% if_p("dd.use_uuid_hostname") do |hostname| %>
-hostname: <%= hostname %>
+<% if p("dd.use_uuid_hostname") and spec.id and not spec.id.empty? %>
+hostname: <%= spec.id %>
 <% end.else do %>
 hostname: <%= spec.name.tr('_', '-') %>-<%= spec.index %>
 <% end %>
