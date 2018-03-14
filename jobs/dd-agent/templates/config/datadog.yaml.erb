@@ -41,9 +41,9 @@ skip_ssl_validation: <%= p("dd.skip_ssl_validation", "no") %>
 
 <%
 # Force the hostname to whatever you want. (default: auto-detected)
-if p("dd.hostname")
-  hostname = p("dd.hostname")
-elsif p("dd.use_uuid_hostname") and spec.id and not spec.id.empty?
+if p("dd.hostname", "")
+  hostname = p("dd.hostname", "")
+elsif p("dd.use_uuid_hostname", false) and spec.id and not spec.id.empty?
   hostname = spec.id
 else
   hostname = "#{spec.name.tr('_', '-')}-#{spec.index}"
