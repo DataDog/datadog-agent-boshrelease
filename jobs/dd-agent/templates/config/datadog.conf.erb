@@ -21,16 +21,18 @@ skip_ssl_validation: <%= p("dd.skip_ssl_validation", "no") %>
 # Can be found here: https://app.datadoghq.com/account/settings
 api_key: <%= p('dd.api_key') %>
 
-# Force the hostname to whatever you want.
-<% if_p("dd.hostname") do |hostname| %>
+<%
+# Force the hostname to whatever you want. (default: auto-detected)
+if p("dd.hostname")
+  hostname = p("dd.hostname")
+elsif p("dd.use_uuid_hostname") and spec.id and not spec.id.empty?
+  hostname = spec.id
+else
+  hostname = "#{spec.name.tr('_', '-')}-#{spec.index}"
+end
+%>
+
 hostname: <%= hostname %>
-<% end.else do %>
-<% if_p("dd.use_uuid_hostname") do |hostname| %>
-hostname: <%= spec.id %>
-<% end.else do %>
-hostname: <%= spec.name.tr('_', '-') %>-<%= spec.index %>
-<% end %>
-<% end %>
 
 
 cloud_foundry: true
