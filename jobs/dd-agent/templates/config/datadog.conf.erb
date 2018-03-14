@@ -22,14 +22,15 @@ skip_ssl_validation: <%= p("dd.skip_ssl_validation", "no") %>
 api_key: <%= p('dd.api_key') %>
 
 <%
-# Force the hostname to whatever you want. (default: auto-detected)
-if p("dd.hostname", "")
-  hostname = p("dd.hostname", "")
-elsif p("dd.use_uuid_hostname", false) and spec.id and not spec.id.empty?
-  hostname = spec.id
-else
-  hostname = "#{spec.name.tr('_', '-')}-#{spec.index}"
-end
+  # Force the hostname to whatever you want. (default: auto-detected)
+  # if no hostname is specified, it will just use the name of the VM
+  if p("dd.hostname", nil)
+    hostname = p("dd.hostname", "")
+  elsif p("dd.friendly_hostname", true)
+    hostname = "#{spec.name.tr('_', '-')}-#{spec.index}"
+  elsif p("dd.use_uuid_hostname", false) and spec.id and not spec.id.empty?
+    hostname = spec.id
+  end
 %>
 
 hostname: <%= hostname %>
