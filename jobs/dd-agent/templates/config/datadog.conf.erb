@@ -33,7 +33,9 @@ api_key: <%= p('dd.api_key') %>
   end
 %>
 
-hostname: <%= hostname %>
+<% if hostname %>
+  hostname: <%= hostname %>
+<% end %>
 
 
 cloud_foundry: true

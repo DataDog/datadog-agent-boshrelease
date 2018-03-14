@@ -51,7 +51,9 @@ skip_ssl_validation: <%= p("dd.skip_ssl_validation", "no") %>
   end
 %>
 
-hostname: <%= hostname %>
+<% if hostname %>
+  hostname: <%= hostname %>
+<% end %>
 
 cloud_foundry: true
 <% if spec.id and not spec.id.empty? %>
