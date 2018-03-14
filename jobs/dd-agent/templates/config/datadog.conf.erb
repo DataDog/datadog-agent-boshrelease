@@ -26,7 +26,7 @@ api_key: <%= p('dd.api_key') %>
 hostname: <%= hostname %>
 <% end.else do %>
 <% if_p("dd.use_uuid_hostname") do |hostname| %>
-hostname: <%= hostname %>
+hostname: <%= spec.id %>
 <% end.else do %>
 hostname: <%= spec.name.tr('_', '-') %>-<%= spec.index %>
 <% end %>
