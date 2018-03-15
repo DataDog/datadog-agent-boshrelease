@@ -21,6 +21,8 @@ builds:
     version: 1.1.5200
   c8186680-7018-4482-9af7-002c93107213:
     version: 1.0.5150
+  cc4b38bb-0183-4e31-58c1-45aa71dce0a1:
+    version: 2.2.603
   e816a513-f1a0-4853-8933-6375c344e0cc:
     version: 1.1.5172
 format-version: "2"
