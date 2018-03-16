@@ -9,7 +9,7 @@ allow_paid_service_plans: false        # Allow paid service plans, default: fals
 stemcell_criteria:
   os: ubuntu-trusty
   requires_cpi: false
-  version: '3263'
+  version: '3468'
 
 properties:
 - name: author
@@ -77,6 +77,11 @@ forms:
     label: App Metrics Interval
     description: The interval at which to grab the app metrics
     default: 10
+  - name: flush_max_bytes
+    type: integer
+    label: Flush Max Bytes
+    description: The maximum number of bytes to send per POST request
+    default: 2097152
 
 - name: datadog-agent-config
   label: Datadog Agent Config
@@ -87,6 +92,11 @@ forms:
     label: Use UUID Hostname
     default: false
     description: By default we use a friendly hostname, this might cause problems with some setups. Set this to use the UUID instead. (In an environment where there are multiple hosts of the same type on different deployments or in different foundries, this will be necessary.) If dd.hostname is set, it will take precedence over the uuid hostname.
+  - name: use_friendly_hostname
+    type: boolean
+    label: Use Friendly Hostname
+    default: true
+    description: By default we use a friendly hostname, this might cause problems with some setups. If you set the UUID hostname to true, it will supercede this one. If you set both to false, the agent will detect the underlying hostname and use that instead.
   - name: process_agent_enabled
     label: Enable Process Agent
     type: boolean
@@ -152,6 +162,16 @@ forms:
     default: '1'
     label: Forwarder Workers
     description: "The number of workers used by the forwarder. Please note each worker will open an outbound HTTP connection towards Datadog's metrics intake at every flush."
+  - name: ip_tag
+    label: IP Address Tag
+    type: boolean
+    default: true
+    description: Include a tag with the IP address of the VM
+  - name: address_tag
+    label: Address Tag
+    type: boolean
+    default: true
+    description: Include a tag with the address of the VM
 
 - name: cf-config
   label: Cloud Foundry Settings
@@ -209,6 +229,7 @@ packages:
           api_url: (( .properties.api_url.value ))/api/v1/series
           metric_prefix: (( .properties.metric_prefix.value ))
           custom_tags: (( .properties.tags.value ))
+          flush_max_bytes: (( .properties.flush_max_bytes.value ))
         nozzle:
           insecure_ssl_skip_verify: (( .properties.insecure_ssl_skip_verify.value ))
           disable_access_control: (( .properties.disable_access_control.value ))
@@ -237,7 +258,7 @@ runtime_configs:
     runtime_config:
       releases:
         - name: datadog-agent
-          version: 2.0.600 # Update this if update the agent
+          version: 2.2.603 # Update this if update the agent
       addons:
       - name: datadog
         jobs:
@@ -269,3 +290,5 @@ runtime_configs:
             enable_gohai: (( .properties.enable_gohai.value ))
             check_runners: (( .properties.check_runners.value ))
             forwarder_num_workers: (( .properties.forwarder_num_workers.value ))
+            ip_tag: (( .properties.ip_tag.value ))
+            address_tag: (( .properties.address_tag.value ))
