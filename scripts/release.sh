@@ -41,20 +41,24 @@ fi
 # if it's production set the bucket to production
 if [ "$PRODUCTION" = "true" ]; then
   cp $WORKING_DIR/config/final.yml.s3 $WORKING_DIR/config/final.yml
+  echo '{"blobstore": {"options": {"credentials_source": "env_or_profile"}}}' > $WORKING_DIR/config/private.yml
 fi
 
 # upload to the staging buckets if it's a staging release
 if [ "$STAGING" = "true" ]; then
  cp $WORKING_DIR/config/final.yml.s3.staging $WORKING_DIR/config/final.yml
+ echo '{"blobstore": {"options": {"credentials_source": "env_or_profile"}}}' > $WORKING_DIR/config/private.yml
 fi
 
 # make sure we're in the right directory
 cd $WORKING_DIR
+if [ ! -f $WORKING_DIR/config/private.yml ]; then
+  echo '{}' > $WORKING_DIR/config/private.yml
+fi
 
 # run the prepare script
 ./prepare
 bosh sync-blobs
-echo '{}' > config/private.yml
 # release a dev version of the agent to ensure the cache is warm
 # (it's better to fail here than to fail when really attempting to release it)
 bosh create-release --force --name "datadog-agent"
