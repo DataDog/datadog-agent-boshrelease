@@ -6,9 +6,23 @@ set -euxo pipefail
 
 # This script is to release the agent bosh release from Datadog's internal infrastructure.
 # It won't work for anyone else
-if [[ -z $VERSION ]]; then
+if [[ -z ${VERSION+x} ]]; then
   echo "You must set a version"
   exit 1
+fi
+
+# Make sure variables are set
+if [ -z ${PRODUCTION+x} ]; then
+  PRODUCTION="false"
+fi
+if [ -z ${STAGING+x} ]; then
+  STAGING="false"
+fi
+if [ -z ${DRY_RUN+x} ]; then
+  DRY_RUN="false"
+fi
+if [ -z ${RELEASE_BUCKET+x} ]; then
+  RELEASE_BUCKET="false"
 fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -65,7 +79,7 @@ git push
 cp blobstore/* archive/blobstore
 cp datadog-agent-release.tgz archive/datadog-agent-release.tgz
 
-if [ "$RELEASE_BUCKET" ]; then
+if [ "$RELEASE_BUCKET" && "$RELEASE_BUCKET" != "false" ]; then
   # the production release bucket is cloudfoundry.datadoghq.com/datadog-agent
   # aws s3 cp datadog-agent-release.tgz s3://$RELEASE_BUCKET/datadog-agent-boshrelease-$VERSION.tgz --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
 
