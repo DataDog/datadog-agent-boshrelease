@@ -24,14 +24,14 @@ if [ ! -f "/usr/local/bin/bosh" ]; then
   export PATH="$WORKING_DIR/bin:$PATH"
 fi
 
-# upload to the staging buckets if it's a staging release
-if [ "$STAGING" = "true" ]; then
- cp $WORKING_DIR/config/final.yml.s3.staging $WORKING_DIR/config/final.yml
-fi
-
 # if it's production set the bucket to production
 if [ "$PRODUCTION" = "true" ]; then
   cp $WORKING_DIR/config/final.yml.s3 $WORKING_DIR/config/final.yml
+fi
+
+# upload to the staging buckets if it's a staging release
+if [ "$STAGING" = "true" ]; then
+ cp $WORKING_DIR/config/final.yml.s3.staging $WORKING_DIR/config/final.yml
 fi
 
 # make sure we're in the right directory
