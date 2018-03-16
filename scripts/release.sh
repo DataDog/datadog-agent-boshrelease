@@ -67,6 +67,7 @@ bosh create-release --force --name "datadog-agent"
 # we have to make sure the cache is warm first
 if [ "$DRY_RUN" = "true" ]; then
   cp $WORKING_DIR/config/final.yml.s3.local $WORKING_DIR/config/final.yml
+  echo '{}' > $WORKING_DIR/config/private.yml
 fi
 
 # finally, release the agent

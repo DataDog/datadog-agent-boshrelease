@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-set -e
+
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
+IFS=$'\n\t'
+set -euxo pipefail
 
 RELEASE="datadog-agent"
 
