@@ -12,9 +12,10 @@ source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "pr
 # Load function lib (alway before setup, there are some global variables needed)
 source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
 
-DD_PROCESS_AGENT="$JOB_DIR/packages/dd-agent/embedded/bin/process-agent"
 export DD_AGENT_PY_ENV="PYTHONPATH=$PYTHONPATH,LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
 export DD_AGENT_PY="$DD_AGENT_PYTHON"
+DD_PROCESS_AGENT="$JOB_DIR/packages/dd-agent/embedded/bin/process-agent"
+PROCESS_AGENT_CMD="$DD_PROCESS_AGENT --config=$JOB_DIR/config/ --pid=$PIDFILE"
 
 
 case ${1:-help} in
@@ -23,7 +24,7 @@ case ${1:-help} in
     pid_guard $PIDFILE "dd-agent-$COMPONENT"
     (
         {
-            exec chpst -v -u vcap:vcap "$DD_PROCESS_AGENT" -ddconfig $JOB_DIR/config/datadog.conf
+            exec chpst -v -u vcap:vcap $PROCESS_AGENT_CMD
         } >>$LOG_DIR/$COMPONENT.stdout.log \
         2>>$LOG_DIR/$COMPONENT.stderr.log
     ) &
