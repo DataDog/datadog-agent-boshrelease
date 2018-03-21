@@ -32,7 +32,8 @@ case ${1:-help} in
     ;;
   stop)
     printf_log "Stopping Datadog $COMPONENT: $(<${PIDFILE}). "
-    kill_and_wait $PIDFILE
+    kill_and_wait $PIDFILE 25 true
+    find_pid_kill_and_wait $DD_PROCESS_AGENT
     printf_log "Done"
     ;;
   *)

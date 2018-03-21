@@ -44,7 +44,7 @@ case ${1:-help} in
     ;;
   stop)
     printf_log "Stopping Datadog $COMPONENT: $(<${PIDFILE}). "
-    stop_agent $AGENT_COMMAND
+    stop_agent $DD_AGENT
     kill_and_wait $PIDFILE
     rm -f $PIDFILE
     printf_log "Done"

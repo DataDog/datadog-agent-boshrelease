@@ -10,3 +10,12 @@ source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent"
 
 # setup configuration
 source /var/vcap/jobs/dd-agent/config/confd.sh
+
+# Load function lib (alway before setup, there are some global variables needed)
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/agent-setup.sh
+
+if [ ! -e /etc/datadog-agent ]; then
+  ln -s $JOB_DIR/config/ /etc/datadog-agent
+fi
+
+ensure_agent_ownership

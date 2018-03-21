@@ -13,3 +13,19 @@ export JOB_INDEX="<%= spec.index %>"
 export JOB_FULL="$JOB_NAME/$JOB_INDEX"
 export JOB_AZ="<%= spec.az %>"
 export JOB_DNS_DOMAIN="<%= spec.dns_domain_name %>"
+
+<%
+  # Force the hostname to whatever you want. (default: auto-detected)
+  # if no hostname is specified, it will just use the name of the VM
+  if p("dd.hostname", nil)
+    hostname = p("dd.hostname", "")
+  elsif p("dd.use_uuid_hostname", false) and spec.id and not spec.id.empty?
+    hostname = spec.id
+  elsif p("dd.friendly_hostname", true)
+    hostname = "#{spec.name.tr('_', '-')}-#{spec.index}"
+  end
+%>
+
+<% if hostname %>
+export DD_HOSTNAME="<%= hostname %>"
+<% end %>
