@@ -30,7 +30,7 @@ done
 for package_lib_dir in $(ls -d $PACKAGES/dd-agent/embedded/lib/python*/site-packages 2>/dev/null); do
     LD_LIBRARY_PATH="${package_lib_dir}:${LD_LIBRARY_PATH}"
 done
-export LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
 # Python modules
 PYTHONPATH=${PYTHONPATH:-''}
@@ -38,8 +38,18 @@ PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7:${PYTHONPATH}"
 for python_mod_dir in $(ls -d $PACKAGES/dd-agent/embedded/lib/python*/site-packages 2>/dev/null); do
     PYTHONPATH="${python_mod_dir}:${PYTHONPATH}"
 done
-PYTHONPATH="$PACKAGES/$NAME/agent:$PACKAGES/dd-agent/agent/checks/libs:$PACKAGES/$NAME/checks.d:$PYTHONPATH"
-export PYTHONPATH
+PYTHONPATH="$PACKAGES/$NAME/checks.d:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/dd-agent/agent/checks/libs:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/$NAME/agent:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python27.zip:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7/plat-linux2:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7/lib-tk:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7/lib-old:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7/lib-dynload:$PYTHONPATH"
+export PYTHONPATH="$PACKAGES/$NAME/bin/agent/dist:$PYTHONPATH"
+
+export PYTHONHOME="$PACKAGES/$NAME/embedded/"
 
 # Setup log and tmp folders
 export LOG_DIR="/var/vcap/sys/log/$NAME"

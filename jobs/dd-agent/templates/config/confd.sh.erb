@@ -94,9 +94,13 @@ function create_dd_instances {
 rm -rf $CONFD_DIR
 mkdir -p $CONFD_DIR
 
+cp -R ${PACKAGES}/dd-agent/etc/conf.d/* $CONFD_DIR/
+
+
 # Process checks
 <% if p('dd.generate_processes') == true || p('dd.generate_processes') =~ (/(true|t|yes|y|1)$/i) %>
-cat <<EOF > "${CONFD_DIR}/process.yaml"
+mkdir -p ${CONFD_DIR}/process.d/
+cat <<EOF > "${CONFD_DIR}/process.d/process.yaml"
 ---
 init_config:
   pid_cache_duration: 120
@@ -126,7 +130,8 @@ EOF
 
 # NTP
 <% if p('dd.generate_ntp_config') == true || p('dd.generate_ntp_config') =~ (/(true|t|yes|y|1)$/i) %>
-cat <<EOF > "${CONFD_DIR}/ntp.yaml"
+mkdir -p ${CONFD_DIR}/ntp.d
+cat <<EOF > "${CONFD_DIR}/ntp.d/ntp.yaml"
 ---
 init_config:
 
@@ -143,7 +148,8 @@ EOF
 
 # Network
 <% if p('dd.generate_network_config') == true || p('dd.generate_network_config') =~ (/(true|t|yes|y|1)$/i) %>
-cat <<EOF > "${CONFD_DIR}/network.yaml"
+mkdir -p ${CONFD_DIR}/network.d/
+cat <<EOF > "${CONFD_DIR}/network.d/network.yaml"
 ---
 init_config:
 
@@ -159,7 +165,8 @@ EOF
 
 # Mounts
 <% if p('dd.generate_disk_config') == true || p('dd.generate_disk_config') =~ (/(true|t|yes|y|1)$/i) %>
-cat <<EOF > "${CONFD_DIR}/disk.yaml"
+mkdir -p ${CONFD_DIR}/disk.d
+cat <<EOF > "${CONFD_DIR}/disk.d/disk.yaml"
 ---
 init_config:
 
@@ -176,7 +183,8 @@ EOF
 
 # Integrations
 <% p("dd.integrations", {}).each do |integration, config| %>
-cat <<'YAML' > "${CONFD_DIR}/<%= integration %>.yaml"
+mkdir -p ${CONFD_DIR}/<%= integration %>.d/
+cat <<'YAML' > "${CONFD_DIR}/<%= integration %>.d/<%= integration %>.yaml"
 <%= YAML.dump(config) %>
 YAML
 

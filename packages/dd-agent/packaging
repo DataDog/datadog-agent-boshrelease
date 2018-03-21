@@ -26,6 +26,8 @@ cp -av helpers ${BOSH_INSTALL_TARGET}/
 AGENT_INSTALL_TARGET=${BOSH_INSTALL_TARGET}/agent
 mkdir -p ${AGENT_INSTALL_TARGET}/checks.d
 
+DIST_DIR=${BOSH_INSTALL_TARGET}/bin/agent/dist
+
 mkdir ./extracted-agent
 
 echo "extracting package"
@@ -33,6 +35,7 @@ if [ $OS == "Debian" ]; then
   dpkg -x dd-agent/datadog-agent_${DD_AGENT_VERSION}-1_amd64.deb ./extracted-agent
 
   cp -R ./extracted-agent/opt/datadog-agent/* ${BOSH_INSTALL_TARGET}
+  cp -R ./extracted-agent/etc/datadog-agent ${BOSH_INSTALL_TARGET}/etc
 fi
 
 if [ $OS == "RedHat" ]; then
@@ -40,7 +43,11 @@ if [ $OS == "RedHat" ]; then
     rpm2cpio ../dd-agent/datadog-agent-${DD_AGENT_VERSION}-1.x86_64.rpm | cpio -idmv --no-absolute-filenames
   popd
   cp -R ./extracted-agent/opt/datadog-agent/* ${BOSH_INSTALL_TARGET}
+  cp -R ./extracted-agent/etc/datadog-agent ${BOSH_INSTALL_TARGET}/etc
 fi
+
+mkdir -p $DIST_DIR/conf.d
+cp -R ./extracted-agent/etc/datadog-agent/conf.d $DIST_DIR/conf.d
 
 # Install custom checks
 echo "Adding custom checks ..."
@@ -54,6 +61,13 @@ pushd ${AGENT_INSTALL_TARGET}
   ln -s /var/vcap/jobs/$JOB_NAME/config/conf.d conf.d
   ln -s /var/vcap/jobs/$JOB_NAME/config/datadog.conf datadog.conf
   ln -s /var/vcap/jobs/$JOB_NAME/config/datadog.yaml datadog.yaml
+popd
+pushd ${DIST_DIR}
+  rm -rf conf.d datadog.conf
+  # create the links to the configuration
+  ln -s /var/vcap/jobs/$JOB_NAME/config/datadog.conf datadog.conf
+  ln -s /var/vcap/jobs/$JOB_NAME/config/datadog.yaml datadog.yaml
+
 popd
 
 echo "Fixing broken symbolic links"

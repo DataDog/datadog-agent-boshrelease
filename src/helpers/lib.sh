@@ -57,10 +57,11 @@ function pid_guard {
 
 
 function wait_pid {
-  local pid=$1
-  local try_kill=$2
-  local timeout=${3:-0}
-  local force=${4:-0}
+  local pidfile $1
+  local pid=$2
+  local try_kill=$3
+  local timeout=${4:-0}
+  local force=${5:-0}
   local countdown=$(( $timeout * 10 ))
 
   if [ -e /proc/$pid ]; then
@@ -108,7 +109,7 @@ function wait_pidfile {
     if [ -z "$pid" ]; then
       die "Unable to get pid from $pidfile"
     fi
-    wait_pid $pid $try_kill $timeout $force
+    wait_pid $pidfile $pid $try_kill $timeout $force
     rm -f $pidfile
   else
     printf_log "Pidfile $pidfile doesn't exist"

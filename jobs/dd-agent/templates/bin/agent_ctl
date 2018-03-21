@@ -40,7 +40,6 @@ case ${1:-help} in
         } >>$LOG_DIR/$COMPONENT.stdout.log \
         2>>$LOG_DIR/$COMPONENT.stderr.log
     ) &
-    # echo $! > $PIDFILE
     echo "$(<${PIDFILE}). Done"
     ;;
   stop)
