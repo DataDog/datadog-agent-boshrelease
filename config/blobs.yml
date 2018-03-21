@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 dd-agent/datadog-agent-6.1.0-1.x86_64.rpm:
   size: 89453993
   object_id: 9912fe51-4990-4e79-4085-39fbd9c2026d
@@ -6,3 +7,13 @@ dd-agent/datadog-agent_6.1.0-1_amd64.deb:
   size: 92535874
   object_id: 416281dd-54a6-473f-4208-4a907943cad7
   sha: 44e56d0b992b572e38c626aa86f56a326feb7bc3
+=======
+dd-agent/datadog-agent-6.0.3-1.x86_64.rpm:
+  size: 89919227
+  object_id: 48aa8dd6-a7ca-489c-57a3-fc0c9c809601
+  sha: 6c27bfa94808c06cf7afb40e0924c1a3e788d479
+dd-agent/datadog-agent_6.0.3-1_amd64.deb:
+  size: 93045272
+  object_id: 544a5bd7-0d1c-43ba-548f-a7a79493e875
+  sha: b1cedbabcfa9503c0c6d8fcfcc619c98179766dd
+>>>>>>> remove the old blobs
