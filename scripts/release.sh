@@ -78,6 +78,9 @@ fi
 # make sure we upload the blobs
 bosh upload-blobs
 
+git config --global push.default simple
+git config --global user.name "Datadog"
+git config --global user.email "dev@datadoghq.com"
 # git commit it and then push it to the repo
 git add .
 git commit -m "releases datadog agent $VERSION"
