@@ -92,8 +92,8 @@ git commit -m "releases datadog agent $VERSION"
 git push
 
 # cache the blobs
-cp blobstore/* archive/blobstore
-cp datadog-agent-release.tgz archive/datadog-agent-release.tgz
+cp $WORKING_DIR/blobstore/ archive/blobstore
+cp $WORKING_DIR/datadog-agent-release.tgz archive/datadog-agent-release.tgz
 
 if [ "$RELEASE_BUCKET" && "$RELEASE_BUCKET" != "false" ]; then
   # the production release bucket is cloudfoundry.datadoghq.com/datadog-agent
