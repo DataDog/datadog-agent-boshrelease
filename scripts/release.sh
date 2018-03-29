@@ -95,7 +95,7 @@ git commit -m "releases datadog agent $VERSION"
 git push
 
 # cache the blobs
-cp $WORKING_DIR/blobstore archive/blobstore
+cp -R $WORKING_DIR/blobstore archive/blobstore
 cp $WORKING_DIR/datadog-agent-release.tgz archive/datadog-agent-release.tgz
 
 if [ "$RELEASE_BUCKET" && "$RELEASE_BUCKET" != "false" ]; then
