@@ -49,6 +49,7 @@ git checkout $REPO_BRANCH
 # if it's production set the bucket to production
 if [ "$PRODUCTION" = "true" ]; then
   cp $WORKING_DIR/config/final.yml.s3 $WORKING_DIR/config/final.yml
+  BUCKET_NAME="public-datadog-agent-boshrelease"
   echo '{"blobstore": {"options": {"credentials_source": "env_or_profile"}}}' > $WORKING_DIR/config/private.yml
 fi
 
@@ -57,6 +58,7 @@ if [ "$STAGING" = "true" ]; then
  cp $WORKING_DIR/config/final.yml.s3.staging $WORKING_DIR/config/final.yml
  echo '{"blobstore": {"options": {"credentials_source": "env_or_profile"}}}' > $WORKING_DIR/config/private.yml
 
+ BUCKET_NAME="public-datadog-agent-boshrelease-staging"
  # For staging we should make sure everything is available in the staging bucket
  # aws s3 cp s3://public-datadog-agent-boshrelease/ s3://public-datadog-agent-boshrelease-staging/ --recursive --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
 fi
@@ -79,6 +81,7 @@ bosh create-release --force --name "datadog-agent"
 if [ "$DRY_RUN" = "true" ]; then
   cp $WORKING_DIR/config/final.yml.s3.local $WORKING_DIR/config/final.yml
   echo '{}' > $WORKING_DIR/config/private.yml
+  BUCKET_NAME=""
 fi
 
 # finally, release the agent
@@ -90,6 +93,13 @@ bosh upload-blobs
 git add .
 git commit -m "releases datadog agent $VERSION"
 git push
+
+
+if [ "$BUCKET_NAME" ]; then
+  BUILD_NUMBER=$(python $WORKING_DIR/upload-tgz.py)
+  aws s3 cp datadog-agent-release.tgz s3://$BUCKET_NAME/$BUILD_NUMBER --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
+fi
+
 
 # cache the blobs
 cp $WORKING_DIR/blobstore/ archive/blobstore
