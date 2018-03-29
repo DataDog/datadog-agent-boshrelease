@@ -28,8 +28,10 @@ if [ -z ${REPO_BRANCH+x} ]; then
   REPO_BRANCH="greg/test"
 fi
 
+echo $(pwd)
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-WORKING_DIR=$DIR/..
+WORKING_DIR="$DIR/.."
 
 mkdir -p $WORKING_DIR/blobstore
 
@@ -96,18 +98,18 @@ git push
 
 
 if [ "$BUCKET_NAME" ]; then
-  BUILD_NUMBER=$(python $WORKING_DIR/upload-tgz.py)
+  BUILD_NUMBER=$(python upload-tgz.py)
   aws s3 cp datadog-agent-release.tgz s3://$BUCKET_NAME/$BUILD_NUMBER --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
 fi
 
 
 # cache the blobs
-cp $WORKING_DIR/blobstore/ archive/blobstore
+cp $WORKING_DIR/blobstore archive/blobstore
 cp $WORKING_DIR/datadog-agent-release.tgz archive/datadog-agent-release.tgz
 
 if [ "$RELEASE_BUCKET" && "$RELEASE_BUCKET" != "false" ]; then
   # the production release bucket is cloudfoundry.datadoghq.com/datadog-agent
-  # aws s3 cp datadog-agent-release.tgz s3://$RELEASE_BUCKET/datadog-agent-boshrelease-$VERSION.tgz --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
+  aws s3 cp datadog-agent-release.tgz s3://$RELEASE_BUCKET/datadog-agent-boshrelease-$VERSION.tgz --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
 
-  # aws s3 cp datadog-agent-release.tgz s3://$RELEASE_BUCKET/datadog-agent-boshrelease-latest.tgz --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
+  aws s3 cp datadog-agent-release.tgz s3://$RELEASE_BUCKET/datadog-agent-boshrelease-latest.tgz --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
 fi

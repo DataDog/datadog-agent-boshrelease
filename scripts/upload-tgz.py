@@ -1,7 +1,7 @@
 import yaml
 import os
 
-p = os.path.join(os.environ.get("WORKING_DIR"), 'releases/datadog-agent/index.yml')
+p = os.path.join('releases/datadog-agent/index.yml')
 version = os.environ.get('VERSION')
 
 with open(p, 'r') as f:
