@@ -42,8 +42,8 @@ if [ ! -f "/usr/local/bin/bosh" ]; then
 fi
 
 git config --global push.default simple
-git config --global user.name "Datadog"
-git config --global user.email "dev@datadoghq.com"
+# git config --global user.name "Datadog"
+# git config --global user.email "dev@datadoghq.com"
 git checkout $REPO_BRANCH
 
 # if it's production set the bucket to production
