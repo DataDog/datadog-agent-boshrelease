@@ -24,6 +24,9 @@ fi
 if [ -z ${RELEASE_BUCKET+x} ]; then
   RELEASE_BUCKET="false"
 fi
+if [ -z ${REPO_BRANCH+x} ]; then
+  REPO_BRANCH="greg/test"
+fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 WORKING_DIR=$DIR/..
@@ -37,6 +40,11 @@ if [ ! -f "/usr/local/bin/bosh" ]; then
   chmod +x $WORKING_DIR/bin/bosh
   export PATH="$WORKING_DIR/bin:$PATH"
 fi
+
+git config --global push.default simple
+git config --global user.name "Datadog"
+git config --global user.email "dev@datadoghq.com"
+git checkout $REPO_BRANCH
 
 # if it's production set the bucket to production
 if [ "$PRODUCTION" = "true" ]; then
@@ -78,9 +86,6 @@ fi
 # make sure we upload the blobs
 bosh upload-blobs
 
-git config --global push.default simple
-git config --global user.name "Datadog"
-git config --global user.email "dev@datadoghq.com"
 # git commit it and then push it to the repo
 git add .
 git commit -m "releases datadog agent $VERSION"
