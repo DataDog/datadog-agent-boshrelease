@@ -50,7 +50,7 @@ if [ "$STAGING" = "true" ]; then
  echo '{"blobstore": {"options": {"credentials_source": "env_or_profile"}}}' > $WORKING_DIR/config/private.yml
 
  # For staging we should make sure everything is available in the staging bucket
- aws s3 cp s3://public-datadog-agent-boshrelease/ s3://public-datadog-agent-boshrelease-staging/ --recursive --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
+ # aws s3 cp s3://public-datadog-agent-boshrelease/ s3://public-datadog-agent-boshrelease-staging/ --recursive --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
 fi
 
 # make sure we're in the right directory
