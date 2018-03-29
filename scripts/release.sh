@@ -96,7 +96,7 @@ git push
 
 
 if [ "$BUCKET_NAME" ]; then
-  sudo apt-get install python-dev
+  sudo apt-get install -y python-dev
   pip install pyyaml
   BUILD_NUMBER=$(python $WORKING_DIR/scripts/upload-tgz.py)
   aws s3 cp datadog-agent-release.tgz s3://$BUCKET_NAME/$BUILD_NUMBER --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
