@@ -95,6 +95,7 @@ git commit -m "releases datadog agent $VERSION"
 git push
 
 # cache the blobs
+mkdir -p ./archive
 cp -R $WORKING_DIR/blobstore archive/blobstore
 cp $WORKING_DIR/datadog-agent-release.tgz archive/datadog-agent-release.tgz
 
