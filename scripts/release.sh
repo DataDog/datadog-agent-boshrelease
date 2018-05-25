@@ -71,7 +71,7 @@ fi
 
 # run the prepare script
 ./prepare
-bosh sync-blobs
+BOSH_LOG_LEVEL=debug bosh sync-blobs
 # release a dev version of the agent to ensure the cache is warm
 # (it's better to fail here than to fail when really attempting to release it)
 bosh create-release --force --name "datadog-agent"
