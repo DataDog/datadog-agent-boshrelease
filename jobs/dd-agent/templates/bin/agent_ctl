@@ -21,7 +21,7 @@ ensure_agent_ownership
 DD_AGENT_PIDFILE="$TMP_DIR/dd-agent.pid"
 DD_AGENT="$JOB_DIR/packages/dd-agent/bin/agent/agent"
 
-AGENT_COMMAND="$DD_AGENT run -c $JOB_DIR/config/"
+AGENT_COMMAND="$DD_AGENT start -c $JOB_DIR/config/"
 
 case ${1:-help} in
   start)
