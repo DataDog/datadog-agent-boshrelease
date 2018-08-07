@@ -1,8 +1,8 @@
-dd-agent/datadog-agent-6.3.3-1.x86_64.rpm:
-  size: 92207361
-  object_id: 451f3b82-4a90-4b8a-7eac-147d283aaa93
-  sha: 41fc7e29fc3264b513df17b258ef405d0ffc059c
-dd-agent/datadog-agent_6.3.3-1_amd64.deb:
-  size: 96265628
-  object_id: af8c546e-e9b8-4205-5ed2-f4a9d1668009
-  sha: 2291bbd5e562cb515c66e5a11ada946b264d94f0
+dd-agent/datadog-agent-6.4.1-1.x86_64.rpm:
+  size: 95587046
+  object_id: db1ebc90-59db-4081-4961-3cd89e5f2bd3
+  sha: 3dbe4df5ee86b8696d234a37e1e3cba1bf21d47b
+dd-agent/datadog-agent_6.4.1-1_amd64.deb:
+  size: 99651508
+  object_id: f1422517-a5c5-4ffb-6dde-0ad97d7e3e69
+  sha: 2bebf804430bea86b0c5c8281a337678b939724f
