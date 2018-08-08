@@ -88,6 +88,7 @@ fi
 ./release
 # make sure we upload the blobs
 bosh upload-blobs
+s3cmd setacl "s3://${BUCKET_NAME}"  --acl-public --recursive
 
 # git commit it and then push it to the repo
 git add .
