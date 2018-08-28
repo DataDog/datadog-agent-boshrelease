@@ -32,6 +32,10 @@ forms:
     label: Datadog API URL
     description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
     default: https://app.datadoghq.com
+  - name: additional_api_keys
+    type: secret
+    label: Additional Datadog API Keys
+    description: Your comma separated additional Datadog API Keys
   - name: tags
     type: string
     label: Tags
