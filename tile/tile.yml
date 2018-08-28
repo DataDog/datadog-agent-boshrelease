@@ -23,10 +23,10 @@ forms:
   description: Datadog Configuration
   markdown: This is common configuration to both the Datadog Firehose Nozzle and the Datadog Agent
   properties:
-  - name: api_keys
+  - name: api_key
     type: secret
-    label: Datadog API Keys
-    description: Your comma separated Datadog API Keys
+    label: Datadog API Key
+    description: Your Datadog API Key
   - name: api_url
     type: string
     label: Datadog API URL
