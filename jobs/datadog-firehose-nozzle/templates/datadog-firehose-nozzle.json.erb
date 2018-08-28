@@ -19,6 +19,12 @@
     no_proxy = no_proxy.split(",")
   end
 
+  datadog_api_keys = p("datadog.additional_api_keys", "")
+  if datadog_api_keys.class == String
+    datadog_api_keys = datadog_api_keys.split(",")
+  end
+  datadog_api_keys << p("datadog.api.keys", "")
+
   traffic_controller_url = ""
   if p("loggregator", nil) && p("loggregator.traffic_controller_url", nil)
     traffic_controller_url = p("loggregator.traffic_controller_url", "")
@@ -34,7 +40,7 @@ JSON.pretty_generate(
     "TrafficControllerURL" => traffic_controller_url,
     "FirehoseSubscriptionID" => p("nozzle.subscription_id"),
     "DataDogURL" => p("datadog.api_url"),
-    "DataDogAPIKey" => p("datadog.api_key"),
+    "DataDogAPIKeys" => datadog_api_keys,
     "DataDogTimeoutSeconds" => p("datadog.timeout_seconds"),
     "FlushDurationSeconds" => p("datadog.flush_duration_seconds"),
     "FlushMaxBytes" => p("datadog.flush_max_bytes"),

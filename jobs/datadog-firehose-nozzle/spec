@@ -20,6 +20,9 @@ properties:
     default: "https://app.datadoghq.com/api/v1/series"
   datadog.api_key:
     description: "The datadog API key to use while submitting requests"
+  datadog.additional_api_keys:
+    description: "Additional Datadog API keys to use while submitting requests"
+    default: []
   datadog.flush_duration_seconds:
     description: "The duration in seconds between flushes to datadog"
     default: 15
