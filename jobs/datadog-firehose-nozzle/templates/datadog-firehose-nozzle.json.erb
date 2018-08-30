@@ -22,14 +22,14 @@
   datadog_additional_endpoints = Hash.new
   for i in 1..5 do
     additional_api_url = p("datadog.additional_api_url_#{i}", "")
-    if additional_api_url != ""
+    if !additional_api_url.empty?
       datadog_additional_endpoints[additional_api_url] = []
     end
   end
   for i in 1..5 do
     additional_api_url = p("datadog.additional_api_url_#{i}", "")
     additional_api_key = p("datadog.additional_api_key_#{i}", "")
-    if additional_api_url.empty && additional_api_key.empty
+    if !additional_api_url.empty && !additional_api_key.empty
       datadog_additional_endpoints[additional_api_url] << additional_api_key
     end
   end
