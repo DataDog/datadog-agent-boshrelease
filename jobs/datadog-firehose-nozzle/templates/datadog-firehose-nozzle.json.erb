@@ -34,11 +34,6 @@
     end
   end
 
-  if datadog_api_keys.class == String
-    datadog_api_keys = datadog_api_keys.split(",")
-  end
-  datadog_api_keys << p("datadog.api.keys", "")
-
   traffic_controller_url = ""
   if p("loggregator", nil) && p("loggregator.traffic_controller_url", nil)
     traffic_controller_url = p("loggregator.traffic_controller_url", "")
