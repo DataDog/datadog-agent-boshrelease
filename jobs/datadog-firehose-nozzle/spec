@@ -20,9 +20,31 @@ properties:
     default: "https://app.datadoghq.com/api/v1/series"
   datadog.api_key:
     description: "The datadog API key to use while submitting requests"
-  datadog.additional_api_keys:
-    description: "Additional Datadog API keys to use while submitting requests"
-    default: []
+  datadog.additional_api_url_1:
+    description: "Additional Endpoint URL 1 for datadog"
+    default: "https://app.datadoghq.com/api/v1/series"
+  datadog.additional_api_key_1:
+    description: "The datadog API key to use while submitting requests for additional endpoint url 1"
+  datadog.additional_api_url_2:
+    description: "Additional Endpoint URL 2 for datadog"
+    default: "https://app.datadoghq.com/api/v1/series"
+  datadog.additional_api_key_2:
+    description: "The datadog API key to use while submitting requests for additional endpoint url 2"
+  datadog.additional_api_url_3:
+    description: "Additional Endpoint URL 3 for datadog"
+    default: "https://app.datadoghq.com/api/v1/series"
+  datadog.additional_api_key_3:
+    description: "The datadog API key to use while submitting requests for additional endpoint url 3"
+  datadog.additional_api_url_4:
+    description: "Additional Endpoint URL 4 for datadog"
+    default: "https://app.datadoghq.com/api/v1/series"
+  datadog.additional_api_key_4:
+    description: "The datadog API key to use while submitting requests for additional endpoint url 4"
+  datadog.additional_api_url_5:
+    description: "Additional Endpoint URL 5 for datadog"
+    default: "https://app.datadoghq.com/api/v1/series"
+  datadog.additional_api_key_5:
+    description: "The datadog API key to use while submitting requests for additional endpoint url 5"
   datadog.flush_duration_seconds:
     description: "The duration in seconds between flushes to datadog"
     default: 15

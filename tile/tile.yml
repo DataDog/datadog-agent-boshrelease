@@ -32,10 +32,6 @@ forms:
     label: Datadog API URL
     description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
     default: https://app.datadoghq.com
-  - name: additional_api_keys
-    type: secret
-    label: Additional Datadog API Keys
-    description: Your comma separated additional Datadog API Keys
   - name: tags
     type: string
     label: Tags
@@ -56,6 +52,57 @@ forms:
     optional: true
     label: No Proxy
     description: Set urls that should skip the proxy, separated by a comma (e.g. datadoghq.com,google.com,example.engineering)
+
+- name: additional-datadog-endpoints
+  label: Additional Endpoints
+  description: Additional Datadog Endpoints
+  markdown: This is common additional configuration to both the Datadog Firehose Nozzle and the Datadog Agent
+  properties:
+  - name: additional_api_url_1
+    type: string
+    label: Additional Datadog API URL 1
+    description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
+    default: https://app.datadoghq.com
+  - name: additional_api_key_1
+    type: secret
+    label: Additional Datadog API Key 1
+    description: Your Datadog Additional API Key 1
+  - name: additional_api_url_2
+    type: string
+    label: Additional Datadog API URL 2
+    description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
+    default: https://app.datadoghq.com
+  - name: additional_api_key_2
+    type: secret
+    label: Additional Datadog API Key 2
+    description: Your Datadog Additional API Key 2
+  - name: additional_api_url_3
+    type: string
+    label: Additional Datadog API URL 3
+    description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
+    default: https://app.datadoghq.com
+  - name: additional_api_key_3
+    type: secret
+    label: Additional Datadog API Key 3
+    description: Your Datadog Additional API Key 3
+  - name: additional_api_url_4
+    type: string
+    label: Additional Datadog API URL 4
+    description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
+    default: https://app.datadoghq.com
+  - name: additional_api_key_4
+    type: secret
+    label: Additional Datadog API Key 4
+    description: Your Datadog Additional API Key 4
+  - name: additional_api_url_5
+    type: string
+    label: Additional Datadog API URL 5
+    description: The host of the Datadog intake server to send data to (e.g. https://app.datadoghq.com)
+    default: https://app.datadoghq.com
+  - name: additional_api_key_5
+    type: secret
+    label: Additional Datadog API Key 5
+    description: Your Datadog Additional API Key 5
 
 - name: datadog-nozzle-config
   label: Datadog Firehose Nozzle Config
@@ -231,6 +278,16 @@ packages:
         datadog:
           api_key: (( .properties.api_key.value ))
           api_url: (( .properties.api_url.value ))/api/v1/series
+          additional_api_key_1: (( .properties.additional_api_key_1.value ))
+          additional_api_url_1: (( .properties.additional_api_url_1.value ))
+          additional_api_key_2: (( .properties.additional_api_key_2.value ))
+          additional_api_url_2: (( .properties.additional_api_url_2.value ))
+          additional_api_key_3: (( .properties.additional_api_key_3.value ))
+          additional_api_url_3: (( .properties.additional_api_url_3.value ))
+          additional_api_key_4: (( .properties.additional_api_key_4.value ))
+          additional_api_url_4: (( .properties.additional_api_url_4.value ))
+          additional_api_key_5: (( .properties.additional_api_key_5.value ))
+          additional_api_url_5: (( .properties.additional_api_url_5.value ))
           metric_prefix: (( .properties.metric_prefix.value ))
           custom_tags: (( .properties.tags.value ))
           flush_max_bytes: (( .properties.flush_max_bytes.value ))

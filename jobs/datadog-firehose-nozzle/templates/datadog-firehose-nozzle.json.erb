@@ -19,7 +19,21 @@
     no_proxy = no_proxy.split(",")
   end
 
-  datadog_api_keys = p("datadog.additional_api_keys", "")
+  datadog_additional_endpoints = Hash.new
+  for i in 1..5 do
+    additional_api_url = p("datadog.additional_api_url_#{i}", "")
+    if additional_api_url != ""
+      datadog_additional_endpoints[additional_api_url] = []
+    end
+  end
+  for i in 1..5 do
+    additional_api_url = p("datadog.additional_api_url_#{i}", "")
+    additional_api_key = p("datadog.additional_api_key_#{i}", "")
+    if additional_api_url.empty && additional_api_key.empty
+      datadog_additional_endpoints[additional_api_url] << additional_api_key
+    end
+  end
+
   if datadog_api_keys.class == String
     datadog_api_keys = datadog_api_keys.split(",")
   end
@@ -40,7 +54,8 @@ JSON.pretty_generate(
     "TrafficControllerURL" => traffic_controller_url,
     "FirehoseSubscriptionID" => p("nozzle.subscription_id"),
     "DataDogURL" => p("datadog.api_url"),
-    "DataDogAPIKeys" => datadog_api_keys,
+    "DataDogAPIKey" => p("datadog.api_key", ""),
+    "DataDogAdditionalEndpoints" => datadog_additional_endpoints,
     "DataDogTimeoutSeconds" => p("datadog.timeout_seconds"),
     "FlushDurationSeconds" => p("datadog.flush_duration_seconds"),
     "FlushMaxBytes" => p("datadog.flush_max_bytes"),
