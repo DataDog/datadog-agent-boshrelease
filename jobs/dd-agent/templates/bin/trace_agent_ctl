@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+#
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Load job properties
+source /var/vcap/jobs/dd-agent/data/properties.sh
+
+# Setup env vars and folders for the ctl script
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "trace_agent"
+
+# Load function lib (alway before setup, there are some global variables needed)
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
+
+export DD_AGENT_PY_ENV="PYTHONPATH=$PYTHONPATH,LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+export DD_AGENT_PY="$DD_AGENT_PYTHON"
+DD_TRACE_AGENT="$JOB_DIR/packages/dd-agent/embedded/bin/trace-agent"
+TRACE_AGENT_CMD="$DD_TRACE_AGENT --config=$JOB_DIR/config/datadog.yaml --pid=$PIDFILE"
+
+
+case ${1:-help} in
+  start)
+    echon_log "Starting Datadog Agent $COMPONENT: "
+    pid_guard $PIDFILE "dd-agent-$COMPONENT"
+    (
+        {
+            exec chpst -v -u vcap:vcap $TRACE_AGENT_CMD
+        } >>$LOG_DIR/$COMPONENT.stdout.log \
+        2>>$LOG_DIR/$COMPONENT.stderr.log
+    ) &
+    echo "$(<${PIDFILE}). Done"
+    ;;
+  stop)
+    printf_log "Stopping Datadog $COMPONENT: $(<${PIDFILE}). "
+    kill_and_wait $PIDFILE 25 true
+    find_pid_kill_and_wait $DD_TRACE_AGENT
+    printf_log "Done"
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+    ;;
+esac
+exit 0

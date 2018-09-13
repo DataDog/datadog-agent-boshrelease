@@ -11,3 +11,11 @@ check process dd-agent-process-agent
   stop program "/var/vcap/jobs/dd-agent/bin/process_agent_ctl stop"
   group vcap
 <% end %>
+
+<% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
+check process dd-agent-trace-agent
+  with pidfile /var/vcap/sys/run/dd-agent/trace_agent.pid
+  start program "/var/vcap/jobs/dd-agent/bin/trace_agent_ctl start"
+  stop program "/var/vcap/jobs/dd-agent/bin/trace_agent_ctl stop"
+  group vcap
+<% end %>
