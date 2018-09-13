@@ -155,6 +155,9 @@ properties:
   dd.process_agent_enabled:
     default: no
     description: Enable the process agent.
+  dd.trace_agent_enabled:
+    default: no
+    description: Enable the trace agent.
   dd.generate_network_config_excluded_interfaces:
     default: ["lo", "lo0"]
     description: List of the network interfaces to exclude from reporting metrics
