@@ -9,6 +9,7 @@ templates:
   config/datadog.yaml.erb: config/datadog.yaml
   config/confd.sh.erb: config/confd.sh
   bin/process_agent_ctl: bin/process_agent_ctl
+  bin/trace_agent_ctl: bin/trace_agent_ctl
   bin/pre-start: bin/pre-start
   bin/agent_ctl: bin/agent_ctl
 
@@ -155,6 +156,9 @@ properties:
   dd.process_agent_enabled:
     default: no
     description: Enable the process agent.
+  dd.trace_agent_enabled:
+    default: no
+    description: Enable the trace agent.
   dd.generate_network_config_excluded_interfaces:
     default: ["lo", "lo0"]
     description: List of the network interfaces to exclude from reporting metrics
