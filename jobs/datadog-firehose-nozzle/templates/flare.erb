@@ -53,12 +53,15 @@ DATADOG_FLARE_URL=$(echo $DATADOG_FLARE_URL | sed "s~/api/v1/series/~/support/fl
 
 DATADOG_FLARE_URL="$DATADOG_FLARE_URL?api_key="<%= p("datadog.api_key") %>
 
+# Agent Version must be set, but it doesn't work below 6.1 because of a flare bug.
+# So, we're setting it to a much higher version so that it doesnt' get confused for an actual agent
 curl -SL -X POST \
   -H "Content-Type: multipart/form-data" \
   -F "case_id=$CASE_ID" \
   -F "email=$EMAIL" \
   -F "hostname=$HOSTNAME" \
   -F "flare_file=@$ZIPFILE" \
+  -F "agent_version=9.9.9" \
   $DATADOG_FLARE_URL
 
 CURL_RESULT=$?
