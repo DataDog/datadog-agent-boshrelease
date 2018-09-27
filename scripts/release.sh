@@ -60,7 +60,7 @@ if [ "$STAGING" = "true" ]; then
 
  BUCKET_NAME="public-datadog-agent-boshrelease-staging"
  # For staging we should make sure everything is available in the staging bucket
- # aws s3 cp s3://public-datadog-agent-boshrelease/ s3://public-datadog-agent-boshrelease-staging/ --recursive --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
+ aws s3 cp s3://public-datadog-agent-boshrelease/ s3://public-datadog-agent-boshrelease-staging/ --recursive --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers full=id=3a6e02b08553fd157ae3fb918945dd1eaae5a1aa818940381ef07a430cf25732
 fi
 
 # make sure we're in the right directory
