@@ -65,6 +65,7 @@ forms:
     default: https://app.datadoghq.com
   - name: additional_api_key_1
     type: secret
+    optional: true
     label: Additional Datadog API Key 1
     description: Your Datadog Additional API Key 1
   - name: additional_api_url_2
@@ -74,6 +75,7 @@ forms:
     default: https://app.datadoghq.com
   - name: additional_api_key_2
     type: secret
+    optional: true
     label: Additional Datadog API Key 2
     description: Your Datadog Additional API Key 2
   - name: additional_api_url_3
@@ -83,6 +85,7 @@ forms:
     default: https://app.datadoghq.com
   - name: additional_api_key_3
     type: secret
+    optional: true
     label: Additional Datadog API Key 3
     description: Your Datadog Additional API Key 3
   - name: additional_api_url_4
@@ -92,6 +95,7 @@ forms:
     default: https://app.datadoghq.com
   - name: additional_api_key_4
     type: secret
+    optional: true
     label: Additional Datadog API Key 4
     description: Your Datadog Additional API Key 4
   - name: additional_api_url_5
@@ -101,6 +105,7 @@ forms:
     default: https://app.datadoghq.com
   - name: additional_api_key_5
     type: secret
+    optional: true
     label: Additional Datadog API Key 5
     description: Your Datadog Additional API Key 5
 
@@ -223,6 +228,11 @@ forms:
     type: boolean
     default: true
     description: Include a tag with the address of the VM
+  - name: trace_agent
+    label: Enable Trace Agent
+    type: boolean
+    default: true
+    description: Enable the Trace Agent on all virtual machines
 
 - name: cf-config
   label: Cloud Foundry Settings
@@ -319,7 +329,7 @@ runtime_configs:
     runtime_config:
       releases:
         - name: datadog-agent
-          version: 2.3.611 # Update this if update the agent
+          version: 2.5.652 # Update this if update the agent
       addons:
       - name: datadog
         jobs:
@@ -353,3 +363,4 @@ runtime_configs:
             forwarder_num_workers: (( .properties.forwarder_num_workers.value ))
             ip_tag: (( .properties.ip_tag.value ))
             address_tag: (( .properties.address_tag.value ))
+            trace_agent_enabled: (( .properties.trace_agent.value ))
