@@ -137,10 +137,16 @@ function kill_and_wait {
 function find_pid_kill_and_wait {
   local find_command=$1
   local pid=$(find_pid $find_command)
-  local timeout=${2:-25}
-  local force=${3:-1}
+  if [[ ! "$pid" || "$pid" == "" ]]; then
+    echo "No such PID exists, skipping the hard kill"
+  else
+    local timeout=${2:-25}
+    local force=${3:-1}
 
-  wait_pid $pid 1 $timeout $force
+    wait_pid $pid 1 $timeout $force
+    echo "killed pid"
+  fi
+
 }
 
 function find_pid {
