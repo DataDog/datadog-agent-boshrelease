@@ -5,12 +5,14 @@
 set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
 
+
 # Log some info to the Monit Log file
 function log {
   local message=${1}
   local timestamp=`date +%y:%m:%d-%H:%M:%S`
   printf "${timestamp} :: ${message}\n" >> "/var/vcap/sys/log/${NAME}/${COMPONENT:-$NAME}_script.log"
 }
+
 
 # Print a message
 function printf_log {
@@ -19,6 +21,7 @@ function printf_log {
   printf "${timestamp} :: ${message}\n" | tee -a "/var/vcap/sys/log/${NAME}/${COMPONENT:-$NAME}_script.log"
 }
 
+
 # Print a message without \n at the end
 function echon_log {
   local message=${1}
@@ -26,11 +29,13 @@ function echon_log {
   printf "${timestamp} :: ${message} \n" | tee -a "/var/vcap/sys/log/${NAME}/${COMPONENT:-$NAME}_script.log"
 }
 
+
 # Print a message and exit with error
 function die {
   printf_log "$@"
   exit 1
 }
+
 
 # If loaded within monit ctl scripts then pipe output
 # If loaded from 'source ../utils.sh' then normal STDOUT
@@ -78,7 +83,7 @@ function wait_pid {
           if [ "$force" = "1" ]; then
             echo
             printf_log "Kill timed out, using kill -9 on $pid ..."
-            printf_log `kill -9 $pid`
+            kill -9 $pid
             sleep 0.5
           fi
           break
@@ -134,6 +139,7 @@ function kill_and_wait {
   fi
 }
 
+
 function find_pid_kill_and_wait {
   local find_command=$1
   local pid=$(find_pid $find_command)
@@ -146,8 +152,8 @@ function find_pid_kill_and_wait {
     wait_pid $pid 1 $timeout $force
     echo "killed pid"
   fi
-
 }
+
 
 function find_pid {
   local find_command=$1
