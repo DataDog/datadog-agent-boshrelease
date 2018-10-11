@@ -288,6 +288,57 @@ log_file: /var/vcap/sys/log/dd-agent/agent.log
 # Set the auth token
 auth_token_file_path: /var/vcap/sys/run/dd-agent/auth_token
 
+
+<%
+  additional_endpoints = {}
+  if p("dd.additional_api_key_1", nil)
+    if additional_endpoints[p("dd.additional_api_key_1")]
+      additional_endpoints[p("dd.additional_api_key_1")] << p("dd.additional_api_url_1")
+    else
+      additional_endpoints[p("dd.additional_api_key_1")] = [p("dd.additional_api_url_1")]
+    end
+  end
+
+  if p("dd.additional_api_key_2", nil)
+    if additional_endpoints[p("dd.additional_api_key_2")]
+      additional_endpoints[p("dd.additional_api_key_2")] << p("dd.additional_api_url_2")
+    else
+      additional_endpoints[p("dd.additional_api_key_2")] = [p("dd.additional_api_url_2")]
+    end
+  end
+
+  if p("dd.additional_api_key_3", nil)
+    if additional_endpoints[p("dd.additional_api_key_3")]
+      additional_endpoints[p("dd.additional_api_key_3")] << p("dd.additional_api_url_3")
+    else
+      additional_endpoints[p("dd.additional_api_key_3")] = [p("dd.additional_api_url_3")]
+    end
+  end
+
+  if p("dd.additional_api_key_4", nil)
+    if additional_endpoints[p("dd.additional_api_key_4")]
+      additional_endpoints[p("dd.additional_api_key_4")] << p("dd.additional_api_url_4")
+    else
+      additional_endpoints[p("dd.additional_api_key_4")] = [p("dd.additional_api_url_4")]
+    end
+  end
+
+  if p("dd.additional_api_key_5", nil)
+    if additional_endpoints[p("dd.additional_api_key_5")]
+      additional_endpoints[p("dd.additional_api_key_5")] << p("dd.additional_api_url_5")
+    else
+      additional_endpoints[p("dd.additional_api_key_5")] = [p("dd.additional_api_url_5")]
+    end
+  end
+%>
+additional_endpoints:
+  <% additional_endpoints.each do |additional_endpoint, urls| %>
+  <%= additional_endpoint %>:
+    <% urls.each do |url| %>
+    - <%= url %>
+    <% end %>
+  <% end %>
+
 # Autodiscovery
 #
 # Change the root directory to look at to get cgroup statistics. Useful when running inside a
