@@ -4,12 +4,14 @@ set -u # report the usage of uninitialized variables
 
 # Some tasks that need to be done before the agent is started
 
+
 function ensure_agent_ownership {
   # make sure the agent owns the config directory
   chown -R vcap:vcap "$JOB_DIR/config/"
   # make sure the agent owns its own directory
   chown -R vcap:vcap "$JOB_DIR/packages/dd-agent/"
 }
+
 
 function stop_agent {
   local agent_command=$1
@@ -21,6 +23,7 @@ function stop_agent {
   ) || true
   find_pid_kill_and_wait $1 || true
 }
+
 
 function check_if_running_and_kill {
   local agent_command="$1"
