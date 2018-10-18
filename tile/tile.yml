@@ -341,6 +341,16 @@ runtime_configs:
             dogstatsd_port: 18125 # Many Cloud Foundry deployments have their own StatsD listening on port 8125
             process_agent_enabled: yes
             api_key: (( .properties.api_key.value ))
+            additional_api_key_1: (( .properties.additional_api_key_1.value ))
+            additional_api_url_1: (( .properties.additional_api_url_1.value ))
+            additional_api_key_2: (( .properties.additional_api_key_2.value ))
+            additional_api_url_2: (( .properties.additional_api_url_2.value ))
+            additional_api_key_3: (( .properties.additional_api_key_3.value ))
+            additional_api_url_3: (( .properties.additional_api_url_3.value ))
+            additional_api_key_4: (( .properties.additional_api_key_4.value ))
+            additional_api_url_4: (( .properties.additional_api_url_4.value ))
+            additional_api_key_5: (( .properties.additional_api_key_5.value ))
+            additional_api_url_5: (( .properties.additional_api_url_5.value ))
             tags: (( .properties.tags.value ))
             proxy:
               http: (( .properties.http_proxy_url.value ))
