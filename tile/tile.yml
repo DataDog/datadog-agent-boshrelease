@@ -133,6 +133,11 @@ forms:
     label: App Metrics Interval
     description: The interval at which to grab the app metrics
     default: 10
+  - name: flush_duration_seconds
+    type: integer
+    label: Flush Duration
+    description: the interval (in seconds) to flush the collected metrics to datadog
+    default: 15
   - name: flush_max_bytes
     type: integer
     label: Flush Max Bytes
@@ -301,6 +306,7 @@ packages:
           metric_prefix: (( .properties.metric_prefix.value ))
           custom_tags: (( .properties.tags.value ))
           flush_max_bytes: (( .properties.flush_max_bytes.value ))
+          flush_duration_seconds: (( .properties.flush_duration_seconds.value ))
         nozzle:
           insecure_ssl_skip_verify: (( .properties.insecure_ssl_skip_verify.value ))
           disable_access_control: (( .properties.disable_access_control.value ))
