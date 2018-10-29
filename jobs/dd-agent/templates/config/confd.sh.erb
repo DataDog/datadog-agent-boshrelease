@@ -100,7 +100,7 @@ cp -R ${PACKAGES}/dd-agent/etc/conf.d/* $CONFD_DIR/
 # Process checks
 <% if p('dd.generate_processes') == true || p('dd.generate_processes') =~ (/(true|t|yes|y|1)$/i) %>
 mkdir -p ${CONFD_DIR}/process.d/
-cat <<EOF > "${CONFD_DIR}/process.d/process.yaml"
+cat <<EOF > "${CONFD_DIR}/process.d/default_process.yaml"
 ---
 init_config:
   pid_cache_duration: 120
