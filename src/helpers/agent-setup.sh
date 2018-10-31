@@ -38,3 +38,6 @@ function check_if_running_and_kill {
     fi
   fi
 }
+
+set +e
+set +u 
