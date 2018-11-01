@@ -178,3 +178,6 @@ function check_nfs_mount {
     fi
   fi
 }
+
+set +e
+set +u 

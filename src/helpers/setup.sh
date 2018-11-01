@@ -51,22 +51,17 @@ export PYTHONPATH="$PACKAGES/$NAME/bin/agent/dist:$PYTHONPATH"
 
 export PYTHONHOME="$PACKAGES/$NAME/embedded/"
 
-# Setup log and tmp folders
+# export directories
 export LOG_DIR="/var/vcap/sys/log/$NAME"
-mkdir -p "$LOG_DIR" && chmod 775 "$LOG_DIR" && chown -R vcap "$LOG_DIR"
-
 export RUN_DIR="/var/vcap/sys/run/$NAME"
-mkdir -p "$RUN_DIR" && chmod 775 "$RUN_DIR" && chown -R vcap "$RUN_DIR"
-
 export PIDFILE="${RUN_DIR}/${COMPONENT}.pid"
-
 export TMP_DIR="/var/vcap/sys/tmp/$NAME"
-mkdir -p "$TMP_DIR" && chmod 775 "$TMP_DIR" && chown -R vcap "$TMP_DIR"
 export TMPDIR="$TMP_DIR"
-
 export CONFD_DIR="${JOB_DIR}/config/conf.d"
-mkdir -p "$CONFD_DIR" && chmod 775 "$CONFD_DIR" && chown -R vcap "$CONFD_DIR"
 
 export LANG=POSIX
 
 export DD_AGENT_PYTHON="$JOB_DIR/packages/dd-agent/embedded/bin/python"
+
+set +e
+set +u
