@@ -357,6 +357,7 @@ runtime_configs:
             additional_api_url_4: (( .properties.additional_api_url_4.value ))
             additional_api_key_5: (( .properties.additional_api_key_5.value ))
             additional_api_url_5: (( .properties.additional_api_url_5.value ))
+            friendly_hostname: (( .properties.use_friendly_hostname.value ))
             tags: (( .properties.tags.value ))
             proxy:
               http: (( .properties.http_proxy_url.value ))
