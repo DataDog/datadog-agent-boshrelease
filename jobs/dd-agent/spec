@@ -33,6 +33,9 @@ properties:
   dd.skip_ssl_validation:
     default: no
     description: Skip SSL validation for the Datadog url
+  dd.enable_logs_agent:
+    default: false
+    description: Enable logs agent for integrations
   dd.api_key:
     description: Datadog API key
   dd.additional_api_url_1:

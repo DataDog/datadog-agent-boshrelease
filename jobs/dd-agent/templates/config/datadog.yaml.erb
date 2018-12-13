@@ -1,6 +1,11 @@
 # The host of the Datadog intake server to send Agent data to
 dd_url: <%= p("dd.url", "https://app.datadoghq.com") %>
 
+# Logs agent
+#
+# Logs agent is disabled by default
+logs_enabled: <%= p('dd.enable_logs_agent', false) %>
+
 # The Datadog api key to associate your Agent's data with your organization.
 # Can be found here:
 # https://app.datadoghq.com/account/settings
