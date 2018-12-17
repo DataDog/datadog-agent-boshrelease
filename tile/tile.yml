@@ -335,7 +335,7 @@ runtime_configs:
     runtime_config:
       releases:
         - name: datadog-agent
-          version: 2.5.670 # Update this if update the agent
+          version: 2.5.680 # Update this if update the agent
       addons:
       - name: datadog
         jobs:
