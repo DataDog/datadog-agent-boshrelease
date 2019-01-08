@@ -15,7 +15,6 @@ templates:
 
 properties:
   dd.url:
-    default: "https://app.datadoghq.com"
     description: The host of the Datadog intake server to send Agent data to
   dd.proxy:
     description: Proxy settings to connect to the Internet
@@ -230,5 +229,4 @@ properties:
     default: true
     description: "Include the address tag"
   dd.site:
-    default: "datadoghq.com"
     description: "The site of the Datadog intake to send Agent data to. Defaults to 'datadoghq.com', set to 'datadoghq.eu' to send data to the EU site."

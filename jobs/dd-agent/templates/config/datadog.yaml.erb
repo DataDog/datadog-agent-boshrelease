@@ -1,5 +1,7 @@
 # The host of the Datadog intake server to send Agent data to
-dd_url: <%= p("dd.url", "https://app.datadoghq.com") %>
+<% if p("dd.url", nil) %>
+dd_url: <%= p("dd.url") %>
+<% end %>
 
 # The Datadog api key to associate your Agent's data with your organization.
 # Can be found here:
@@ -13,7 +15,9 @@ api_key: <%= p('dd.api_key') %>
 
 # The site of the Datadog intake to send Agent data to.
 # Defaults to 'datadoghq.com', set to 'datadoghq.eu' to send data to the EU site.
-site: <%= p("dd.site", "datadoghq.com") %>
+<% if p("dd.url" nil) %>
+site: <%= p("dd.site") %>
+<% end %>
 
 # Only use a proxy if one is set
 <% if p("dd.proxy.http", false) || p("dd.proxy.https", false) || p("dd.proxy.no_proxy", false) %>
