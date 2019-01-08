@@ -11,6 +11,10 @@ api_key: <%= p('dd.api_key') %>
 # proxy. These settings might impact your checks requests, please refer to the
 # specific check documentation for more details.
 
+# The site of the Datadog intake to send Agent data to.
+# Defaults to 'datadoghq.com', set to 'datadoghq.eu' to send data to the EU site.
+site: <%= p("dd.site", "datadoghq.com") %>
+
 # Only use a proxy if one is set
 <% if p("dd.proxy.http", false) || p("dd.proxy.https", false) || p("dd.proxy.no_proxy", false) %>
 proxy:
