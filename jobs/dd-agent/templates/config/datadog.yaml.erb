@@ -15,7 +15,7 @@ api_key: <%= p('dd.api_key') %>
 
 # The site of the Datadog intake to send Agent data to.
 # Defaults to 'datadoghq.com', set to 'datadoghq.eu' to send data to the EU site.
-<% if p("dd.url" nil) %>
+<% if p("dd.site", nil) %>
 site: <%= p("dd.site") %>
 <% end %>
 
