@@ -230,3 +230,5 @@ properties:
     description: "Include the address tag"
   dd.site:
     description: "The site of the Datadog intake to send Agent data to. Defaults to 'datadoghq.com', set to 'datadoghq.eu' to send data to the EU site."
+  dd.integration_updates:
+    description: "Add integration level updates here as a dictionary."

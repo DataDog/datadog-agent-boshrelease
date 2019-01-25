@@ -4,6 +4,7 @@ set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
 
 JOBS_DIR="/var/vcap/jobs"
+DD_AGENT="$JOB_DIR/packages/dd-agent/bin/agent/agent"
 
 
 # Get a list of pids from all jobs
@@ -188,4 +189,21 @@ cat <<'YAML' > "${CONFD_DIR}/<%= integration %>.d/<%= integration %>.yaml"
 <%= YAML.dump(config) %>
 YAML
 
+<% end %>
+
+<%
+
+integration_updates = p("dd.integration_updates", {})
+
+if integration_updates.is_a? String
+
+end
+
+%>
+
+
+# Integration Updates
+INTEGRATION_CMD="$DD_AGENT integration install -i"
+<% p("dd.integration_updates", {}).each do |integration, version| %>
+  $INTEGRATION_CMD <%= integration %>==<%= version %>
 <% end %>
