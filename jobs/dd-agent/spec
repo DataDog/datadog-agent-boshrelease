@@ -5,7 +5,6 @@ packages:
 - dd-agent
 templates:
   data/properties.sh.erb: data/properties.sh
-  config/datadog.conf.erb: config/datadog.conf
   config/datadog.yaml.erb: config/datadog.yaml
   config/confd.sh.erb: config/confd.sh
   bin/process_agent_ctl: bin/process_agent_ctl
