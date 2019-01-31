@@ -479,6 +479,8 @@ apm_config:
 <% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
   enabled: true
 <% end %>
+#   The full path to the file where trace-agent logs will be written.
+  log_file: /var/vcap/sys/log/dd-agent/trace_agent.log
 #   The environment tag that Traces should be tagged with
 #   Will inherit from "env" tag if none is applied here
 #   env: none
