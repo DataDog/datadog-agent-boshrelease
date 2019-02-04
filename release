@@ -27,5 +27,7 @@ fi
 # Creating the release
 bosh create-release --force --final --tarball=datadog-agent-release.tgz --name $RELEASE $VERSION_STRING
 
+bosh upload-blobs
+
 # cp config/final.yml.bk config/final.yml
 # rm config/final.yml.bk
