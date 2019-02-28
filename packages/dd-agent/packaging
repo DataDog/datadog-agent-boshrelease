@@ -59,13 +59,11 @@ pushd ${AGENT_INSTALL_TARGET}
   rm -rf conf.d datadog.conf
   # create the links to the configuration
   ln -s /var/vcap/jobs/$JOB_NAME/config/conf.d conf.d
-  ln -s /var/vcap/jobs/$JOB_NAME/config/datadog.conf datadog.conf
   ln -s /var/vcap/jobs/$JOB_NAME/config/datadog.yaml datadog.yaml
 popd
 pushd ${DIST_DIR}
   rm -rf conf.d datadog.conf
   # create the links to the configuration
-  ln -s /var/vcap/jobs/$JOB_NAME/config/datadog.conf datadog.conf
   ln -s /var/vcap/jobs/$JOB_NAME/config/datadog.yaml datadog.yaml
 
 popd
