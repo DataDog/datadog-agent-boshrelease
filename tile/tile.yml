@@ -7,9 +7,9 @@ apply_open_security_group: false       # Apply open security group, default: fal
 allow_paid_service_plans: false        # Allow paid service plans, default: false
 
 stemcell_criteria:
-  os: ubuntu-trusty
+  os: ubuntu-xenial
   requires_cpi: false
-  version: '3468'
+  version: '170.38'
 
 properties:
 - name: author
@@ -335,7 +335,7 @@ runtime_configs:
     runtime_config:
       releases:
         - name: datadog-agent
-          version: 2.6.690 # Update this if update the agent
+          version: 2.7.6100 # Update this if update the agent
       addons:
       - name: datadog
         jobs:
