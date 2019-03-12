@@ -9,7 +9,7 @@ allow_paid_service_plans: false        # Allow paid service plans, default: fals
 stemcell_criteria:
   os: ubuntu-xenial
   requires_cpi: false
-  version: '170.38'
+  version: '170'
 
 properties:
 - name: author
