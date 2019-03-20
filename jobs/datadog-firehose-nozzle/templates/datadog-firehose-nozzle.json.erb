@@ -68,7 +68,8 @@ JSON.pretty_generate(
     "NumWorkers" => p("nozzle.num_workers", 4),
     "GrabInterval" => p("nozzle.grab_interval", 10),
     "CustomTags" => tags,
-    "DBPath": "/var/vcap/sys/tmp/datadog-firehose-nozzle/firehose_nozzle.db"
+    "DBPath": "/var/vcap/sys/tmp/datadog-firehose-nozzle/firehose_nozzle.db",
+    "EnvironmentName" => p("nozzle.environment", "")
 )
 
 %>

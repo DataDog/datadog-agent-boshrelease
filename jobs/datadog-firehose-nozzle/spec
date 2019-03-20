@@ -114,3 +114,6 @@ properties:
   nozzle.no_proxy:
     description: "Hosts that should skip the proxy"
     default: ""
+  nozzle.environment:
+    description: "The name of the environment where the nozzle is running"
+    default: ""
