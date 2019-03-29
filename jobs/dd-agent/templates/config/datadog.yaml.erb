@@ -449,6 +449,9 @@ process_config:
 <% end %>
 #   The full path to the file where process-agent logs will be written.
   log_file: /var/vcap/sys/log/dd-agent/process_agent.log
+<% if p('dd.strip_proc_arguments', false) == true || p('dd.strip_proc_arguments', false) =~ (/(true|t|yes|y|1)$/i) %>
+  strip_proc_arguments: true
+<% end %>
 #   The interval, in seconds, at which we will run each check. If you want consistent
 #   behavior between real-time you may set the Container/ProcessRT intervals to 10.
 #   Defaults to 10s for normal checks and 2s for others.
