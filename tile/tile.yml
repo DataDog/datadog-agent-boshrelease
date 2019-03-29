@@ -238,6 +238,16 @@ forms:
     type: boolean
     default: true
     description: Enable the Trace Agent on all virtual machines
+  - name: logs_enabled
+    label: Enable Logs Agent
+    type: boolean
+    default: false
+    description: Enable the Logs Agent on all virtual machines
+  - name: strip_proc_arguments
+    label: Strip process arguments
+    type: boolean
+    default: false
+    description: This setting will strip the process arguments from the processes sent by the process agent.
 
 - name: cf-config
   label: Cloud Foundry Settings
@@ -331,7 +341,7 @@ packages:
 
 
 runtime_configs:
-  - name: datdog-agent
+  - name: datadog-agent
     runtime_config:
       releases:
         - name: datadog-agent
@@ -381,3 +391,5 @@ runtime_configs:
             ip_tag: (( .properties.ip_tag.value ))
             address_tag: (( .properties.address_tag.value ))
             trace_agent_enabled: (( .properties.trace_agent.value ))
+            logs_enabled: (( .properties.logs_enabled.value ))
+            strip_proc_arguments: (( .properties.strip_proc_arguments.value ))
