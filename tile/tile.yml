@@ -148,6 +148,11 @@ forms:
   label: Datadog Agent Config
   description: Configure your Datadog Agent!
   properties:
+  - name: skip_ssl_validation
+    type: boolean
+    label: Skip SSL validation
+    default: false
+    description: Configure the Datadog agent to skip SSL validation
   - name: use_uuid_hostname
     type: boolean
     label: Use UUID Hostname
@@ -353,6 +358,7 @@ runtime_configs:
           release: datadog-agent
         properties:
           dd:
+            skip_ssl_validation: (( .properties.skip_ssl_validation.value ))
             use_dogstatsd: yes
             dogstatsd_port: 18125 # Many Cloud Foundry deployments have their own StatsD listening on port 8125
             process_agent_enabled: yes
