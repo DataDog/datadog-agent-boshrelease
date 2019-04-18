@@ -348,6 +348,11 @@ runtime_configs:
           version: 2.7.6100 # Update this if update the agent
       addons:
       - name: datadog
+        include:
+        - stemcell:
+          - os: ubuntu-xenial
+          - os: ubuntu-trusty
+          - os: centos-7
         jobs:
         - name: dd-agent
           release: datadog-agent
