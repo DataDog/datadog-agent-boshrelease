@@ -402,5 +402,5 @@ runtime_configs:
             ip_tag: (( .properties.ip_tag.value ))
             address_tag: (( .properties.address_tag.value ))
             trace_agent_enabled: (( .properties.trace_agent.value ))
-            logs_enabled: (( .properties.logs_enabled.value ))
+            enable_logs_agent: (( .properties.logs_enabled.value ))
             strip_proc_arguments: (( .properties.strip_proc_arguments.value ))
