@@ -445,6 +445,10 @@ additional_endpoints:
 # ecs_agent_url: http://localhost:51678
 #
 
+# Logs agent specific settings
+#
+logs_enabled: <%= p("dd.enable_logs_agent", false) %>
+
 # Process agent specific settings
 #
 process_config:
