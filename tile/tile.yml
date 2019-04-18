@@ -354,7 +354,7 @@ runtime_configs:
       addons:
       - name: datadog
         include:
-        - stemcell:
+          stemcell:
           - os: ubuntu-xenial
           - os: ubuntu-trusty
           - os: centos-7
