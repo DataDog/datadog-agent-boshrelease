@@ -64,6 +64,8 @@ skip_ssl_validation: <%= p("dd.skip_ssl_validation", "no") %>
   end
 %>
 
+cf_os_hostname_aliasing: <%= p('dd.cf_os_hostname_aliasing', false) %>
+
 <% if hostname %>
 hostname: <%= hostname %>
 <% end %>

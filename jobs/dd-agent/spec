@@ -68,6 +68,9 @@ properties:
   dd.friendly_hostname:
     default: true
     description: "Use a friendly hostname. If this is enabled, along with the UUID option, uuid will take precedence."
+  dd.cf_os_hostname_aliasing:
+    default: false
+    description: "If enabled, send the OS hostname as an alias. Useful in coordination with the Friendly Hostname option."
   dd.tags:
     default: []
     description: List of tags which will be applied to the data sent from this agent
