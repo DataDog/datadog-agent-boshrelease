@@ -68,6 +68,9 @@ properties:
   dd.friendly_hostname:
     default: true
     description: "Use a friendly hostname. If this is enabled, along with the UUID option, uuid will take precedence."
+  dd.unique_friendly_hostname:
+    default: false
+    description: "Append the CloudFoundry deployment to the friendly hostname, to make it unique."
   dd.cf_os_hostname_aliasing:
     default: false
     description: "If enabled, send the OS hostname as an alias. Useful in coordination with the Friendly Hostname option."
