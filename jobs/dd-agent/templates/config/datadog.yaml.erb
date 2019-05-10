@@ -63,6 +63,7 @@ skip_ssl_validation: <%= p("dd.skip_ssl_validation", "no") %>
     hostname = "#{spec.name.tr('_', '-')}-#{spec.index}"
     if p("dd.unique_friendly_hostname", false)
       hostname = "#{hostname}-#{spec.deployment}"
+    end
   end
 %>
 
