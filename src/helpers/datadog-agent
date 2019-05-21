@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "agent"
+/var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent "$@"
