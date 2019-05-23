@@ -188,6 +188,9 @@ properties:
   dd.generate_network_config_excluded_interfaces:
     default: ["lo", "lo0"]
     description: List of the network interfaces to exclude from reporting metrics
+  dd.disk_yaml_config:
+    default: ""
+    description: Disk integration YAML configuration
   dd.generate_disk_config:
     default: yes
     description: Generate disk configuration, disk.yaml

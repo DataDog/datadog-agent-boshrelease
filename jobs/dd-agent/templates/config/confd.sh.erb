@@ -178,6 +178,11 @@ instances:
       - tracefs
 
 EOF
+<% elsif p('dd.disk_yaml_config') != "" %>
+mkdir -p ${CONFD_DIR}/disk.d
+cat <<EOF > "${CONFD_DIR}/disk.d/disk.yaml"
+<%= p('dd.disk_yaml_config') %>
+EOF
 <% end %>
 
 
