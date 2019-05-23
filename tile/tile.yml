@@ -254,6 +254,22 @@ forms:
     default: false
     description: This setting will strip the process arguments from the processes sent by the process agent.
 
+- name: disk-check-config
+  label: Disk integration configuration
+  description: Use this to fully configure and customize the disk integration.
+  markdown: |
+    Write here the entire YAML configuration of your configuration.
+    See [the example configuration](https://github.com/DataDog/integrations-core/blob/master/disk/datadog_checks/disk/data/conf.yaml.default)
+    for more details about the available options.
+
+    Setting this will override the disk check configuration settings in the main `Datadog Agent Config` tab.
+  properties:
+  - name: disk_yaml_config
+    label: Disk integration YAML configuration
+    type: text
+    optional: true
+    description: Paste here the YAML configuration of the disk integration.
+
 - name: cf-config
   label: Cloud Foundry Settings
   description: Cloud Foundry connection details
@@ -396,6 +412,7 @@ runtime_configs:
             generate_disk_config: (( .properties.generate_disk_config.value ))
             generate_disk_config_tag_by_filesystem: (( .properties.generate_disk_config_tag_by_filesystem.value ))
             generate_disk_config_all_partitions: (( .properties.generate_disk_config_all_partitions.value ))
+            disk_yaml_config: (( .properties.disk_yaml_config.value ))
             enable_gohai: (( .properties.enable_gohai.value ))
             check_runners: (( .properties.check_runners.value ))
             forwarder_num_workers: (( .properties.forwarder_num_workers.value ))
