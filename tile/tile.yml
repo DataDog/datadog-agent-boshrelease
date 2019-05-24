@@ -163,6 +163,16 @@ forms:
     label: Use Friendly Hostname
     default: true
     description: By default we use a friendly hostname, this might cause problems with some setups. If you set the UUID hostname to true, it will supercede this one. If you set both to false, the agent will detect the underlying hostname and use that instead.
+  - name: unique_friendly_hostname
+    type: boolean
+    label: Make Friendly Hostname unique
+    default: false
+    description: Append the CloudFoundry deployment to the friendly hostname, to make it unique.
+  - name: cf_os_hostname_aliasing
+    type: boolean
+    label: Send OS Hostname alias
+    default: false
+    description: If enabled, send the OS hostname as an alias. Useful in coordination with the Friendly Hostname option.
   - name: process_agent_enabled
     label: Enable Process Agent
     type: boolean
@@ -395,6 +405,8 @@ runtime_configs:
             additional_api_key_5: (( .properties.additional_api_key_5.value ))
             additional_api_url_5: (( .properties.additional_api_url_5.value ))
             friendly_hostname: (( .properties.use_friendly_hostname.value ))
+            unique_friendly_hostname: (( .properties.unique_friendly_hostname.value ))
+            cf_os_hostname_aliasing: (( .properties.cf_os_hostname_aliasing.value ))
             tags: (( .properties.tags.value ))
             proxy:
               http: (( .properties.http_proxy_url.value ))
