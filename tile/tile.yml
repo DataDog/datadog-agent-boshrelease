@@ -272,7 +272,7 @@ forms:
     label: Secret backend arguments
     optional: true
     type: string_list
-    description: List of arguments to give to the command.
+    description: Comma separated list of arguments to give to the command.
   - name: secret_backend_output_max_size
     label: Secret backend output max size
     optional: true
