@@ -243,3 +243,15 @@ properties:
     description: "The site of the Datadog intake to send Agent data to. Defaults to 'datadoghq.com', set to 'datadoghq.eu' to send data to the EU site."
   dd.strip_proc_arguments:
     description: "This setting will strip the process arguments from the processes sent by the process agent."
+  dd.secret_backend_command:
+    default: ""
+    description: "Path to the executable to use to fetch secrets."
+  dd.secret_backend_arguments:
+    default: []
+    description: "List of arguments to give to the command."
+  dd.secret_backend_output_max_size:
+    default: 1024
+    description: "The size in bytes of the buffer used to store the command answer."
+  dd.secret_backend_timeout:
+    default: 5
+    description: "The timeout to execute the command in second."
