@@ -263,6 +263,26 @@ forms:
     type: boolean
     default: false
     description: This setting will strip the process arguments from the processes sent by the process agent.
+  - name: secret_backend_command
+    label: Secret backend command
+    optional: true
+    type: string
+    description: Path to the executable to use to fetch secrets.
+  - name: secret_backend_arguments
+    label: Secret backend arguments
+    optional: true
+    type: string_list
+    description: List of arguments to give to the command.
+  - name: secret_backend_output_max_size
+    label: Secret backend output max size
+    optional: true
+    type: integer
+    description: The size in bytes of the buffer used to store the command answer.
+  - name: secret_backend_timeout
+    label: Secret backend timeout
+    optional: true
+    type: integer
+    description: The timeout to execute the command in second.
 
 - name: disk-check-config
   label: Disk integration configuration
@@ -433,3 +453,7 @@ runtime_configs:
             trace_agent_enabled: (( .properties.trace_agent.value ))
             enable_logs_agent: (( .properties.logs_enabled.value ))
             strip_proc_arguments: (( .properties.strip_proc_arguments.value ))
+            secret_backend_command: (( .properties.secret_backend_command.value ))
+            secret_backend_arguments: (( .properties.secret_backend_command.parsed_strings ))
+            secret_backend_output_max_size: (( .properties.secret_backend_output_max_size.value ))
+            secret_backend_timeout: (( .properties.secret_backend_timeout.value ))
