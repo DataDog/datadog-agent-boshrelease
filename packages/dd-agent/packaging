@@ -101,3 +101,13 @@ pushd ${BOSH_INSTALL_TARGET}/embedded/lib/pkgconfig/
     fi
   done
 popd
+
+
+echo "Fixing python prefixes ..."
+sitecustomize_script="import site
+site.addsitedir('${BOSH_INSTALL_TARGET}/embedded/lib/python2.7/site-packages')
+site.PREFIXES.append('${BOSH_INSTALL_TARGET}/embedded/')
+"
+pushd ${BOSH_INSTALL_TARGET}/embedded/lib/python2.7/
+  echo $sitecustomize_script > sitecustomize.py
+popd
