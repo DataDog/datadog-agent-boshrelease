@@ -454,6 +454,6 @@ runtime_configs:
             enable_logs_agent: (( .properties.logs_enabled.value ))
             strip_proc_arguments: (( .properties.strip_proc_arguments.value ))
             secret_backend_command: (( .properties.secret_backend_command.value ))
-            secret_backend_arguments: (( .properties.secret_backend_command.parsed_strings ))
+            secret_backend_arguments: (( .properties.secret_backend_arguments.parsed_strings ))
             secret_backend_output_max_size: (( .properties.secret_backend_output_max_size.value ))
             secret_backend_timeout: (( .properties.secret_backend_timeout.value ))
