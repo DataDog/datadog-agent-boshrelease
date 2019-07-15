@@ -1,17 +1,16 @@
 # datadog-firehose-nozzle-release
 
-This is a BOSH release for the datadog-firehose-nozzle, which transports logs
+This is a BOSH release for the datadog-firehose-nozzle, which transports metrics
 from [Loggregator](https://github.com/cloudfoundry/loggregator) to [Datadog](https://www.datadoghq.com/).
 
 ## Building the Nozzle
 
-First, you will need to grab all the submodules.
-
-`git submodule update --init --recursive`.
-
-Second, you will need to grab the firehose-nozzle golang dependencies. The Datadog Firehose Nozzle uses glide to manage its dependencies. If you want to build your own bosh release, you will need to run `./prepare`. That will install glide, if needed, and then install all the dependencies under vendor/ in the datadog firehose nozzle submodule under src.
-
-Then, all you will need to do is run bosh prepare, and everything will be bundled up for you!
+From the root of the repository, run:
+```bash
+VERSION=<YOUR_VERSION> scripts/create-release.sh
+```
+This will create a BOSH release of the nozzle, with the version you specified. The `datadog-firehose-nozzle-release.tgz` archive of the release is created at the root of the repository.
+You can upload this release on your CF environment to make it available and deploy it.
 
 ## Deploying the Nozzle
 
