@@ -1,6 +1,6 @@
 ---
 final_name: datadog-firehose-nozzle
 blobstore:
-  provider: local
+  provider: s3
   options:
-    blobstore_path: blobstore
+    bucket_name: public-datadog-firehose-nozzle-blobs

@@ -67,14 +67,11 @@ fi
 # finally, release the nozzle
 $WORKING_DIR/scripts/create-release.sh
 
-if [ ! "$DRY_RUN" = "true" ]; then
+if [ "$DRY_RUN" = "false" ]; then
   # make sure we upload the blobs
   bosh upload-blobs
   s3cmd setacl "s3://${BLOBS_BUCKET}" --acl-public --recursive
-  cp $WORKING_DIR/config/final.yml.s3.local $WORKING_DIR/config/final.yml
-fi
 
-if [ ! "$DRY_RUN" = "true" ]; then
   # git commit it and then push it to the repo
   git add $WORKING_DIR
   git commit -m "release datadog firehose nozzle $VERSION"
