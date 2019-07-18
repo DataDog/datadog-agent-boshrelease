@@ -73,7 +73,8 @@ broken_links="/embedded/bin/bzfgrep
 /embedded/bin/bzcmp
 /embedded/bin/bzless
 /embedded/bin/bzegrep
-/embedded/ssl/cert.pem"
+/embedded/ssl/cert.pem
+/embedded/bin/pip"
 
 for link in $broken_links; do
   rm -f ${BOSH_INSTALL_TARGET}/${link}
@@ -84,6 +85,7 @@ pushd ${BOSH_INSTALL_TARGET}/embedded/bin
   ln -s bzdiff bzcmp
   ln -s bzmore bzless
   ln -s bzgrep bzegrep
+  ln -s pip2 pip
 popd
 
 pushd ${BOSH_INSTALL_TARGET}/embedded/ssl
