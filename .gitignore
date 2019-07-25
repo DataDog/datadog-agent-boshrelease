@@ -32,3 +32,8 @@ tmp
 tile/product/
 tile/release/
 *.tgz
+
+# Ignore go installations
+go/*
+bin/*
+*.tar.gz
