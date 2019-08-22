@@ -14,22 +14,19 @@ export PATH="$PACKAGES/$NAME/checks.d:$PACKAGES/$NAME/bin:$PACKAGES/$NAME/embedd
 
 # Setup the LD_LIBRARY_PATH
 LD_LIBRARY_PATH=${LD_LIBRARY_PATH:-''}
-LD_LIBRARY_PATH="$PACKAGES/$JOB_NAME/embedded/lib:${LD_LIBRARY_PATH}"
-LD_LIBRARY_PATH="$PACKAGES/$JOB_NAME/embedded/lib:$LD_LIBRARY_PATH"
-LD_LIBRARY_PATH="$PACKAGES/$JOB_NAME/embedded/lib/python3.7/lib-dynload:$LD_LIBRARY_PATH"
-LD_LIBRARY_PATH="$PACKAGES/$JOB_NAME/embedded/lib/python3.7/site-packages:$LD_LIBRARY_PATH"
+LD_LIBRARY_PATH="$PACKAGES/$NAME/embedded/lib:$LD_LIBRARY_PATH"
+LD_LIBRARY_PATH="$PACKAGES/$NAME/embedded/lib/python3.7/lib-dynload:$LD_LIBRARY_PATH"
+LD_LIBRARY_PATH="$PACKAGES/$NAME/embedded/lib/python3.7/site-packages:$LD_LIBRARY_PATH"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
 # Python modules
 PYTHONPATH=${PYTHONPATH:-''}
-PYTHONPATH="$PACKAGES/$JOB_NAME/embedded/lib/python3.7:$PYTHONPATH"
-PYTHONPATH="$PACKAGES/$JOB_NAME/embedded/lib/python3.7/site-packages:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/$NAME/embedded/lib/python3.7:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/$NAME/embedded/lib/python3.7/site-packages:$PYTHONPATH"
 PYTHONPATH="$PACKAGES/$NAME/checks.d:$PYTHONPATH"
-PYTHONPATH="$PACKAGES/$JOB_NAME/agent/checks/libs:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/$NAME/agent/checks/libs:$PYTHONPATH"
 PYTHONPATH="$PACKAGES/$NAME/agent:$PYTHONPATH"
-# PYTHONPATH="$PACKAGES/$JOB_NAME/embedded/lib/python2.7/plat-linux2:$PYTHONPATH"
-# PYTHONPATH="$PACKAGES/$JOB_NAME/embedded/lib/python2.7/lib-tk:$PYTHONPATH"
-PYTHONPATH="$PACKAGES/$JOB_NAME/embedded/lib/python3.7/lib-dynload:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/$NAME/embedded/lib/python3.7/lib-dynload:$PYTHONPATH"
 export PYTHONPATH="$PACKAGES/$NAME/bin/agent/dist:$PYTHONPATH"
 
 export PYTHONHOME="$PACKAGES/$NAME/embedded/"
@@ -44,7 +41,7 @@ export CONFD_DIR="$JOB_DIR/config/conf.d"
 
 export LANG=POSIX
 
-export DD_AGENT_PYTHON="$PACKAGES/$JOB_NAME/embedded/bin/python3"
+export DD_AGENT_PYTHON="$PACKAGES/$NAME/embedded/bin/python3"
 
 set +e
 set +u
