@@ -21,23 +21,17 @@ for package_bin_dir in $(ls -d ${package_dir}/*bin 2>/dev/null); do
   temp_path=${package_bin_dir}:${temp_path}
 done
 export PATH="$PACKAGES/$NAME/checks.d:$PACKAGES/$NAME/agent:$PACKAGES/$NAME/bin:$PACKAGES/$NAME/embedded/bin:$PATH"
-for package_lib_dir in $(ls -d $PACKAGES/dd-agent/embedded/lib 2>/dev/null); do
-    LD_LIBRARY_PATH="${package_lib_dir}:${LD_LIBRARY_PATH}"
-done
-for package_lib_dir in $(ls -d $PACKAGES/dd-agent/embedded/lib/python*/lib-dynload 2>/dev/null); do
-    LD_LIBRARY_PATH="${package_lib_dir}:${LD_LIBRARY_PATH}"
-done
-for package_lib_dir in $(ls -d $PACKAGES/dd-agent/embedded/lib/python*/site-packages 2>/dev/null); do
-    LD_LIBRARY_PATH="${package_lib_dir}:${LD_LIBRARY_PATH}"
-done
+
+LD_LIBRARY_PATH="$PACKAGES/dd-agent/embedded/lib:${LD_LIBRARY_PATH}"
+LD_LIBRARY_PATH="$PACKAGES/dd-agent/embedded/lib/python2.7/lib-dynload:${LD_LIBRARY_PATH}"
+LD_LIBRARY_PATH="$PACKAGES/dd-agent/embedded/lib/python2.7/site-packages:${LD_LIBRARY_PATH}"
+
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
 # Python modules
 PYTHONPATH=${PYTHONPATH:-''}
 PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7:${PYTHONPATH}"
-for python_mod_dir in $(ls -d $PACKAGES/dd-agent/embedded/lib/python*/site-packages 2>/dev/null); do
-    PYTHONPATH="${python_mod_dir}:${PYTHONPATH}"
-done
+PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7/site-packages:${PYTHONPATH}"
 PYTHONPATH="$PACKAGES/$NAME/checks.d:$PYTHONPATH"
 PYTHONPATH="$PACKAGES/dd-agent/agent/checks/libs:$PYTHONPATH"
 PYTHONPATH="$PACKAGES/$NAME/agent:$PYTHONPATH"
