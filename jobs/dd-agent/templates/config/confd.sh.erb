@@ -139,7 +139,7 @@ instances:
   - host: <%= p("dd.generate_ntp_config_host", "0.ubuntu.pool.ntp.org") %>
     offset_threshold: <%= p("dd.generate_ntp_config_offset_threshold", "60") %>
     min_collection_interval: <%= p("dd.generate_ntp_config_min_collection_interval", "60") %>
-    port: ntp
+    port: 123
     version: 3
     timeout: 30
 
