@@ -1,6 +1,6 @@
-# Datadog Agent release for BOSH
+# Datadog Agent releases for BOSH
 
-* For Debian and RHEL/CentOS based stemcells
+* For Debian, RHEL/CentOS and Windows based stemcells
 * Automatically defines tags based on deployments, names and jobs
 * Process, network, ntp and disk integrations by default
 * Monit processes are added automatically to process integration
@@ -9,7 +9,7 @@
 
 # What this does
 
-This includes the Debian and RHEL/CentOS releases in the package and unpacks them in the dd-agent directory.
+This includes jobs for the Debian and RHEL/CentOS releases in the package and unpacks them in the dd-agent/dd-agent-windows directory.
 
 While a source install would be preferable, we're balancing a number of concerns.
 
@@ -34,6 +34,7 @@ The first three are directly from the agent itself, they reflect the current age
 # Configuration
 
 Upload the release to Bosh director
+There are two distinct releases, one for the Linux stemcells, and the other for windows; dd-agent and dd-agent-windows respectively. These jobs accept the same properties, they only differ in release name.
 
 Create a `runtime-config.yaml` file:
 ```
@@ -45,7 +46,7 @@ addons:
 - name: dd-agent
   jobs:
   - name: dd-agent
-    release: datadog-agent
+    release: <datadog-agent/datadog-agent-windows>
   properties:
     dd:
       use_dogstatsd: yes
@@ -83,7 +84,7 @@ Based on the [https://github.com/SpringerPE/datadog-agent-boshrelease](https://g
 
 # Contribute
 
-If you notice a limitation or a bug with this project, feel free to open a Github issue or submit a PR. 
+If you notice a limitation or a bug with this project, feel free to open a Github issue or submit a PR.
 
 # Support
 

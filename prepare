@@ -52,9 +52,9 @@ get_agent_version() {
 }
 
 check_versions() {
-  local agent_script=$(pwd)/packages/dd-agent/packaging
+  local agent_script=$(pwd)/packages/${job}/packaging
   local agent_version=$(get_agent_version $agent_script)
-  for script in $(pwd)/packages/*/spec ; do
+  for script in "${scripts[@]}"; do
     local base=$(dirname "${script}")
       local priorversion=""
       for spec in $(read_spec "${script}"); do
@@ -91,32 +91,44 @@ check_versions() {
 remove_stale() {
   local stale_files=""
   local spec_files=""
-  for spec in $(read_spec "${script}"); do
-    local downloadfile=$(echo $spec | cut -d'@' -f 1)
-    local filename=$(echo $downloadfile | cut -d'/' -f 2)
-    spec_files="$filename $spec_files"
+  for script in "${scripts[@]}"; do
+    echo "SCRIPT IS: ${script}"
+    for spec in $(read_spec "${script}"); do
+      local downloadfile=$(echo $spec | cut -d'@' -f 1)
+      local filename=$(echo $downloadfile | cut -d'/' -f 2)
+      spec_files="$filename $spec_files"
+    done
   done
-  for saved_file in $(ls blobs/dd-agent); do
+  for saved_file in $(ls blobs/${job}); do
+    echo $saved_file $spec_files
     res=$(echo "$spec_files" | grep -o -h "$saved_file")
     if [[ ! "$res" ]]; then
-      bosh remove-blob "dd-agent/$saved_file"
+      bosh remove-blob "${job}/$saved_file"
     fi
   done
 }
 
 main() {
-  for script in $(pwd)/packages/*/spec ; do
+  scripts=()
+  if [ -z "$@" ]; then
+    job="dd-agent"
+  else
+    job="$@"
+  fi
+  echo "Preparing the $job build"
+  for script in $(pwd)/packages/$job/spec ; do
+    scripts+=(${script})
     local base=$(dirname "${script}")
-      echo "* Procesing ${script} ..."
-      local priorversion=""
-      for spec in $(read_spec "${script}"); do
-        local downloadfile=$(echo $spec | cut -d'@' -f 1)
-        local file_version=$(echo $downloadfile | grep -o -h -e "[0-9]\.[0-9]\.[0-9][~]*[r]*[c]*\.*[0-9]*")
-        local downloadurl=$(echo $spec | cut -d'@' -f 2)
+    echo "* Procesing ${script} ..."
+    local priorversion=""
+    for spec in $(read_spec "${script}"); do
+      local downloadfile=$(echo $spec | cut -d'@' -f 1)
+      local file_version=$(echo $downloadfile | grep -o -h -e "[0-9]\.[0-9]\.[0-9][~]*[r]*[c]*\.*[0-9]*")
+      local downloadurl=$(echo $spec | cut -d'@' -f 2)
 
-        exec_download "${downloadfile}" "${downloadurl}"
-        add_blob "${downloadfile}"
-      done
+      exec_download "${downloadfile}" "${downloadurl}"
+      add_blob "${downloadfile}"
+    done
   done
 
   check_versions
@@ -125,4 +137,4 @@ main() {
 
 # Run!
 mkdir -p $SRC
-main
+main $@

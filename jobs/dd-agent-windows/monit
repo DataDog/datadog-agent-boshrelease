@@ -1,0 +1,13 @@
+{
+  "processes": [
+    {
+      "name": "dd-agent-windows",
+      "executable": "powershell.exe",
+      "args": [ "/var/vcap/jobs/dd-agent-windows/bin/agent_ctl.ps1" ],
+      "stop": {
+        "executable": "powershell.exe",
+        "args": [ "/var/vcap/jobs/dd-agent/bin/agent_stop.ps1" ]
+      }
+    }
+  ]
+}
