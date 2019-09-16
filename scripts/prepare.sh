@@ -5,7 +5,7 @@ type glide >/dev/null 2>&1 || (echo "installing Glide" && curl https://glide.sh/
 
 export GOPATH="$(pwd)/src/datadog-firehose-nozzle/:$GOPATH"
 
-DEFAULT_NOZZLE_VERSION=1.1.0
+DEFAULT_NOZZLE_VERSION=1.2.0
 
 NOZZLE_VERSION=${NOZZLE_VERSION:-$DEFAULT_NOZZLE_VERSION}
 
