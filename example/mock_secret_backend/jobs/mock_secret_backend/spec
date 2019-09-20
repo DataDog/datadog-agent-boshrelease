@@ -1,0 +1,8 @@
+---
+name: mock_secret_backend
+
+packages:
+  - mock_secret_backend
+
+templates:
+  bin/pre-start: bin/pre-start

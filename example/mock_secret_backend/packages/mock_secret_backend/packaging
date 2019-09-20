@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -ex
+
+mkdir -p $BOSH_INSTALL_TARGET
+cp mock_secret_backend.py $BOSH_INSTALL_TARGET
