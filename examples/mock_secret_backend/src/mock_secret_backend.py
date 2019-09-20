@@ -3,6 +3,8 @@
 import sys
 import json
 
+# Example taken from https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md#the-executable-api
+# and translated to python
 def main():
     data = json.loads(sys.stdin.read())
 
