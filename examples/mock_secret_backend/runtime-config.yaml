@@ -1,0 +1,14 @@
+releases:
+- name: mock_secret_backend
+  version: 1.0.0
+
+addons:
+- name: secret_backend
+  include:
+    stemcell:
+    - os: ubuntu-xenial
+    - os: ubuntu-trusty
+    - os: centos-7
+  jobs:
+  - name: mock_secret_backend
+    release: mock_secret_backend
