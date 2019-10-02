@@ -1,12 +1,12 @@
 {
   "processes": [
     {
-      "name": "dd-agent-windows",
-      "executable": "powershell.exe",
-      "args": [ "/var/vcap/jobs/dd-agent-windows/bin/agent_ctl.ps1" ],
+      "name": "dd-windows-agent",
+      "executable": "C:/var/vcap/packages/dd-agent-windows/Datadog/bin/agent.exe",
+      "args": [ "start-service" ],
       "stop": {
-        "executable": "powershell.exe",
-        "args": [ "/var/vcap/jobs/dd-agent/bin/agent_stop.ps1" ]
+        "executable": "C:/var/vcap/packages/dd-agent-windows/Datadog/bin/agent.exe",
+        "args": [ "stopservice" ]
       }
     }
   ]
