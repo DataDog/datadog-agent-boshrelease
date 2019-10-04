@@ -3,6 +3,7 @@ name: dd-agent-windows
 description: Datadog Agent for Windows
 templates:
   bin/pre-start.ps1: bin/pre-start.ps1
+  bin/drain.ps1: bin/drain.ps1
   config/datadog.yaml.erb: config/datadog.yaml
 packages:
   - dd-agent-windows

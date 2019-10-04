@@ -164,7 +164,7 @@ collect_security_groups: <%= p("dd.collect_security_groups", "no") %>
 
 # The path containing check configuration files
 # By default, uses the conf.d folder located in the agent configuration folder.
-confd_path: \var\vcap\packages\dd-agent-windows\AppData\Datadog\conf.d
+confd_path: \var\vcap\packages\dd-agent-windows\CommonAppData\conf.d
 
 # Additional path where to search for Python checks
 # By default, uses the checks.d folder located in the agent configuration folder.
@@ -484,7 +484,7 @@ process_config:
 #   Only change if the defaults are causing issues.
 #   max_per_message:
 #   Overrides the path to the Agent bin used for getting the hostname. The default is usually fine.
-  dd_agent_bin: "\var\vcap\jobs\dd-agent-windows\packages\dd-agent-windows\Datadog Agent\bin\agent.exe"
+  dd_agent_bin: \var\vcap\jobs\dd-agent-windows\packages\dd-agent-windows\Datadog\bin\agent.exe
 #   Overrides of the environment we pass to fetch the hostname. The default is usually fine.
 #   dd_agent_env:
 

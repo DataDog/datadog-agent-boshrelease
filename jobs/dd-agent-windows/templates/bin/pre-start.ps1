@@ -12,3 +12,5 @@ Start-Process -NoNewWindow -Wait sc.exe -ArgumentList "create datadogagent binPa
 # Need to manually create the Process/Trace agent services
 Start-Process -NoNewWindow -Wait sc.exe -ArgumentList "create datadog-trace-agent binPath= \var\vcap\packages\dd-agent-windows\Datadog\bin\agent\trace-agent.exe depend= `"datadogagent`""
 Start-Process -NoNewWindow -Wait sc.exe -ArgumentList "create datadog-process-agent binPath= \var\vcap\packages\dd-agent-windows\Datadog\bin\agent\process-agent.exe depend= `"datadogagent`""
+
+Start-Process -NoNewWindow -Wait "\var\vcap\packages\dd-agent-windows\Datadog\bin\agent.exe" -ArgumentList "start-service"
