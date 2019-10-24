@@ -7,10 +7,10 @@ Set-ItemProperty -Path "hklm:Software/DataDog/datadog agent/" -Name "InstallPath
 Set-ItemProperty -Path "hklm:Software/DataDog/datadog agent/" -Name "ConfigRoot" -Value "\var\vcap\packages\dd-agent-windows\CommonAppData\"
 
 # Install the Agent service
-Start-Process -NoNewWindow -Wait sc.exe -ArgumentList "create datadogagent binPath= \var\vcap\packages\dd-agent-windows\Datadog\bin\agent.exe"
+Start-Process -NoNewWindow -Wait sc.exe -ArgumentList "create datadogagent obj= `"NT AUTHORITY\Local Service`" password= `"`" binPath= \var\vcap\packages\dd-agent-windows\Datadog\bin\agent.exe"
 
 # Need to manually create the Process/Trace agent services
-Start-Process -NoNewWindow -Wait sc.exe -ArgumentList "create datadog-trace-agent binPath= \var\vcap\packages\dd-agent-windows\Datadog\bin\agent\trace-agent.exe depend= `"datadogagent`""
-Start-Process -NoNewWindow -Wait sc.exe -ArgumentList "create datadog-process-agent binPath= \var\vcap\packages\dd-agent-windows\Datadog\bin\agent\process-agent.exe depend= `"datadogagent`""
+Start-Process -NoNewWindow -Wait sc.exe -ArgumentList "create datadog-trace-agent obj= `"NT AUTHORITY\Local Service`" password= `"`" binPath= \var\vcap\packages\dd-agent-windows\Datadog\bin\agent\trace-agent.exe depend= `"datadogagent`""
+Start-Process -NoNewWindow -Wait sc.exe -ArgumentList "create datadog-process-agent obj= `"NT AUTHORITY\Local Service`" password= `"`" binPath= \var\vcap\packages\dd-agent-windows\Datadog\bin\agent\process-agent.exe depend= `"datadogagent`""
 
 Start-Process -NoNewWindow -Wait "\var\vcap\packages\dd-agent-windows\Datadog\bin\agent.exe" -ArgumentList "start-service"
