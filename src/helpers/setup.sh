@@ -9,38 +9,24 @@ export PACKAGES="$JOB_DIR/packages"
 
 export COMPONENT=${2:-$NAME}
 
-# Setup the PATH and LD_LIBRARY_PATH
+# Setup the PATH
+export PATH="$PACKAGES/$NAME/checks.d:$PACKAGES/$NAME/bin:$PACKAGES/$NAME/embedded/bin:$PATH"
+
+# Setup the LD_LIBRARY_PATH
 LD_LIBRARY_PATH=${LD_LIBRARY_PATH:-''}
-LD_LIBRARY_PATH="$PACKAGES/dd-agent/embedded/lib:${LD_LIBRARY_PATH}"
-package_dir="/var/vcap/packages/dd-agent"
-temp_path=${PATH}
-# Add all packages' /bin & /sbin into $PATH
-for package_bin_dir in $(ls -d ${package_dir}/*bin 2>/dev/null); do
-  # Do not add any packages that use busybox, as impacts builtin commands and
-  # is often used for different architecture (via containers)
-  temp_path=${package_bin_dir}:${temp_path}
-done
-export PATH="$PACKAGES/$NAME/checks.d:$PACKAGES/$NAME/agent:$PACKAGES/$NAME/bin:$PACKAGES/$NAME/embedded/bin:$PATH"
-
-LD_LIBRARY_PATH="$PACKAGES/dd-agent/embedded/lib:${LD_LIBRARY_PATH}"
-LD_LIBRARY_PATH="$PACKAGES/dd-agent/embedded/lib/python2.7/lib-dynload:${LD_LIBRARY_PATH}"
-LD_LIBRARY_PATH="$PACKAGES/dd-agent/embedded/lib/python2.7/site-packages:${LD_LIBRARY_PATH}"
-
+LD_LIBRARY_PATH="$PACKAGES/$NAME/embedded/lib:$LD_LIBRARY_PATH"
+LD_LIBRARY_PATH="$PACKAGES/$NAME/embedded/lib/python3.7/lib-dynload:$LD_LIBRARY_PATH"
+LD_LIBRARY_PATH="$PACKAGES/$NAME/embedded/lib/python3.7/site-packages:$LD_LIBRARY_PATH"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 
 # Python modules
 PYTHONPATH=${PYTHONPATH:-''}
-PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7:${PYTHONPATH}"
-PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7/site-packages:${PYTHONPATH}"
+PYTHONPATH="$PACKAGES/$NAME/embedded/lib/python3.7:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/$NAME/embedded/lib/python3.7/site-packages:$PYTHONPATH"
 PYTHONPATH="$PACKAGES/$NAME/checks.d:$PYTHONPATH"
-PYTHONPATH="$PACKAGES/dd-agent/agent/checks/libs:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/$NAME/agent/checks/libs:$PYTHONPATH"
 PYTHONPATH="$PACKAGES/$NAME/agent:$PYTHONPATH"
-PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python27.zip:$PYTHONPATH"
-PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7:$PYTHONPATH"
-PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7/plat-linux2:$PYTHONPATH"
-PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7/lib-tk:$PYTHONPATH"
-PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7/lib-old:$PYTHONPATH"
-PYTHONPATH="$PACKAGES/dd-agent/embedded/lib/python2.7/lib-dynload:$PYTHONPATH"
+PYTHONPATH="$PACKAGES/$NAME/embedded/lib/python3.7/lib-dynload:$PYTHONPATH"
 export PYTHONPATH="$PACKAGES/$NAME/bin/agent/dist:$PYTHONPATH"
 
 export PYTHONHOME="$PACKAGES/$NAME/embedded/"
@@ -48,14 +34,14 @@ export PYTHONHOME="$PACKAGES/$NAME/embedded/"
 # export directories
 export LOG_DIR="/var/vcap/sys/log/$NAME"
 export RUN_DIR="/var/vcap/sys/run/$NAME"
-export PIDFILE="${RUN_DIR}/${COMPONENT}.pid"
+export PIDFILE="$RUN_DIR/$COMPONENT.pid"
 export TMP_DIR="/var/vcap/sys/tmp/$NAME"
-export TMPDIR="$TMP_DIR"
-export CONFD_DIR="${JOB_DIR}/config/conf.d"
+export TMPDIR=$TMP_DIR
+export CONFD_DIR="$JOB_DIR/config/conf.d"
 
 export LANG=POSIX
 
-export DD_AGENT_PYTHON="$JOB_DIR/packages/dd-agent/embedded/bin/python"
+export DD_AGENT_PYTHON="$PACKAGES/$NAME/embedded/bin/python3"
 
 set +e
 set +u

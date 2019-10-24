@@ -98,18 +98,10 @@ popd
 echo "Fixing pkg config settings ..."
 pushd ${BOSH_INSTALL_TARGET}/embedded/lib/pkgconfig/
   OLD_PREFIX="prefix=/opt/datadog-agent/embedded"
-  NEW_PREFIX="prefix=/var/vcap/jobs/$JOB_NAME/packages/dd-agent/embedded"
+  NEW_PREFIX="prefix=/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/embedded"
   for file in $(ls); do
     if [ -f "${file}" -a ! -L "${file}" ]; then
       sed -i "s~${OLD_PREFIX}~${NEW_PREFIX}~" ${file}
     fi
   done
-popd
-
-
-echo "Fixing python prefixes ..."
-pushd ${BOSH_INSTALL_TARGET}/embedded/lib/python2.7/
-  echo "import site" >> sitecustomize.py
-  echo "site.addsitedir('${BOSH_INSTALL_TARGET}/embedded/lib/python2.7/site-packages')" >> sitecustomize.py
-  echo "site.PREFIXES.append('${BOSH_INSTALL_TARGET}/embedded/')" >> sitecustomize.py
 popd
