@@ -96,6 +96,9 @@ properties:
   cc.endpoint:
     description: "Cloud Controller Endpoint for getting appmetrics"
     default: ""
+  cc.api_batch_size:
+    description: "Size of batches in which to query V3 API to populate app cache (integer between 100 and 5000)"
+    default: 500
   nozzle.app_metrics:
     description: "Turn on grabbing of app metrics (may substantially increase load)"
     default: true
@@ -105,6 +108,9 @@ properties:
   nozzle.grab_interval:
     description: "The Interval (in minutes) to update the app metadata"
     default: 10
+  nozzle.org_data_collection_interval:
+    description: "The interval (in seconds) in which to submit org metrics"
+    default: 600
   nozzle.http_proxy_url:
     description: "Use an http proxy"
     default: ""

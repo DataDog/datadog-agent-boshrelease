@@ -64,9 +64,11 @@ JSON.pretty_generate(
     "DisableAccessControl" => p("nozzle.disable_access_control"),
     "DeploymentFilter" => p("nozzle.deployment_filter"),
     "CloudControllerEndpoint" => p("cc.endpoint", ""),
+    "CloudControllerAPIBatchSize" => p("cc.api_batch_size", 500),
     "AppMetrics" => p("nozzle.app_metrics", true),
     "NumWorkers" => p("nozzle.num_workers", 4),
     "GrabInterval" => p("nozzle.grab_interval", 10),
+    "OrgDataCollectionInterval" => p("nozzle.nozzle.org_data_collection_interval", 600),
     "CustomTags" => tags,
     "DBPath": "/var/vcap/sys/tmp/datadog-firehose-nozzle/firehose_nozzle.db",
     "EnvironmentName" => p("nozzle.environment", "")
