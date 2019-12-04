@@ -34,9 +34,9 @@
     end
   end
 
-  traffic_controller_url = ""
-  if p("loggregator", nil) && p("loggregator.traffic_controller_url", nil)
-    traffic_controller_url = p("loggregator.traffic_controller_url", "")
+  rlp_gateway_url = ""
+  if p("loggregator", nil) && p("loggregator.rlp_gateway_url", nil)
+    rlp_gateway_url = p("loggregator.rlp_gateway_url", "")
   end
 %>
 
@@ -46,7 +46,7 @@ JSON.pretty_generate(
     "UAAURL" => p("uaa.url"),
     "Client" => p("uaa.client"),
     "ClientSecret" => p("uaa.client_secret"),
-    "TrafficControllerURL" => traffic_controller_url,
+    "RLPGatewayURL" => rlp_gateway_url,
     "FirehoseSubscriptionID" => p("nozzle.subscription_id"),
     "DataDogURL" => p("datadog.api_url"),
     "DataDogAPIKey" => p("datadog.api_key", ""),

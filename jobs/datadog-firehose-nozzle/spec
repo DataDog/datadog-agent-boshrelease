@@ -12,8 +12,8 @@ packages:
 - datadog-firehose-nozzle
 
 properties:
-  loggregator.traffic_controller_url:
-    description: "Traffic controller URL (not necessary if you have cc.endpoint)"
+  loggregator.rlp_gateway_url:
+    description: "RLP Gateway URL (loggregator V2 API - not necessary if you have cc.endpoint)"
     default: ""
   datadog.api_url:
     description: "The REST API Endpoint for datadog"

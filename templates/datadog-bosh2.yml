@@ -33,7 +33,7 @@ instance_groups:
     release: datadog-firehose-nozzle
     properties:
       loggregator:
-        traffic_controller_url: "((tc_url))"
+        rlp_gateway_url: "((rlp_url))"
       datadog:
         api_url: "((datadog_api))"
         api_key: "((datadog_key))"

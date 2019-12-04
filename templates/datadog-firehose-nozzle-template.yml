@@ -40,7 +40,7 @@ jobs:
 
 properties:
   loggregator:
-    traffic_controller_url: (( merge ))
+    rlp_gateway_url: (( merge ))
   datadog:
     api_url: (( merge ))
     api_key: (( merge ))

@@ -24,7 +24,7 @@ properties:
     flush_duration_seconds: 15
     metric_prefix: cf.nozzle.
   loggregator:
-    traffic_controller_url: wss://doppler.sys.mycloudfoundry.com:443
+    rlp_gateway_url: https://log-stream.sys.mycloudfoundry.com
   nozzle:
     deployment: datadog-firehose-nozzle
     disable_access_control: null

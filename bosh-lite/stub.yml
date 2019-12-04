@@ -44,7 +44,7 @@ resource_pools:
 
 properties:
   loggregator:
-    traffic_controller_url: wss://doppler.bosh-lite.com:4443
+    rlp_gateway_url: https://log-stream.sys.bosh-lite.com
   datadog:
     api_url: https://app.datadoghq.com/api/v1/series
     api_key: API_KEY
