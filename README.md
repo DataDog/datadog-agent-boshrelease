@@ -86,7 +86,7 @@ Support for this project is available via standard [Datadog support channels][6]
 
 # License
 
-Apache 2.0 License
+[Apache 2.0 License](LICENSE)
 
 [1]: https://github.com/DataDog/datadog-agent
 [2]: https://github.com/cloudfoundry/bosh
