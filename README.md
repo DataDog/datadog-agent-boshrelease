@@ -1,7 +1,15 @@
-# datadog-firehose-nozzle-release
+# Datadog Firehose Nozzle Release
 
 This is a BOSH release for the datadog-firehose-nozzle, which transports metrics
 from [Loggregator](https://github.com/cloudfoundry/loggregator) to [Datadog](https://www.datadoghq.com/).
+
+## Development
+
+This repository contains only the packaging pieces for the [datadog-firehose-nozzle](https://github.com/DataDog/datadog-firehose-nozzle) to be deployed with [Cloud Foundry BOSH](https://github.com/cloudfoundry/bosh).
+
+See [here](https://bosh.io/docs/create-release/) for more information about the structure of a BOSH release.
+
+The source code is added in the release as a git submobule, and contributions to it must be made on the [datadog-firehose-nozzle repositories](https://github.com/DataDog/datadog-firehose-nozzle).
 
 ## Building the Nozzle
 
