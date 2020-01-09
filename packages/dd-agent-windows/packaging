@@ -1,15 +1,5 @@
 Write-Host "Extracting Datadog Agent Package"
-
-$DD_AGENT_VERSION="6.14.0"
+$DD_AGENT_VERSION="7.16.0"
 $BOSH_INSTALL_TARGET=Resolve-Path "${env:BOSH_INSTALL_TARGET}"
-$CURRENT_DIR=$(Get-Location)
-echo "Installing the Datadog Agent"
-
-# New-Item -Path "$BOSH_INSTALL_TARGET\datadog\scripts" -ItemType Directory
-New-Item -Path "$BOSH_INSTALL_TARGET\Datadog" -ItemType Directory
-New-Item -Path "$BOSH_INSTALL_TARGET\CommonAppData" -ItemType Directory
-
 # Extract agent
-Start-Process msiexec -NoNewWindow -Wait -ArgumentList " PROJECTLOCATION=$BOSH_INSTALL_TARGET\Datadog /i dd-agent-windows\datadog-agent-$DD_AGENT_VERSION.msi APPLICATIONDATADIRECTORY=$BOSH_INSTALL_TARGET\CommonAppData /L*V $CURRENT_DIR\log.txt"
-Stop-Process -Name "agent" -Force
-Remove-Item -Path "$BOSH_INSTALL_TARGET\CommonAppData\logs\agent.log"
+Expand-Archive -LiteralPath dd-agent-windows\datadog-agent-$DD_AGENT_VERSION-1-x86_64.zip -DestinationPath $BOSH_INSTALL_TARGET\Datadog

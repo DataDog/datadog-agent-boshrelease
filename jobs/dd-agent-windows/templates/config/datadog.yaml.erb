@@ -164,8 +164,6 @@ collect_security_groups: <%= p("dd.collect_security_groups", "no") %>
 
 # The path containing check configuration files
 # By default, uses the conf.d folder located in the agent configuration folder.
-confd_path: \var\vcap\packages\dd-agent-windows\CommonAppData\conf.d
-
 # Additional path where to search for Python checks
 # By default, uses the checks.d folder located in the agent configuration folder.
 # additional_checksd:
@@ -304,11 +302,6 @@ dogstatsd_non_local_traffic: <%= p("dd.non_local_traffic", "no") %>
 # Logging
 #
 log_level: <%= p("dd.log_level", "INFO") %>
-log_file: \var\vcap\sys\log\dd-agent-windows\agent.log
-
-# Set the auth token
-auth_token_file_path: \var\vcap\sys\run\dd-agent-windows\auth_token
-
 
 <%
   additional_endpoints = {}
@@ -461,7 +454,6 @@ process_config:
   enabled: "true"
 <% end %>
 #   The full path to the file where process-agent logs will be written.
-  log_file: \var\vcap\sys\log\dd-agent-windows\process_agent.log
 <% if p('dd.strip_proc_arguments', false) == true || p('dd.strip_proc_arguments', false) =~ (/(true|t|yes|y|1)$/i) %>
   strip_proc_arguments: true
 <% end %>
@@ -484,7 +476,6 @@ process_config:
 #   Only change if the defaults are causing issues.
 #   max_per_message:
 #   Overrides the path to the Agent bin used for getting the hostname. The default is usually fine.
-  dd_agent_bin: \var\vcap\jobs\dd-agent-windows\packages\dd-agent-windows\Datadog\bin\agent.exe
 #   Overrides of the environment we pass to fetch the hostname. The default is usually fine.
 #   dd_agent_env:
 
@@ -496,7 +487,6 @@ apm_config:
   enabled: true
 <% end %>
 #   The full path to the file where trace-agent logs will be written.
-  log_file: \var\vcap\sys\log\dd-agent-windows\trace_agent.log
 #   The environment tag that Traces should be tagged with
 #   Will inherit from "env" tag if none is applied here
 #   env: none
