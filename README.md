@@ -67,10 +67,12 @@ Re-deploy the deployments to automatically add the agent.
 
 Since there's almost no code here, just add your checks to checks.d and get going!
 
-There is a script `bosh_prepare,` which grabs all the relevant blobs gets everything ready to release.
+There is a script `prepare,` which grabs all the relevant blobs gets everything ready to release.
 ```
-./bosh_prepare
+./prepare <JOB_NAME>
 ```
+
+where <JOB_NAME> is either `dd-agent` or `dd-agent-windows` depending on your OS.
 
 It will get all sources specified in the packages/\*/spec files for local development.
 
