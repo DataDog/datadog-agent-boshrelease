@@ -45,11 +45,11 @@ addons:
   jobs:
   - name: dd-agent
     release: datadog-agent
-  properties:
-    dd:
-      use_dogstatsd: yes
-      api_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-      tags: ["datadog", "bosh", "bosh:bosh-exp"]
+    properties:
+      dd:
+        use_dogstatsd: yes
+        api_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        tags: ["datadog", "bosh", "bosh:bosh-exp"]
 
 tags:
   owner: datadog
