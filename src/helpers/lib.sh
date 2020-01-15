@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-#
+
+# Unless explicitly stated otherwise all files in this repository are licensed under the Apache 2.0 License.
+# This product includes software developed at Datadog (https://www.datadoghq.com/).
+# Copyright 2017-Present Datadog, Inc.
+
 # Helper functions used by ctl scripts
-#
 set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
 
@@ -180,4 +183,4 @@ function check_nfs_mount {
 }
 
 set +e
-set +u 
+set +u

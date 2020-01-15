@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Set proper permissions on the script, the agent is strict on that
+chmod 0500 $BOSH_INSTALL_TARGET/mock_secret_backend.py
+chown vcap:vcap /var/vcap/jobs/mock_secret_backend/packages/mock_secret_backend/mock_secret_backend.py

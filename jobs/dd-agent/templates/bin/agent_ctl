@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-#
+
+# Unless explicitly stated otherwise all files in this repository are licensed under the Apache 2.0 License.
+# This product includes software developed at Datadog (https://www.datadoghq.com/).
+# Copyright 2017-Present Datadog, Inc.
+
 set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
 
@@ -23,7 +27,7 @@ ensure_agent_ownership
 DD_AGENT_PIDFILE="$TMP_DIR/dd-agent.pid"
 DD_AGENT="$JOB_DIR/packages/dd-agent/bin/agent/agent"
 
-AGENT_COMMAND="$DD_AGENT start -c $JOB_DIR/config/"
+AGENT_COMMAND="$DD_AGENT run -c $JOB_DIR/config/"
 
 case ${1:-help} in
   start)

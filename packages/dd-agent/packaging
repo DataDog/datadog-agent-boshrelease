@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
+
+# Unless explicitly stated otherwise all files in this repository are licensed under the Apache 2.0 License.
+# This product includes software developed at Datadog (https://www.datadoghq.com/).
+# Copyright 2017-Present Datadog, Inc.
+
 set -e -x
 
 # Grab the latest versions that are in the directory
-DD_AGENT_VERSION=6.13.0
+DD_AGENT_VERSION=7.16.0
 JOB_NAME="dd-agent"
 BOSH_PACKAGES_DIR=${BOSH_PACKAGES_DIR:-/var/vcap/packages}
 
@@ -74,7 +79,9 @@ broken_links="/embedded/bin/bzfgrep
 /embedded/bin/bzless
 /embedded/bin/bzegrep
 /embedded/ssl/cert.pem
-/embedded/bin/pip"
+/embedded/bin/python
+/embedded/bin/pip
+/embedded/bin/2to3"
 
 for link in $broken_links; do
   rm -f ${BOSH_INSTALL_TARGET}/${link}
@@ -85,7 +92,9 @@ pushd ${BOSH_INSTALL_TARGET}/embedded/bin
   ln -s bzdiff bzcmp
   ln -s bzmore bzless
   ln -s bzgrep bzegrep
-  ln -s pip2 pip
+  ln -s python3 python
+  ln -s pip3 pip
+  ln -s 2to3-3.7 2to3
 popd
 
 pushd ${BOSH_INSTALL_TARGET}/embedded/ssl
@@ -96,18 +105,10 @@ popd
 echo "Fixing pkg config settings ..."
 pushd ${BOSH_INSTALL_TARGET}/embedded/lib/pkgconfig/
   OLD_PREFIX="prefix=/opt/datadog-agent/embedded"
-  NEW_PREFIX="prefix=/var/vcap/jobs/$JOB_NAME/packages/dd-agent/embedded"
+  NEW_PREFIX="prefix=/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/embedded"
   for file in $(ls); do
     if [ -f "${file}" -a ! -L "${file}" ]; then
       sed -i "s~${OLD_PREFIX}~${NEW_PREFIX}~" ${file}
     fi
   done
-popd
-
-
-echo "Fixing python prefixes ..."
-pushd ${BOSH_INSTALL_TARGET}/embedded/lib/python2.7/
-  echo "import site" >> sitecustomize.py
-  echo "site.addsitedir('${BOSH_INSTALL_TARGET}/embedded/lib/python2.7/site-packages')" >> sitecustomize.py
-  echo "site.PREFIXES.append('${BOSH_INSTALL_TARGET}/embedded/')" >> sitecustomize.py
 popd
