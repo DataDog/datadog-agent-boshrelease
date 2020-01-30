@@ -19,3 +19,11 @@ check process dd-agent-trace-agent
   stop program "/var/vcap/jobs/dd-agent/bin/trace_agent_ctl stop"
   group vcap
 <% end %>
+
+<% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
+check process dd-agent-system-probe
+  with pidfile /var/vcap/sys/run/dd-agent/system-probe.pid
+  start program "/var/vcap/jobs/dd-agent/bin/system_probe_ctl start"
+  stop program "/var/vcap/jobs/dd-agent/bin/system_probe_ctl stop"
+  group vcap
+<% end %>
