@@ -28,7 +28,7 @@ case ${1:-help} in
     pid_guard $PIDFILE "dd-agent-$COMPONENT"
     (
         {
-            exec chpst -v -u vcap:vcap $SYSTEM_PROBE_CMD
+            exec chpst -v -u root:root $SYSTEM_PROBE_CMD
         } >>$LOG_DIR/$COMPONENT.stdout.log \
         2>>$LOG_DIR/$COMPONENT.stderr.log
     ) &
