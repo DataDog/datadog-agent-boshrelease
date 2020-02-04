@@ -90,16 +90,15 @@ check_versions() {
 }
 
 remove_stale() {
-  local stale_files=""
   local spec_files=""
   for spec in $(read_spec "${script}"); do
     local downloadfile=$(echo $spec | cut -d'@' -f 1)
     local filename=$(echo $downloadfile | cut -d'/' -f 2)
     spec_files="$filename $spec_files"
   done
+  # Remove any files in blobs/dd-agent that aren't in spec
   for saved_file in $(ls blobs/dd-agent); do
-    res=$(echo "$spec_files" | grep -o -h "$saved_file")
-    if [[ ! "$res" ]]; then
+    if [[ !("$spec_files" =~ .*"$saved_file".*) ]]; then
       bosh remove-blob "dd-agent/$saved_file"
     fi
   done
