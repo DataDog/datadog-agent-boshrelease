@@ -94,7 +94,7 @@ pushd ${BOSH_INSTALL_TARGET}/embedded/bin
   ln -s bzgrep bzegrep
   ln -s python3 python
   ln -s pip3 pip
-  ln -s 2to3-3.7 2to3
+  ln -s 2to3-3.8 2to3
 popd
 
 pushd ${BOSH_INSTALL_TARGET}/embedded/ssl
