@@ -105,6 +105,11 @@ remove_stale() {
 }
 
 main() {
+  # When using local blobs, its useful to start with an empty slate
+  if [ $CLEAN_BLOBS ]; then
+    > config/blobs.yml
+  fi
+
   for script in $(pwd)/packages/*/spec ; do
     local base=$(dirname "${script}")
       echo "* Procesing ${script} ..."
