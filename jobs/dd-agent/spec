@@ -6,7 +6,6 @@ packages:
 templates:
   data/properties.sh.erb: data/properties.sh
   config/datadog.yaml.erb: config/datadog.yaml
-  config/system-probe.yaml.erb: config/system-probe.yaml
   config/confd.sh.erb: config/confd.sh
   bin/process_agent_ctl: bin/process_agent_ctl
   bin/system_probe_ctl: bin/system_probe_ctl

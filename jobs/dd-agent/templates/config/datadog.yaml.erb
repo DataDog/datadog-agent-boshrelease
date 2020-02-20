@@ -217,7 +217,7 @@ enable_gohai: <%= p('dd.enable_gohai', 'yes') %>
 # DogStatsd
 #
 # If you don't want to enable the DogStatsd server, set this option to no
-<% if p('dd.use_dogstatsd') == true || p('dd.use_dogstatsd') =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.use_dogstatsd', true) == true || p('dd.use_dogstatsd', 'yes') =~ (/(true|t|yes|y|1)$/i) %>
 use_dogstatsd: yes
 <% else %>
 use_dogstatsd: no
@@ -532,4 +532,12 @@ apm_config:
   agent_config.each do |key, value|
 %>
 <%= key %>: <%= JSON.dump(value) %>
+<% end %>
+
+<% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
+# System probe specific settings
+system_probe_config:
+  enabled: true
+  sysprobe_socket: /var/vcap/packages/dd-agent/run/sysprobe.sock
+  log_file: /var/vcap/sys/log/dd-agent/system-probe.log
 <% end %>
