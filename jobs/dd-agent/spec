@@ -124,7 +124,7 @@ properties:
     default: no
     description: Should the jmxfetch agent be started
   dd.use_dogstatsd:
-    default: no
+    default: yes
     description: Should the dogstatsd agent be started for statsd metrics collection
   dd.dogstatsd_port:
     default: 18125
