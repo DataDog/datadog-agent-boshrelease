@@ -4,14 +4,15 @@ description: Datadog Agent
 packages:
 - dd-agent
 templates:
-  data/properties.sh.erb: data/properties.sh
-  config/datadog.yaml.erb: config/datadog.yaml
   config/confd.sh.erb: config/confd.sh
+  config/datadog.yaml.erb: config/datadog.yaml
+  config/system-probe.yaml.erb: config/system-probe.yaml
+  data/properties.sh.erb: data/properties.sh
+  bin/agent_ctl: bin/agent_ctl
+  bin/pre-start: bin/pre-start
   bin/process_agent_ctl: bin/process_agent_ctl
   bin/system_probe_ctl: bin/system_probe_ctl
   bin/trace_agent_ctl: bin/trace_agent_ctl
-  bin/pre-start: bin/pre-start
-  bin/agent_ctl: bin/agent_ctl
 
 properties:
   dd.url:
