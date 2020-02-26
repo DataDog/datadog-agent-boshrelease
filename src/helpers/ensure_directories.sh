@@ -15,7 +15,7 @@ mkdir -p "$TMP_DIR" && chmod 775 "$TMP_DIR" && chown -R vcap "$TMP_DIR"
 mkdir -p "$CONFD_DIR" && chmod 775 "$CONFD_DIR" && chown -R vcap "$CONFD_DIR"
 
 # System probe runs as root, so set the config file for this to be writable only by root
-chown root:root "$JOB_DIR/config/system-probe.yaml" && chmod +r "$JOB_DIR/config/system-probe.yaml"
+chown root:root "$JOB_DIR/config/system-probe.yaml" && chmod 0644 "$JOB_DIR/config/system-probe.yaml"
 
 set +e
 set +u
