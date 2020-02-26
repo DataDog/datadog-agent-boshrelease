@@ -4,15 +4,15 @@ description: Datadog Agent
 packages:
 - dd-agent
 templates:
-  data/properties.sh.erb: data/properties.sh
+  config/confd.sh.erb: config/confd.sh
   config/datadog.yaml.erb: config/datadog.yaml
   config/system-probe.yaml.erb: config/system-probe.yaml
-  config/confd.sh.erb: config/confd.sh
+  data/properties.sh.erb: data/properties.sh
+  bin/agent_ctl: bin/agent_ctl
+  bin/pre-start: bin/pre-start
   bin/process_agent_ctl: bin/process_agent_ctl
   bin/system_probe_ctl: bin/system_probe_ctl
   bin/trace_agent_ctl: bin/trace_agent_ctl
-  bin/pre-start: bin/pre-start
-  bin/agent_ctl: bin/agent_ctl
 
 properties:
   dd.url:
@@ -125,7 +125,7 @@ properties:
     default: no
     description: Should the jmxfetch agent be started
   dd.use_dogstatsd:
-    default: no
+    default: yes
     description: Should the dogstatsd agent be started for statsd metrics collection
   dd.dogstatsd_port:
     default: 18125

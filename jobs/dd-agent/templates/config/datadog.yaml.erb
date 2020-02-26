@@ -217,7 +217,7 @@ enable_gohai: <%= p('dd.enable_gohai', 'yes') %>
 # DogStatsd
 #
 # If you don't want to enable the DogStatsd server, set this option to no
-<% if p('dd.use_dogstatsd') == true || p('dd.use_dogstatsd') =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.use_dogstatsd', true) == true || p('dd.use_dogstatsd', 'yes') =~ (/(true|t|yes|y|1)$/i) %>
 use_dogstatsd: yes
 <% else %>
 use_dogstatsd: no

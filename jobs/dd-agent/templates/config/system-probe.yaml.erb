@@ -1,3 +1,12 @@
+# Duplicate any fields required by the process agent from the main datadog.yaml file here
+# Logging
+#
+log_level: <%= p("dd.log_level", "INFO") %>
+
+# Dogstatsd
+dogstatsd_port: <%= p("dd.dogstatsd_port", "18125") %>
+
+# Dedicated system probe section
 <% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
 # System probe specific settings
 system_probe_config:

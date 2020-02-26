@@ -15,6 +15,8 @@ function ensure_agent_ownership {
   chown -R vcap:vcap "$JOB_DIR/config/"
   # make sure the agent owns its own directory
   chown -R vcap:vcap "$JOB_DIR/packages/dd-agent/"
+  # make sure that root owns the system probe config
+  chown root:root "$JOB_DIR/config/system-probe.yaml" && chmod 0644 "$JOB_DIR/config/system-probe.yaml"
 }
 
 
