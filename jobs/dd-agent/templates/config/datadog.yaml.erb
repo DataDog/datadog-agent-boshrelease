@@ -306,6 +306,17 @@ dogstatsd_non_local_traffic: <%= p("dd.non_local_traffic", "no") %>
 #     username:
 #     password:
 
+<% if p('dd.cluster_agent_enabled') == true %>
+ad_config_poll_interval: <%= p("dd.cluster_agent_poll_interval", 10) %>
+config_providers:
+  - name: clusterchecks
+  - name: endpointschecks
+
+cluster_agent:
+  auth_token: <%= link('datadog-cluster-agent').p('cluster_agent.token') %>
+  # TODO: multiple URLs for multiple instances?
+  url: <%= link('datadog-cluster-agent').instances[0].address %>:<%= link('datadog-cluster-agent').p('cluster_agent.port') %>
+<% end %>
 # Logging
 #
 log_level: <%= p("dd.log_level", "INFO") %>
