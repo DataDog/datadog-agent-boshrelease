@@ -12,7 +12,6 @@ logs_enabled: <%= p('dd.enable_logs_agent', false) %>
 # Can be found here:
 # https://app.datadoghq.com/account/settings
 api_key: <%= p('dd.api_key') %>
-python_version: 3
 
 # If you need a proxy to connect to the Internet, provide it here (default:
 # disabled). You can use the 'no_proxy' list to specify hosts that should bypass the
@@ -47,6 +46,26 @@ proxy:
     <% end %>
   <% end %>
 <% end %>
+
+<%
+if_link("datadog-cluster-agent") do |dca_link|
+  if dca_link.p('cluster_agent.enabled') == true
+%>
+ad_config_poll_interval: <%= p("dd.cluster_agent_poll_interval", 10) %>
+config_providers:
+  - name: clusterchecks
+    polling: true
+  - name: endpointschecks
+    polling: true
+
+cluster_agent:
+  auth_token: <%= dca_link.p("cluster_agent.token") %>
+  url: https://<%= dca_link.address %>:<%= dca_link.p("cluster_agent.port") %>
+  enabled: <%= dca_link.p("cluster_agent.enabled") %>
+<%
+  end
+end
+%>
 
 <% if p("dd.secret_backend_command", "") != "" %>
 secret_backend_command: <%= p("dd.secret_backend_command") %>
