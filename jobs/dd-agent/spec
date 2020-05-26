@@ -14,6 +14,11 @@ templates:
   bin/system_probe_ctl: bin/system_probe_ctl
   bin/trace_agent_ctl: bin/trace_agent_ctl
 
+consumes:
+- name: datadog-cluster-agent
+  type: datadog-cluster-agent-http
+  optional: true
+
 properties:
   dd.url:
     description: The host of the Datadog intake server to send Agent data to
@@ -260,3 +265,6 @@ properties:
   dd.system_probe_enabled:
     default: false
     description: Enable the process agent.
+  dd.cluster_agent_poll_interval:
+    default: 10
+    description: How often to poll the Cluster Agent for new config checks (in seconds).

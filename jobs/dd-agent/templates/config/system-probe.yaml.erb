@@ -14,3 +14,15 @@ system_probe_config:
   sysprobe_socket: /var/vcap/packages/dd-agent/run/sysprobe.sock
   log_file: /var/vcap/sys/log/dd-agent/system-probe.log
 <% end %>
+
+cloud_foundry: true
+<% if spec.id and not spec.id.empty? %>
+bosh_id: <%= spec.id %>
+<% end %>
+
+<% if_link("datadog-cluster-agent") do |dca_link| %>
+cluster_agent:
+  auth_token: <%= dca_link.p("cluster_agent.token") %>
+  url: https://<%= dca_link.address %>:<% dca_link.p("cluster_agent.port") %>
+  enabled: <%= dca_link.p("cluster_agent.enabled") %>
+<% end %>
