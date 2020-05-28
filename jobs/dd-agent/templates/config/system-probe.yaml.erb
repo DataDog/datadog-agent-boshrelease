@@ -20,9 +20,15 @@ cloud_foundry: true
 bosh_id: <%= spec.id %>
 <% end %>
 
-<% if_link("datadog-cluster-agent") do |dca_link| %>
+<%
+if_link("datadog-cluster-agent") do |dca_link|
+  if dca_link.p('cluster_agent.enabled') == true
+%>
 cluster_agent:
   auth_token: <%= dca_link.p("cluster_agent.token") %>
-  url: https://<%= dca_link.address %>:<% dca_link.p("cluster_agent.port") %>
+  url: https://<%= dca_link.address %>:<%= dca_link.p("cluster_agent.port") %>
   enabled: <%= dca_link.p("cluster_agent.enabled") %>
-<% end %>
+<%
+  end
+end
+%>
