@@ -49,7 +49,7 @@ proxy:
 
 <%
 if_link("datadog-cluster-agent") do |dca_link|
-  if dca_link.p('cluster_agent.enabled') == true
+  if dca_link.instances.length > 0 && dca_link.p('cluster_agent.enabled') == true
 %>
 ad_config_poll_interval: <%= p("dd.cluster_agent_poll_interval", 10) %>
 config_providers:
