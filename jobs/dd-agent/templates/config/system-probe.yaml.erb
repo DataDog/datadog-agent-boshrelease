@@ -22,7 +22,7 @@ bosh_id: <%= spec.id %>
 
 <%
 if_link("datadog-cluster-agent") do |dca_link|
-  if dca_link.p('cluster_agent.enabled') == true
+  if dca_link.instances.length > 0 && dca_link.p('cluster_agent.enabled') == true
 %>
 cluster_agent:
   auth_token: <%= dca_link.p("cluster_agent.token") %>
