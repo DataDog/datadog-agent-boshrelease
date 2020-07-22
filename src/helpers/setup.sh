@@ -56,7 +56,7 @@ DISTRIBUTION=$(lsb_release -d 2>/dev/null | grep -Eo $KNOWN_DISTRIBUTION  || gre
 
 # Make python checks use the system CA store
 if [ -f /etc/redhat-release -o "$DISTRIBUTION" == "RedHat" -o "$DISTRIBUTION" == "CentOS" -o "$DISTRIBUTION" == "Amazon" ]; then
-    export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-bundle.trust.crt"
+    export REQUESTS_CA_BUNDLE="/etc/pki/tls/certs/ca-bundle.crt"
 else
     export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
 fi
