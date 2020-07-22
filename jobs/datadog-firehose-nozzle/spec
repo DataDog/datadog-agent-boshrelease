@@ -123,3 +123,18 @@ properties:
   nozzle.environment:
     description: "The name of the environment where the nozzle is running"
     default: ""
+  nozzle.enable_metadata_collection:
+    description: "Whether or not to enable labels and annotations collection as tags"
+    default: false
+  nozzle.metadata_keys_whitelist_patterns:
+    description: |
+      Label and annotation keys that match any regular expression in this list are included.
+      If neither a whitelist nor a blacklist is provided, everything is included.
+      If a key matches both a whitelist and a blacklist pattern, it is excluded.
+    default: []
+  nozzle.metadata_keys_blacklist_patterns:
+    description: |
+      Label and annotation keys that match any regular expression in this list are excluded.
+      If neither a whitelist nor a blacklist is provided, everything is included.
+      If a key matches both a whitelist and a blacklist pattern, it is excluded.
+    default: []

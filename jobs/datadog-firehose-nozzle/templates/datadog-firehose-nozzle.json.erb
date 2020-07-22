@@ -19,6 +19,16 @@
     no_proxy = no_proxy.split(",")
   end
 
+  metadata_keys_whitelist_patterns = p("nozzle.metadata_keys_whitelist_patterns", [])
+  if metadata_keys_whitelist_patterns.class == String
+    metadata_keys_whitelist_patterns = metadata_keys_whitelist_patterns.split(",")
+  end
+
+  metadata_keys_blacklist_patterns = p("nozzle.metadata_keys_blacklist_patterns", [])
+  if metadata_keys_blacklist_patterns.class == String
+    metadata_keys_blacklist_patterns = metadata_keys_blacklist_patterns.split(",")
+  end
+
   datadog_additional_endpoints = Hash.new
   for i in 1..5 do
     additional_api_url = p("datadog.additional_api_url_#{i}", "")
@@ -54,9 +64,9 @@ JSON.pretty_generate(
     "DataDogTimeoutSeconds" => p("datadog.timeout_seconds"),
     "FlushDurationSeconds" => p("datadog.flush_duration_seconds"),
     "FlushMaxBytes" => p("datadog.flush_max_bytes"),
-    "HTTPProxyURL": p("nozzle.http_proxy_url", ""),
-    "HTTPSProxyURL": p("nozzle.https_proxy_url", ""),
-    "NoProxy": no_proxy,
+    "HTTPProxyURL" => p("nozzle.http_proxy_url", ""),
+    "HTTPSProxyURL" => p("nozzle.https_proxy_url", ""),
+    "NoProxy" => no_proxy,
     "InsecureSSLSkipVerify" => p("nozzle.insecure_ssl_skip_verify"),
     "MetricPrefix" => p("datadog.metric_prefix"),
     "Deployment" => p("nozzle.deployment"),
@@ -70,8 +80,11 @@ JSON.pretty_generate(
     "GrabInterval" => p("nozzle.grab_interval", 10),
     "OrgDataCollectionInterval" => p("nozzle.nozzle.org_data_collection_interval", 600),
     "CustomTags" => tags,
-    "DBPath": "/var/vcap/sys/tmp/datadog-firehose-nozzle/firehose_nozzle.db",
-    "EnvironmentName" => p("nozzle.environment", "")
+    "DBPath" => "/var/vcap/sys/tmp/datadog-firehose-nozzle/firehose_nozzle.db",
+    "EnvironmentName" => p("nozzle.environment", ""),
+    "EnableMetadataCollection" => p("nozzle.enable_metadata_collection", false),
+    "MetadataKeysWhitelistPatterns" => metadata_keys_whitelist_patterns,
+    "MetadataKeysBlacklistPatterns" => metadata_keys_blacklist_patterns
 )
 
 %>
