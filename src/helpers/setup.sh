@@ -51,5 +51,15 @@ export LANG=POSIX
 
 export DD_AGENT_PYTHON="$PACKAGES/$NAME/embedded/bin/python3"
 
+KNOWN_DISTRIBUTION="(Debian|Ubuntu|RedHat|CentOS|openSUSE|Amazon|Arista|SUSE)"
+DISTRIBUTION=$(lsb_release -d 2>/dev/null | grep -Eo $KNOWN_DISTRIBUTION  || grep -Eo $KNOWN_DISTRIBUTION /etc/issue 2>/dev/null || grep -Eo $KNOWN_DISTRIBUTION /etc/Eos-release 2>/dev/null || uname -s)
+
+# Make python checks use the system CA store
+if [ -f /etc/redhat-release -o "$DISTRIBUTION" == "RedHat" -o "$DISTRIBUTION" == "CentOS" -o "$DISTRIBUTION" == "Amazon" ]; then
+    export REQUESTS_CA_BUNDLE="/etc/pki/tls/certs/ca-bundle.crt"
+else
+    export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
+fi
+
 set +e
 set +u
