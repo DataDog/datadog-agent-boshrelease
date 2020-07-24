@@ -7,7 +7,7 @@
 set -e -x
 
 # Grab the latest versions that are in the directory
-DD_AGENT_VERSION=7.20.2
+DD_AGENT_VERSION=7.21.1
 JOB_NAME="dd-agent"
 BOSH_PACKAGES_DIR=${BOSH_PACKAGES_DIR:-/var/vcap/packages}
 
