@@ -2,7 +2,7 @@
 
 ## 3.1.0 / 2020-07-24
 
-* [Fixed] Make python checks use the system CA store. See [#125](https://github.com/DataDog/datadog-agent-boshrelease/pull/125).
+* [Fixed] Make Python checks use the system CA store. See [#125](https://github.com/DataDog/datadog-agent-boshrelease/pull/125).
 * [Added] Bump embedded Datadog Agent version to 7.21.1. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/master/CHANGELOG.rst#7211).
 
 ## 3.0.0 / 2020-06-18
