@@ -59,7 +59,7 @@ config_providers:
     polling: true
 
 cluster_agent:
-  auth_token: <%= dca_link.p("cluster_agent.token") %>
+  auth_token: "<%= dca_link.p("cluster_agent.token") %>"
   url: https://<%= dca_link.address %>:<%= dca_link.p("cluster_agent.port") %>
   enabled: <%= dca_link.p("cluster_agent.enabled") %>
 <%
