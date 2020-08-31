@@ -1,6 +1,6 @@
 ---
 blobstore:
-  provider: s3
+  provider: local
   options:
-    bucket_name: public-datadog-agent-boshrelease
+    blobstore_path: blobstore
 final_name: datadog-agent
