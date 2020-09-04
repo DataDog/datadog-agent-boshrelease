@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.0 / 2020-09-04
+
+* [Changed] Remove usage of Bosh links in favor of DNS aliases. See [#129](https://github.com/DataDog/datadog-agent-boshrelease/pull/129).
+
 ## 3.2.0 / 2020-08-31
 
 * [Fixed] Quote cluster agent token in config so that it doesn't get interpreted as number. See [#127](https://github.com/DataDog/datadog-agent-boshrelease/pull/127).
