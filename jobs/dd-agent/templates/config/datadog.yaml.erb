@@ -59,7 +59,7 @@ config_providers:
 
 cluster_agent:
   auth_token: "<%= p("cluster_agent.token") %>"
-  url: https://datadog-cluster-agent.cf.internal:<%= p("cluster_agent.port", 5005) %>
+  url: <%= p("cluster_agent.address") %>:<%= p("cluster_agent.port", 5005) %>
   enabled: true
 <%
 end
