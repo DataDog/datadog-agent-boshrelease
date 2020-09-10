@@ -23,13 +23,6 @@ bosh_id: <%= spec.id %>
 <%
 if p("cluster_agent.enabled")
 %>
-ad_config_poll_interval: <%= p("dd.cluster_agent_poll_interval", 10) %>
-config_providers:
-  - name: clusterchecks
-    polling: true
-  - name: endpointschecks
-    polling: true
-
 cluster_agent:
   auth_token: "<%= p("cluster_agent.token") %>"
   url: <%= p("cluster_agent.address") %>:<%= p("cluster_agent.port", 5005) %>
