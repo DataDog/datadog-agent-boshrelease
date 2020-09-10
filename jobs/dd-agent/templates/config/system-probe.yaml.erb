@@ -22,14 +22,12 @@ bosh_id: <%= spec.id %>
 <% end %>
 
 <%
-if_link("datadog-cluster-agent") do |dca_link|
-  if dca_link.instances.length > 0 && dca_link.p('cluster_agent.enabled') == true
+if p("cluster_agent.enabled")
 %>
 cluster_agent:
-  auth_token: <%= dca_link.p("cluster_agent.token") %>
-  url: https://<%= dca_link.address %>:<%= dca_link.p("cluster_agent.port") %>
-  enabled: <%= dca_link.p("cluster_agent.enabled") %>
+  auth_token: "<%= p("cluster_agent.token") %>"
+  url: <%= p("cluster_agent.address") %>:<%= p("cluster_agent.port", 5005) %>
+  enabled: true
 <%
-  end
 end
 %>
