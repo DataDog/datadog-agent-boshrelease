@@ -3,7 +3,7 @@
 ## 4.0.1 / 2020-09-18
 
 * [Fixed] Properly duplicate new DCA settings in system probe configuration. See [#132](https://github.com/DataDog/datadog-agent-boshrelease/pull/132).
-* [Fixed] Configure path to eBPF libs for system probe. See [#131](https://github.com/DataDog/datadog-agent-boshrelease/pull/131).
+* [Fixed] Configure path to eBPF libraries for system probe. See [#131](https://github.com/DataDog/datadog-agent-boshrelease/pull/131).
 * [Fixed] Bump embedded Datadog Agent version to 7.22.1. In particular, this fixes segfaults in the process agent when collecting application containers in error state. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/7.22.x/CHANGELOG.rst#7221--6221).
 
 ## 4.0.0 / 2020-09-04
