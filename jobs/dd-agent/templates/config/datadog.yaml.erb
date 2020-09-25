@@ -125,8 +125,8 @@ tags:
 # between 0 and 1.
 # Warning: percentiles must be specified as yaml strings
 #
-histogram_aggregates: <%= p("dd.histogram_aggregates", ["max", "median", "avg", "count"]).join(', ') %>
-histogram_percentiles: <%= p("dd.histogram_percentiles", ["0.95"]).join(', ') %>
+histogram_aggregates: <%= p("dd.histogram_aggregates", ["max", "median", "avg", "count"]) %>
+histogram_percentiles: <%= p("dd.histogram_percentiles", ["0.95"]) %>
 
 # Forwarder timeout in seconds
 # forwarder_timeout: 20
