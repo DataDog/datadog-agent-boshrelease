@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.1.0 / 2020-10-13
+
+* [Fixed] Specify aggregates and percentiles as arrays in Datadog agent config. See [#134](https://github.com/DataDog/datadog-agent-boshrelease/pull/134). Thanks [anto-daniel](https://github.com/anto-daniel).
+* [Added] Bump embedded Datadog Agent version to 7.23.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/master/CHANGELOG.rst#7230--6230).
+
 ## 4.0.1 / 2020-09-18
 
 * [Fixed] Properly duplicate new DCA settings in system probe configuration. See [#132](https://github.com/DataDog/datadog-agent-boshrelease/pull/132).
