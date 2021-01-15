@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.3.0 / 2021-01-15
+
+* [Fixed] Set specific `*_dd_url` for process, APM and logs to the URL specified in `dd.url` property. See [#139](https://github.com/DataDog/datadog-agent-boshrelease/pull/139).
+* [Added] Bump embedded Datadog Agent version to 7.25.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/master/CHANGELOG.rst#7250--6250).
+
 ## 4.2.0 / 2020-12-14
 
 * [Fixed] Source files at start only to avoid unnecessary operations during stop. See [#136](https://github.com/DataDog/datadog-agent-boshrelease/pull/136).
