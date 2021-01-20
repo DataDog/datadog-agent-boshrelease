@@ -242,7 +242,7 @@ properties:
     default: true
     description: "Include the address tag"
   dd.site:
-    description: "The site of the Datadog intake to send Agent data to. Defaults to 'datadoghq.com', set to 'datadoghq.eu' to send data to the EU site."
+    description: "The site of the Datadog intake to send Agent data to. Defaults to 'datadoghq.com', set to 'datadoghq.eu' to send data to the EU site. This overrides anything set in the `dd.url` property."
   dd.strip_proc_arguments:
     description: "This setting will strip the process arguments from the processes sent by the process agent."
   dd.secret_backend_command:

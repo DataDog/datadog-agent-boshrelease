@@ -1,5 +1,5 @@
 # The host of the Datadog intake server to send Agent data to
-<% if p("dd.url", nil) %>
+<% if p("dd.url", nil) && !p("dd.site", nil) %>
 dd_url: <%= p("dd.url") %>
 <% end %>
 
