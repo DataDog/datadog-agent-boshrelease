@@ -7,10 +7,6 @@ dd_url: <%= p("dd.url") %>
 #
 # Logs agent is disabled by default
 logs_enabled: <%= p('dd.enable_logs_agent', false) %>
-<% if p("dd.url", nil) %>
-logs_config:
-  logs_dd_url: <%= p("dd.url") %>
-<% end %>
 
 # The Datadog api key to associate your Agent's data with your organization.
 # Can be found here:
@@ -486,9 +482,6 @@ process_config:
 <% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
   enabled: true
 <% end %>
-<% if p("dd.url", nil) %>
-  process_dd_url: <%= p("dd.url") %>
-<% end %>
 #   The full path to the file where process-agent logs will be written.
   log_file: /var/vcap/sys/log/dd-agent/process_agent.log
 <% if p('dd.strip_proc_arguments', false) == true || p('dd.strip_proc_arguments', false) =~ (/(true|t|yes|y|1)$/i) %>
@@ -524,10 +517,6 @@ apm_config:
 <% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
   enabled: true
 <% end %>
-
-  <% if p("dd.url", nil) %>
-  apm_dd_url: <%= p("dd.url") %>
-  <% end %>
 #   The full path to the file where trace-agent logs will be written.
   log_file: /var/vcap/sys/log/dd-agent/trace_agent.log
 #   The environment tag that Traces should be tagged with
