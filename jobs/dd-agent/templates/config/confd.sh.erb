@@ -98,6 +98,16 @@ function get_monit_services {
 function create_dd_instances {
     local base_dir="${1}"
 
+    # instances:
+    for monit in $(get_monit_files "${base_dir}"); do
+        for entry in $(get_monit_services "${monit}"); do
+            # format: registry|/var/vcap/sys/run/registry/registry.pid
+            echo "  - name: ${entry%|*}"
+            echo "    pid_file: ${entry#*|}"
+            echo
+        done
+    done
+
     # Source setup to be able to use agent's embedded python
     source "${base_dir}/dd-agent/packages/dd-agent/helpers/setup.sh" "dd-agent" "agent"
     for bpm in $(get_bpm_files "${base_dir}"); do
