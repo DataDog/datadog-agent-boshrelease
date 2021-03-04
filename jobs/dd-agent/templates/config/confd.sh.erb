@@ -44,6 +44,20 @@ function get_monit_files {
     fi
 }
 
+function get_bpm_files {
+    local base_path="${1}"
+
+    local exclude_path="*/dd-agent/*"
+    local bpmfiles=()
+    for bpm in $(find -L "${base_path}" -path "*/config/bpm.yml" -not -path "${exclude_path}"); do
+        # append
+        bpmfiles+=("${bpm}")
+    done
+    if [[ ${#bpmfiles[@]} > 0 ]]; then
+        echo "${bpmfiles[@]}"
+    fi
+}
+
 function get_monit_services {
     local monit=${1}
 
@@ -69,7 +83,10 @@ function get_monit_services {
                 pidfile=$i
                 pidfile_found=0
                 check_found=0
-                printf("%s|%s\n", name, pidfile)
+                # Only deal with non BPM process, as their pidfile cannot be read by the agent
+                if ($i !~ /^\/var\/vcap\/sys\/run\/bpm/) {
+                    printf("%s|%s\n", name, pidfile)
+                }
             }
         }
     }' "$monit"
@@ -81,13 +98,11 @@ function get_monit_services {
 function create_dd_instances {
     local base_dir="${1}"
 
-    # instances:
-    for monit in $(get_monit_files "${base_dir}"); do
-        for entry in $(get_monit_services "${monit}"); do
-            # format: registry|/var/vcap/sys/run/registry/registry.pid
-            echo "  - name: ${entry%|*}"
-            echo "    pid_file: ${entry#*|}"
-            echo
+    # Source setup to be able to use agent's embedded python
+    source "${base_dir}/dd-agent/packages/dd-agent/helpers/setup.sh" "dd-agent" "agent"
+    for bpm in $(get_bpm_files "${base_dir}"); do
+        python "${base_dir}/dd-agent/config/get_bpm_processes.py" "${bpm}" | while IFS= read -r line; do
+            echo "  ${line}"
         done
     done
 }
