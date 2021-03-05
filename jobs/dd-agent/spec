@@ -69,10 +69,13 @@ properties:
     description: By default we use a friendly hostname, this might cause problems with some setups. Set this to use the UUID instead. (In an environment where there are multiple hosts of the same type on different deployments or in different foundries, this will be necessary.) If dd.hostname is set, it will take precedence over the uuid hostname.
   dd.friendly_hostname:
     default: true
-    description: "Use a friendly hostname. If this is enabled, along with the UUID option, uuid will take precedence."
+    description: "Use a friendly hostname. If this is enabled, along with the UUID option, uuid will take precedence. If you have several foundations, set one or both of the options `dd.unique_friendly_hostname` and `dd.friendly_hostname_append_vm_guid` to true to generate unique hostnames across foundations."
   dd.unique_friendly_hostname:
     default: false
-    description: "Append the CloudFoundry deployment to the friendly hostname, to make it unique."
+    description: "Append the CloudFoundry deployment to the friendly hostname, to make it unique. If the deployments across your foundations are not unique, set the option `dd.friendly_hostname_append_vm_guid` to true instead."
+  dd.friendly_hostname_append_vm_guid:
+    default: false
+    description: "Append the VM UUID to the friendly hostname, to make it unique. Set this to `true` to generate unique friendly hostnames across your entire Cloud Foundry environment."
   dd.cf_os_hostname_aliasing:
     default: false
     description: "If enabled, send the OS hostname as an alias. Useful in coordination with the Friendly Hostname option."
