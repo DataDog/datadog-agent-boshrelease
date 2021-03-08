@@ -108,12 +108,15 @@ function create_dd_instances {
         done
     done
 
+    IFS_BACKUP=IFS
     # Source setup to be able to use agent's embedded python
     source "${base_dir}/dd-agent/packages/dd-agent/helpers/setup.sh" "dd-agent" "agent"
     for bpm in $(get_bpm_files "${base_dir}"); do
+        IFS=""
         python "${base_dir}/dd-agent/config/get_bpm_processes.py" "${bpm}" | while IFS= read -r line; do
             echo "  ${line}"
         done
+        IFS=IFS_BACKUP
     done
 }
 
