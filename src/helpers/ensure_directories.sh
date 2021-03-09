@@ -13,8 +13,8 @@ mkdir -p "$LOG_DIR" && chmod 775 "$LOG_DIR" && chown -R vcap "$LOG_DIR"
 mkdir -p "$RUN_DIR" && chmod 775 "$RUN_DIR" && chown -R vcap "$RUN_DIR"
 mkdir -p "$TMP_DIR" && chmod 775 "$TMP_DIR" && chown -R vcap "$TMP_DIR"
 mkdir -p "$CONFD_DIR" && chmod 775 "$CONFD_DIR" && chown -R vcap "$CONFD_DIR"
-# Add execute flags to the bpm run folder, so that the agent can read pidfiles inside
-chmod +x /var/vcap/sys/run/bpm/*
+# Add execute flags to any directory inside the bpm run folder, so that the agent can read pidfiles inside
+find /var/vcap/sys/run/bpm -type d -print0 | xargs -0 chmod +x || true
 
 set +e
 set +u
