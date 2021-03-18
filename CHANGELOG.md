@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.4.0 / 2021-03-18
+
+* [Added] Add option to append VM UUID to generated friendly hostnames. See [#144](https://github.com/DataDog/datadog-agent-boshrelease/pull/144).
+* [Fixed] Fix issue with process check when trying to access BPM processes. See [#143](https://github.com/DataDog/datadog-agent-boshrelease/pull/143).
+* [Fixed] Fixed hostname generation issue. See [#142](https://github.com/DataDog/datadog-agent-boshrelease/pull/142).
+* [Added] Bump embedded Datadog Agent version to 7.26.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/master/CHANGELOG.rst#7260--6260).
+
 ## 4.3.0 / 2021-01-21
 
 * [Added] Bump embedded Datadog Agent version to 7.25.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/master/CHANGELOG.rst#7250--6250).
