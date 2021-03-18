@@ -193,6 +193,9 @@ properties:
   dd.process_agent_enabled:
     default: no
     description: Enable the process agent.
+  dd.process_agent_containers_only:
+    default: no
+    description: Enable only the container collection of the process agent.
   dd.trace_agent_enabled:
     default: no
     description: Enable the trace agent.
