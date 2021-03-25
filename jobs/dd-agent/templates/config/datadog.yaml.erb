@@ -89,7 +89,7 @@ skip_ssl_validation: <%= p("dd.skip_ssl_validation", "no") %>
     if p("dd.unique_friendly_hostname", false)
       hostname = "#{hostname}-#{spec.deployment}"
     end
-    if p("dd.friendly_hostname_append_vm_uuid", false)
+    if p("dd.friendly_hostname_append_vm_guid", false)
       hostname = "#{hostname}-#{spec.id}"
     end
   end
