@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.4.1 / 2021-03-25
+
+* [Fixed] Fix appending VM GUID to friendly hostname. See [#147](https://github.com/DataDog/datadog-agent-boshrelease/pull/147).
+
 ## 4.4.0 / 2021-03-18
 
 * [Added] Add option to append VM UUID to generated friendly hostnames. See [#144](https://github.com/DataDog/datadog-agent-boshrelease/pull/144).
