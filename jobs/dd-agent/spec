@@ -16,7 +16,13 @@ templates:
 
 properties:
   dd.url:
-    description: The host of the Datadog intake server to send Agent data to
+    description: The host of the Datadog intake server for metrics
+  dd.logs_dd_url:
+    description: The host of the Datadog intake server for logs
+  dd.apm_dd_url:
+    description: The host of the Datadog intake server for APM data
+  dd.process_dd_url:
+    description: The host of the Datadog intake server for process data
   dd.proxy:
     description: Proxy settings to connect to the Internet
     example:
