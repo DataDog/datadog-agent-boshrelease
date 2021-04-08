@@ -485,7 +485,13 @@ additional_endpoints:
 process_config:
 #   Note: the Process Agent expects this to be a string
 <% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
-  enabled: true
+  <% if p('dd.process_agent_containers_only', false) == true || p('dd.process_agent_containers_only', false) =~ (/(true|t|yes|y|1)$/i) %>
+  enabled: "false"
+  <% else %>
+  enabled: "true"
+  <% end %>
+<% else %>
+  enabled: "disabled"
 <% end %>
 #   The full path to the file where process-agent logs will be written.
   log_file: /var/vcap/sys/log/dd-agent/process_agent.log
