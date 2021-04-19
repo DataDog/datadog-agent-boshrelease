@@ -47,6 +47,10 @@ proxy:
   <% end %>
 <% end %>
 
+<% if p("dd.no_proxy_nonexact_match", false) %>
+no_proxy_nonexact_match: <%= p("dd.no_proxy_nonexact_match") %>
+<% end %>
+
 <%
 if p("cluster_agent.enabled")
 %>

@@ -36,6 +36,8 @@ properties:
     description: The proxy for https endpoints
   dd.proxy.no_proxy:
     description: Domains that the agent proxy should skip
+  dd.no_proxy_nonexact_match:
+    description: Enable more flexible no_proxy matching
   dd.skip_ssl_validation:
     default: no
     description: Skip SSL validation for the Datadog url
