@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.5.0 / 2021-04-20
+
+* [Added] Add `no_proxy_nonexact_match` configuration option. See [#150](https://github.com/DataDog/datadog-agent-boshrelease/pull/150).
+* [Added] Add properties to configure custom URLs for process, APM and logs. See [#149](https://github.com/DataDog/datadog-agent-boshrelease/pull/149).
+* [Added] Add ability to configure process agent for container collection only. See [#145](https://github.com/DataDog/datadog-agent-boshrelease/pull/145).
+* [Added] Bump embedded Datadog Agent version to 7.27.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/master/CHANGELOG.rst#7270--6270).
+
 ## 4.4.1 / 2021-03-25
 
 * [Fixed] Fix appending VM GUID to friendly hostname. See [#147](https://github.com/DataDog/datadog-agent-boshrelease/pull/147).
