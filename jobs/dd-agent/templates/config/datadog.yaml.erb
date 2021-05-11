@@ -47,8 +47,8 @@ proxy:
   <% end %>
 <% end %>
 
-<% if p("dd.no_proxy_nonexact_match", false) %>
-no_proxy_nonexact_match: <%= p("dd.no_proxy_nonexact_match") %>
+<% if_p("dd.no_proxy_nonexact_match") do |no_proxy_nonexact_match| %>
+no_proxy_nonexact_match: <%= no_proxy_nonexact_match %>
 <% end %>
 
 <%
