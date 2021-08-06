@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# only install glide if it is not installed
-type glide >/dev/null 2>&1 || (echo "installing Glide" && curl https://glide.sh/get | sh )
-
-export GOPATH="$(pwd)/src/datadog-firehose-nozzle/:$GOPATH"
-
 DEFAULT_NOZZLE_VERSION=2.2.0
 
 NOZZLE_VERSION=${NOZZLE_VERSION:-$DEFAULT_NOZZLE_VERSION}
@@ -16,10 +11,9 @@ if [ $NOZZLE_VERSION != "local" ]; then
 # Init and update the git submodule
   git submodule update --init --recursive
   # Checkout the version tag
-  pushd src/datadog-firehose-nozzle/src/github.com/DataDog/datadog-firehose-nozzle
+  pushd src/datadog-firehose-nozzle
     git fetch --tags
     git checkout -f $NOZZLE_VERSION
-    glide install
   popd
   set +e
 fi

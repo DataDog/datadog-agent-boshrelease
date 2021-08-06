@@ -1,12 +1,13 @@
 set -e -x
 
-export GOROOT=$(readlink -nf /var/vcap/packages/golang1.13)
+export GOROOT=$(readlink -nf /var/vcap/packages/golang1.16)
 export PATH=$GOROOT/bin:$PATH
 
 cd datadog-firehose-nozzle
 
-export GOPATH=$PWD
-export GOCACHE=$PWD
+mkdir "$HOME/go"
+export GOPATH="$HOME/go"
+export GOCACHE="$PWD"
 
-go install github.com/DataDog/datadog-firehose-nozzle
-cp -a $PWD/bin/datadog-firehose-nozzle ${BOSH_INSTALL_TARGET}
+go build
+cp -a $PWD/datadog-firehose-nozzle ${BOSH_INSTALL_TARGET}

@@ -2,7 +2,7 @@
 name: datadog-firehose-nozzle
 
 dependencies:
-- golang1.13
+- golang1.16
 
 files:
 - datadog-firehose-nozzle/**/*
