@@ -1,5 +1,9 @@
 # Changelog
 
+## 83 / 2021-08-09
+
+* [Fixed] Fix broken 82 release built with outdated go version, resulting in inconsistent vendoring.
+
 ## 82 / 2021-08-09
 
 * [Fixed] Support building in air gapped environment. See [#104](https://github.com/DataDog/datadog-firehose-nozzle-release/pull/104).

@@ -1,0 +1,25 @@
+name: datadog-firehose-nozzle
+version: "83"
+commit_hash: ed8634b
+uncommitted_changes: false
+jobs:
+- name: datadog-firehose-nozzle
+  version: e1ec1ec57b92fc3d065999147f6209f3f0c7baa6
+  fingerprint: e1ec1ec57b92fc3d065999147f6209f3f0c7baa6
+  sha1: 7c07fe018c663d47b77015a12512b996626983ae
+packages:
+- name: datadog-firehose-nozzle
+  version: 9b9066c90184546e0c54e51a44a817fb94e429f6
+  fingerprint: 9b9066c90184546e0c54e51a44a817fb94e429f6
+  sha1: 75627fe11a71ef28ee57699dc258b0d4aa0ee05b
+  dependencies:
+  - golang1.16
+- name: golang1.16
+  version: 1d080f46b5df23eb802cff39506425db124b1397
+  fingerprint: 1d080f46b5df23eb802cff39506425db124b1397
+  sha1: 7a02e8c3003a250212d1ef98f72821fb6480c2a7
+  dependencies: []
+license:
+  version: df09296091d86b3c66596f78a43065af84060221
+  fingerprint: df09296091d86b3c66596f78a43065af84060221
+  sha1: 3430b711d0a3125c329ef4ba4a7d221cd9dd2aa8
