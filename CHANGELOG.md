@@ -1,5 +1,9 @@
 # Changelog
 
+## 82 / 2021-08-09
+
+* [Fixed] Support building in air gapped environment. See [#104](https://github.com/DataDog/datadog-firehose-nozzle-release/pull/104).
+
 ## 81 / 2021-08-09
 
 * [Added] Upgrade nozzle to 2.3.0. See [#102](https://github.com/DataDog/datadog-firehose-nozzle-release/pull/102).
