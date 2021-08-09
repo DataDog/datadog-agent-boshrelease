@@ -14,6 +14,7 @@ if [ $NOZZLE_VERSION != "local" ]; then
   pushd src/datadog-firehose-nozzle
     git fetch --tags
     git checkout -f $NOZZLE_VERSION
+    go mod vendor
   popd
   set +e
 fi

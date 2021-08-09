@@ -9,5 +9,5 @@ mkdir "$HOME/go"
 export GOPATH="$HOME/go"
 export GOCACHE="$PWD"
 
-go build
+go build -mod=vendor
 cp -a $PWD/datadog-firehose-nozzle ${BOSH_INSTALL_TARGET}
