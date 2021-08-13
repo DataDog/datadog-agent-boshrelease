@@ -23,6 +23,9 @@ properties:
     description: The host of the Datadog intake server for APM data
   dd.process_dd_url:
     description: The host of the Datadog intake server for process data
+  dd.force_tls_12:
+    description: Whether or not to force TLS 1.2 for agent HTTPS communications.
+    default: false
   dd.proxy:
     description: Proxy settings to connect to the Internet
     example:
