@@ -86,6 +86,7 @@ function create_dd_instances {
         for entry in $(get_monit_services "${monit}"); do
             # format: registry|/var/vcap/sys/run/registry/registry.pid
             echo "  - name: ${entry%|*}"
+            echo "    collect_children: <%= p('dd.collect_monit_children_processes', false) %>"
             echo "    pid_file: ${entry#*|}"
             echo
         done
