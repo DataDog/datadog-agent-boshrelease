@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.6.0 / 2021-08-16
+
+* [Added] Add option to collect monit children processes in process check. See [#155](https://github.com/DataDog/datadog-agent-boshrelease/pull/155).
+* [Added] Add option to force use of TLS 1.2. See [#153](https://github.com/DataDog/datadog-agent-boshrelease/pull/153).
+* [Fixed] Always set `no_proxy_nonexact_match` option if specified. See [#152](https://github.com/DataDog/datadog-agent-boshrelease/pull/152).
+* [Added] Bump embedded Datadog Agent version to 7.30.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/master/CHANGELOG.rst#7300--6300).
+
 ## 4.5.0 / 2021-04-20
 
 * [Added] Add `no_proxy_nonexact_match` configuration option. See [#150](https://github.com/DataDog/datadog-agent-boshrelease/pull/150).
