@@ -180,6 +180,9 @@ properties:
   dd.generate_monit_processes:
     default: yes
     description: Add monit processes to process check
+  dd.collect_monit_children_processes:
+    default: false
+    description: Enable collection of children processes of monit processes
   dd.generate_system_processes:
     default: yes
     description: Add basic system processes to process check
