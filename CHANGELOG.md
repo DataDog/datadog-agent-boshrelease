@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.7.0 / 2021-09-17
+
+
 ## 4.6.0 / 2021-08-16
 
 * [Added] Add option to collect monit children processes in process check. See [#155](https://github.com/DataDog/datadog-agent-boshrelease/pull/155).
