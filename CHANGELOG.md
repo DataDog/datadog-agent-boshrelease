@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.7.1 / 2021-09-21
+
+* [Added] Downgrade embedded Datadog Agent version to 7.27.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/master/CHANGELOG.rst#7270--6270).
+
 ## 4.7.0 / 2021-09-20
 
 * [Added] Bump embedded Datadog Agent version to 7.31.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7310--6310).
