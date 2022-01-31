@@ -1,0 +1,24 @@
+variables:
+    VERSION:
+      value: ""
+      description: "The bosh version to release"
+    ARTIFACT_BUCKET:
+      value: "public-datadog-agent-boshrelease"
+      description: "Bucket where the generated artifacts (blobs) is stored"
+    RELEASE_BUCKET:
+      value: "cloudfoundry.datadoghq.com/datadog-agent"
+      description: "Bucket where the actual bosh release is be stored"
+    DRY_RUN:
+      value: "true"
+      description: "Set to true to do a dry run"
+    REPO_BRANCH:
+      value: "master"
+      description: "The branch to use"
+
+agent-bosh-prod-release:
+  stage: deploy
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-builders/gitlab_agent_deploy:v6554890-8eae026
+  tags: ["runner:main"]
+  when: manual
+  script:
+    - export PRODUCTION=true; ./scripts/release.sh
