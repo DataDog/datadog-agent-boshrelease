@@ -17,8 +17,10 @@ function ensure_agent_ownership {
   chown -R vcap:vcap "$JOB_DIR/packages/dd-agent/"
   # make sure that root owns the system probe config
   chown root:root "$JOB_DIR/config/system-probe.yaml" && chmod 0644 "$JOB_DIR/config/system-probe.yaml"
-  # add dd-agent user as an alias of vcap
-  sudo useradd -N -r -s /usr/sbin/nologin -u $(id -u vcap) -g vcap -o dd-agent
+  # make sure that dd-agent user exists as an alias of vcap
+  if ! id dd-agent &>/dev/null; then
+    sudo useradd -N -r -s /usr/sbin/nologin -u $(id -u vcap) -g vcap -o dd-agent
+  fi
 }
 
 
