@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.9.0 / 2022-02-07
+
+* [Added] Bump embedded Datadog Agent version to 7.33.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7330--6330).
+* [Fixed] Fix socket ownership issue related to system-probe and process-agent communication. See [#162](https://github.com/DataDog/datadog-agent-boshrelease/pull/162).
+
 ## 4.8.3 / 2021-12-22
 
 * [Added] Bump embedded Datadog Agent version to 7.32.4. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7324--6324).
