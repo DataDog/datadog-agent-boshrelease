@@ -12,6 +12,7 @@ dogstatsd_port: <%= p("dd.dogstatsd_port", "18125") %>
 <% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
 # System probe specific settings
 system_probe_config:
+  enabled: true
   bpf_dir: /var/vcap/packages/dd-agent/embedded/share/system-probe/ebpf
   sysprobe_socket: /var/vcap/packages/dd-agent/run/sysprobe.sock
   log_file: /var/vcap/sys/log/dd-agent/system-probe.log
