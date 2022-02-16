@@ -279,7 +279,10 @@ properties:
     description: "The timeout to execute the command in second."
   dd.system_probe_enabled:
     default: false
-    description: Enable Network Performance Monitoring.
+    description: Enable System Probe.
+  dd.disable_network_performance_monitoring:
+    default: false
+    description: Disable Network Performance Monitoring.
   dd.cluster_agent_poll_interval:
     default: 10
     description: How often to poll the Cluster Agent for new config checks (in seconds).
