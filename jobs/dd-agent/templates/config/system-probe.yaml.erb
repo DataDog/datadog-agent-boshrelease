@@ -20,7 +20,6 @@ system_probe_config:
 
 network_config:
   enabled: <%= not p('dd.disable_network_performance_monitoring', false) %>
-<% end %>
 
 cloud_foundry: true
 <% if spec.id and not spec.id.empty? %>
