@@ -22,4 +22,4 @@ agent-bosh-prod-release:
   when: manual
   script:
     - 'export PRODUCTION=true'
-    - ./scripts/release.sh'
+    - ./scripts/release.sh
