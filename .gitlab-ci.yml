@@ -21,4 +21,5 @@ agent-bosh-prod-release:
   tags: ["runner:main"]
   when: manual
   script:
-    - export PRODUCTION=true; ./scripts/release.sh
+    - 'export PRODUCTION=true'
+    - ./scripts/release.sh'
