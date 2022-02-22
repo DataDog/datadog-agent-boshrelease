@@ -546,6 +546,8 @@ apm_config:
 #   Whether or not the APM Agent should run
 <% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
   enabled: true
+<% else %>
+  enabled: false
 <% end %>
 #   The full path to the file where trace-agent logs will be written.
   log_file: /var/vcap/sys/log/dd-agent/trace_agent.log
