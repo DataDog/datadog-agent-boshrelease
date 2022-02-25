@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.9.1 / 2022-02-24
+
+* [Added] Add option to disable Network Performance Monitoring when enabling system probe. See [#164](https://github.com/DataDog/datadog-agent-boshrelease/pull/164).
+* [Fixed] Fix option to enable/disable trace agent. See [#166](https://github.com/DataDog/datadog-agent-boshrelease/pull/166).
+
 ## 4.9.0 / 2022-02-07
 
 * [Added] Bump embedded Datadog Agent version to 7.33.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7330--6330).
