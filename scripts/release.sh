@@ -97,6 +97,7 @@ chmod 400 ~/.ssh/id_rsa_github
 # setup ssh key
 eval `ssh-agent -s`
 ssh-add ~/.ssh/id_rsa_github
+ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 # config git
 git config --global user.email "Robot-Github-IntegrationToolsandLibraries@datadoghq.com"
