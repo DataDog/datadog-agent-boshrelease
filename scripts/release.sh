@@ -98,6 +98,10 @@ chmod 400 ~/.ssh/id_rsa_github
 eval `ssh-agent -s`
 ssh-add ~/.ssh/id_rsa_github
 
+# config git
+git config --global user.email "Robot-Github-IntegrationToolsandLibraries@datadoghq.com"
+git config --global user.name "robot-github-intg-tools"
+
 # git commit it and then push it to the repo
 git add .
 git commit -m "releases datadog agent $VERSION"
