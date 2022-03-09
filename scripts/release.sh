@@ -89,6 +89,15 @@ fi
 # make sure we upload the blobs
 bosh upload-blobs
 
+# get github credentials
+mkdir -p ~/.ssh
+aws ssm get-parameter --name ci.datadog-agent-boshrelease.ssh_private_key --with-decryption --query "Parameter.Value" --out text --region us-east-1 > ~/.ssh/id_rsa_github
+chmod 400 ~/.ssh/id_rsa_github
+
+# setup ssh key
+eval `ssh-agent -s`
+ssh-add ~/.ssh/id_rsa_github
+
 # git commit it and then push it to the repo
 git add .
 git commit -m "releases datadog agent $VERSION"
