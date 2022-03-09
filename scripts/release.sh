@@ -101,6 +101,7 @@ ssh-add ~/.ssh/id_rsa_github
 # config git
 git config --global user.email "Robot-Github-IntegrationToolsandLibraries@datadoghq.com"
 git config --global user.name "robot-github-intg-tools"
+git remote set-url origin git@github.com:DataDog/datadog-agent-boshrelease.git
 
 # git commit it and then push it to the repo
 git add .
