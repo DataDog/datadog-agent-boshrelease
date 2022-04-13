@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.9.2 / 2022-04-13
+
+* [Added] Bump embedded Datadog Agent version to 7.35.1. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7351--6351).
+
 ## 4.9.1 / 2022-02-24
 
 * [Added] Add option to disable Network Performance Monitoring when enabling system probe. See [#164](https://github.com/DataDog/datadog-agent-boshrelease/pull/164).
