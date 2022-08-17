@@ -1,8 +1,11 @@
 # Changelog
 
+## 4.11.1 / 2022-08-17
+
+* [Added] Increase monit stop timeout from 30s (default) to 90s. Read more about it [here](https://github.com/DataDog/datadog-agent-boshrelease/pull/174).
+
 ## 4.11.0 / 2022-08-03
 
-* [Added] Bump embedded Datadog Agent version to 7.37.1. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7.37.1--6.37.1).
 * [Added] Bump embedded Datadog Agent version to 7.37.1. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7371--6371).
 
 ## 4.10.0 / 2022-06-09
