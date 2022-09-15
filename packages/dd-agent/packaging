@@ -39,20 +39,20 @@ echo "extracting package"
 if [ $OS == "Debian" ]; then
   dpkg -x dd-agent/datadog-agent_${DD_AGENT_VERSION}-1_amd64.deb ./extracted-agent
 
-  cp -R ./extracted-agent/opt/datadog-agent/* ${BOSH_INSTALL_TARGET}
-  cp -R ./extracted-agent/etc/datadog-agent ${BOSH_INSTALL_TARGET}/etc
+  cp -Rp ./extracted-agent/opt/datadog-agent/* ${BOSH_INSTALL_TARGET}
+  cp -Rp ./extracted-agent/etc/datadog-agent ${BOSH_INSTALL_TARGET}/etc
 fi
 
 if [ $OS == "RedHat" ]; then
   pushd ./extracted-agent
     rpm2cpio ../dd-agent/datadog-agent-${DD_AGENT_VERSION}-1.x86_64.rpm | cpio -idmv --no-absolute-filenames
   popd
-  cp -R ./extracted-agent/opt/datadog-agent/* ${BOSH_INSTALL_TARGET}
-  cp -R ./extracted-agent/etc/datadog-agent ${BOSH_INSTALL_TARGET}/etc
+  cp -Rp ./extracted-agent/opt/datadog-agent/* ${BOSH_INSTALL_TARGET}
+  cp -Rp ./extracted-agent/etc/datadog-agent ${BOSH_INSTALL_TARGET}/etc
 fi
 
 mkdir -p $DIST_DIR/conf.d
-cp -R ./extracted-agent/etc/datadog-agent/conf.d $DIST_DIR/conf.d
+cp -Rp ./extracted-agent/etc/datadog-agent/conf.d $DIST_DIR/conf.d
 
 # Install custom checks
 echo "Adding custom checks ..."
