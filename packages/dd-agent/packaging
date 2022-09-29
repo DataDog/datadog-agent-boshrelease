@@ -47,7 +47,6 @@ if [ $OS == "RedHat" ]; then
   pushd ./extracted-agent
     rpm2cpio ../dd-agent/datadog-agent-${DD_AGENT_VERSION}-1.x86_64.rpm | cpio -idmv --no-absolute-filenames
   popd
-
   cp -R ./extracted-agent/opt/datadog-agent/* ${BOSH_INSTALL_TARGET}
   cp -R ./extracted-agent/etc/datadog-agent ${BOSH_INSTALL_TARGET}/etc
 fi
