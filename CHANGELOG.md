@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.11.2 / 2022-10-11
+
+* [Fixed] Fix system-probe ownership issue. Read more about it [here](https://github.com/DataDog/datadog-agent-boshrelease/pull/176).
+
 ## 4.11.1 / 2022-08-17
 
 * [Added] Increase monit stop timeout from 30s (default) to 90s. Read more about it [here](https://github.com/DataDog/datadog-agent-boshrelease/pull/174).
