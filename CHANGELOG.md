@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.12.0 / 2022-11-14
+
+* [Added] Bump embedded Datadog Agent version to 7.40.1. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7401--6401).
+
 ## 4.11.2 / 2022-10-11
 
 * [Fixed] Fix system-probe ownership issue. Read more about it [here](https://github.com/DataDog/datadog-agent-boshrelease/pull/176).
