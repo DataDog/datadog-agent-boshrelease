@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.12.1 / 2022-11-16
+
+* [Added] Bump embedded Datadog Agent version to 7.40.2\~pcf\~beta\~container\~tagger\~image. It consists of the Datadog Agent version 7.40.1 in addition to this [fix](https://github.com/DataDog/datadog-agent/pull/14267). Image branch [here](https://github.com/DataDog/datadog-agent/tree/7.40.2-pcf-beta-container-tagger-image)
+
 ## 4.12.0 / 2022-11-14
 
 * [Added] Bump embedded Datadog Agent version to 7.40.1. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7401--6401).
