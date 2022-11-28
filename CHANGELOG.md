@@ -1,6 +1,10 @@
 # Changelog
 
-## 4.12.1-beta / 2022-11-16
+## 4.12.2 / 2022-11-28
+
+Fixes a `missing .deb package error` introduced in the previous release.
+
+## 4.12.1 / 2022-11-16
 
 * [Added] Bump embedded Datadog Agent version to 7.40.2\~pcf\~beta\~container\~tagger\~image. It consists of the Datadog Agent version 7.40.1 in addition to this [fix](https://github.com/DataDog/datadog-agent/pull/14267). Image branch [here](https://github.com/DataDog/datadog-agent/tree/7.40.2-pcf-beta-container-tagger-image)
 
