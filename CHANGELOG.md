@@ -2,7 +2,7 @@
 
 ## 4.12.2 / 2022-11-28
 
-Fixes a `missing .deb package error` introduced in the previous release.
+Fixes missing debian package error in the previous release.
 
 ## 4.12.1 / 2022-11-16
 
