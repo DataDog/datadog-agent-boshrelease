@@ -1,8 +1,8 @@
 dd-agent/datadog-agent-7.40.2~pcf~beta~container~tagger~image-1.x86_64.rpm:
   size: 287996081
-  object_id: dbbbcdbe-8189-4779-6142-c49b5bcf9367
+  object_id: 9aa8deb9-614d-4947-60a5-93a7bb8b67fa
   sha: a754a4da0d59ada685aa453f5eca4b8a63d2c897
 dd-agent/datadog-agent_7.40.2~pcf~beta~container~tagger~image-1_amd64.deb:
   size: 292377300
-  object_id: 33c16eab-0381-40f3-4e38-528abec0a257
+  object_id: 3a62e707-cdd7-44aa-7bc1-d65b01f49583
   sha: 5b7750766eb6afcb0586e21209acd778554062af
