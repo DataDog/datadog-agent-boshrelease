@@ -292,6 +292,9 @@ properties:
   container_tagger.retry_interval:
     default: 10
     description: How often the Agent tries to inject tags in a Container.
+  container_tagger.shell_path:
+    default: "/bin/sh"
+    description: Path to the shell to use to run the update container tags script.
   cluster_agent.enabled:
     default: false
     description: Whether or not the cluster agent is enabled.
