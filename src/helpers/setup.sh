@@ -37,8 +37,6 @@ PYTHONPATH="$PACKAGES/$NAME/agent:$PYTHONPATH"
 PYTHONPATH="$PACKAGES/$NAME/$EMBEDDED_PATH/lib-dynload:$PYTHONPATH"
 export PYTHONPATH="$PACKAGES/$NAME/bin/agent/dist:$PYTHONPATH"
 
-export PYTHONHOME="$PACKAGES/$NAME/embedded/"
-
 # export directories
 export LOG_DIR="/var/vcap/sys/log/$NAME"
 export RUN_DIR="/var/vcap/sys/run/$NAME"
@@ -60,6 +58,10 @@ if [ -f /etc/redhat-release -o "$DISTRIBUTION" == "RedHat" -o "$DISTRIBUTION" ==
 else
     export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
 fi
+
+"$PACKAGES/$NAME/embedded/bin/python3" parse_python_path.py "$PACKAGES/$NAME/helpers/.python_env"
+source "$PACKAGES/$NAME/helpers/.python_env"
+export PYTHONPATH
 
 set +e
 set +u
