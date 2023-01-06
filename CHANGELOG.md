@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.13.0 / 2023-01-06
+
+* [Added] Bump embedded Datadog Agent version to 7.41.1. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7411--6411).
+* [Added] Add options for the `cloud_foundry_container_tagger`. See [#187](https://github.com/DataDog/datadog-agent-boshrelease/pull/187).
+
 ## 4.12.2 / 2022-11-28
 
 Fixes missing debian package error in the previous release.
