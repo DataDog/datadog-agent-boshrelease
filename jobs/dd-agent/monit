@@ -4,7 +4,7 @@ check process datadog-agent
   stop program "/var/vcap/jobs/dd-agent/bin/agent_ctl stop" with timeout 90 seconds
   group vcap
 
-<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
 check process dd-agent-process-agent
   with pidfile /var/vcap/sys/run/dd-agent/process_agent.pid
   start program "/var/vcap/jobs/dd-agent/bin/process_agent_ctl start"
@@ -12,7 +12,7 @@ check process dd-agent-process-agent
   group vcap
 <% end %>
 
-<% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
 check process dd-agent-trace-agent
   with pidfile /var/vcap/sys/run/dd-agent/trace_agent.pid
   start program "/var/vcap/jobs/dd-agent/bin/trace_agent_ctl start"
@@ -20,7 +20,7 @@ check process dd-agent-trace-agent
   group vcap
 <% end %>
 
-<% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
 check process dd-agent-system-probe
   with pidfile /var/vcap/sys/run/dd-agent/system-probe.pid
   start program "/var/vcap/jobs/dd-agent/bin/system_probe_ctl start"
