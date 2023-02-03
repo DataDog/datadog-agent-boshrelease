@@ -103,7 +103,7 @@ cp -R ${PACKAGES}/dd-agent/etc/conf.d/* $CONFD_DIR/
 
 
 # Process checks
-<% if p('dd.generate_processes') == true || p('dd.generate_processes') =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.generate_processes') == true || p('dd.generate_processes').to_s =~ (/(true|t|yes|y|1)$/i) %>
 mkdir -p ${CONFD_DIR}/process.d/
 cat <<EOF > "${CONFD_DIR}/process.d/default_process.yaml"
 ---
@@ -111,10 +111,10 @@ init_config:
   pid_cache_duration: 120
 
 instances:
-<% if p('dd.generate_monit_processes') == true || p('dd.generate_monit_processes') =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.generate_monit_processes') == true || p('dd.generate_monit_processes').to_s =~ (/(true|t|yes|y|1)$/i) %>
 $(create_dd_instances "$JOBS_DIR")
 <% end %>
-<% if p('dd.generate_system_processes') == true || p('dd.generate_system_processes') =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.generate_system_processes') == true || p('dd.generate_system_processes').to_s =~ (/(true|t|yes|y|1)$/i) %>
   - name: sshd
     exact_match: false
     search_string:
@@ -134,7 +134,7 @@ EOF
 
 
 # NTP
-<% if p('dd.generate_ntp_config') == true || p('dd.generate_ntp_config') =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.generate_ntp_config') == true || p('dd.generate_ntp_config').to_s =~ (/(true|t|yes|y|1)$/i) %>
 mkdir -p ${CONFD_DIR}/ntp.d
 cat <<EOF > "${CONFD_DIR}/ntp.d/ntp.yaml"
 ---
@@ -152,7 +152,7 @@ EOF
 <% end %>
 
 # Network
-<% if p('dd.generate_network_config') == true || p('dd.generate_network_config') =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.generate_network_config') == true || p('dd.generate_network_config').to_s =~ (/(true|t|yes|y|1)$/i) %>
 mkdir -p ${CONFD_DIR}/network.d/
 cat <<EOF > "${CONFD_DIR}/network.d/network.yaml"
 ---
@@ -169,7 +169,7 @@ EOF
 <% end %>
 
 # Mounts
-<% if p('dd.generate_disk_config') == true || p('dd.generate_disk_config') =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.generate_disk_config') == true || p('dd.generate_disk_config').to_s =~ (/(true|t|yes|y|1)$/i) %>
 mkdir -p ${CONFD_DIR}/disk.d
 cat <<EOF > "${CONFD_DIR}/disk.d/disk.yaml"
 ---

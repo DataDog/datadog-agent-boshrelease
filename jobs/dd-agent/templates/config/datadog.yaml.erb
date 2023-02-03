@@ -117,7 +117,7 @@ bosh_id: <%= spec.id %>
 # Set the host's tags
 <%
 generated_tags = {}
-if p('dd.bosh_tags') == true || p('dd.bosh_tags') =~ (/(true|t|yes|y|1)$/i)
+if p('dd.bosh_tags') == true || p('dd.bosh_tags').to_s =~ (/(true|t|yes|y|1)$/i)
     bosh_tags_prefix=p('dd.bosh_tags_prefix', 'bosh_')
     generated_tags["#{bosh_tags_prefix}id"] = spec.id if spec.id and not spec.id.empty?
     generated_tags["#{bosh_tags_prefix}job"] = spec.name if spec.name and not spec.name.empty?
@@ -222,7 +222,7 @@ check_runners: <%= p('dd.check_runners', 1) %>
 # Metadata collection should always be enabled, except if you are running several
 # agents/dsd instances per host. In that case, only one agent should have it on.
 # WARNING: disabling it on every agent will lead to display and billing issues
-<% if p('dd.enable_metadata_collection') == true || p('dd.enable_metadata_collection') =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.enable_metadata_collection') == true || p('dd.enable_metadata_collection').to_s =~ (/(true|t|yes|y|1)$/i) %>
 enable_metadata_collection: yes
 <% else %>
 enable_metadata_collection: no
@@ -245,7 +245,7 @@ enable_gohai: <%= p('dd.enable_gohai', 'yes') %>
 # DogStatsd
 #
 # If you don't want to enable the DogStatsd server, set this option to no
-<% if p('dd.use_dogstatsd', true) == true || p('dd.use_dogstatsd', 'yes') =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.use_dogstatsd', true) == true || p('dd.use_dogstatsd', 'yes').to_s =~ (/(true|t|yes|y|1)$/i) %>
 use_dogstatsd: yes
 <% else %>
 use_dogstatsd: no
@@ -500,8 +500,8 @@ process_config:
   process_dd_url: <%= url %>
 <% end %>
 #   Note: the Process Agent expects this to be a string
-<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
-  <% if p('dd.process_agent_containers_only', false) == true || p('dd.process_agent_containers_only', false) =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+  <% if p('dd.process_agent_containers_only', false) == true || p('dd.process_agent_containers_only', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   enabled: "false"
   <% else %>
   enabled: "true"
@@ -511,7 +511,7 @@ process_config:
 <% end %>
 #   The full path to the file where process-agent logs will be written.
   log_file: /var/vcap/sys/log/dd-agent/process_agent.log
-<% if p('dd.strip_proc_arguments', false) == true || p('dd.strip_proc_arguments', false) =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.strip_proc_arguments', false) == true || p('dd.strip_proc_arguments', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   strip_proc_arguments: true
 <% end %>
 #   The interval, in seconds, at which we will run each check. If you want consistent
@@ -544,7 +544,7 @@ apm_config:
   apm_dd_url: <%= url %>
 <% end %>
 #   Whether or not the APM Agent should run
-<% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false) =~ (/(true|t|yes|y|1)$/i) %>
+<% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   enabled: true
 <% else %>
   enabled: false
