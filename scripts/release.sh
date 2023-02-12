@@ -25,7 +25,7 @@ if [ -z ${RELEASE_BUCKET+x} ]; then
   RELEASE_BUCKET="false"
 fi
 if [ -z ${REPO_BRANCH+x} ]; then
-  REPO_BRANCH="greg/test"
+  REPO_BRANCH="master"
 fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -34,16 +34,13 @@ WORKING_DIR="$DIR/.."
 mkdir -p $WORKING_DIR/blobstore
 
 # if bosh isn't on the docker image, download it
-if [ ! -f "/usr/local/bin/bosh" ]; then
+if [ ! -f "$(which bosh)" ]; then
   mkdir -p $WORKING_DIR/bin
   curl -sSL -o $WORKING_DIR/bin/bosh https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-2.0.48-linux-amd64
   chmod +x $WORKING_DIR/bin/bosh
   export PATH="$WORKING_DIR/bin:$PATH"
 fi
 
-git config --global push.default simple
-# git config --global user.name "Datadog"
-# git config --global user.email "dev@datadoghq.com"
 git checkout $REPO_BRANCH
 
 # if it's production set the bucket to production
@@ -71,6 +68,7 @@ fi
 
 # run the prepare script
 ./prepare
+
 bosh sync-blobs
 # release a dev version of the agent to ensure the cache is warm
 # (it's better to fail here than to fail when really attempting to release it)
@@ -79,13 +77,18 @@ bosh create-release --force --name "datadog-agent"
 # if it's a try run, then set the bucket to a local bucket
 # we have to make sure the cache is warm first
 if [ "$DRY_RUN" = "true" ]; then
-  cp $WORKING_DIR/config/final.yml.s3.local $WORKING_DIR/config/final.yml
+  cp $WORKING_DIR/config/final.yml.local $WORKING_DIR/config/final.yml
   echo '{}' > $WORKING_DIR/config/private.yml
   BUCKET_NAME=""
 fi
 
 # finally, release the agent
 ./release
+
+if [ "$DRY_RUN" == "true" ]; then
+  exit 0
+fi
+
 # make sure we upload the blobs
 bosh upload-blobs
 
@@ -107,6 +110,7 @@ git remote set-url origin git@github.com:DataDog/datadog-agent-boshrelease.git
 # git commit it and then push it to the repo
 git add .
 git commit -m "releases datadog agent $VERSION"
+git config --global push.default simple
 git push
 
 # cache the blobs
