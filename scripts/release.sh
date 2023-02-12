@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/usr/bin/env bash
 
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
 IFS=$'\n\t'
@@ -36,7 +36,7 @@ mkdir -p $WORKING_DIR/blobstore
 # if bosh isn't on the docker image, download it
 if [ ! -f "$(which bosh)" ]; then
   mkdir -p $WORKING_DIR/bin
-  curl -sSL -o $WORKING_DIR/bin/bosh https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-2.0.48-linux-amd64
+  curl -sSL -o $WORKING_DIR/bin/bosh https://github.com/cloudfoundry/bosh-cli/releases/download/v7.1.2/bosh-cli-7.1.2-linux-amd64
   chmod +x $WORKING_DIR/bin/bosh
   export PATH="$WORKING_DIR/bin:$PATH"
 fi
