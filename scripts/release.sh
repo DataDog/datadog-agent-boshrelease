@@ -34,7 +34,8 @@ WORKING_DIR="$DIR/.."
 mkdir -p $WORKING_DIR/blobstore
 
 # if bosh isn't on the docker image, download it
-if [ ! -f "$(which bosh)" ]; then
+if ! which bosh >/dev/null; then
+  echo "installing bosh"
   mkdir -p $WORKING_DIR/bin
   curl -sSL -o $WORKING_DIR/bin/bosh https://github.com/cloudfoundry/bosh-cli/releases/download/v7.1.2/bosh-cli-7.1.2-linux-amd64
   chmod +x $WORKING_DIR/bin/bosh
