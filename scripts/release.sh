@@ -84,7 +84,7 @@ if [ "$DRY_RUN" = "true" ]; then
 fi
 
 # finally, release the agent
-./scripts/release.sh
+./scripts/build.sh
 
 if [ "$DRY_RUN" == "true" ]; then
   exit 0
