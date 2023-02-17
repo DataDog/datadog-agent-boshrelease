@@ -68,7 +68,7 @@ if [ ! -f $WORKING_DIR/config/private.yml ]; then
 fi
 
 # run the prepare script
-./prepare
+./scripts/prepare.sh
 
 bosh sync-blobs
 # release a dev version of the agent to ensure the cache is warm
@@ -84,7 +84,7 @@ if [ "$DRY_RUN" = "true" ]; then
 fi
 
 # finally, release the agent
-./release
+./scripts/release.sh
 
 if [ "$DRY_RUN" == "true" ]; then
   exit 0

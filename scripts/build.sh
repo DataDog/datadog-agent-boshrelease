@@ -6,12 +6,11 @@ set -euxo pipefail
 
 RELEASE="datadog-agent"
 
-./prepare
+./scripts/prepare.sh
 
-if [ ! -f './config/private.yml' ]; then
-  # Setting it up could eventually be templated
+if [ ! -f ./config/private.yml ]; then
+  echo '{}' > ./config/private.yml
   echo "you need to set up your private.yml"
-  exit 1
 fi
 
 VERSION_STRING=""
@@ -21,13 +20,13 @@ if [[ ! -z $VERSION ]]; then
 fi
 
 # setting up the local blobstore
-# cp config/final.yml config/final.yml.bk
-# cp config/final.yml.local config/final.yml
+cp config/final.yml config/final.yml.bk
+cp config/final.yml.local config/final.yml
 
 # Creating the release
 bosh create-release --force --final --tarball=datadog-agent-release.tgz --name $RELEASE $VERSION_STRING
 
 bosh upload-blobs
 
-# cp config/final.yml.bk config/final.yml
-# rm config/final.yml.bk
+cp config/final.yml.bk config/final.yml
+rm config/final.yml.bk
