@@ -12,19 +12,19 @@ if [[ -z ${VERSION+x} ]]; then
 fi
 
 # Make sure variables are set
-if [ -z ${PRODUCTION+x} ]; then
+if [ -n "${PRODUCTION}" ]; then
   PRODUCTION="false"
 fi
-if [ -z ${STAGING+x} ]; then
+if [ -n "${STAGING}" ]; then
   STAGING="false"
 fi
-if [ -z ${DRY_RUN+x} ]; then
+if [ -n "${DRY_RUN}" ]; then
   DRY_RUN="false"
 fi
-if [ -z ${RELEASE_BUCKET+x} ]; then
+if [ -n "${RELEASE_BUCKET}" ]; then
   RELEASE_BUCKET="false"
 fi
-if [ -z ${REPO_BRANCH+x} ]; then
+if [ -n "${REPO_BRANCH}" ]; then
   REPO_BRANCH="master"
 fi
 
