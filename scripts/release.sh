@@ -12,21 +12,11 @@ if [[ -z ${VERSION+x} ]]; then
 fi
 
 # Make sure variables are set
-if [ -n "${PRODUCTION}" ]; then
-  PRODUCTION="false"
-fi
-if [ -n "${STAGING}" ]; then
-  STAGING="false"
-fi
-if [ -n "${DRY_RUN}" ]; then
-  DRY_RUN="false"
-fi
-if [ -n "${RELEASE_BUCKET}" ]; then
-  RELEASE_BUCKET="false"
-fi
-if [ -n "${REPO_BRANCH}" ]; then
-  REPO_BRANCH="master"
-fi
+PRODUCTION=${PRODUCTION:-"false"}
+STAGING=${STAGING:-"false"}
+DRY_RUN=${DRY_RUN:-"false"}
+RELEASE_BUCKET=${RELEASE_BUCKET:-"false"}
+REPO_BRANCH=${REPO_BRANCH:-"master"}
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 WORKING_DIR="$DIR/.."
