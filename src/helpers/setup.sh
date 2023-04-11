@@ -59,9 +59,5 @@ else
     export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
 fi
 
-"$PACKAGES/$NAME/embedded/bin/python3" parse_python_path.py "$PACKAGES/$NAME/helpers/.python_env"
-source "$PACKAGES/$NAME/helpers/.python_env"
-export PYTHONPATH
-
 set +e
 set +u
