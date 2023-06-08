@@ -14,7 +14,7 @@ fi
 # Make sure variables are set
 PRODUCTION=${PRODUCTION:-"false"}
 STAGING=${STAGING:-"false"}
-DRY_RUN=${DRY_RUN:-"false"}
+DRY_RUN=${DRY_RUN:-"true"}
 RELEASE_BUCKET=${RELEASE_BUCKET:-"false"}
 REPO_BRANCH=${REPO_BRANCH:-"master"}
 
