@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.14.0 / 2023-07-13
+
+* [Added] Bump embedded Datadog Agent version to 7.46.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7460--6460).
+
 ## 4.13.1 / 2023-02-06
 
 * [Fixed] Fix template rendering on BOSH directors running Ruby 3.2. See [#191](https://github.com/DataDog/datadog-agent-boshrelease/pull/191). Thanks [jpalermo](https://github.com/jpalermo).
