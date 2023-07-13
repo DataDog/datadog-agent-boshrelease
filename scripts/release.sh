@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -l
+#!/bin/bash -l
 
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
 IFS=$'\n\t'
