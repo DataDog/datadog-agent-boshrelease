@@ -37,8 +37,6 @@ PYTHONPATH="$PACKAGES/$NAME/agent:$PYTHONPATH"
 PYTHONPATH="$PACKAGES/$NAME/$EMBEDDED_PATH/lib-dynload:$PYTHONPATH"
 export PYTHONPATH="$PACKAGES/$NAME/bin/agent/dist:$PYTHONPATH"
 
-export PYTHONHOME="$PACKAGES/$NAME/embedded/"
-
 # export directories
 export LOG_DIR="/var/vcap/sys/log/$NAME"
 export RUN_DIR="/var/vcap/sys/run/$NAME"
