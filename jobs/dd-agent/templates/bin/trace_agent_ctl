@@ -16,8 +16,6 @@ source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "tr
 # Load function lib (alway before setup, there are some global variables needed)
 source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
 
-export DD_AGENT_PY_ENV="PYTHONPATH=$PYTHONPATH,LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
-export DD_AGENT_PY="$DD_AGENT_PYTHON"
 DD_TRACE_AGENT="$JOB_DIR/packages/dd-agent/embedded/bin/trace-agent"
 TRACE_AGENT_CMD="$DD_TRACE_AGENT --config=$JOB_DIR/config/datadog.yaml --pid=$PIDFILE"
 
