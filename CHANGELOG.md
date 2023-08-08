@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.14.1 / 2023-08-08
+
+* [Added] Bump embedded Datadog Agent version to 7.46.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7460--6460).
+* [Fixed] Fix python packaging and running the snowflake integration on CF. See [#188](https://github.com/DataDog/datadog-agent-boshrelease/pull/188).
+* [Removed] Remove references to deprecated python environment vars. See [#178](https://github.com/DataDog/datadog-agent-boshrelease/pull/178).
+
 ## 4.14.0 / 2023-07-13
 
 * [Added] Bump embedded Datadog Agent version to 7.46.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7460--6460).
