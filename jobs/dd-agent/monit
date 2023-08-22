@@ -1,3 +1,35 @@
+<% if p("bpm.enabled") %>
+check process datadog-agent
+  with pidfile /var/vcap/sys/run/bpm/dd-agent/datadog-agent.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start datadog-agent"
+  stop program "/var/vcap/jobs/bpm/binstop bpm start datadog-agent"  with timeout 90 seconds
+  group vcap
+
+<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+check process dd-agent-process-agent
+  with pidfile /var/vcap/sys/run/bpm/dd-agent/dd-agent-process-agent.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start dd-agent-process-agent"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop dd-agent-process-agent"  with timeout 90 seconds
+  group vcap
+<% end %>
+
+<% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+check process dd-agent-trace-agent
+  with pidfile /var/vcap/sys/run/bpm/dd-agent/dd-agent-trace-agent.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start dd-agent-trace-agent"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop dd-agent-trace-agent"  with timeout 90 seconds
+  group vcap
+<% end %>
+
+<% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+check process dd-agent-system-probe
+  with pidfile /var/vcap/sys/run/bpm/dd-agent/dd-agent-system-probe.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start dd-agent-system-probe"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop dd-agent-system-probe"  with timeout 90 seconds
+  group root
+<% end %>
+
+<% else %>
 check process datadog-agent
   with pidfile /var/vcap/sys/run/dd-agent/agent.pid
   start program "/var/vcap/jobs/dd-agent/bin/agent_ctl start" with timeout 90 seconds
@@ -26,4 +58,5 @@ check process dd-agent-system-probe
   start program "/var/vcap/jobs/dd-agent/bin/system_probe_ctl start" with timeout 90 seconds
   stop program "/var/vcap/jobs/dd-agent/bin/system_probe_ctl stop" with timeout 90 seconds
   group root
+<% end %>
 <% end %>
