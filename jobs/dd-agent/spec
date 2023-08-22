@@ -7,6 +7,7 @@ templates:
   config/confd.sh.erb: config/confd.sh
   config/datadog.yaml.erb: config/datadog.yaml
   config/system-probe.yaml.erb: config/system-probe.yaml
+  config/bpm.yml.erb: config/bpm.yml
   data/properties.sh.erb: data/properties.sh
   bin/agent_ctl: bin/agent_ctl
   bin/pre-start: bin/pre-start

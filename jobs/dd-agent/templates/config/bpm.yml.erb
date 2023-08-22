@@ -1,0 +1,24 @@
+processes:
+  - name: datadog-agent
+    hooks: /var/vcap/jobs/dd-agent/bin/pre_start
+    executable: "/var/vcap/jobs/dd-agent/bin/agent_ctl"
+    
+<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+  - name: dd-agent-process-agent
+    hooks: /var/vcap/jobs/dd-agent/bin/pre_start
+    executable: "/var/vcap/jobs/dd-agent/bin/process_agent_ctl"
+<% end %>
+
+<% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+  - name: dd-agent-trace-agent
+    hooks: /var/vcap/jobs/dd-agent/bin/pre_start
+    executable: "/var/vcap/jobs/dd-agent/bin/trace_agent_ctl"
+<% end %>
+
+<% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+  - name: dd-agent-process-agent
+    hooks: /var/vcap/jobs/dd-agent/bin/pre_start
+    executable: "/var/vcap/jobs/dd-agent/bin/system_probe_ctl"
+    unsafe:
+      privileged:true
+<% end %>
