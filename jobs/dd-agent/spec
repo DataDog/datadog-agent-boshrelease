@@ -15,6 +15,9 @@ templates:
   bin/trace_agent_ctl: bin/trace_agent_ctl
 
 properties:
+  bpm.enabled:
+    description: "Enable Bosh Process Manager"
+    default: false
   dd.url:
     description: The host of the Datadog intake server for metrics
   dd.logs_dd_url:
