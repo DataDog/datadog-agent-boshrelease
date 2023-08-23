@@ -1,8 +1,8 @@
 processes:
   - name: datadog-agent
-    hooks: 
-      pre_start: /var/vcap/jobs/dd-agent/bin/pre_start
     workdir: /var/vcap/jobs/dd-agent
+    hooks: 
+      pre_start: /var/vcap/jobs/dd-agent/bin/pre-start
     executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent"
     args:
       - run
@@ -11,9 +11,9 @@ processes:
     
 <% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   - name: dd-agent-process-agent
-    hooks: 
-      pre_start: /var/vcap/jobs/dd-agent/bin/pre_start
     workdir: /var/vcap/jobs/dd-agent
+    hooks: 
+      pre_start: /var/vcap/jobs/dd-agent/bin/pre-start
     executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/embedded/bin/process-agent"
     args:
       - run
@@ -22,9 +22,9 @@ processes:
 
 <% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   - name: dd-agent-trace-agent
-    hooks: 
-      pre_start: /var/vcap/jobs/dd-agent/bin/pre_start
     workdir: /var/vcap/jobs/dd-agent
+    hooks: 
+      pre_start: /var/vcap/jobs/dd-agent/bin/pre-start
     executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/embedded/bin/trace-agent"
     args:
       - --config=/var/vcap/jobs/dd-agent/config/datadog.yaml
@@ -34,8 +34,7 @@ processes:
 <% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   - name: dd-agent-process-agent
     hooks: 
-      pre_start: /var/vcap/jobs/dd-agent/bin/pre_start
-    workdir: /var/vcap/jobs/dd-agent
+      pre_start: /var/vcap/jobs/dd-agent/bin/pre-start
     executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/embedded/bin/system-probe"
     args:
       - --config=$JOB_DIR/config/system-probe.yaml 
