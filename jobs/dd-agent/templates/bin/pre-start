@@ -27,5 +27,5 @@ fi
 
 ensure_agent_ownership
 
-sysctl -e -w net.ipv4.tcp_fin_timeout 10
-sysctl -e -w net.ipv4.tcp_tw_reuse 1
+# sysctl -e -w net.ipv4.tcp_fin_timeout 10
+# sysctl -e -w net.ipv4.tcp_tw_reuse 1
