@@ -1,24 +1,36 @@
 processes:
   - name: datadog-agent
     hooks: /var/vcap/jobs/dd-agent/bin/pre_start
-    executable: "/var/vcap/jobs/dd-agent/bin/agent_ctl"
+    executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent"
+    args:
+      - run
+      - -c 
+      - /var/vcap/jobs/dd-agent/config/
     
 <% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   - name: dd-agent-process-agent
     hooks: /var/vcap/jobs/dd-agent/bin/pre_start
-    executable: "/var/vcap/jobs/dd-agent/bin/process_agent_ctl"
+    executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/embedded/bin/process-agent"
+    args:
+      - run
+      - --config=/var/vcap/jobs/dd-agent/config/datadog.yaml
 <% end %>
 
 <% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   - name: dd-agent-trace-agent
     hooks: /var/vcap/jobs/dd-agent/bin/pre_start
-    executable: "/var/vcap/jobs/dd-agent/bin/trace_agent_ctl"
+    executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/embedded/bin/trace-agent"
+    args:
+      - --config=/var/vcap/jobs/dd-agent/config/datadog.yaml
+      
 <% end %>
 
 <% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   - name: dd-agent-process-agent
     hooks: /var/vcap/jobs/dd-agent/bin/pre_start
-    executable: "/var/vcap/jobs/dd-agent/bin/system_probe_ctl"
+    executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/embedded/bin/system-probe"
+    args:
+      - --config=$JOB_DIR/config/system-probe.yaml 
     unsafe:
       privileged:true
 <% end %>
