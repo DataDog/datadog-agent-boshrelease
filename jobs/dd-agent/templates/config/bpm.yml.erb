@@ -2,7 +2,7 @@ processes:
   - name: datadog-agent
     workdir: /var/vcap/jobs/dd-agent
     hooks: 
-      pre_start: /var/vcap/jobs/dd-agent/bin/pre-start
+      pre_start: /var/vcap/jobs/dd-agent/bin/agent_ctl
     executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent"
     args:
       - run
