@@ -18,7 +18,7 @@ templates:
 properties:
   bpm.enabled:
     description: "Enable Bosh Process Manager"
-    default: false
+    default: true
   dd.url:
     description: The host of the Datadog intake server for metrics
   dd.logs_dd_url:
