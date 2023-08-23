@@ -32,7 +32,7 @@ processes:
 <% end %>
 
 <% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
-  - name: dd-agent-process-agent
+  - name: dd-agent-system-probe
     hooks: 
       pre_start: /var/vcap/jobs/dd-agent/bin/pre-start
     executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/embedded/bin/system-probe"
