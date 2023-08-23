@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Unless explicitly stated otherwise all files in this repository are licensed under the Apache 2.0 License.
+# This product includes software developed at Datadog (https://www.datadoghq.com/).
+# Copyright 2017-Present Datadog, Inc.
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Load job properties
+source /var/vcap/jobs/dd-agent/data/properties.sh
+
+# Setup env vars and folders for the ctl script
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "process_agent"
+
+# Load function lib (alway before setup, there are some global variables needed)
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
