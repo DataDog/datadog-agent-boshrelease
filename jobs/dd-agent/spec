@@ -15,7 +15,6 @@ templates:
   bin/process_agent_ctl: bin/process_agent_ctl
   bin/system_probe_ctl: bin/system_probe_ctl
   bin/trace_agent_ctl: bin/trace_agent_ctl
-  bin/agent_pre_start: bin/agent_pre_start
   bin/process_agent_pre_start: bin/process_agent_pre_start
   bin/system_probe_pre_start: bin/system_probe_pre_start
   bin/trace_agent_pre_start: bin/trace_agent_pre_start
