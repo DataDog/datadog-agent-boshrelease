@@ -2,6 +2,8 @@ processes:
   - name: datadog-agent
     workdir: /var/vcap/jobs/dd-agent
     executable: "/var/vcap/jobs/dd-agent/bin/agent_bpm"
+    additional_volumes:
+      - path: /var/vcap/data/garden
     
 <% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   - name: dd-agent-process-agent
@@ -11,6 +13,8 @@ processes:
     executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/embedded/bin/process-agent"
     args:
       - --cfgpath=/var/vcap/jobs/dd-agent/config/datadog.yaml
+    additional_volumes:
+      - path: /var/vcap/data/garden
 <% end %>
 
 <% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
@@ -21,6 +25,8 @@ processes:
     executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/embedded/bin/trace-agent"
     args:
       - --config=/var/vcap/jobs/dd-agent/config/datadog.yaml
+    additional_volumes:
+      - path: /var/vcap/data/garden
       
 <% end %>
 
@@ -30,7 +36,9 @@ processes:
       pre_start: /var/vcap/jobs/dd-agent/bin/system_probe_pre_start
     executable: "/var/vcap/jobs/dd-agent/packages/dd-agent/embedded/bin/system-probe"
     args:
-      - --config=$JOB_DIR/config/system-probe.yaml 
+      - --config=$JOB_DIR/config/system-probe.yaml
+    additional_volumes:
+      - path: /var/vcap/data/garden
     unsafe:
       privileged: true
 <% end %>
