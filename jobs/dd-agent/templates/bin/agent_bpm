@@ -18,3 +18,22 @@ source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
 
 # Load function lib (alway before setup, there are some global variables needed)
 source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/agent-setup.sh
+
+DD_AGENT="$JOB_DIR/packages/dd-agent/bin/agent/agent"
+
+AGENT_COMMAND="$DD_AGENT run -c $JOB_DIR/config/"
+
+echon_log "Start Datadog Agent Control command"
+
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/ensure_directories.sh
+ensure_agent_ownership
+
+echon_log "Starting Datadog Agent $COMPONENT: "
+
+# There is a rare bug that can cause monit to lose track of the agent.
+# Monit thinks the agent is not running, but it is.
+# An orphaned agent must be killed before attempting to start it again,
+# So, run a check and kill it before attempting to start it.
+check_if_running_and_kill $AGENT_COMMAND "false"
+
+$AGENT_COMMAND

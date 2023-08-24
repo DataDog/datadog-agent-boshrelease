@@ -10,6 +10,7 @@ templates:
   config/bpm.yml.erb: config/bpm.yml
   data/properties.sh.erb: data/properties.sh
   bin/agent_ctl: bin/agent_ctl
+  bin/agent_bpm: bin/agent_bpm
   bin/pre-start: bin/pre-start
   bin/process_agent_ctl: bin/process_agent_ctl
   bin/system_probe_ctl: bin/system_probe_ctl
