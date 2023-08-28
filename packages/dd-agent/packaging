@@ -74,24 +74,19 @@ pushd ${DIST_DIR}
 popd
 
 echo "Fixing broken symbolic links"
-broken_links="/embedded/bin/bzfgrep
-/embedded/bin/bzcmp
-/embedded/bin/bzless
-/embedded/bin/bzegrep
-/embedded/ssl/cert.pem
+broken_links="/embedded/ssl/cert.pem
 /embedded/bin/python
 /embedded/bin/pip
-/embedded/bin/2to3"
+/embedded/bin/2to3
+/embedded/lib/libselinux.so
+/embedded/lib/libsepol.so"
+
 
 for link in $broken_links; do
   rm -f ${BOSH_INSTALL_TARGET}/${link}
 done
 
 pushd ${BOSH_INSTALL_TARGET}/embedded/bin
-  ln -s bzgrep bzfgrep
-  ln -s bzdiff bzcmp
-  ln -s bzmore bzless
-  ln -s bzgrep bzegrep
   ln -s python3 python
   ln -s pip3 pip
   ln -s 2to3-3.8 2to3
@@ -101,6 +96,10 @@ pushd ${BOSH_INSTALL_TARGET}/embedded/ssl
   ln -s ./certs/cacert.pem cert.pem
 popd
 
+pushd ${BOSH_INSTALL_TARGET}/embedded/lib
+  ln -s ${BOSH_INSTALL_TARGET}/embedded/lib/libselinux.so.1 libselinux.so
+  ln -s ${BOSH_INSTALL_TARGET}/embedded/lib/libsepol.so.2 libsepol.so
+popd
 
 echo "Fixing pkg config settings ..."
 pushd ${BOSH_INSTALL_TARGET}/embedded/lib/pkgconfig/
