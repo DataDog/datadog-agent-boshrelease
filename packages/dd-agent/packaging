@@ -97,8 +97,8 @@ pushd ${BOSH_INSTALL_TARGET}/embedded/ssl
 popd
 
 pushd ${BOSH_INSTALL_TARGET}/embedded/lib
-  ln -s ${BOSH_INSTALL_TARGET}/embedded/lib/libselinux.so.1 libselinux.so
-  ln -s ${BOSH_INSTALL_TARGET}/embedded/lib/libsepol.so.2 libsepol.so
+  ln -s libselinux.so.1 libselinux.so
+  ln -s libsepol.so.2 libsepol.so
 popd
 
 echo "Fixing pkg config settings ..."
