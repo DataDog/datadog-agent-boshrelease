@@ -287,7 +287,6 @@ properties:
     default: 10
     description: How often to poll the Cluster Agent for new config checks (in seconds).
   dd.enable_inventories_configuration:
-    default: false
     description: Enable Inventories Configuration. The Agent can send its own configuration to Datadog to be displayed in the Agent Configuration section of the host detail panel.
   container_tagger.retry_count:
     default: 10
