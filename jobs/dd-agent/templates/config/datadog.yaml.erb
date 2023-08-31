@@ -3,6 +3,10 @@
 dd_url: <%= p("dd.url") %>
 <% end %>
 
+<% if p("dd.enable_inventories_configuration", nil) %>
+inventories_configuration_enabled: <%= p("dd.enable_inventories_configuration") %>
+<% end %>
+
 # Logs agent
 #
 # Logs agent is disabled by default
