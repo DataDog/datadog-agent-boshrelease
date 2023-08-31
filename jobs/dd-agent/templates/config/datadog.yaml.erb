@@ -3,6 +3,11 @@
 dd_url: <%= p("dd.url") %>
 <% end %>
 
+<% if p("dd.enable_remote_configuration") %>
+remote_configuration: 
+  enabled: <%= p("dd.enable_remote_configuration") %>
+<% end %>
+
 # Logs agent
 #
 # Logs agent is disabled by default

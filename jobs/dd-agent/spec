@@ -286,6 +286,9 @@ properties:
   dd.cluster_agent_poll_interval:
     default: 10
     description: How often to poll the Cluster Agent for new config checks (in seconds).
+  dd.enable_remote_configuration:
+    default: false
+    description: Enable Remote Configuration
   container_tagger.retry_count:
     default: 10
     description: How many attempts the Agent tries to inject tags in a Container.
@@ -305,4 +308,3 @@ properties:
   cluster_agent.port:
     default: 5005
     description: Port to connect to the cluster agent.
-
