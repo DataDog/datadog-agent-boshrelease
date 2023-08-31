@@ -3,8 +3,8 @@
 dd_url: <%= p("dd.url") %>
 <% end %>
 
-<% if p("dd.enable_remote_configuration") %>
-remote_configuration: 
+<% if p("dd.enable_remote_configuration", nil) %>
+remote_configuration:
   enabled: <%= p("dd.enable_remote_configuration") %>
 <% end %>
 
