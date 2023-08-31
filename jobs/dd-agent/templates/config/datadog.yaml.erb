@@ -3,6 +3,11 @@
 dd_url: <%= p("dd.url") %>
 <% end %>
 
+<%# run_path needs to be correctly set for remote config to work %>
+<% if p("dd.run_path") %>
+run_path: <%= p("dd.run_path") %>
+<% end %>
+
 # Logs agent
 #
 # Logs agent is disabled by default
