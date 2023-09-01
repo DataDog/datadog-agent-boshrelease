@@ -286,6 +286,8 @@ properties:
   dd.cluster_agent_poll_interval:
     default: 10
     description: How often to poll the Cluster Agent for new config checks (in seconds).
+  dd.enable_inventories_configuration:
+    description: Enable Inventories Configuration. The Agent can send its own configuration to Datadog to be displayed in the Agent Configuration section of the host detail panel.
   dd.run_path:
     default: /var/vcap/jobs/dd-agent/packages/dd-agent/run
     description: Path to the run folder of the agent.
