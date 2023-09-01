@@ -289,6 +289,8 @@ properties:
   dd.run_path:
     default: /var/vcap/jobs/dd-agent/packages/dd-agent/run
     description: Path to the run folder of the agent.
+  dd.enable_remote_configuration:
+    description: Enable Remote Configuration
   container_tagger.retry_count:
     default: 10
     description: How many attempts the Agent tries to inject tags in a Container.
@@ -308,4 +310,3 @@ properties:
   cluster_agent.port:
     default: 5005
     description: Port to connect to the cluster agent.
-
