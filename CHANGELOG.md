@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.15.0 / 2023-09-05
+
+* [Added] Add `dd.enable_inventories_configuration` property. See [#200](https://github.com/DataDog/datadog-agent-boshrelease/pull/200).
+* [Added] Add `dd.enable_remote_configuration` property. See [#201](https://github.com/DataDog/datadog-agent-boshrelease/pull/201).
+* [Added] Add `dd.run_path` property. See [#202](https://github.com/DataDog/datadog-agent-boshrelease/pull/202).
+* [Fixed] Fix broken symlinks in the packaging script. See [#199](https://github.com/DataDog/datadog-agent-boshrelease/pull/199).
+
 ## 4.14.1 / 2023-08-08
 
 * [Fixed] Fix python packaging and running the snowflake integration on CF. See [#188](https://github.com/DataDog/datadog-agent-boshrelease/pull/188).
