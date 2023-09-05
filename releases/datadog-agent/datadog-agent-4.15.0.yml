@@ -1,0 +1,21 @@
+name: datadog-agent
+version: 4.15.0
+commit_hash: 5ec2c08
+uncommitted_changes: true
+jobs:
+- name: dd-agent
+  version: eb207247a14b092708b27ec7c67f1555fa318fd1bf7a7f239396bf17522f0aea
+  fingerprint: eb207247a14b092708b27ec7c67f1555fa318fd1bf7a7f239396bf17522f0aea
+  sha1: sha256:ce42b770616ed3ec47ce396861b217d9441dc24772372ed8d51f0c0af32809c2
+  packages:
+  - dd-agent
+packages:
+- name: dd-agent
+  version: 69fb13d9da122237f17091b26c569d137ed884f4536472ccc028d11ae5e56294
+  fingerprint: 69fb13d9da122237f17091b26c569d137ed884f4536472ccc028d11ae5e56294
+  sha1: sha256:2d9091f1edc0f128d1023ff677ec67d82787b37e43ed278262dbc4e815f1eff2
+  dependencies: []
+license:
+  version: 3e1bfe6017d53b457ee5186e88c5d6f39858c4f2eabce9cb42ba984c78bb8130
+  fingerprint: 3e1bfe6017d53b457ee5186e88c5d6f39858c4f2eabce9cb42ba984c78bb8130
+  sha1: sha256:63bc7d4c34c00006c2b43a797f5b42221cbab4cd5cc0290e372beda913fab74f
