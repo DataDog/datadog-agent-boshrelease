@@ -30,6 +30,7 @@ case ${1:-help} in
         } >>$LOG_DIR/$COMPONENT.stdout.log \
         2>>$LOG_DIR/$COMPONENT.stderr.log
     ) &
+    sleep 2
     echo "$(<${PIDFILE}). Done"
     ;;
   stop)
