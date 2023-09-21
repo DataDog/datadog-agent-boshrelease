@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.15.1 / 2023-09-21
+
+* [Added] Bump embedded Datadog Agent version to 7.46.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7460--6460).
+* [Fixed] Fix monit `execution failed` false negative on dd-agent processes. See [#204](https://github.com/DataDog/datadog-agent-boshrelease/pull/204).
+
 ## 4.15.0 / 2023-09-05
 
 * [Added] Add `dd.enable_inventories_configuration` property. See [#200](https://github.com/DataDog/datadog-agent-boshrelease/pull/200).
