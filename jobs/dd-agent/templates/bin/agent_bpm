@@ -22,7 +22,7 @@ source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/agent-setup.sh
 DD_AGENT="$JOB_DIR/packages/dd-agent/bin/agent/agent"
 PIDFILE="/var/vcap/sys/run/bpm/dd-agent/datadog-agent.pid"
 
-AGENT_COMMAND="$DD_AGENT run -c $JOB_DIR/config/ -p $PIDFILE"
+AGENT_COMMAND="$DD_AGENT run -c $JOB_DIR/config/"
 
 echon_log "Start Datadog Agent Control command"
 
