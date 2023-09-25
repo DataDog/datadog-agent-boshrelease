@@ -22,14 +22,13 @@ processes:
     capabilities: [NET_ADMIN, SYS_PTRACE]
     unsafe:
       host_pid_namespace: true
-
 <% end %>
-
 <% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   - name: dd-agent-trace-agent
     workdir: /var/vcap/jobs/dd-agent
     executable: "/var/vcap/jobs/dd-agent/bin/trace_agent_bpm"
-    - path: /var/vcap/sys/run/dd-agent
+    additional_volumes:
+      - path: /var/vcap/sys/run/dd-agent
         writable: true
     limits:
       open_files: 1024
