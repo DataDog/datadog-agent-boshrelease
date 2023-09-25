@@ -41,11 +41,7 @@ processes:
       - path: /var/vcap/data/garden/garden.sock
       - path: /var/vcap/sys/run/dd-agent
         writable: true
-      - path: /var/vcap/packages/dd-agent/run/
-        writable: true
-      - path:  /var/vcap/packages/dd-agent/embedded/share/system-probe/ebpf
-        writable: true
-      - path:  /var/vcap/packages/dd-agent/run/sysprobe.sock
+      - path: /var/vcap/packages/dd-agent/
         writable: true
     limits:
       open_files: 1024
