@@ -3,4 +3,9 @@ processes:
     workdir: /var/vcap/jobs/dd-agent
     executable: "/var/vcap/jobs/dd-agent/bin/agent_bpm"
     additional_volumes:
-      - path: /var/vcap/data/garden
+      - path: /var/vcap/data/garden/garden.sock
+      - path: /var/vcap/run/dd-agent
+        writable: true
+    limits:
+      open_files: 16384
+    capabilities: [NET_ADMIN, SYS_PTRACE]
