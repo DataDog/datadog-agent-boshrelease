@@ -17,7 +17,6 @@ templates:
   bin/agent_bpm: bin/agent_bpm
   bin/process_agent_bpm: bin/process_agent_bpm
   bin/trace_agent_bpm: bin/trace_agent_bpm
-  bin/system_probe_bpm: bin/system_probe_bpm
 properties:
   bpm.enabled:
     description: "Enable Bosh Process Manager"
