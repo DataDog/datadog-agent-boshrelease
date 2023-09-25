@@ -19,3 +19,22 @@ processes:
       open_files: 1024
     capabilities: [NET_ADMIN, SYS_PTRACE]
 <% end %>
+
+<% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+  - name: dd-agent-trace-agent
+    workdir: /var/vcap/jobs/dd-agent
+    executable: "/var/vcap/jobs/dd-agent/bin/trace_agent_bpm"
+    limits:
+      open_files: 1024
+    capabilities: [NET_ADMIN, SYS_PTRACE]
+<% end %>
+
+<% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+  - name: dd-agent-system-probe
+    executable: "/var/vcap/jobs/dd-agent/bin/system_probe_bpm"
+    limits:
+      open_files: 1024
+    capabilities: [NET_ADMIN, SYS_PTRACE]
+    unsafe:
+      privileged: true
+<% end %>

@@ -11,7 +11,12 @@ set -u # report the usage of uninitialized variables
 source /var/vcap/jobs/dd-agent/data/properties.sh
 
 # Setup env vars and folders for the ctl script
-source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "system-probe"
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "trace_agent"
 
 # Load function lib (alway before setup, there are some global variables needed)
 source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
+
+DD_TRACE_AGENT="$JOB_DIR/packages/dd-agent/embedded/bin/trace-agent"
+TRACE_AGENT_CMD="$DD_TRACE_AGENT --config=$JOB_DIR/config/datadog.yaml"
+
+$TRACE_AGENT_CMD
