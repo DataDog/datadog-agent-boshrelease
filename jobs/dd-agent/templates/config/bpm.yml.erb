@@ -4,8 +4,18 @@ processes:
     executable: "/var/vcap/jobs/dd-agent/bin/agent_bpm"
     additional_volumes:
       - path: /var/vcap/data/garden/garden.sock
-      - path: /var/vcap/run/dd-agent
+      - path: /var/vcap/sys/run/dd-agent
         writable: true
     limits:
-      open_files: 16384
+      open_files: 1024
     capabilities: [NET_ADMIN, SYS_PTRACE]
+<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+  - name: dd-agent-process-agent
+    workdir: /var/vcap/jobs/dd-agent
+    executable: "/var/vcap/jobs/dd-agent/bin/process_agent_bpm"
+    additional_volumes:
+      - path: /var/vcap/data/garden/garden.sock
+    limits:
+      open_files: 1024
+    capabilities: [NET_ADMIN, SYS_PTRACE]
+<% end %>

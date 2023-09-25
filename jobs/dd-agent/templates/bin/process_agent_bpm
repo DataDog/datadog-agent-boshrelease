@@ -17,6 +17,29 @@ source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "pr
 source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
 
 DD_PROCESS_AGENT="$JOB_DIR/packages/dd-agent/embedded/bin/process-agent"
-PROCESS_AGENT_CMD="$DD_PROCESS_AGENT --config=$JOB_DIR/config/datadog.yaml --pid=$PIDFILE"
+PROCESS_AGENT_CMD="$DD_PROCESS_AGENT --config=$JOB_DIR/config/datadog.yaml"
 
-$PROCESS_AGENT_CMD
+
+case ${1:-help} in
+  start)
+    echon_log "Starting Datadog Agent $COMPONENT: "
+    pid_guard $PIDFILE "dd-agent-$COMPONENT"
+    (
+        {
+            exec chpst -v -u vcap:vcap $PROCESS_AGENT_CMD
+        } >>$LOG_DIR/$COMPONENT.stdout.log \
+        2>>$LOG_DIR/$COMPONENT.stderr.log
+    ) &
+    echo "$(<${PIDFILE}). Done"
+    ;;
+  stop)
+    printf_log "Stopping Datadog $COMPONENT: $(<${PIDFILE}). "
+    kill_and_wait $PIDFILE 25 true
+    find_pid_kill_and_wait $DD_PROCESS_AGENT
+    printf_log "Done"
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+    ;;
+esac
+exit 0
