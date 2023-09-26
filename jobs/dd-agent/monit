@@ -21,6 +21,14 @@ check process dd-agent-trace-agent
   group vcap
 <% end %>
 
+<% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+check process dd-agent-system-probe
+  with pidfile /var/vcap/sys/run/bpm/dd-agent/dd-agent-system-probe.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start dd-agent -p dd-agent-system-probe"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop dd-agent -p dd-agent-system-probe"  with timeout 90 seconds
+  group root
+<% end %>
+
 <% else %>
 check process datadog-agent
   with pidfile /var/vcap/sys/run/dd-agent/agent.pid

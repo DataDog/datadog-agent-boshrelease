@@ -34,3 +34,18 @@ processes:
       open_files: 1024
     capabilities: [NET_ADMIN, SYS_PTRACE]
 <% end %>
+<% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+  - name: dd-agent-system-probe
+    executable: "/var/vcap/jobs/dd-agent/bin/system_probe_bpm"
+    additional_volumes:
+      - path: /var/vcap/data/garden/garden.sock
+      - path: /var/vcap/sys/run/dd-agent
+        writable: true
+      - path: /var/vcap/packages/dd-agent
+        writable: true
+    limits:
+      open_files: 1024
+    capabilities: [NET_ADMIN, SYS_PTRACE]
+    unsafe:
+      privileged: true
+<% end %>
