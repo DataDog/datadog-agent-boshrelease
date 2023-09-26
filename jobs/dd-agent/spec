@@ -346,3 +346,12 @@ properties:
   bpm.trace_agent.processes:
     description: "The number of processes which the trace-agent process is allowed to have running at any one moment (inclusive of the main process)."
     default: 10
+  bpm.system_probe.memory:
+    description: "The memory limit to apply to the system-probe. It is formatted as a number and then a single character for units e.g. 1G, 256M."
+    default: "256M"
+  bpm.system_probe.open_files:
+    description: "The number of files the system-probe process is allowed to have open at any one time."
+    default: 1024
+  bpm.system_probe.processes:
+    description: "The number of processes which the system-probe process is allowed to have running at any one moment (inclusive of the main process)."
+    default: 10

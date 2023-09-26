@@ -86,8 +86,9 @@ processes:
         writable: true
         allow_executions: true
     limits:
-      memory: 256M
-      open_files: 1024
+      memory: <%= p("bpm.system_probe.memory") %>
+      open_files: <%= p("bpm.system_probe.open_files") %>
+      processes: <%= p("bpm.system_probe.processes") %>
     unsafe:
       host_pid_namespace: true
       unrestricted_volumes:
