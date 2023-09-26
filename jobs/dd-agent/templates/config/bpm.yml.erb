@@ -41,7 +41,7 @@ processes:
       - path: /var/vcap/data/garden/garden.sock
       - path: /var/vcap/sys/run/dd-agent
         writable: true
-      - path: /var/vcap/packages/dd-agent
+      - path: /var/vcap/packages/dd-agent/run
         writable: true
         allow_executions: true
     limits:
@@ -50,5 +50,4 @@ processes:
       privileged: true
       unrestricted_volumes:
         - path: /sys/kernel
-          allow_executions: true
 <% end %>
