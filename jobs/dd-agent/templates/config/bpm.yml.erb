@@ -24,6 +24,8 @@ processes:
     capabilities: [NET_ADMIN, SYS_PTRACE]
     unsafe:
       host_pid_namespace: true
+      unrestricted_volumes:
+        - path: /sys/fs/cgroup
 <% end %>
 <% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   - name: dd-agent-trace-agent
