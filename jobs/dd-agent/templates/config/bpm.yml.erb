@@ -43,9 +43,12 @@ processes:
         writable: true
       - path: /var/vcap/packages/dd-agent
         writable: true
+        allow_executions: true
     limits:
       open_files: 1024
-    capabilities: [NET_ADMIN, SYS_PTRACE]
     unsafe:
       privileged: true
+      unrestricted_volumes:
+        - path: /sys/kernel
+          allow_executions: true
 <% end %>
