@@ -6,6 +6,8 @@ processes:
       - path: /var/vcap/data/garden/garden.sock
       - path: /var/vcap/sys/run/dd-agent
         writable: true
+      - path: /var/vcap/jobs/dd-agent/packages/dd-agent/run
+        writable: true
     limits:
       memory: 256M
       open_files: 1024
