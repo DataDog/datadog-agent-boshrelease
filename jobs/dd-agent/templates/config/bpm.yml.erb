@@ -8,10 +8,19 @@ processes:
         writable: true
       - path: /var/vcap/jobs/dd-agent/packages/dd-agent/run
         writable: true
+        allow_executions: true
+      - path: /var/vcap/packages/dd-agent/run
+        writable: true
+        allow_executions: true
     limits:
       memory: 256M
       open_files: 1024
     capabilities: [NET_ADMIN, SYS_PTRACE]
+    unsafe:
+      host_pid_namespace: true
+      unrestricted_volumes:
+        - path: /sys/kernel
+        - path: /sys/fs/cgroup
 <% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   - name: dd-agent-process-agent
     workdir: /var/vcap/jobs/dd-agent
@@ -20,6 +29,12 @@ processes:
       - path: /var/vcap/data/garden/garden.sock
       - path: /var/vcap/sys/run/dd-agent
         writable: true
+      - path: /var/vcap/jobs/dd-agent/packages/dd-agent/run
+        writable: true
+        allow_executions: true
+      - path: /var/vcap/packages/dd-agent/run
+        writable: true
+        allow_executions: true
     limits:
       memory: 128M
       open_files: 1024
@@ -27,6 +42,7 @@ processes:
     unsafe:
       host_pid_namespace: true
       unrestricted_volumes:
+        - path: /sys/kernel
         - path: /sys/fs/cgroup
 <% end %>
 <% if p('dd.trace_agent_enabled', false) == true || p('dd.trace_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
@@ -34,12 +50,24 @@ processes:
     workdir: /var/vcap/jobs/dd-agent
     executable: "/var/vcap/jobs/dd-agent/bin/trace_agent_bpm"
     additional_volumes:
+      - path: /var/vcap/data/garden/garden.sock
       - path: /var/vcap/sys/run/dd-agent
         writable: true
+      - path: /var/vcap/jobs/dd-agent/packages/dd-agent/run
+        writable: true
+        allow_executions: true
+      - path: /var/vcap/packages/dd-agent/run
+        writable: true
+        allow_executions: true
     limits:
       memory: 128M
       open_files: 1024
     capabilities: [NET_ADMIN, SYS_PTRACE]
+    unsafe:
+      host_pid_namespace: true
+      unrestricted_volumes:
+        - path: /sys/kernel
+        - path: /sys/fs/cgroup
 <% end %>
 <% if p('dd.system_probe_enabled', false) == true || p('dd.system_probe_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
   - name: dd-agent-system-probe
@@ -48,14 +76,19 @@ processes:
       - path: /var/vcap/data/garden/garden.sock
       - path: /var/vcap/sys/run/dd-agent
         writable: true
+      - path: /var/vcap/jobs/dd-agent/packages/dd-agent/run
+        writable: true
+        allow_executions: true
       - path: /var/vcap/packages/dd-agent/run
         writable: true
         allow_executions: true
     limits:
       memory: 256M
-      open_files: 128
+      open_files: 1024
     unsafe:
-      privileged: true
+      host_pid_namespace: true
       unrestricted_volumes:
         - path: /sys/kernel
+        - path: /sys/fs/cgroup
+      privileged: true
 <% end %>
