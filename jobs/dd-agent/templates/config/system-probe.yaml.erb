@@ -3,6 +3,8 @@
 #
 log_level: <%= p("dd.log_level", "INFO") %>
 
+log_file: /var/vcap/sys/log/dd-agent/system-probe.log
+
 force_tls_12: <%= p("dd.force_tls_12") %>
 
 # Dogstatsd
@@ -15,7 +17,6 @@ system_probe_config:
   enabled: true
   bpf_dir: /var/vcap/packages/dd-agent/embedded/share/system-probe/ebpf
   sysprobe_socket: /var/vcap/packages/dd-agent/run/sysprobe.sock
-  log_file: /var/vcap/sys/log/dd-agent/system-probe.log
 <% end %>
 
 network_config:
