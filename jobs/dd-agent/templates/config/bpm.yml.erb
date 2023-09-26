@@ -13,8 +13,9 @@ processes:
         writable: true
         allow_executions: true
     limits:
-      memory: 256M
-      open_files: 1024
+      memory: <%= p("bpm.agent.memory") %>
+      open_files: <%= p("bpm.agent.open_files") %>
+      processes: <%= p("bpm.agent.processes") %>
     capabilities: [NET_ADMIN, SYS_PTRACE]
     unsafe:
       host_pid_namespace: true
