@@ -328,3 +328,12 @@ properties:
   bpm.agent.processes:
     description: "The number of processes which the agent process is allowed to have running at any one moment (inclusive of the main process)."
     default: 10
+  bpm.process_agent.memory:
+    description: "The memory limit to apply to the process-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M."
+    default: "128M"
+  bpm.process_agent.open_files:
+    description: "The number of files the process-agent process is allowed to have open at any one time."
+    default: 1024
+  bpm.process_agent.processes:
+    description: "The number of processes which the process-agent process is allowed to have running at any one moment (inclusive of the main process)."
+    default: 10
