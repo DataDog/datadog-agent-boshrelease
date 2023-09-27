@@ -317,41 +317,41 @@ properties:
     default: 5005
     description: Port to connect to the cluster agent.
   bpm.enabled:
-    description: "Enable Bosh Process Manager"
+    description: Use BPM (Bosh Process Manager) to manage datadog agent processes. Requires bpm-release to be installed.
     default: true
   bpm.agent.memory:
-    description: "The memory limit to apply to the agent. It is formatted as a number and then a single character for units e.g. 1G, 256M."
-    default: "256M"
+    description: The memory limit to apply to the agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
+    default: 256M
   bpm.agent.open_files:
-    description: "The number of files the agent process is allowed to have open at any one time."
+    description: The number of files the agent process is allowed to have open at any one time.
     default: 1024
   bpm.agent.processes:
-    description: "The number of processes which the agent process is allowed to have running at any one moment (inclusive of the main process)."
+    description: The number of processes which the agent process is allowed to have running at any one moment (inclusive of the main process).
     default: 256
   bpm.process_agent.memory:
-    description: "The memory limit to apply to the process-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M."
-    default: "128M"
+    description: The memory limit to apply to the process-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
+    default: 128M
   bpm.process_agent.open_files:
-    description: "The number of files the process-agent process is allowed to have open at any one time."
+    description: The number of files the process-agent process is allowed to have open at any one time.
     default: 1024
   bpm.process_agent.processes:
-    description: "The number of processes which the process-agent process is allowed to have running at any one moment (inclusive of the main process)."
+    description: The number of processes which the process-agent process is allowed to have running at any one moment (inclusive of the main process).
     default: 256
   bpm.trace_agent.memory:
-    description: "The memory limit to apply to the trace-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M."
-    default: "128M"
+    description: The memory limit to apply to the trace-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
+    default: 128M
   bpm.trace_agent.open_files:
-    description: "The number of files the trace-agent process is allowed to have open at any one time."
+    description: The number of files the trace-agent process is allowed to have open at any one time.
     default: 1024
   bpm.trace_agent.processes:
-    description: "The number of processes which the trace-agent process is allowed to have running at any one moment (inclusive of the main process)."
+    description: The number of processes which the trace-agent process is allowed to have running at any one moment (inclusive of the main process).
     default: 256
   bpm.system_probe.memory:
-    description: "The memory limit to apply to the system-probe. It is formatted as a number and then a single character for units e.g. 1G, 256M."
-    default: "256M"
+    description: The memory limit to apply to the system-probe. It is formatted as a number and then a single character for units e.g. 1G, 256M.
+    default: 256M
   bpm.system_probe.open_files:
-    description: "The number of files the system-probe process is allowed to have open at any one time."
+    description: The number of files the system-probe process is allowed to have open at any one time.
     default: 1024
   bpm.system_probe.processes:
-    description: "The number of processes which the system-probe process is allowed to have running at any one moment (inclusive of the main process)."
+    description: The number of processes which the system-probe process is allowed to have running at any one moment (inclusive of the main process).
     default: 256
