@@ -318,7 +318,7 @@ properties:
     description: Port to connect to the cluster agent.
   bpm.enabled:
     description: Use BPM (Bosh Process Manager) to manage datadog agent processes. Requires bpm-release to be installed.
-    default: true
+    default: false
   bpm.agent.memory:
     description: The memory limit to apply to the agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
     default: 256M
