@@ -327,7 +327,7 @@ properties:
     default: 1024
   bpm.agent.processes:
     description: "The number of processes which the agent process is allowed to have running at any one moment (inclusive of the main process)."
-    default: 10
+    default: 256
   bpm.process_agent.memory:
     description: "The memory limit to apply to the process-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M."
     default: "128M"
@@ -336,7 +336,7 @@ properties:
     default: 1024
   bpm.process_agent.processes:
     description: "The number of processes which the process-agent process is allowed to have running at any one moment (inclusive of the main process)."
-    default: 10
+    default: 256
   bpm.trace_agent.memory:
     description: "The memory limit to apply to the trace-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M."
     default: "128M"
@@ -345,7 +345,7 @@ properties:
     default: 1024
   bpm.trace_agent.processes:
     description: "The number of processes which the trace-agent process is allowed to have running at any one moment (inclusive of the main process)."
-    default: 10
+    default: 256
   bpm.system_probe.memory:
     description: "The memory limit to apply to the system-probe. It is formatted as a number and then a single character for units e.g. 1G, 256M."
     default: "256M"
@@ -354,4 +354,4 @@ properties:
     default: 1024
   bpm.system_probe.processes:
     description: "The number of processes which the system-probe process is allowed to have running at any one moment (inclusive of the main process)."
-    default: 10
+    default: 256
