@@ -321,7 +321,7 @@ properties:
     default: false
   bpm.agent.memory:
     description: The memory limit to apply to the agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
-    default: 256M
+    default: ""
   bpm.agent.open_files:
     description: The number of files the agent process is allowed to have open at any one time.
     default: 1024
@@ -330,7 +330,7 @@ properties:
     default: 256
   bpm.process_agent.memory:
     description: The memory limit to apply to the process-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
-    default: 128M
+    default: ""
   bpm.process_agent.open_files:
     description: The number of files the process-agent process is allowed to have open at any one time.
     default: 1024
@@ -339,7 +339,7 @@ properties:
     default: 256
   bpm.trace_agent.memory:
     description: The memory limit to apply to the trace-agent. It is formatted as a number and then a single character for units e.g. 1G, 256M.
-    default: 128M
+    default: ""
   bpm.trace_agent.open_files:
     description: The number of files the trace-agent process is allowed to have open at any one time.
     default: 1024
@@ -348,7 +348,7 @@ properties:
     default: 256
   bpm.system_probe.memory:
     description: The memory limit to apply to the system-probe. It is formatted as a number and then a single character for units e.g. 1G, 256M.
-    default: 256M
+    default: ""
   bpm.system_probe.open_files:
     description: The number of files the system-probe process is allowed to have open at any one time.
     default: 1024
