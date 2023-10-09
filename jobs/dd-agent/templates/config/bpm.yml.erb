@@ -19,7 +19,9 @@ processes:
 <% if p("bpm.agent.open_files") %>
       open_files: <%= p("bpm.agent.open_files") %>
 <% end %>
+<% if p("bpm.agent.processes") %>
       processes: <%= p("bpm.agent.processes") %>
+<% end %>
     capabilities: [NET_ADMIN, SYS_PTRACE]
     unsafe:
       host_pid_namespace: true
@@ -47,7 +49,9 @@ processes:
 <% if p("bpm.process_agent.open_files") %>
       open_files: <%= p("bpm.process_agent.open_files") %>
 <% end %>
+<% if p("bpm.process_agent.processes") %>
       processes: <%= p("bpm.process_agent.processes") %>
+<% end %>
     capabilities: [NET_ADMIN, SYS_PTRACE]
     unsafe:
       host_pid_namespace: true
@@ -76,7 +80,9 @@ processes:
 <% if p("bpm.trace_agent.open_files") %>
       open_files: <%= p("bpm.trace_agent.open_files") %>
 <% end %>
+<% if p("bpm.trace_agent.processes") %>
       processes: <%= p("bpm.trace_agent.processes") %>
+<% end %>
     capabilities: [NET_ADMIN, SYS_PTRACE]
     unsafe:
       host_pid_namespace: true
@@ -104,7 +110,9 @@ processes:
 <% if p("bpm.system_probe.open_files") %>
       open_files: <%= p("bpm.system_probe.open_files") %>
 <% end %>
+<% if p("bpm.system_probe.processes") %>
       processes: <%= p("bpm.system_probe.processes") %>
+<% end %>
     unsafe:
       host_pid_namespace: true
       unrestricted_volumes:
