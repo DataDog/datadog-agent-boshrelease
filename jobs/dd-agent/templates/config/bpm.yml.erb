@@ -13,7 +13,7 @@ processes:
         writable: true
         allow_executions: true
     limits:
-<% if p("bpm.agent.memory") %>
+<% if p("bpm.agent.memory") != "" %>
       memory: <%= p("bpm.agent.memory") %>
 <% end %>
 <% if p("bpm.agent.open_files") %>
@@ -43,7 +43,7 @@ processes:
         writable: true
         allow_executions: true
     limits:
-<% if p("bpm.process_agent.memory") %>
+<% if p("bpm.process_agent.memory") != "" %>
       memory: <%= p("bpm.process_agent.memory") %>
 <% end %>
 <% if p("bpm.process_agent.open_files") %>
@@ -74,7 +74,7 @@ processes:
         writable: true
         allow_executions: true
     limits:
-<% if p("bpm.trace_agent.memory") %>
+<% if p("bpm.trace_agent.memory") != "" %>
       memory: <%= p("bpm.trace_agent.memory") %>
 <% end %>
 <% if p("bpm.trace_agent.open_files") %>
@@ -104,7 +104,7 @@ processes:
         writable: true
         allow_executions: true
     limits:
-<% if p("bpm.system_probe.memory") %>
+<% if p("bpm.system_probe.memory") != "" %>
       memory: <%= p("bpm.system_probe.memory") %>
 <% end %>
 <% if p("bpm.system_probe.open_files") %>
