@@ -12,6 +12,9 @@ processes:
       - path: /var/vcap/packages/dd-agent/run
         writable: true
         allow_executions: true
+      - path: /var/vcap/jobs/dd-agent/packages/dd-agent/embedded/*
+        writable: true
+        allow_executions: true
     limits:
 <% if p("bpm.agent.memory") != "" %>
       memory: <%= p("bpm.agent.memory") %>
@@ -40,6 +43,9 @@ processes:
         writable: true
         allow_executions: true
       - path: /var/vcap/packages/dd-agent/run
+        writable: true
+        allow_executions: true
+      - path: /var/vcap/jobs/dd-agent/packages/dd-agent/embedded/*
         writable: true
         allow_executions: true
     limits:
@@ -73,6 +79,9 @@ processes:
       - path: /var/vcap/packages/dd-agent/run
         writable: true
         allow_executions: true
+      - path: /var/vcap/jobs/dd-agent/packages/dd-agent/embedded/*
+        writable: true
+        allow_executions: true
     limits:
 <% if p("bpm.trace_agent.memory") != "" %>
       memory: <%= p("bpm.trace_agent.memory") %>
@@ -101,6 +110,9 @@ processes:
         writable: true
         allow_executions: true
       - path: /var/vcap/packages/dd-agent/run/*
+        writable: true
+        allow_executions: true
+      - path: /var/vcap/jobs/dd-agent/packages/dd-agent/embedded/*
         writable: true
         allow_executions: true
     limits:
