@@ -18,7 +18,7 @@ export COMPONENT=${2:-$NAME}
 export PATH="$PACKAGES/$NAME/checks.d:$PACKAGES/$NAME/bin:$PACKAGES/$NAME/embedded/bin:$PATH"
 
 # Const for the path to the embedded py3 directory
-EMBEDDED_PATH="embedded/lib/python3.8"
+EMBEDDED_PATH="embedded/lib/python3.9"
 
 # Setup the LD_LIBRARY_PATH
 LD_LIBRARY_PATH=${LD_LIBRARY_PATH:-''}
