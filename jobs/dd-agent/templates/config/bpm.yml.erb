@@ -4,6 +4,9 @@ processes:
     executable: "/var/vcap/jobs/dd-agent/bin/agent_bpm"
     additional_volumes:
       - path: /var/vcap/data/garden/garden.sock
+      - path: /var/vcap/sys/tmp/dd-agent
+        allow_executions: true
+        writable: true
       - path: /var/vcap/sys/run/dd-agent
         writable: true
       - path: /var/vcap/jobs/dd-agent/packages/dd-agent/run
