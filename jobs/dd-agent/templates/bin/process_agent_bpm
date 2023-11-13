@@ -11,21 +11,12 @@ set -u # report the usage of uninitialized variables
 source /var/vcap/jobs/dd-agent/data/properties.sh
 
 # Setup env vars and folders for the ctl script
-source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent"
-
-# setup configuration
-source /var/vcap/jobs/dd-agent/config/confd.sh
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "process_agent"
 
 # Load function lib (alway before setup, there are some global variables needed)
-source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/agent-setup.sh
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
 
-source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/ensure_directories.sh
+DD_PROCESS_AGENT="$JOB_DIR/packages/dd-agent/embedded/bin/process-agent"
+PROCESS_AGENT_CMD="$DD_PROCESS_AGENT --config=$JOB_DIR/config/datadog.yaml"
 
-if [ ! -e /etc/datadog-agent ]; then
-  ln -s $JOB_DIR/config/ /etc/datadog-agent
-fi
-
-ensure_agent_ownership
-
-# sysctl -e -w net.ipv4.tcp_fin_timeout 10
-# sysctl -e -w net.ipv4.tcp_tw_reuse 1
+$PROCESS_AGENT_CMD

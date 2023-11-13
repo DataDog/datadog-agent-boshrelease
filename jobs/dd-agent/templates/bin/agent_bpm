@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# Unless explicitly stated otherwise all files in this repository are licensed under the Apache 2.0 License.
+# This product includes software developed at Datadog (https://www.datadoghq.com/).
+# Copyright 2017-Present Datadog, Inc.
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Load job properties
+source /var/vcap/jobs/dd-agent/data/properties.sh
+
+# Setup env vars and folders for the ctl script
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "agent"
+
+# Load function lib (alway before setup, there are some global variables needed)
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
+
+# Load function lib (alway before setup, there are some global variables needed)
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/agent-setup.sh
+
+DD_AGENT="$JOB_DIR/packages/dd-agent/bin/agent/agent"
+PIDFILE="/var/vcap/sys/run/bpm/dd-agent/datadog-agent.pid"
+
+AGENT_COMMAND="$DD_AGENT run -c $JOB_DIR/config/"
+
+echon_log "Start Datadog Agent Control command"
+
+source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/ensure_directories.sh
+ensure_agent_ownership
+
+echon_log "Starting Datadog Agent $COMPONENT: "
+
+# There is a rare bug that can cause monit to lose track of the agent.
+# Monit thinks the agent is not running, but it is.
+# An orphaned agent must be killed before attempting to start it again,
+# So, run a check and kill it before attempting to start it.
+check_if_running_and_kill $AGENT_COMMAND "false"
+
+$AGENT_COMMAND
