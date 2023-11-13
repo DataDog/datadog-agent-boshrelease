@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.16.0 / 2023-11-13
+
+* [Added] Bump embedded Datadog Agent version to 7.48.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7480--6480).
+* [Added] Add support for BPM. See [#206](https://github.com/DataDog/datadog-agent-boshrelease/pull/206).
+* [Added] Bump embedded python path to 3.9. See [#207](https://github.com/DataDog/datadog-agent-boshrelease/pull/207).
+
 ## 4.15.1 / 2023-09-21
 
 * [Fixed] Fix monit `execution failed` false negative on dd-agent processes. See [#204](https://github.com/DataDog/datadog-agent-boshrelease/pull/204).
