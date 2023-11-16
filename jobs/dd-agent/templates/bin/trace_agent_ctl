@@ -17,7 +17,7 @@ source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/setup.sh "dd-agent" "tr
 source /var/vcap/jobs/dd-agent/packages/dd-agent/helpers/lib.sh
 
 DD_TRACE_AGENT="$JOB_DIR/packages/dd-agent/embedded/bin/trace-agent"
-TRACE_AGENT_CMD="$DD_TRACE_AGENT --config=$JOB_DIR/config/datadog.yaml --pid=$PIDFILE"
+TRACE_AGENT_CMD="$DD_TRACE_AGENT --config=$JOB_DIR/config/datadog.yaml --pidfile=$PIDFILE"
 
 
 case ${1:-help} in
