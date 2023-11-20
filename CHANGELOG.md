@@ -2,7 +2,7 @@
 
 ## 4.16.0 / 2023-11-20
 
-* [Fixed] Fix trace_agent_ctl fails to start. Deprecated pid flag being used. Updated to --pidfile.
+* [Fixed] Fix trace_agent_ctl fails to start. Deprecated pid flag being used. Updated to --pidfile. See [#209](https://github.com/DataDog/datadog-agent-boshrelease/pull/209)
 
 ## 4.16.0 / 2023-11-13
 
