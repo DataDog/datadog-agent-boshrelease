@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.16.0 / 2023-11-20
+
+* [Fixed] Fix trace_agent_ctl fails to start. Deprecated pid flag being used. Updated to --pidfile.
+
 ## 4.16.0 / 2023-11-13
 
 * [Added] Bump embedded Datadog Agent version to 7.48.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7480--6480).
