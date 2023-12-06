@@ -1,9 +1,5 @@
 # Changelog
 
-## 4.16.0 / 2023-11-20
-
-* [Fixed] Fix `trace_agent_ctl` failing to start. Deprecated the `pid` flag being used, and upgraded to `--pidfile`. See [#209](https://github.com/DataDog/datadog-agent-boshrelease/pull/209).
-
 ## 4.16.0 / 2023-11-13
 
 * [Added] Bump embedded Datadog Agent version to 7.48.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7480--6480).
