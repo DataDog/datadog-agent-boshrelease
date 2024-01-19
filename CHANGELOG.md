@@ -1,6 +1,6 @@
 # Changelog
 
-## 4.16.1 / 2024-01-12
+## 4.16.1 / 2024-01-19
 
 * [Fixed] Fix trace_agent_ctl deprecated flag in use. See [#209](https://github.com/DataDog/datadog-agent-boshrelease/pull/209). Thanks [Simon-Wood1980](https://github.com/Simon-Wood1980).
 
