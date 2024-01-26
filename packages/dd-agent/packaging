@@ -112,7 +112,7 @@ if [ -d "${BOSH_INSTALL_TARGET}/embedded/lib/pkgconfig/" ]; then
   pushd ${BOSH_INSTALL_TARGET}/embedded/lib/pkgconfig/
     OLD_PREFIX="prefix=/opt/datadog-agent/embedded"
     NEW_PREFIX="prefix=/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/embedded"
-    for file in $(ls); do
+    for file in *; do
       if [ -f "${file}" -a ! -L "${file}" ]; then
         sed -i "s~${OLD_PREFIX}~${NEW_PREFIX}~" ${file}
       fi
