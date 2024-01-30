@@ -86,28 +86,36 @@ for link in $broken_links; do
   rm -f ${BOSH_INSTALL_TARGET}/${link}
 done
 
-pushd ${BOSH_INSTALL_TARGET}/embedded/bin
-  ln -s python3 python
-  ln -s pip3 pip
-  ln -s 2to3-3.8 2to3
-popd
+if [ -d "${BOSH_INSTALL_TARGET}/embedded/bin" ]; then
+  pushd ${BOSH_INSTALL_TARGET}/embedded/bin
+    ln -s python3 python
+    ln -s pip3 pip
+    ln -s 2to3-3.8 2to3
+  popd
+fi
 
-pushd ${BOSH_INSTALL_TARGET}/embedded/ssl
-  ln -s ./certs/cacert.pem cert.pem
-popd
+if [ -d "${BOSH_INSTALL_TARGET}/embedded/ssl" ]; then
+  pushd ${BOSH_INSTALL_TARGET}/embedded/ssl
+    ln -s ./certs/cacert.pem cert.pem
+  popd
+fi
 
-pushd ${BOSH_INSTALL_TARGET}/embedded/lib
-  ln -s libselinux.so.1 libselinux.so
-  ln -s libsepol.so.2 libsepol.so
-popd
+if [ -d "${BOSH_INSTALL_TARGET}/embedded/lib" ]; then
+  pushd ${BOSH_INSTALL_TARGET}/embedded/lib
+    ln -s libselinux.so.1 libselinux.so
+    ln -s libsepol.so.2 libsepol.so
+  popd
+fi
 
-echo "Fixing pkg config settings ..."
-pushd ${BOSH_INSTALL_TARGET}/embedded/lib/pkgconfig/
-  OLD_PREFIX="prefix=/opt/datadog-agent/embedded"
-  NEW_PREFIX="prefix=/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/embedded"
-  for file in $(ls); do
-    if [ -f "${file}" -a ! -L "${file}" ]; then
-      sed -i "s~${OLD_PREFIX}~${NEW_PREFIX}~" ${file}
-    fi
-  done
-popd
+if [ -d "${BOSH_INSTALL_TARGET}/embedded/lib/pkgconfig/" ]; then
+  echo "Fixing pkg config settings ..."
+  pushd ${BOSH_INSTALL_TARGET}/embedded/lib/pkgconfig/
+    OLD_PREFIX="prefix=/opt/datadog-agent/embedded"
+    NEW_PREFIX="prefix=/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/embedded"
+    for file in *; do
+      if [ -f "${file}" -a ! -L "${file}" ]; then
+        sed -i "s~${OLD_PREFIX}~${NEW_PREFIX}~" ${file}
+      fi
+    done
+  popd
+fi
