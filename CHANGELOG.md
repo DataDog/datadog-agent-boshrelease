@@ -1,8 +1,11 @@
 # Changelog
 
-## 4.16.1 / 2024-01-19
+## 4.17.0 / 2024-01-30
 
 * [Added] Bump embedded Datadog Agent version to 7.50.3. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7503--6503).
+
+## 4.16.1 / 2024-01-19
+
 * [Fixed] Fix trace_agent_ctl deprecated flag in use. See [#209](https://github.com/DataDog/datadog-agent-boshrelease/pull/209). Thanks [Simon-Wood1980](https://github.com/Simon-Wood1980).
 
 ## 4.16.0 / 2023-11-13
