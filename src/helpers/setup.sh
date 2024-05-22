@@ -18,7 +18,7 @@ export COMPONENT=${2:-$NAME}
 export PATH="$PACKAGES/$NAME/checks.d:$PACKAGES/$NAME/bin:$PACKAGES/$NAME/embedded/bin:$PATH"
 
 # Automatically detected the available python version
-DETECTED_PYTHON=$(ls "embedded/lib" | grep '^python3\.[0-9]*$' | head -n1)
+DETECTED_PYTHON=$(ls "$PACKAGES/$NAME/embedded/lib" | grep '^python3\.[0-9]*$' | head -n1)
 
 # Const for the path to the embedded py3 directory
 EMBEDDED_PATH="embedded/lib/$DETECTED_PYTHON"
