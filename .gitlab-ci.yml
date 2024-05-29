@@ -21,5 +21,6 @@ agent-bosh-prod-release:
   tags: ["runner:main"]
   # when: manual
   script:
-    - 'export PRODUCTION=false'
+    - export DRY_RUN=true VERSION=4.17.0
+    - 'export PRODUCTION=true'
     - ./scripts/release.sh
