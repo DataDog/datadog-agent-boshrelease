@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.18.0 / 2024-05-29
+
+* [Added] Bump embedded Datadog Agent version to 7.53.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7530--6530).
+* [Added] Automatically detect the Agent embedded Python version. See [#213](https://github.com/DataDog/datadog-agent-boshrelease/pull/213).
+
 ## 4.17.0 / 2024-01-30
 
 * [Added] Bump embedded Datadog Agent version to 7.50.3. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7503--6503).
