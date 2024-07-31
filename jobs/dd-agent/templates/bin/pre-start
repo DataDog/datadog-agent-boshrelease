@@ -27,5 +27,8 @@ fi
 
 ensure_agent_ownership
 
+# Install additional integrations
+source /var/vcap/jobs/dd-agent/config/extra-integrations.sh
+
 # sysctl -e -w net.ipv4.tcp_fin_timeout 10
 # sysctl -e -w net.ipv4.tcp_tw_reuse 1
