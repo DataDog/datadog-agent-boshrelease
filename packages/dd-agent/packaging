@@ -90,7 +90,7 @@ if [ -d "${BOSH_INSTALL_TARGET}/embedded/bin" ]; then
   pushd ${BOSH_INSTALL_TARGET}/embedded/bin
     ln -s python3 python
     ln -s pip3 pip
-    ln -s 2to3-3.8 2to3
+    ln -s 2to3-3.* 2to3
   popd
 fi
 
