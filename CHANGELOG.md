@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.19.0 / 2024-10-21
+
+* [Added] Bump embedded Datadog Agent version to 7.57.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7570).
+* [Added] Enable installing extra integrations not included in Agent package. See [#217](https://github.com/DataDog/datadog-agent-boshrelease/pull/217). Thanks [wpt1313](https://github.com/wpt1313).
+* [Fixed] Fix `2to3` broken symlink. See [#218](https://github.com/DataDog/datadog-agent-boshrelease/pull/218).
+
 ## 4.18.0 / 2024-05-29
 
 * [Added] Bump embedded Datadog Agent version to 7.53.0. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7530--6530).
