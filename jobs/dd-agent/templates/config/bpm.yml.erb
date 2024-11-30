@@ -18,6 +18,8 @@ processes:
       - path: /var/vcap/jobs/dd-agent/packages/dd-agent/embedded/*
         writable: true
         allow_executions: true
+      - path: /var/vcap/store
+      - path: /var/vcap/data
     limits:
 <% if p("bpm.agent.memory") != "" %>
       memory: <%= p("bpm.agent.memory") %>
