@@ -93,4 +93,4 @@ Support for this project is available via standard [Datadog support channels][6]
 [3]: https://bosh.io/docs/create-release/
 [4]: https://github.com/SpringerPE/datadog-agent-boshrelease
 [5]: https://github.com/SpringerPE/
-[6]: http://docs.datadoghq.com/help/
+[6]: https://docs.datadoghq.com/help/
