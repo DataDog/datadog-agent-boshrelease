@@ -2,6 +2,7 @@
 
 ## 4.20.0 / 2024-12-11
 
+* [Added] Bump embedded Datadog Agent version to 7.64.2. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7642--6642).
 * [Added] Add additional volumes to the datadog-agent BPM process. See [#221](https://github.com/DataDog/datadog-agent-boshrelease/pull/221).
 * [Added] Bump embedded Datadog Agent version to 7.59.1. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7591).
 
