@@ -291,6 +291,9 @@ properties:
   dd.disable_network_performance_monitoring:
     default: false
     description: Disable Network Performance Monitoring.
+  dd.traceroute_enabled:
+    default: false
+    description: "Enable the System Probe traceroute module, which is required for Network Path."
   dd.cluster_agent_poll_interval:
     default: 10
     description: How often to poll the Cluster Agent for new config checks (in seconds).

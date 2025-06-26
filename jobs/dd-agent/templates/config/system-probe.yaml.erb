@@ -22,6 +22,12 @@ system_probe_config:
 network_config:
   enabled: <%= not p('dd.disable_network_performance_monitoring', false) %>
 
+<% if p("dd.traceroute_enabled") %>
+traceroute:
+  enabled: true
+<% end %>
+
+
 cloud_foundry: true
 <% if spec.id and not spec.id.empty? %>
 bosh_id: <%= spec.id %>
