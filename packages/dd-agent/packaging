@@ -4,118 +4,184 @@
 # This product includes software developed at Datadog (https://www.datadoghq.com/).
 # Copyright 2017-Present Datadog, Inc.
 
-set -e -x
+set -euo pipefail
 
-# Grab the latest versions that are in the directory
-DD_AGENT_VERSION=7.64.2
-JOB_NAME="dd-agent"
-BOSH_PACKAGES_DIR=${BOSH_PACKAGES_DIR:-/var/vcap/packages}
+# Configuration
+readonly DD_AGENT_VERSION="7.64.2"
+readonly JOB_NAME="dd-agent"
+readonly BOSH_PACKAGES_DIR="${BOSH_PACKAGES_DIR:-/var/vcap/packages}"
+readonly AGENT_INSTALL_TARGET="${BOSH_INSTALL_TARGET}/agent"
+readonly DIST_DIR="${BOSH_INSTALL_TARGET}/bin/agent/dist"
+readonly EXTRACTED_AGENT_DIR="./extracted-agent"
 
-KNOWN_DISTRIBUTION="(Debian|Ubuntu|RedHat|CentOS|openSUSE|Amazon|Arista|SUSE)"
-DISTRIBUTION=$(lsb_release -d 2>/dev/null | grep -Eo $KNOWN_DISTRIBUTION  || grep -Eo $KNOWN_DISTRIBUTION /etc/issue 2>/dev/null || grep -Eo $KNOWN_DISTRIBUTION /etc/Eos-release 2>/dev/null || uname -s)
+# Utility functions
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"
+}
 
-if [ -f /etc/debian_version -o "$DISTRIBUTION" == "Debian" -o "$DISTRIBUTION" == "Ubuntu" ]; then
-    OS="Debian"
-elif [ -f /etc/redhat-release -o "$DISTRIBUTION" == "RedHat" -o "$DISTRIBUTION" == "CentOS" -o "$DISTRIBUTION" == "Amazon" ]; then
-    OS="RedHat"
-else
-    echo "this distribution is not supported by datadog"
+error() {
+    echo "[ERROR] $*" >&2
     exit 1
-fi
+}
 
-# Install shell helpers
-echo "Adding shell helpers ..."
-mkdir -p ${BOSH_INSTALL_TARGET}
-cp -av helpers ${BOSH_INSTALL_TARGET}/
+detect_os() {
+    local known_distributions="(Debian|Ubuntu|RedHat|CentOS|openSUSE|Amazon|Arista|SUSE)"
+    local distribution
+    
+    distribution=$(lsb_release -d 2>/dev/null | grep -Eo "$known_distributions" || \
+                   grep -Eo "$known_distributions" /etc/issue 2>/dev/null || \
+                   grep -Eo "$known_distributions" /etc/Eos-release 2>/dev/null || \
+                   uname -s)
+    
+    if [[ -f /etc/debian_version ]] || [[ "$distribution" =~ ^(Debian|Ubuntu)$ ]]; then
+        echo "Debian"
+    elif [[ -f /etc/redhat-release ]] || [[ "$distribution" =~ ^(RedHat|CentOS|Amazon)$ ]]; then
+        echo "RedHat"
+    else
+        error "Distribution '$distribution' is not supported by Datadog"
+    fi
+}
 
-AGENT_INSTALL_TARGET=${BOSH_INSTALL_TARGET}/agent
-mkdir -p ${AGENT_INSTALL_TARGET}/checks.d
+extract_package() {
+    local os="$1"
+    
+    log "Extracting Datadog Agent package for $os"
+    mkdir -p "$EXTRACTED_AGENT_DIR"
+    
+    case "$os" in
+        Debian)
+            dpkg -x "dd-agent/datadog-agent_${DD_AGENT_VERSION}-1_amd64.deb" "$EXTRACTED_AGENT_DIR"
+            ;;
+        RedHat)
+            pushd "$EXTRACTED_AGENT_DIR" >/dev/null
+            rpm2cpio "../dd-agent/datadog-agent-${DD_AGENT_VERSION}-1.x86_64.rpm" | \
+                cpio -idmv --no-absolute-filenames
+            popd >/dev/null
+            ;;
+    esac
+}
 
-DIST_DIR=${BOSH_INSTALL_TARGET}/bin/agent/dist
+install_agent_files() {
+    log "Installing agent files"
+    
+    # Copy agent binaries and configuration
+    cp -R "${EXTRACTED_AGENT_DIR}/opt/datadog-agent/"* "${BOSH_INSTALL_TARGET}/"
+    cp -R "${EXTRACTED_AGENT_DIR}/etc/datadog-agent" "${BOSH_INSTALL_TARGET}/etc"
+    
+    # Setup distribution directory
+    mkdir -p "$DIST_DIR/conf.d"
+    cp -R "${EXTRACTED_AGENT_DIR}/etc/datadog-agent/conf.d" "$DIST_DIR/"
+}
 
-mkdir ./extracted-agent
+install_helpers_and_checks() {
+    log "Installing shell helpers and custom checks"
+    
+    # Install shell helpers
+    mkdir -p "${BOSH_INSTALL_TARGET}"
+    cp -av helpers "${BOSH_INSTALL_TARGET}/"
+    
+    # Install custom checks
+    mkdir -p "${AGENT_INSTALL_TARGET}/checks.d"
+    cp -av checks.d "${AGENT_INSTALL_TARGET}/"
+}
 
-echo "extracting package"
-if [ $OS == "Debian" ]; then
-  dpkg -x dd-agent/datadog-agent_${DD_AGENT_VERSION}-1_amd64.deb ./extracted-agent
+setup_configuration_links() {
+    log "Setting up configuration links"
+    
+    # Agent configuration links
+    pushd "${AGENT_INSTALL_TARGET}" >/dev/null
+    rm -rf conf.d datadog.conf
+    ln -s "/var/vcap/jobs/$JOB_NAME/config/conf.d" conf.d
+    ln -s "/var/vcap/jobs/$JOB_NAME/config/datadog.yaml" datadog.yaml
+    popd >/dev/null
+    
+    # Distribution configuration links
+    pushd "${DIST_DIR}" >/dev/null
+    rm -rf conf.d datadog.conf
+    ln -s "/var/vcap/jobs/$JOB_NAME/config/datadog.yaml" datadog.yaml
+    popd >/dev/null
+}
 
-  cp -R ./extracted-agent/opt/datadog-agent/* ${BOSH_INSTALL_TARGET}
-  cp -R ./extracted-agent/etc/datadog-agent ${BOSH_INSTALL_TARGET}/etc
-fi
-
-if [ $OS == "RedHat" ]; then
-  pushd ./extracted-agent
-    rpm2cpio ../dd-agent/datadog-agent-${DD_AGENT_VERSION}-1.x86_64.rpm | cpio -idmv --no-absolute-filenames
-  popd
-  cp -R ./extracted-agent/opt/datadog-agent/* ${BOSH_INSTALL_TARGET}
-  cp -R ./extracted-agent/etc/datadog-agent ${BOSH_INSTALL_TARGET}/etc
-fi
-
-mkdir -p $DIST_DIR/conf.d
-cp -R ./extracted-agent/etc/datadog-agent/conf.d $DIST_DIR/conf.d
-
-# Install custom checks
-echo "Adding custom checks ..."
-mkdir -p ${AGENT_INSTALL_TARGET}
-cp -av checks.d ${AGENT_INSTALL_TARGET}/
-
-echo "Setting up configuration ..."
-pushd ${AGENT_INSTALL_TARGET}
-  rm -rf conf.d datadog.conf
-  # create the links to the configuration
-  ln -s /var/vcap/jobs/$JOB_NAME/config/conf.d conf.d
-  ln -s /var/vcap/jobs/$JOB_NAME/config/datadog.yaml datadog.yaml
-popd
-pushd ${DIST_DIR}
-  rm -rf conf.d datadog.conf
-  # create the links to the configuration
-  ln -s /var/vcap/jobs/$JOB_NAME/config/datadog.yaml datadog.yaml
-
-popd
-
-echo "Fixing broken symbolic links"
-broken_links="/embedded/ssl/cert.pem
-/embedded/bin/python
-/embedded/bin/pip
-/embedded/bin/2to3
-/embedded/lib/libselinux.so
-/embedded/lib/libsepol.so"
-
-
-for link in $broken_links; do
-  rm -f ${BOSH_INSTALL_TARGET}/${link}
-done
-
-if [ -d "${BOSH_INSTALL_TARGET}/embedded/bin" ]; then
-  pushd ${BOSH_INSTALL_TARGET}/embedded/bin
-    ln -s python3 python
-    ln -s pip3 pip
-    ln -s 2to3-3.* 2to3
-  popd
-fi
-
-if [ -d "${BOSH_INSTALL_TARGET}/embedded/ssl" ]; then
-  pushd ${BOSH_INSTALL_TARGET}/embedded/ssl
-    ln -s ./certs/cacert.pem cert.pem
-  popd
-fi
-
-if [ -d "${BOSH_INSTALL_TARGET}/embedded/lib" ]; then
-  pushd ${BOSH_INSTALL_TARGET}/embedded/lib
-    ln -s libselinux.so.1 libselinux.so
-    ln -s libsepol.so.2 libsepol.so
-  popd
-fi
-
-if [ -d "${BOSH_INSTALL_TARGET}/embedded/lib/pkgconfig/" ]; then
-  echo "Fixing pkg config settings ..."
-  pushd ${BOSH_INSTALL_TARGET}/embedded/lib/pkgconfig/
-    OLD_PREFIX="prefix=/opt/datadog-agent/embedded"
-    NEW_PREFIX="prefix=/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/embedded"
-    for file in *; do
-      if [ -f "${file}" -a ! -L "${file}" ]; then
-        sed -i "s~${OLD_PREFIX}~${NEW_PREFIX}~" ${file}
-      fi
+fix_symbolic_links() {
+    log "Fixing broken symbolic links"
+    
+    local broken_links=(
+        "/embedded/ssl/cert.pem"
+        "/embedded/bin/python"
+        "/embedded/bin/pip"
+        "/embedded/bin/2to3"
+        "/embedded/lib/libselinux.so"
+        "/embedded/lib/libsepol.so"
+    )
+    
+    # Remove broken links
+    for link in "${broken_links[@]}"; do
+        rm -f "${BOSH_INSTALL_TARGET}${link}"
     done
-  popd
-fi
+    
+    # Recreate Python binary links
+    if [[ -d "${BOSH_INSTALL_TARGET}/embedded/bin" ]]; then
+        pushd "${BOSH_INSTALL_TARGET}/embedded/bin" >/dev/null
+        ln -sf python3 python
+        ln -sf pip3 pip
+        ln -sf 2to3-3.* 2to3
+        popd >/dev/null
+    fi
+    
+    # Recreate SSL certificate link
+    if [[ -d "${BOSH_INSTALL_TARGET}/embedded/ssl" ]]; then
+        pushd "${BOSH_INSTALL_TARGET}/embedded/ssl" >/dev/null
+        ln -sf ./certs/cacert.pem cert.pem
+        popd >/dev/null
+    fi
+    
+    # Recreate library links
+    if [[ -d "${BOSH_INSTALL_TARGET}/embedded/lib" ]]; then
+        pushd "${BOSH_INSTALL_TARGET}/embedded/lib" >/dev/null
+        ln -sf libselinux.so.1 libselinux.so
+        ln -sf libsepol.so.2 libsepol.so
+        popd >/dev/null
+    fi
+}
+
+fix_pkgconfig_paths() {
+    local pkgconfig_dir="${BOSH_INSTALL_TARGET}/embedded/lib/pkgconfig"
+    
+    if [[ ! -d "$pkgconfig_dir" ]]; then
+        return
+    fi
+    
+    log "Fixing pkg-config settings"
+    
+    pushd "$pkgconfig_dir" >/dev/null
+    local old_prefix="prefix=/opt/datadog-agent/embedded"
+    local new_prefix="prefix=/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/embedded"
+    
+    for file in *; do
+        if [[ -f "$file" && ! -L "$file" ]]; then
+            sed -i "s~${old_prefix}~${new_prefix}~g" "$file"
+        fi
+    done
+    popd >/dev/null
+}
+
+# Main execution
+main() {
+    local os
+    
+    log "Starting Datadog Agent packaging (version $DD_AGENT_VERSION)"
+    
+    os=$(detect_os)
+    log "Detected OS: $os"
+    
+    extract_package "$os"
+    install_helpers_and_checks
+    install_agent_files
+    setup_configuration_links
+    fix_symbolic_links
+    fix_pkgconfig_paths
+    
+    log "Datadog Agent packaging completed successfully"
+}
+
+main "$@"
