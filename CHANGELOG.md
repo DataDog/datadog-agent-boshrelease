@@ -2,8 +2,7 @@
 
 ## 4.22.0 / 2025-10-14
 
-* [Added] Bump embedded Datadog Agent version to 7.70.2. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7702--6702).
-* [Changed] [SINT-3848] 🔒 Pin GitHub Actions to specific SHA versions for enhanced security. See [#229](https://github.com/DataDog/datadog-agent-boshrelease/pull/229).
+* [Added] Bump embedded Datadog Agent version to 7.70.2. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7702).
 * [Changed] Add option to enable the traceroute module in system-probe. See [#227](https://github.com/DataDog/datadog-agent-boshrelease/pull/227).
 
 ## 4.21.0 / 2025-04-22
