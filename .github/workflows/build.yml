@@ -1,0 +1,46 @@
+name: Validate
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install BOSH CLI
+        run: |
+          wget -q https://github.com/cloudfoundry/bosh-cli/releases/download/v7.5.6/bosh-cli-7.5.6-linux-amd64
+          chmod +x bosh-cli-7.5.6-linux-amd64
+          sudo mv bosh-cli-7.5.6-linux-amd64 /usr/local/bin/bosh
+
+      - name: Verify BOSH CLI installation
+        run: bosh --version
+
+      - name: Create private.yml
+        run: echo '{}' > ./config/private.yml
+
+      - name: Run prepare script
+        run: ./scripts/prepare.sh
+
+      - name: Run build script
+        env:
+          VERSION: 0.0.0-ci-test
+        run: ./scripts/build.sh
+
+      - name: Verify build artifact
+        run: |
+          if [ ! -f datadog-agent-release.tgz ]; then
+            echo "Build artifact not found!"
+            exit 1
+          fi
+          echo "Build successful! Artifact: datadog-agent-release.tgz"
