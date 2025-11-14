@@ -502,9 +502,14 @@ additional_endpoints:
 
 # Logs agent specific settings
 #
-<% if_p('dd.logs_dd_url') do |url| %>
+<% if p('dd.logs_dd_url', nil) || p('dd.logs_expected_tags_duration', nil) %>
 logs_config:
+  <% if_p('dd.logs_dd_url') do |url| %>
   logs_dd_url: <%= url %>
+  <% end %>
+  <% if_p('dd.logs_expected_tags_duration') do |duration| %>
+  expected_tags_duration: <%= duration %>
+  <% end %>
 <% end %>
 
 # Process agent specific settings

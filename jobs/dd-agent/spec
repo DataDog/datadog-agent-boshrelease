@@ -24,6 +24,10 @@ properties:
     description: The host of the Datadog intake server for metrics
   dd.logs_dd_url:
     description: The host of the Datadog intake server for logs
+  dd.logs_expected_tags_duration:
+    description: Apply host-level tags known by the Agent to all logs for this duration
+    default: 0s
+    example: 10m
   dd.apm_dd_url:
     description: The host of the Datadog intake server for APM data
   dd.process_dd_url:
