@@ -2,7 +2,6 @@
 
 ## 4.24.0 / 2025-11-18
 
-* [Added] Bump embedded Datadog Agent version to 7.71.2. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7712).
 * [Changed] Add option for setting logs config `expected_tags_duration`. See [#234](https://github.com/DataDog/datadog-agent-boshrelease/pull/234).
 
 ## 4.23.0 / 2025-10-28
