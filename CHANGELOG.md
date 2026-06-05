@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.26.1 / 2026-06-05
+
+* [Added] Bump embedded Datadog Agent version to 7.76.3. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7763).
+* [Changed] Migrate deprecated GitLab runner tags. See [#240](https://github.com/DataDog/datadog-agent-boshrelease/pull/240).
+* [Changed] [ARTSEC-INT] Update datadog-agent-buildimages to v102144341-64dad9f8. See [#238](https://github.com/DataDog/datadog-agent-boshrelease/pull/238).
+
 ## 4.25.0 / 2026-03-13
 
 * [Added] Bump embedded Datadog Agent version to 7.76.3. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7763).
