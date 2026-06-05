@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.25.1 / 2026-06-05
+
+* [Fixed] Move `bpm` `chmod +x` from pre-start to post-start. See [#241](https://github.com/DataDog/datadog-agent-boshrelease/pull/241).
+
 ## 4.25.0 / 2026-03-13
 
 * [Added] Bump embedded Datadog Agent version to 7.76.3. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7763).
