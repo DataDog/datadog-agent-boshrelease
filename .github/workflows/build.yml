@@ -32,10 +32,9 @@ jobs:
       - name: Run prepare script
         run: ./scripts/prepare.sh
 
-      - name: Run build script
-        env:
-          VERSION: 0.0.0-ci-test
-        run: ./scripts/build.sh
+      - name: Create dev release
+        run: |
+          bosh create-release --force --tarball=datadog-agent-release.tgz --name datadog-agent --version 0.0.0-ci-test
 
       - name: Verify build artifact
         run: |
