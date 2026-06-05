@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Unless explicitly stated otherwise all files in this repository are licensed under the Apache 2.0 License.
+# This product includes software developed at Datadog (https://www.datadoghq.com/).
+# Copyright 2017-Present Datadog, Inc.
+
+set -e
+set -u
+
+# Add execute flags to any directory inside the bpm run folder, so that the agent can read pidfiles inside.
+# This runs as a post-start so that BPM job directories created when starting BPM-managed processes
+# (including any future BPM job added to this release) exist by the time we chmod them.
+find /var/vcap/sys/run/bpm -type d -print0 | xargs -0 chmod +x || true

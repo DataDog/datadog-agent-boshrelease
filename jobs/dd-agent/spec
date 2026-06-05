@@ -11,6 +11,7 @@ templates:
   config/bpm.yml.erb: config/bpm.yml
   data/properties.sh.erb: data/properties.sh
   bin/pre-start: bin/pre-start
+  bin/post-start: bin/post-start
   bin/agent_ctl: bin/agent_ctl
   bin/process_agent_ctl: bin/process_agent_ctl
   bin/trace_agent_ctl: bin/trace_agent_ctl
