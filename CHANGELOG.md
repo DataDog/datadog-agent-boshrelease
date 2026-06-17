@@ -4,7 +4,7 @@
 
 * [Fixed] Move `bpm` `chmod +x` from pre-start to post-start. See [#241](https://github.com/DataDog/datadog-agent-boshrelease/pull/241).
 
-__Fixes Datadog metrics missing for Otel Collector issue__
+  _Fixes Datadog metrics missing for Otel Collector issue_
 
 ## 4.25.0 / 2026-03-13
 
