@@ -3,8 +3,6 @@
 ## 4.26.0 / 2026-09-01
 
 * [Added] Bump embedded Datadog Agent version to 7.80.4. Read more about it [here](https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst#7804).
-* [Changed] Release 4.25.1. See [#244](https://github.com/DataDog/datadog-agent-boshrelease/pull/244).
-* [Changed] fix(dd-agent): move bpm chmod +x from pre-start to post-start. See [#241](https://github.com/DataDog/datadog-agent-boshrelease/pull/241).
 
 ## 4.25.1 / 2026-06-05
 
