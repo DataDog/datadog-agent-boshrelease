@@ -165,4 +165,6 @@ builds:
     version: 4.12.1
   e816a513-f1a0-4853-8933-6375c344e0cc:
     version: 1.1.5172
+  e9de83ef-c93f-4fbf-4ba9-ed6f2798ad02:
+    version: 4.26.0
 format-version: "2"
