@@ -1,3 +1,15 @@
+<%
+  # The standalone process-agent only stays up to serve NPM's connections
+  # check: since agent 7.78 Linux process checks run in the core agent, and
+  # with network_config.direct_send system-probe sends NPM data itself. In
+  # every other case process-agent exits right after start, which monit
+  # would report as a failed job, so it is not supervised then.
+  truthy = ->(v) { v == true || v.to_s =~ /\A(true|t|yes|y|1)\z/i }
+  run_process_agent = truthy.(p('dd.process_agent_enabled', false)) &&
+    truthy.(p('dd.system_probe_enabled', false)) &&
+    !truthy.(p('dd.disable_network_performance_monitoring', false)) &&
+    !truthy.(p('dd.network_direct_send', false))
+-%>
 <% if p("bpm.enabled") %>
 check process datadog-agent
   with pidfile /var/vcap/sys/run/bpm/dd-agent/datadog-agent.pid
@@ -5,7 +17,7 @@ check process datadog-agent
   stop program "/var/vcap/jobs/bpm/bin/bpm stop dd-agent -p datadog-agent"  with timeout 90 seconds
   group vcap
 
-<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+<% if run_process_agent %>
 check process dd-agent-process-agent
   with pidfile /var/vcap/sys/run/bpm/dd-agent/dd-agent-process-agent.pid
   start program "/var/vcap/jobs/bpm/bin/bpm start dd-agent -p dd-agent-process-agent"
@@ -36,7 +48,7 @@ check process datadog-agent
   stop program "/var/vcap/jobs/dd-agent/bin/agent_ctl stop" with timeout 90 seconds
   group vcap
 
-<% if p('dd.process_agent_enabled', false) == true || p('dd.process_agent_enabled', false).to_s =~ (/(true|t|yes|y|1)$/i) %>
+<% if run_process_agent %>
 check process dd-agent-process-agent
   with pidfile /var/vcap/sys/run/dd-agent/process_agent.pid
   start program "/var/vcap/jobs/dd-agent/bin/process_agent_ctl start" with timeout 90 seconds
