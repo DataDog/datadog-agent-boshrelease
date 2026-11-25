@@ -8,7 +8,7 @@
   run_process_agent = truthy.(p('dd.process_agent_enabled', false)) &&
     truthy.(p('dd.system_probe_enabled', false)) &&
     !truthy.(p('dd.disable_network_performance_monitoring', false)) &&
-    !truthy.(p('dd.network_direct_send', false))
+    !truthy.(p('dd.network_direct_send', true))
 -%>
 processes:
   - name: datadog-agent

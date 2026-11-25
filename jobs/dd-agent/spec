@@ -297,12 +297,11 @@ properties:
     default: false
     description: Disable Network Performance Monitoring.
   dd.network_direct_send:
-    default: false
+    default: true
     description: >-
-      Have system-probe send Network Performance Monitoring data directly
-      (agent 7.86+). When true, the standalone process-agent is not run, since
-      process checks run in the core agent. Leave false for agents before 7.86,
-      which send NPM data through process-agent.
+      Controls whether system-probe sends Network Performance Monitoring
+      payloads directly, or process-agent queries them from system-probe.
+      When true, the standalone process-agent is not run.
   dd.traceroute_enabled:
     default: false
     description: "Enable the System Probe traceroute module, which is required for Network Path."

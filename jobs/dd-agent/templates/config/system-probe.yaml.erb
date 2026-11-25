@@ -21,9 +21,9 @@ system_probe_config:
 
 network_config:
   enabled: <%= not p('dd.disable_network_performance_monitoring', false) %>
-  # true: system-probe sends NPM data itself (agent >= 7.86) and process-agent
-  # is not run; false: NPM data goes through process-agent.
-  direct_send: <%= p('dd.network_direct_send', false) == true || p('dd.network_direct_send', false).to_s =~ (/\A(true|t|yes|y|1)\z/i) ? true : false %>
+  # true: system-probe sends NPM data itself and process-agent is not run;
+  # false: NPM data goes through process-agent.
+  direct_send: <%= p('dd.network_direct_send', true) == true || p('dd.network_direct_send', true).to_s =~ (/\A(true|t|yes|y|1)\z/i) ? true : false %>
 
 <% if p("dd.traceroute_enabled") %>
 traceroute:
